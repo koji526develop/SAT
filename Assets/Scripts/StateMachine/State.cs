@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// 岡田テスト
 // ステートの基底クラス
 
 public class State<T>
