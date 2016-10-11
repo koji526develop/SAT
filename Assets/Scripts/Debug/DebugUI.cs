@@ -22,27 +22,30 @@ public class DebugUI : MonoBehaviour
 	bool IsDebugAction()
 	{
 		bool result = false;
+        for (int i = 0; i < 2; i++)
+        {
+            TouchInfo touchInfo = TouchManager.GetTouchInfo(i);
+            if (touchInfo == TouchInfo.Began)
+            {
+                m_touchBeganPos = TouchManager.GetTouchPosition(i);
+            }
+            else if (touchInfo == TouchInfo.Ended)
+            {
+                m_touchEndedPos = TouchManager.GetTouchPosition(i);
+            }
 
-		TouchInfo touchInfo = TouchManager.GetTouchInfo();
-		if (touchInfo == TouchInfo.Began) 
-		{
-			m_touchBeganPos = TouchManager.GetTouchPosition ();
-		} 
-		else if (touchInfo == TouchInfo.Ended) 
-		{
-			m_touchEndedPos = TouchManager.GetTouchPosition ();
-		}
+            if (m_touchBeganPos.x < 300 && m_touchEndedPos.x > Screen.width - 300)
+            {
+                result = true;
+            }
 
-		if (m_touchBeganPos.x < 300 && m_touchEndedPos.x > Screen.width - 300)
-		{
-			result = true;
-		}
+            if (touchInfo == TouchInfo.Ended)
+            {
+                m_touchBeganPos = Vector3.zero;
+                m_touchEndedPos = Vector3.zero;
+            }
+        }
 
-		if (touchInfo == TouchInfo.Ended) 
-		{
-			m_touchBeganPos = Vector3.zero;
-			m_touchEndedPos = Vector3.zero;
-		}
 
 		return result;
 	}
