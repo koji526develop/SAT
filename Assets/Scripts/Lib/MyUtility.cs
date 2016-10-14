@@ -11,12 +11,13 @@ public class MyUtility : MonoBehaviour
 		light.type = LightType.Directional;
 	}
 
-	public static void CreateCamera(string name, Transform _parent = null)
+	public static void CreateCamera(string tagName, Transform _parent = null)
 	{
-		GameObject cameraObj = new GameObject (name);
+		GameObject cameraObj = new GameObject (tagName);
 		Camera camera = cameraObj.AddComponent<Camera> ();
 
 		camera.transform.position = new Vector3 (0, 1, -10);
+		cameraObj.tag = tagName;
 
 		cameraObj.AddComponent<GUILayer> ();
 		cameraObj.AddComponent<FlareLayer> ();
