@@ -16,7 +16,7 @@ public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
 	protected StateMachine<T> stateMachine;
 
 	// ステートの変更
-	protected void ChangeState(TEnum _state)
+	public void ChangeState(TEnum _state)
 	{
 		if (stateMachine == null) return;
 
