@@ -14,11 +14,29 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
     ScaleTo m_scaleTo;
     RotateTo m_rotateTo;
 
+<<<<<<< HEAD
     void Start()
     {
         // ステートマシンの初期設定
         stateList.Add(new TestState(this));
         stateList.Add(new TestState2(this));
+=======
+	public static GameObject CreateObject(Transform _parent)
+	{
+		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		playerObj.AddComponent<Player> ();
+		playerObj.name = "Player";
+		playerObj.transform.SetParent (_parent);
+
+		return playerObj;
+	}
+
+	void Start () 
+	{
+		// ステートマシンの初期設定
+		stateList.Add(new TestState(this));
+		stateList.Add(new TestState2(this));
+>>>>>>> Okada_dev
 
         stateMachine = new StateMachine<Player>();
 
