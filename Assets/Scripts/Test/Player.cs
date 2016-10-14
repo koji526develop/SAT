@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Player : StatefulObjectBase<Player, Player.CharaState>
 {
+	Camera m_mainCamera;
+
     public enum CharaState
     {
         None,
@@ -26,6 +28,8 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 
 	void Start () 
 	{
+		m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
+
 		// ステートマシンの初期設定
 		stateList.Add(new TestState(this));
 		stateList.Add(new TestState2(this));
@@ -41,27 +45,20 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 
     void Update()
     {
-        for (int i = 0; i < 1; i++)
-        {
-            TouchInfo touchInfo = TouchManager.GetTouchInfo(i);
-            stateMachine.Update();
-            if (touchInfo == TouchInfo.Began)
-            {
-                if (IsEqualState(CharaState.None))
-                {
-                    ChangeState(CharaState.Walk);
-                    m_moveTo.SetMoveTo(new Vector3(0, 0, 0), 1.0f);
-                    m_scaleTo.SetScaleTo(new Vector3(0, 0, 0), 1.0f);
-                    m_rotateTo.SetRotateTo(new Vector3(90, 0, 0), 1.0f);
-                }
-                else
-                {
-                    ChangeState(CharaState.None);
-                    m_moveTo.SetMoveTo(new Vector3(1, 0, 0), 1.0f);
-                    m_scaleTo.SetScaleTo(new Vector3(1, 1, 1), 1.0f);
-                    m_rotateTo.SetRotateTo(new Vector3(0, 0, 0), 1.0f);
-                }
-            }
-        }
+		stateMachine.Update();
+      
+        TouchInfo touchInfo = TouchManager.GetTouchInfo(0);
+		if (touchInfo == TouchInfo.Began) 
+		{
+			GameObject hitObject = TouchManager.GetRaycastHitObject (m_mainCamera,0);
+			if (hitObject) 
+			{
+				Player player = hitObject.GetComponent<Player> ();
+				if (player) 
+				{
+					Debug.Log (hitObject.ToString ());
+				}
+			}
+		}  
     }
 }

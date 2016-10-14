@@ -123,11 +123,11 @@ public static class TouchManager
     }
 
     // Raycast
-    public static GameObject GetRaycastHitObject(int touchCount)
+    public static GameObject GetRaycastHitObject(Camera _camera, int touchCount)
     {
         RaycastHit hit;
 
-        Ray ray = Camera.main.ScreenPointToRay(TouchManager.GetTouchPosition(touchCount));
+		Ray ray = _camera.ScreenPointToRay(TouchManager.GetTouchPosition(touchCount));
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
