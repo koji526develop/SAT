@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 		// Light作成
 		MyUtility.CreateDirectionalLight ();
 
-		//UIManager作成
+		// UIManager作成
 		Transform UIManager = new GameObject ("UIManager").transform;
 
 		// UICanvas作成
@@ -23,16 +23,13 @@ public class GameManager : MonoBehaviour
 		// イベントシステム作成
 		MyUtility.CreateEventSystem (UIManager);
 
-		//BattleManager作成
+		// BattleManager作成
 		Transform battleManager = new GameObject ("BattleManager").transform;
 
 		// バトル用のカメラ作成
 		MyUtility.CreateCamera ("BattleCamera", battleManager);
 
 		// プレイヤーオブジェクト作成
-		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
-		playerObj.name = "Player";
-		playerObj.AddComponent<Player> ();
-		playerObj.transform.SetParent (battleManager);
+		GameObject player = Player.CreateObject(battleManager);
 	}
 }

@@ -14,6 +14,16 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 	ScaleTo m_scaleTo;
 	RotateTo m_rotateTo;
 
+	public static GameObject CreateObject(Transform _parent)
+	{
+		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		playerObj.AddComponent<Player> ();
+		playerObj.name = "Player";
+		playerObj.transform.SetParent (_parent);
+
+		return playerObj;
+	}
+
 	void Start () 
 	{
 		// ステートマシンの初期設定
