@@ -6,7 +6,7 @@ public class MyUtility : MonoBehaviour
 	public static void CreateDirectionalLight()
 	{
 		GameObject lightObj = new GameObject ("DirectionalLight");
-		lightObj.transform.Rotate(new Vector3 (50, -30, 0));
+		lightObj.transform.Rotate(new Vector3 (15, 0, 0));
 		Light light = lightObj.AddComponent<Light> ();
 		light.type = LightType.Directional;
 	}
