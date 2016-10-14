@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestState : State<Player> 
+public class CharacterNone : State<Character> 
 {
-	public TestState(Player _instance) : base(_instance) {}
+	public CharacterNone(Character _instance) : base(_instance) {}
 
 	public override void Enter() 
 	{
@@ -13,7 +13,10 @@ public class TestState : State<Player>
 	public override void Update()
 	{
 		Debug.Log ("TestStateなう");
-		//m_instance;
+
+		if (Input.GetMouseButtonDown (0)) {
+			m_instance.ChangeState (Character.CharacterState.Attack);
+		}
 
 	}
 
