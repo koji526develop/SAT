@@ -23,7 +23,8 @@ public class CharacterAttack : State<Character>
 	{
 		Debug.Log ("TestState出たー");
 	}
-	public CharacterAttack(Character.CharacterType _characterType)
+
+	public void Attack(Character.CharacterType _characterType)
 	{
 
 	}
