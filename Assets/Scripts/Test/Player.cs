@@ -14,11 +14,21 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
     ScaleTo m_scaleTo;
     RotateTo m_rotateTo;
 
-    void Start()
-    {
-        // ステートマシンの初期設定
-        stateList.Add(new TestState(this));
-        stateList.Add(new TestState2(this));
+	public static GameObject CreateObject(Transform _parent)
+	{
+		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		playerObj.AddComponent<Player> ();
+		playerObj.name = "Player";
+		playerObj.transform.SetParent (_parent);
+
+		return playerObj;
+	}
+
+	void Start () 
+	{
+		// ステートマシンの初期設定
+		stateList.Add(new TestState(this));
+		stateList.Add(new TestState2(this));
 
         stateMachine = new StateMachine<Player>();
 
@@ -31,7 +41,7 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 
     void Update()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 1; i++)
         {
             TouchInfo touchInfo = TouchManager.GetTouchInfo(i);
             stateMachine.Update();
