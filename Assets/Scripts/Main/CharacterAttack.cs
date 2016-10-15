@@ -26,6 +26,10 @@ public class CharacterAttack : State<Character>
 
 	public void Attack(Character.CharacterType _characterType)
 	{
+		/*switch (_characterType) 
+		{
+		case 
 
+		}*/
 	}
 }

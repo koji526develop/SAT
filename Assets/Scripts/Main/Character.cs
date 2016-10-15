@@ -8,11 +8,13 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	int m_attackDistance;
 	float m_moveSpeed;
 	CharacterType m_characterType;
+	float dis;
 
 	public enum CharacterState
 	{
 		None,
-		Attack
+		Attack,
+		Move
 	}
 
 	public enum CharacterType
@@ -23,28 +25,49 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		Shield
 	}
 
-	public Character(CharacterType _characterType)
+	public CharacterType characterType
 	{
-		m_characterType = _characterType;
+		set
+		{
+			m_characterType = value;
+		}
+	}
+
+	public static GameObject CreateObject(Transform _parent,CharacterType _characterType)
+	{
+		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
+		Character character = playerObj.AddComponent<Character> ();
+		playerObj.name = _characterType.ToString();
+		playerObj.transform.SetParent (_parent);
+		playerObj.transform.position=new Vector3(GameManager.j,0,0);
+		playerObj.tag="Character";
+
+		character.characterType = _characterType;
+
+		Vector2 playerpos = playerObj.transform.position;
+		Vector2 Enemypos  = playerObj.transform.position;
+		character.dis = Vector3.Distance(playerpos,Enemypos);
 
 		switch (_characterType) 
 		{
 		case CharacterType.Sword:
-			SetParametor (2,4,1,0.5f);
+			character.SetParametor (2,4,1,0.5f);
 			break;
 		case CharacterType.Shield:
-			SetParametor (10,1,1,1);
+			character.SetParametor (10,1,1,1);
 			break;
 		case CharacterType.Ax:
-			SetParametor (6,2,1,1);
+			character.SetParametor (6,2,1,1);
 			break;
 		case CharacterType.Spear:
-			SetParametor (2,2,1,1);
+			character.SetParametor (2,2,2,1);
 			break;
 		}
-	}
 
-	void SetParametor(int _life,int _attack,int _attackDistance,float _moveSpeed)
+		return playerObj;
+	}
+		
+	public void SetParametor(int _life,int _attack,int _attackDistance,float _moveSpeed)
 	{
 		m_life = _life;
 		m_attack = _attack;
@@ -58,6 +81,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		// ステートマシンの初期設定
 		stateList.Add(new CharacterNone(this));
 		stateList.Add(new CharacterAttack(this));
+		stateList.Add(new CharacterMove(this));
 
 		stateMachine = new StateMachine<Character>();
 
@@ -67,7 +91,14 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	// Update is called once per frame
 	void Update () {
 		stateMachine.Update();
+		hit ();
 	}
+	public void hit()
+	{
+		
+		Debug.Log("Distance : " + dis);
+	}
+
 
 
 }
