@@ -38,7 +38,7 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 		Shake shake = gameObject.AddComponent<Shake> ();
 		shake.ShakeObject ();
 		FadeTo fade = gameObject.AddComponent<FadeTo> ();
-		fade.SetBlinkFadeForever (FadeTo.RendererType.Mesh,1.0f);
+		fade.SetBlinkFadeForever (1.0f);
     }
 
     void Update()
