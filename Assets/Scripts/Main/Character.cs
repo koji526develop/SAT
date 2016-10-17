@@ -3,11 +3,16 @@ using System.Collections;
 
 public class Character : StatefulObjectBase<Character, Character.CharacterState> 
 {
-	public int m_life;
-	int m_attack;
-	int m_attackDistance;
-	float m_moveSpeed;
-	CharacterType m_characterType;
+	struct Status
+	{
+		public int life;
+		public int attack;
+		public int attackDistance;
+		public float moveSpeed;
+		public CharacterType characterType;
+	}
+
+	Status m_status;
 	float dis;
 
 	public enum CharacterState
@@ -29,7 +34,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		set
 		{
-			m_characterType = value;
+			m_status.characterType = value;
 		}
 	}
 
@@ -70,10 +75,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		
 	public void SetParametor(int _life,int _attack,int _attackDistance,float _moveSpeed)
 	{
-		m_life = _life;
-		m_attack = _attack;
-		m_attackDistance = _attackDistance;
-		m_moveSpeed = _moveSpeed;
+		m_status.life = _life;
+		m_status.attack = _attack;
+		m_status.attackDistance = _attackDistance;
+		m_status.moveSpeed = _moveSpeed;
 
 	}
 

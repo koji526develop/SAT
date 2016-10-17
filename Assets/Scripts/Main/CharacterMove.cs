@@ -24,7 +24,6 @@ public class CharacterMove :  State<Character> {
 			{
 			//m_instance.ChangeState (Character.CharacterState.Attack);
 				Debug.Log("当たったー");
-				+
 			}
 		}
 	}
