@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// 指定の座標に移動させるクラス
+// オブジェクトを指定の座標に移動させるクラス
 
 public class MoveTo : MonoBehaviour 
 {

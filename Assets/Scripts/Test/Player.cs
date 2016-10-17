@@ -12,10 +12,6 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
         Run
     }
 
-    MoveTo m_moveTo;
-    ScaleTo m_scaleTo;
-    RotateTo m_rotateTo;
-
 	public static GameObject CreateObject(Transform _parent)
 	{
 		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
@@ -36,11 +32,12 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 
         stateMachine = new StateMachine<Player>();
 
-        m_moveTo = this.gameObject.AddComponent<MoveTo>();
-        m_scaleTo = this.gameObject.AddComponent<ScaleTo>();
-        m_rotateTo = this.gameObject.AddComponent<RotateTo>();
-
         ChangeState(CharaState.None);
+
+		Shake shake = gameObject.AddComponent<Shake> ();
+		shake.ShakeObject ();
+		FadeTo fade = gameObject.AddComponent<FadeTo> ();
+		fade.SetFadeTo (FadeTo.RendererType.Mesh,0.0f,1.0f);
     }
 
     void Update()

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// 動的にオブジェクト作ったりするクラス
+
 public class MyUtility : MonoBehaviour 
 {
 	public static void CreateDirectionalLight()
@@ -11,7 +13,7 @@ public class MyUtility : MonoBehaviour
 		light.type = LightType.Directional;
 	}
 
-	public static void CreateCamera(string tagName, Transform _parent = null)
+	public static Camera CreateCamera(string tagName, Transform _parent = null)
 	{
 		GameObject cameraObj = new GameObject (tagName);
 		Camera camera = cameraObj.AddComponent<Camera> ();
@@ -24,6 +26,8 @@ public class MyUtility : MonoBehaviour
 		cameraObj.AddComponent<AudioListener> ();
 
 		if(_parent) cameraObj.transform.SetParent (_parent);
+
+		return camera;
 	}
 
 	public static void CreateUICanvas(Transform _parent)

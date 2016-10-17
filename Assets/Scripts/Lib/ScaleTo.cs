@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// 指定のスケールに拡縮させるクラス
+// オブジェクトを指定のスケールに拡縮させるクラス
 
 public class ScaleTo : MonoBehaviour 
 {
