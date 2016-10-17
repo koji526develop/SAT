@@ -9,7 +9,13 @@ public class MySceneManager : MonoBehaviour {
     static public MySceneManager m_instance;//シングルトン　マネージャー変数
     public string m_nextScene;              //次のシーンの名前
     private AsyncOperation m_async;             //シーン情報
-
+	public float Progress
+	{
+		get
+		{
+			return m_async.progress;
+		}
+	}
     private Color fadeColor = Color.black;      //フェードイン・アウトの黒画像
 
     private float   m_nowTime = 0.0f;           //時間
@@ -61,6 +67,9 @@ public class MySceneManager : MonoBehaviour {
             yield return 0;
         }
 
+		if (this.m_async.progress < 0.9f) {
+			SceneManager.LoadScene ("Loading");
+		}
         //非同期で画面遷移のロードが終わっているかどうか、(0.9が完了？らしい）
         while (this.m_async.progress < 0.9f)
         {
