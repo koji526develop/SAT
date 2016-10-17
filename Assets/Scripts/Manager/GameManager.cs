@@ -15,11 +15,11 @@ public class GameManager : MonoBehaviour
 		// UIManager作成
 		Transform UIManager = new GameObject ("UIManager").transform;
 
-		// UICanvas作成
-		MyUtility.CreateUICanvas (UIManager);
-
 		// UIカメラ作成
-		MyUtility.CreateCamera ("UICamera", UIManager);
+		Camera uiCamera = MyUtility.CreateCamera ("UICamera", UIManager);
+
+		// UICanvas作成(UICameraの子オブジェクトにする)
+		MyUtility.CreateUICanvas (uiCamera.transform);
 
 		// イベントシステム作成
 		MyUtility.CreateEventSystem (UIManager);
