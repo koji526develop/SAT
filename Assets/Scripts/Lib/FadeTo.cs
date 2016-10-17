@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections;
+using UnityEngine.UI;
 
 public class FadeTo : MonoBehaviour 
 {
@@ -13,16 +13,8 @@ public class FadeTo : MonoBehaviour
 			return m_isFade;
 		}
 	}
-
-	public enum RendererType
-	{
-		Mesh,
-		Sprite
-	}
-	RendererType m_rendererType;
-
-	MeshRenderer m_meshRenderer;
-	SpriteRenderer m_spriteRenderer;
+	// レンダラー	
+	Renderer m_renderer;
 
 	// フェード時間
 	float m_duration;
@@ -45,54 +37,36 @@ public class FadeTo : MonoBehaviour
 	void Awake()
 	{
 		enabled = false;
+		//SetBlinkFadeForever (1.0f);
 	}
 
-	public void SetBlinkFadeForever(RendererType _rendererType, float _duration)
+	public void SetBlinkFadeForever(float _duration)
 	{
 		m_isForever = true;
 		m_isReverse = false;
 		m_isFade = true;
 		enabled = true;
-		m_rendererType = _rendererType;
 
 		m_startAlpha = 1.0f;
 		m_endAlpha = 0.0f;
 
 		m_duration = _duration;
 
-		switch (m_rendererType)
-		{
-		case RendererType.Mesh:
-			m_meshRenderer = GetComponent<MeshRenderer> ();
-			m_startAlpha = m_meshRenderer.material.color.a;
-			break;
-		case RendererType.Sprite:
-			m_spriteRenderer = GetComponent<SpriteRenderer> ();
-			m_startAlpha = m_spriteRenderer.material.color.a;
-			break;
-		}
+
+		m_renderer = GetComponent<Renderer> ();
+		m_startAlpha = m_renderer.material.color.a;
 	}
 
-	public void SetFadeTo(RendererType _rendererType, float _endAlpha,float _duration, float _delay = 0.0f)
+	public void SetFadeTo(float _endAlpha,float _duration, float _delay = 0.0f)
 	{
 		m_isForever = false;
 		m_isFade = true;
 		enabled = true;
 		m_elapsedTime = 0.0f;
 
-		m_rendererType = _rendererType;
 
-		switch (m_rendererType)
-		{
-		case RendererType.Mesh:
-			m_meshRenderer = GetComponent<MeshRenderer> ();
-			m_startAlpha = m_meshRenderer.material.color.a;
-			break;
-		case RendererType.Sprite:
-			m_spriteRenderer = GetComponent<SpriteRenderer> ();
-			m_startAlpha = m_spriteRenderer.material.color.a;
-			break;
-		}
+		m_renderer = GetComponent<Renderer> ();
+		m_startAlpha = m_renderer.material.color.a;
 			
 		m_endAlpha = _endAlpha;
 		m_duration = _duration;
@@ -106,23 +80,13 @@ public class FadeTo : MonoBehaviour
 
 	void FinishFade()
 	{
-		switch (m_rendererType)
-		{
-		case RendererType.Mesh:
-			m_meshRenderer.material.color = new Color(
-				m_meshRenderer.material.color.r,
-				m_meshRenderer.material.color.g,
-				m_meshRenderer.material.color.b,
-				m_endAlpha);
-			break;
-		case RendererType.Sprite:
-			m_spriteRenderer.material.color = new Color(
-				m_spriteRenderer.material.color.r,
-				m_spriteRenderer.material.color.g,
-				m_spriteRenderer.material.color.b,
-				m_endAlpha);
-			break;
-		}
+
+		m_renderer.material.color = new Color(
+			m_renderer.material.color.r,
+			m_renderer.material.color.g,
+			m_renderer.material.color.b,
+			m_endAlpha);
+		
 		enabled = false;
 	}
 
@@ -138,22 +102,12 @@ public class FadeTo : MonoBehaviour
 				m_endAlpha = 1.0f;
 			}
 		}
-		switch (m_rendererType) {
-		case RendererType.Mesh:
-			m_meshRenderer.material.color = new Color (
-				m_meshRenderer.material.color.r,
-				m_meshRenderer.material.color.g,
-				m_meshRenderer.material.color.b,
-				Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
-			break;
-		case RendererType.Sprite:
-			m_spriteRenderer.material.color = new Color (
-				m_spriteRenderer.material.color.r,
-				m_spriteRenderer.material.color.g,
-				m_spriteRenderer.material.color.b,
-				Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
-			break;
-		}
+
+		m_renderer.material.color = new Color (
+			m_renderer.material.color.r,
+			m_renderer.material.color.g,
+			m_renderer.material.color.b,
+			Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
 	}
 
 	void Update ()
