@@ -3,31 +3,26 @@ using System.Collections;
 
 public class SceneChanger : MonoBehaviour
 {
-    //タイトル
-    public void ChangeToMenu()
-    {
-        MySceneManager.m_instance.LoadLevel("Menu", 1.0f);
-    }
 
-    //メニュー
+    //タイトルに行く
     public void ChangeToTitle()
     {
         MySceneManager.m_instance.LoadLevel("Title", 1.0f);
     }
 
-    //操作説明
+    //操作説明に行く
     public void ChangeToOperating()
     {
         MySceneManager.m_instance.LoadLevel("Operating", 1.0f);
     }
 
-    //ゲーム
+    //ゲームに行く
     public void ChangeToGame()
     {
-        MySceneManager.m_instance.LoadLevel("Main", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Game", 1.0f);
     }
 
-    //リザルト
+    //リザルトに行く
     public void ChangeToResukt()
     {
         MySceneManager.m_instance.LoadLevel("Result", 1.0f);

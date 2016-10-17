@@ -7,12 +7,14 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Title.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Menu.unity
   - enabled: 1
     path: Assets/Scenes/Operating.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UIGameScene.unity
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
   - enabled: 0
     path: Assets/Scenes/Main.unity
   - enabled: 1
