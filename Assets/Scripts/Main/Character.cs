@@ -37,6 +37,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		Character character = playerObj.AddComponent<Character> ();
+
 		playerObj.name = _characterType.ToString();
 		playerObj.transform.SetParent (_parent);
 		playerObj.transform.position=new Vector3(GameManager.j,0,0);
@@ -85,7 +86,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		stateMachine = new StateMachine<Character>();
 
-		ChangeState(CharacterState.None);
+		ChangeState(CharacterState.Move);
 	}
 	
 	// Update is called once per frame
@@ -95,8 +96,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	}
 	public void hit()
 	{
-		
-		Debug.Log("Distance : " + dis);
+
+		//Debug.Log("Distance : " + dis);
 	}
 
 

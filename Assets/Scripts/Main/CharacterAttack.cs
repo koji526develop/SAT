@@ -24,12 +24,5 @@ public class CharacterAttack : State<Character>
 		Debug.Log ("TestState出たー");
 	}
 
-	public void Attack(Character.CharacterType _characterType)
-	{
-		/*switch (_characterType) 
-		{
-		case 
 
-		}*/
-	}
 }

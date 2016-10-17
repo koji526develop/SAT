@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 		MyUtility.CreateCamera ("BattleCamera", battleManager);
 
 		// プレイヤーオブジェクト作成
-		for (int i = 0; i < 5; i++) 
+		for (int i = 0; i < 2; i++) 
 		{
 			j=j+2;
 
