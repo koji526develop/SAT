@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-// 指定の角度に回転させるクラス
+// オブジェクトを指定の角度に回転させるクラス
 
 public class RotateTo : MonoBehaviour 
 {

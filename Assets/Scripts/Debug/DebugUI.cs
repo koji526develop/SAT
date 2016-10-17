@@ -34,7 +34,7 @@ public class DebugUI : MonoBehaviour
                 m_touchEndedPos = TouchManager.GetTouchPosition(i);
             }
 
-            if (m_touchBeganPos.x < 300 && m_touchEndedPos.x > Screen.width - 300)
+			if (m_touchBeganPos.x < Screen.width * 2.0f/10 && m_touchEndedPos.x > Screen.width * 8.0f/10)
             {
                 result = true;
             }
