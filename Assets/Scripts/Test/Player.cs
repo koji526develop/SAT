@@ -18,6 +18,7 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 		playerObj.AddComponent<Player> ();
 		playerObj.name = "Player";
 		playerObj.transform.SetParent (_parent);
+		playerObj.GetComponent<Renderer>().material = new Material(Shader.Find("Transparent/Diffuse"));
 
 		return playerObj;
 	}
@@ -37,7 +38,7 @@ public class Player : StatefulObjectBase<Player, Player.CharaState>
 		Shake shake = gameObject.AddComponent<Shake> ();
 		shake.ShakeObject ();
 		FadeTo fade = gameObject.AddComponent<FadeTo> ();
-		fade.SetFadeTo (FadeTo.RendererType.Mesh,0.0f,1.0f);
+		fade.SetBlinkFadeForever (FadeTo.RendererType.Mesh,1.0f);
     }
 
     void Update()

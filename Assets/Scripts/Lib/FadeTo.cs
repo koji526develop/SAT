@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections;
 
 public class FadeTo : MonoBehaviour 
 {
@@ -46,13 +47,30 @@ public class FadeTo : MonoBehaviour
 		enabled = false;
 	}
 
-	public void SetBlinkFadeForever(RendererType _rendererType, float _duration, float _delay = 0.0f)
+	public void SetBlinkFadeForever(RendererType _rendererType, float _duration)
 	{
-		/*m_isForever = true;
+		m_isForever = true;
 		m_isReverse = false;
 		m_isFade = true;
 		enabled = true;
-		m_rendererType = _rendererType;*/
+		m_rendererType = _rendererType;
+
+		m_startAlpha = 1.0f;
+		m_endAlpha = 0.0f;
+
+		m_duration = _duration;
+
+		switch (m_rendererType)
+		{
+		case RendererType.Mesh:
+			m_meshRenderer = GetComponent<MeshRenderer> ();
+			m_startAlpha = m_meshRenderer.material.color.a;
+			break;
+		case RendererType.Sprite:
+			m_spriteRenderer = GetComponent<SpriteRenderer> ();
+			m_startAlpha = m_spriteRenderer.material.color.a;
+			break;
+		}
 	}
 
 	public void SetFadeTo(RendererType _rendererType, float _endAlpha,float _duration, float _delay = 0.0f)
@@ -108,40 +126,70 @@ public class FadeTo : MonoBehaviour
 		enabled = false;
 	}
 
-	void Update ()
+	void SetAlphaLerp(float _rate)
 	{
-		m_elapsedTime += Time.deltaTime;
-
-		if (m_elapsedTime - m_delay < 0) 
-			return;
-
-		// 経過時間が移動時間を超えたら
-		if (m_elapsedTime - m_delay > m_duration) 
+		if(m_isForever)
 		{
-			m_isFade = false;
-			FinishFade ();
+			if (!m_isReverse) {
+				m_startAlpha = 1.0f;
+				m_endAlpha = 0.0f;
+			} else {
+				m_startAlpha = 0.0f;
+				m_endAlpha = 1.0f;
+			}
 		}
-
-		// 割合
-		float rate = m_elapsedTime / m_duration;
-
-		// 割合から出した２点間の座標を入れる
-		switch (m_rendererType)
-		{
+		switch (m_rendererType) {
 		case RendererType.Mesh:
-			m_meshRenderer.material.color = new Color(
+			m_meshRenderer.material.color = new Color (
 				m_meshRenderer.material.color.r,
 				m_meshRenderer.material.color.g,
 				m_meshRenderer.material.color.b,
-				Mathf.Lerp(m_startAlpha,m_endAlpha,rate));
+				Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
 			break;
 		case RendererType.Sprite:
-			m_spriteRenderer.material.color = new Color(
+			m_spriteRenderer.material.color = new Color (
 				m_spriteRenderer.material.color.r,
 				m_spriteRenderer.material.color.g,
 				m_spriteRenderer.material.color.b,
-				Mathf.Lerp(m_startAlpha,m_endAlpha,rate));
+				Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
 			break;
+		}
+	}
+
+	void Update ()
+	{
+		if (!m_isForever) {
+			m_elapsedTime += Time.deltaTime;
+
+			if (m_elapsedTime - m_delay < 0)
+				return;
+
+			// 経過時間が移動時間を超えたら
+			if (m_elapsedTime - m_delay > m_duration) {
+				m_isFade = false;
+				FinishFade ();
+			}
+
+			// 割合
+			float rate = m_elapsedTime / m_duration;
+
+			// 割合から出した２点間の座標を入れる
+			SetAlphaLerp(rate);
+		} 
+		else
+		{
+			m_elapsedTime += Time.deltaTime;
+			// 経過時間が移動時間を超えたら
+			if (m_elapsedTime > m_duration) {
+				m_isReverse = !m_isReverse;
+				m_elapsedTime = 0.0f;
+			}
+
+			// 割合
+			float rate = m_elapsedTime / m_duration;
+
+			// 割合から出した色を入れる
+			SetAlphaLerp(rate);
 		}
 	}
 }
