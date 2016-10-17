@@ -15,7 +15,6 @@ public class OperatingManager : MonoBehaviour
         if(touch == TouchInfo.Began)
         {
             SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToMenu();
         }
 	}
 }
