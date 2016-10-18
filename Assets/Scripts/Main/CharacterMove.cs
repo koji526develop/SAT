@@ -14,6 +14,12 @@ public class CharacterMove :  State<Character> {
 	{
 		GameObject[] gameobject = GameObject.FindGameObjectsWithTag("Character");
 
+		this.m_instance.transform.position += new Vector3 (0.01f,0,0);
+		if (Input.GetMouseButtonDown (0))
+		{
+			m_instance.ChangeState (Character.CharacterState.None);
+			this.m_instance.transform.position += new Vector3 (0, 1, 0);
+		}
 
 		for(int i=0;i<gameobject.Length;i++)
 		{
@@ -22,7 +28,7 @@ public class CharacterMove :  State<Character> {
 
 			if(gameobject[i].CompareTag("Character") && IsHit(m_instance.gameObject, gameobject[i], 3.0f)) 
 			{
-			//m_instance.ChangeState (Character.CharacterState.Attack);
+			m_instance.ChangeState (Character.CharacterState.Attack);
 				Debug.Log("当たったー");
 			}
 		}
