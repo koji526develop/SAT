@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Character : StatefulObjectBase<Character, Character.CharacterState> 
 {
-	struct Status
+	public struct Status
 	{
 		public int life;
 		public int attack;
@@ -13,7 +13,14 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	}
 
 	Status m_status;
-	float dis;
+	public Status status
+	{
+		get
+		{
+			return m_status;
+		}
+	}
+
 
 	public enum CharacterState
 	{
@@ -43,6 +50,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		Character character = playerObj.AddComponent<Character> ();
 
+
 		playerObj.name = _characterType.ToString();
 		playerObj.transform.SetParent (_parent);
 		playerObj.transform.position=new Vector3(GameManager.j,0,0);
@@ -50,23 +58,21 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		character.characterType = _characterType;
 
-		Vector2 playerpos = playerObj.transform.position;
-		Vector2 Enemypos  = playerObj.transform.position;
-		character.dis = Vector3.Distance(playerpos,Enemypos);
+
 
 		switch (_characterType) 
 		{
 		case CharacterType.Sword:
-			character.SetParametor (2,4,1,0.5f);
+			character.SetParametor (2,4,1,0.05f);
 			break;
 		case CharacterType.Shield:
-			character.SetParametor (10,1,1,1);
+			character.SetParametor (10,1,1,0.01f);
 			break;
 		case CharacterType.Ax:
-			character.SetParametor (6,2,1,1);
+			character.SetParametor (6,2,1,0.01f);
 			break;
 		case CharacterType.Spear:
-			character.SetParametor (2,2,2,1);
+			character.SetParametor (2,2,2,0.01f);
 			break;
 		}
 
@@ -97,12 +103,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	// Update is called once per frame
 	void Update () {
 		stateMachine.Update();
-		hit ();
-	}
-	public void hit()
-	{
 
-		//Debug.Log("Distance : " + dis);
 	}
 
 
