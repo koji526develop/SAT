@@ -63,7 +63,7 @@ public class MyUtility : MonoBehaviour
 		return imageObj;
 	}
 
-	public static void AddText(string _text, Transform _parent)
+	public static Text AddText(string _text, Transform _parent)
 	{
 		GameObject obj = new GameObject ("Text");
 		Text text = obj.AddComponent<Text> ();
@@ -73,20 +73,50 @@ public class MyUtility : MonoBehaviour
 		rectTransform.pivot = new Vector2 (0.5f, 0.5f);
 		rectTransform.anchoredPosition3D = new Vector3 (0,-10,0);
 		rectTransform.sizeDelta = new Vector2 (0, 0);
-		rectTransform.anchorMin = new Vector2 (0.5f, 0.5f);
-		rectTransform.anchorMax = new Vector2 (0.5f, 0.5f);
+		rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+		rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
 		text.font = Font.CreateDynamicFontFromOSFont ("Arial", 0);
 		text.text = _text;
-		text.fontSize = 35;
+		text.fontSize = 35 * Screen.width / 1024;
 		text.lineSpacing = 1;
 		text.alignment = TextAnchor.MiddleCenter;
 		text.horizontalOverflow = HorizontalWrapMode.Overflow;
 		text.verticalOverflow = VerticalWrapMode.Overflow;
 		text.color = new Color (0, 0, 0);
+
+        return text;
 	}
 
-	public static GameObject CreateButton(string _name, string _imagePath,Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
+    public static Text CreateText(string _text, Transform _parent, int _fontSize,Vector3 _rotation, Vector2 _anchorMin, Vector2 _anchorMax)
+    {
+        GameObject obj = new GameObject("Text");
+        Text text = obj.AddComponent<Text>();
+        obj.transform.SetParent(_parent);
+
+        RectTransform rectTransform = obj.GetComponent<RectTransform>();
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        rectTransform.anchoredPosition3D = new Vector3(0, -10, 0);
+        rectTransform.sizeDelta = new Vector2(0, 0);
+        rectTransform.anchorMin = _anchorMin;
+        rectTransform.anchorMax = _anchorMax;
+
+        text.font = Font.CreateDynamicFontFromOSFont("Arial", 0);
+        text.text = _text;
+        text.fontSize = _fontSize * Screen.width / 1024;
+        text.lineSpacing = 1;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.horizontalOverflow = HorizontalWrapMode.Overflow;
+        text.verticalOverflow = VerticalWrapMode.Overflow;
+        text.color = new Color(0, 0, 0);
+        text.transform.Rotate(new Vector3(0, 0, 1), -90);
+
+
+
+        return text;
+    }
+
+    public static GameObject CreateButton(string _name, string _imagePath,Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
 	{
 		GameObject buttonObj = new GameObject (_name);
 		Button button = buttonObj.AddComponent<Button> ();
@@ -119,4 +149,15 @@ public class MyUtility : MonoBehaviour
 		return spriteObj;
 	}
 
+    public static int GetFontSizeFromWidth(GUIStyle style, GUIContent contents, float width)
+    {
+        int size = 0;
+        for (int i = 1; ; i++)
+        {
+            style.fontSize = i;
+            Vector2 v = style.CalcSize(contents);
+            if (v.x < width) { size = i; } else { break; }
+        }
+        return size;
+    }
 }
