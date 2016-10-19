@@ -13,7 +13,7 @@ public class CharacterNone : State<Character>
 	public override void Update()
 	{
 		Debug.Log ("TestStateなう");
-		m_instance.ChangeState (Character.CharacterState.Move);
+		//m_instance.ChangeState (Character.CharacterState.Move);
 //		if (Input.GetMouseButtonDown (0)) {
 //			m_instance.ChangeState (Character.CharacterState.Attack);
 //		}

@@ -15,6 +15,7 @@ public class CharacterAttack : State<Character>
 	{
 		Debug.Log ("TestStateなう");
 		//m_instance.ChangeSta0te
+		//GameObject[] gameobject = GameObject.FindGameObjectsWithTag("Character");
 
 
 	}
