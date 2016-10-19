@@ -63,7 +63,7 @@ public class MyUtility : MonoBehaviour
 		return imageObj;
 	}
 
-	public static Text AddText(string _text, Transform _parent,int _fontSize)
+	public static Text AddText(string _text, Transform _parent)
 	{
 		GameObject obj = new GameObject ("Text");
 		Text text = obj.AddComponent<Text> ();
@@ -73,12 +73,12 @@ public class MyUtility : MonoBehaviour
 		rectTransform.pivot = new Vector2 (0.5f, 0.5f);
 		rectTransform.anchoredPosition3D = new Vector3 (0,-10,0);
 		rectTransform.sizeDelta = new Vector2 (0, 0);
-		rectTransform.anchorMin = new Vector2(0, 0);
-		rectTransform.anchorMax = new Vector2(0, 0);
+		rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+		rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
 
 		text.font = Font.CreateDynamicFontFromOSFont ("Arial", 0);
 		text.text = _text;
-		text.fontSize = _fontSize;
+		text.fontSize = 35 * Screen.width / 1024;
 		text.lineSpacing = 1;
 		text.alignment = TextAnchor.MiddleCenter;
 		text.horizontalOverflow = HorizontalWrapMode.Overflow;

@@ -24,7 +24,7 @@ public class SelectUIManager : MonoBehaviour
 				new Vector2 (6 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
-			MyUtility.AddText (WeaponName[i], obj.transform,35);
+			MyUtility.AddText (WeaponName[i], obj.transform);
 		}
 
 		// 配置する場所用の画像４つ作成
