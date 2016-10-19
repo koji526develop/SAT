@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class SelectUIManager : MonoBehaviour 
 {
+	int m_num;
+	int m_count;
+	List<GameObject> gaugeList = new List<GameObject>();
+
 	void Awake () 
 	{
 		string[] WeaponName = { "剣", "槍", "斧", "盾" };
@@ -32,34 +39,38 @@ public class SelectUIManager : MonoBehaviour
 			);
 		}
 
+		UnityAction[] plusFunc = { Plus, Plus, Plus, Plus };
 		// +ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
-			MyUtility.CreateButton (
+			GameObject buttonObj = MyUtility.CreateButton (
 				"PlusButton",
 				"Image/karie/plus",
-				new Vector2 (23 / 32.0f, (21 - i * 4) / 25.0f),
-				new Vector2 (26 / 32.0f, (24 - i * 4) / 25.0f), 
-				transform
-			);
-		}
-
-		// -ボタン４つ作成
-		for (int i = 0; i < 4; i++) 
-		{
-			MyUtility.CreateButton (
-				"MinusButton",
-				"Image/karie/minus",
 				new Vector2 (27 / 32.0f, (21 - i * 4) / 25.0f),
 				new Vector2 (30 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
+			buttonObj.GetComponent<Button> ().onClick.AddListener (plusFunc[i]);
 		}
-
+			
+		UnityAction[] minusFunc = { Minus, Minus, Minus, Minus };
+		// -ボタン４つ作成
+		for (int i = 0; i < 4; i++) 
+		{
+			GameObject buttonObj = MyUtility.CreateButton (
+				"MinusButton",
+				"Image/karie/minus",
+				new Vector2 (23 / 32.0f, (21 - i * 4) / 25.0f),
+				new Vector2 (26 / 32.0f, (24 - i * 4) / 25.0f), 
+				transform
+			);
+			buttonObj.GetComponent<Button> ().onClick.AddListener (minusFunc[i]);
+		}
+	
 		// ゲージ９つ作成
 		for (int i = 0; i < 9; i++) 
 		{
-			MyUtility.CreateImage 
+			GameObject obj = MyUtility.CreateImage 
 			(
 				"Gauge",
 				"Image/karie/waku2",
@@ -67,30 +78,78 @@ public class SelectUIManager : MonoBehaviour
 				new Vector2 ((8 + i * 2) / 32.0f, 8 / 25.0f), 
 				transform
 			);
+			gaugeList.Add (obj);
 		}
 
 		// 戻るボタン作成
-		MyUtility.CreateButton (
+		GameObject backObj = MyUtility.CreateButton (
 			"Back",
 			"Image/karie/waku5",
 			new Vector2 (3 / 32.0f, 1 / 25.0f),
 			new Vector2 (9 / 32.0f, 4 / 25.0f), 
 			transform
 		);
+		MyUtility.AddText ("決定", backObj.transform);
 
 		// 決定ボタン作成
-		MyUtility.CreateButton (
+		GameObject enterObj = MyUtility.CreateButton (
 			"Enter",
 			"Image/karie/waku5",
 			new Vector2 (23 / 32.0f, 1 / 25.0f),
 			new Vector2 (29 / 32.0f, 4 / 25.0f), 
 			transform
 		);
-	
+		MyUtility.AddText ("戻る", enterObj.transform);
 	}
 
-	void Update ()
+	void Plus()
 	{
-	
+		m_num++;
+
+		gaugeList [m_count].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Plus);
+
+		if (m_num % 2 == 0)
+		{
+			m_count++;
+		}
+	}
+
+	void Minus()
+	{
+		m_num--;
+
+		if (m_num % 2 == 1) 
+		{
+			m_count--;
+		}
+
+		gaugeList [m_count].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Minus);
+	}
+
+	enum PlusOrMinus
+	{
+		Plus,
+		Minus
+	}
+
+	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
+	{
+		if (_plusOrMinus == PlusOrMinus.Plus) {
+			switch (m_num % 2) {
+			case 0:
+				return Resources.Load ("Image/karie/waku4", typeof(Sprite)) as Sprite;
+			case 1:
+				return Resources.Load ("Image/karie/waku3", typeof(Sprite)) as Sprite;
+			}
+		} else {
+			switch (m_num % 2) 
+			{
+			case 0:
+				return Resources.Load ("Image/karie/waku2", typeof(Sprite)) as Sprite;
+			case 1:
+				return Resources.Load ("Image/karie/waku3", typeof(Sprite)) as Sprite;
+			}
+		}
+		return null;
 	}
 }
