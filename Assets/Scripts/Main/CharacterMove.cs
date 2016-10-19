@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CharacterMove :  State<Character> {
 	Camera m_mainCamera;
+	float RoteteTime=3;
 	public CharacterMove(Character _instance) : base(_instance) {}
 
 	public override void Enter() 
@@ -12,6 +13,7 @@ public class CharacterMove :  State<Character> {
 
 	public override void Update()
 	{
+		RoteteTime += Time.deltaTime;
 		m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
 		 GameObject[] gameobject = GameObject.FindGameObjectsWithTag("Character");
 
@@ -22,7 +24,10 @@ public class CharacterMove :  State<Character> {
 		{	 
 			if(TouchInfo.Moved>0)
 			{
-				this.m_instance.transform.rotation = Quaternion.Euler (0, 90, 0);
+				
+					this.m_instance.transform.rotation = Quaternion.Euler (0, 90, 0);
+				
+
 				//this.m_instance.transform.position += new Vector3 (0, 1, 0);
 				//m_instance.ChangeState (Character.CharacterState.None);
 			}
