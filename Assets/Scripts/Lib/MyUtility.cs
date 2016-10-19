@@ -43,4 +43,15 @@ public class MyUtility : MonoBehaviour
 		eventSystemObj.name = "EventSystem";
 		eventSystemObj.transform.SetParent (_parent);
 	}
+
+    public static GameObject CreateSprite(Transform _parent,string _name,string _resourcesFolder)
+    {
+        GameObject spriteObj = new GameObject(_name);
+        spriteObj.AddComponent<SpriteRenderer>();
+        SpriteRenderer m_SpriteRenderer = spriteObj.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sprite = Resources.Load<Sprite>(_resourcesFolder);
+        spriteObj.transform.SetParent(_parent);
+
+        return spriteObj;
+    }
 }
