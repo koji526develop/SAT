@@ -26,7 +26,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		None,
 		Attack,
-		Move
+		Move,
+		Rotate
 	}
 
 	public enum CharacterType
@@ -49,6 +50,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		GameObject playerObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		Character character = playerObj.AddComponent<Character> ();
+		RotateTo rotate = playerObj.AddComponent<RotateTo> ();
+		MoveTo moveto = playerObj.AddComponent<MoveTo> ();
 
 
 		playerObj.name = _characterType.ToString();
@@ -94,6 +97,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		stateList.Add(new CharacterNone(this));
 		stateList.Add(new CharacterAttack(this));
 		stateList.Add(new CharacterMove(this));
+		stateList.Add(new CharacterRotate(this));
 
 		stateMachine = new StateMachine<Character>();
 

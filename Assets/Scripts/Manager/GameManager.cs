@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 			j=j+2;
 
 			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword);
-		
+
 		}
 	}
 }
