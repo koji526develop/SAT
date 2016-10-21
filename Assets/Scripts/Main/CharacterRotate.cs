@@ -26,7 +26,7 @@ public class CharacterRotate : State<Character>
 		}
 		if(moveto.isMove==false)
 		{
-			m_instance.ChangeState (Character.CharacterState.Mov	e);
+			m_instance.ChangeState (Character.CharacterState.Move);
 		}
 
 
