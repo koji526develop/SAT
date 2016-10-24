@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterMove :  State<Character> {
 	Camera m_mainCamera;
-	float RoteteTime=3;
+
 	Vector3 move;
 
 	bool m_CharacterTouch;
@@ -21,13 +21,14 @@ public class CharacterMove :  State<Character> {
 	{
 		Debug.Log ("TestState入ったー");
 		m_CharacterTouch = false;
-		 m_Rotate = 0;
+
 
 	}
 
 	public override void Update()
 	{
-		RoteteTime += Time.deltaTime;
+
+
 		m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
 		GameObject[] gameobject = GameObject.FindGameObjectsWithTag("Character");
 
@@ -46,12 +47,13 @@ public class CharacterMove :  State<Character> {
 					//m_instance.transform.position += new Vector3 (0, 1, 0);
 					//m_CharacterObj.transform.position += new Vector3 (0, 1, 0);
 					m_Rotate=1;
-					m_CharacterPosition = m_instance.transform.position.y+1.0f;
-					m_CharacterRotate = m_instance.transform.rotation.y+90.0f;
-					m_instance.ChangeState (Character.CharacterState.Rotate);
-					Debug.Log("上");
 					m_CharacterTouch = false;
 					m_CharacterObj = null;
+					m_CharacterPosition = m_instance.transform.position.y+1.0f;
+					m_CharacterRotate = m_instance.transform.rotation.eulerAngles.x+90.0f;
+					Debug.Log("上");
+
+					m_instance.ChangeState (Character.CharacterState.Rotate);
 				}
 			}
 			else if(TouchManager.GetTouchMoveDistanceY (0) < -50.0f)
@@ -61,12 +63,13 @@ public class CharacterMove :  State<Character> {
 					//m_instance.transform.position += new Vector3 (0, 1, 0);
 					//m_CharacterObj.transform.position -= new Vector3 (0, 1, 0);
 					m_Rotate=2;
-					m_CharacterPosition = m_instance.transform.position.y-1.0f;
-					m_CharacterRotate = m_instance.transform.rotation.y-90.0f;
-					m_instance.ChangeState (Character.CharacterState.Rotate);
-					Debug.Log("下");
 					m_CharacterTouch = false;
 					m_CharacterObj = null;
+					m_CharacterPosition = m_instance.transform.position.y-1.0f;
+					m_CharacterRotate = m_instance.transform.rotation.eulerAngles.x-90.0f;
+					Debug.Log("下");
+
+					m_instance.ChangeState (Character.CharacterState.Rotate);
 				}
 			}
 		}
