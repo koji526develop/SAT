@@ -13,14 +13,6 @@ public class SelectSpecialManager : MonoBehaviour
 		GameObject uiObj = MyUtility.CreateEmpty ("UI", canvas.transform);
 		uiObj.AddComponent<SelectSpecialUIManager> ();
 
-		GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
-		plane.transform.position = new Vector3 (0, 0, 0);
-		plane.transform.rotation = Quaternion.Euler (270, 0, 0);
-		plane.transform.localScale = new Vector3 (2, 1, 2);
-
-		// MAINカメラ作成
-		Camera mainCamera = MyUtility.CreateCamera ("MainCamera");
-
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);
 	}
