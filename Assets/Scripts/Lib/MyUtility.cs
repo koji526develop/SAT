@@ -161,7 +161,7 @@ public class MyUtility : MonoBehaviour
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
         text.verticalOverflow = VerticalWrapMode.Overflow;
         text.color = new Color(0, 0, 0);
-        text.transform.Rotate(new Vector3(0, 0, 1), -90);
+		text.transform.rotation = Quaternion.Euler (_rotation);
 
         return text;
     }

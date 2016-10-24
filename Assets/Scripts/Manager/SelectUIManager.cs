@@ -28,7 +28,7 @@ public class SelectUIManager : MonoBehaviour
 		}
 
 		// 配置する場所用の画像４つ作成
-		for (int i = 0; i < 4; i++) 
+		/*for (int i = 0; i < 4; i++) 
 		{
 			MyUtility.CreateImage (
 				"LongBar",
@@ -37,7 +37,15 @@ public class SelectUIManager : MonoBehaviour
 				new Vector2 (22 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
-		}
+		}*/
+
+		Text text = MyUtility.CreateText ("Text",
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2 (6 / 32.0f, (21) / 25.0f),
+			new Vector2 (22 / 32.0f, (24) / 25.0f));
+		text.text = "あ";
 
 		UnityAction[] plusFunc = { Plus, Plus, Plus, Plus };
 		// +ボタン４つ作成
