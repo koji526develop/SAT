@@ -33,6 +33,38 @@ public class MyUtility : MonoBehaviour
 		light.type = LightType.Directional;
 	}
 
+	public static Canvas CreateCanvas(Transform _parent = null)
+	{
+		GameObject canvasObj = new GameObject ("Canvas");
+
+		Canvas canvas = canvasObj.AddComponent<Canvas> ();
+		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+		CanvasScaler canvasScaler = canvasObj.AddComponent<CanvasScaler> ();
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+
+		canvasObj.AddComponent<GraphicRaycaster> ();
+
+		if(_parent) canvasObj.transform.SetParent (_parent);
+
+		return canvas;
+	}
+
+	public static GameObject CreateEmpty(string _name, Transform _parent)
+	{
+		GameObject emptyObj = new GameObject (_name);
+		emptyObj.transform.SetParent (_parent);
+
+		RectTransform rectTransform = emptyObj.AddComponent<RectTransform> ();
+		rectTransform.pivot = new Vector2 (0.5f, 0.5f);
+		rectTransform.anchoredPosition3D = new Vector3 (0,0,0);
+		rectTransform.sizeDelta = new Vector2 (0, 0);
+		rectTransform.anchorMin = new Vector2 (0, 0);
+		rectTransform.anchorMax =new Vector2 (1, 1);
+
+		return emptyObj;
+	}
+
 	public static Camera CreateCamera(string tagName, Transform _parent = null)
 	{
 		GameObject cameraObj = new GameObject (tagName);
