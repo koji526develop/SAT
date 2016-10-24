@@ -163,18 +163,30 @@ public class MyUtility : MonoBehaviour
         Slider slider = sliderObj.AddComponent<Slider>();
         sliderObj.transform.SetParent(_parent);
 
-        Image image = sliderObj.AddComponent<Image>();
+        GameObject fillObj = new GameObject("fill");
+        Image image = fillObj.AddComponent<Image>();
         image.sprite = Resources.Load(_imagePath, typeof(Sprite)) as Sprite;
 
-        slider.targetGraphic = image;
+        fillObj.transform.SetParent(sliderObj.transform);
 
         RectTransform rectTransform = sliderObj.GetComponent<RectTransform>();
-        rectTransform.pivot = new Vector2(0, 1);
-        rectTransform.anchoredPosition3D = new Vector3(0, 0, 0);
-        rectTransform.sizeDelta = new Vector2(0, 0);
+        RectTransform fillRectTransform = fillObj.GetComponent<RectTransform>();
+
+        rectTransform.pivot      = new Vector2(0, 1);
+        fillRectTransform.pivot  = new Vector2(0, 1);
+
+        rectTransform.anchoredPosition3D        = new Vector3(0, 0, 0);
+        fillRectTransform.anchoredPosition3D    = new Vector3(0, 0, 0);
+
+        rectTransform.sizeDelta             = new Vector2(0, 0);
+        fillRectTransform.sizeDelta          = new Vector2(0, 0);
 
         rectTransform.anchorMin = _anchorMin;
+        fillRectTransform.anchorMin = _anchorMin;
         rectTransform.anchorMax = _anchorMax;
+        fillRectTransform.anchorMax = _anchorMax;
+
+        slider.fillRect = fillRectTransform;
 
         return sliderObj;
     }
