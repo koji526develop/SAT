@@ -8,6 +8,13 @@ public class SelectUIManager : MonoBehaviour
 {
 	int m_num;
 	int m_count;
+
+	int m_swordNum = 0;
+	int m_spearNum = 0;
+	int m_shieldNum = 0;
+	int m_axNum = 0;
+
+	Text [] m_soldierText = new Text[4];
 	List<GameObject> gaugeList = new List<GameObject>();
 
 	void Awake () 
@@ -27,19 +34,30 @@ public class SelectUIManager : MonoBehaviour
 			MyUtility.AddText (WeaponName[i], obj.transform);
 		}
 
-		// 配置する場所用の画像４つ作成
-		for (int i = 0; i < 4; i++) 
+		float [,] value = {
+			{ MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, MyUtility.SWORD_MOCESPEED,m_swordNum },
+			{ MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, MyUtility.SPEAR_MOCESPEED,m_spearNum },
+			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOCESPEED,m_shieldNum },
+			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOCESPEED,m_axNum }
+		};
+		for (int i = 0; i < 5; i++) 
 		{
-			MyUtility.CreateImage (
-				"LongBar",
-				"Image/karie/waku",
-				new Vector2 (6 / 32.0f, (21 - i * 4) / 25.0f),
-				new Vector2 (22 / 32.0f, (24 - i * 4) / 25.0f), 
-				transform
-			);
+			for (int j = 0; j < 4; j++) 
+			{
+				Text text = MyUtility.CreateText (
+				"Text",
+				transform,
+		        35,
+		        Vector3.zero,
+					new Vector2 ((6 + i * 3) / 32.0f, (21 - j * 4) / 25.0f),
+					new Vector2 ((9 + i * 3) / 32.0f, (24 - j * 4) / 25.0f));
+				text.text = value[j,i].ToString();
+				if (i == 4)
+					m_soldierText [j] = text;
+			}
 		}
 
-		UnityAction[] plusFunc = { Plus, Plus, Plus, Plus };
+		UnityAction[] plusFunc = { SwordPlus, SpearPlus, ShieldPlus, AxPlus };
 		// +ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -53,7 +71,7 @@ public class SelectUIManager : MonoBehaviour
 			buttonObj.GetComponent<Button> ().onClick.AddListener (plusFunc[i]);
 		}
 			
-		UnityAction[] minusFunc = { Minus, Minus, Minus, Minus };
+		UnityAction[] minusFunc = { SwordMinus, SpearMinus, ShieldMinus, AxMinus };
 		// -ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -102,6 +120,34 @@ public class SelectUIManager : MonoBehaviour
 		MyUtility.AddText ("戻る", enterObj.transform);
 	}
 
+	void SwordPlus()
+	{
+		Plus ();
+		m_swordNum++;
+		m_soldierText [0].text = m_swordNum.ToString();
+	}
+
+	void SpearPlus()
+	{
+		Plus ();
+		m_spearNum++;
+		m_soldierText [1].text = m_spearNum.ToString();
+	}
+
+	void ShieldPlus()
+	{
+		Plus ();
+		m_shieldNum++;
+		m_soldierText [2].text = m_shieldNum.ToString();
+	}
+
+	void AxPlus()
+	{
+		Plus ();
+		m_axNum++;
+		m_soldierText [3].text = m_axNum.ToString();
+	}
+
 	void Plus()
 	{
 		m_num++;
@@ -112,6 +158,34 @@ public class SelectUIManager : MonoBehaviour
 		{
 			m_count++;
 		}
+	}
+
+	void SwordMinus()
+	{
+		Minus ();
+		m_swordNum--;
+		m_soldierText [0].text = m_swordNum.ToString();
+	}
+
+	void SpearMinus()
+	{
+		Minus ();
+		m_spearNum--;
+		m_soldierText [1].text = m_spearNum.ToString();
+	}
+
+	void ShieldMinus()
+	{
+		Minus ();
+		m_shieldNum--;
+		m_soldierText [2].text = m_shieldNum.ToString();
+	}
+
+	void AxMinus()
+	{
+		Minus ();
+		m_axNum--;
+		m_soldierText [3].text = m_axNum.ToString();
 	}
 
 	void Minus()

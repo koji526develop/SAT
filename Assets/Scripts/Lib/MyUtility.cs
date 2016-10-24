@@ -5,25 +5,25 @@ using System.Collections;
 // 動的にオブジェクト作ったりするクラス
 public class MyUtility : MonoBehaviour
 {
-	public readonly int SWORD_LIFE = 2;
-	public readonly int SWORD_ATTACK = 4;
-	public readonly int SWORD_ATTACKDISTANCE = 1;
-	public readonly float SWORD_MOCESPEED = 1.0f;
+	public static int SWORD_LIFE = 2;
+	public static int SWORD_ATTACK = 4;
+	public static int SWORD_ATTACKDISTANCE = 1;
+	public static float SWORD_MOCESPEED = 1.0f;
 
-	public readonly int SPEAR_LIFE = 10;
-	public readonly int SPEAR_ATTACK = 1;
-	public readonly int SPEAR_ATTACKDISTANCE = 1;
-	public readonly float SPEAR_MOCESPEED = 1.0f;
+	public static int SPEAR_LIFE = 10;
+	public static int SPEAR_ATTACK = 1;
+	public static int SPEAR_ATTACKDISTANCE = 1;
+	public static float SPEAR_MOCESPEED = 1.0f;
 
-	public readonly int AX_LIFE = 6;
-	public readonly int AX_ATTACK = 2;
-	public readonly int AX_ATTACKDISTANCE = 1;
-	public readonly float AX_MOCESPEED = 1.0f;
+	public static int AX_LIFE = 6;
+	public static int AX_ATTACK = 2;
+	public static int AX_ATTACKDISTANCE = 1;
+	public static float AX_MOCESPEED = 1.0f;
 
-	public readonly int SHIELD_LIFE = 2;
-	public readonly int SHIELD_ATTACK = 2;
-	public readonly int SHIELD_ATTACKDISTANCE = 2;
-	public readonly float SHIELD_MOCESPEED = 1.0f;
+	public static int SHIELD_LIFE = 2;
+	public static int SHIELD_ATTACK = 2;
+	public static int SHIELD_ATTACKDISTANCE = 2;
+	public static float SHIELD_MOCESPEED = 1.0f;
 	
 	public static void CreateDirectionalLight()
 	{
@@ -31,6 +31,38 @@ public class MyUtility : MonoBehaviour
 		lightObj.transform.Rotate(new Vector3 (15, 0, 0));
 		Light light = lightObj.AddComponent<Light> ();
 		light.type = LightType.Directional;
+	}
+
+	public static Canvas CreateCanvas(Transform _parent = null)
+	{
+		GameObject canvasObj = new GameObject ("Canvas");
+
+		Canvas canvas = canvasObj.AddComponent<Canvas> ();
+		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+		CanvasScaler canvasScaler = canvasObj.AddComponent<CanvasScaler> ();
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+
+		canvasObj.AddComponent<GraphicRaycaster> ();
+
+		if(_parent) canvasObj.transform.SetParent (_parent);
+
+		return canvas;
+	}
+
+	public static GameObject CreateEmpty(string _name, Transform _parent)
+	{
+		GameObject emptyObj = new GameObject (_name);
+		emptyObj.transform.SetParent (_parent);
+
+		RectTransform rectTransform = emptyObj.AddComponent<RectTransform> ();
+		rectTransform.pivot = new Vector2 (0.5f, 0.5f);
+		rectTransform.anchoredPosition3D = new Vector3 (0,0,0);
+		rectTransform.sizeDelta = new Vector2 (0, 0);
+		rectTransform.anchorMin = new Vector2 (0, 0);
+		rectTransform.anchorMax =new Vector2 (1, 1);
+
+		return emptyObj;
 	}
 
 	public static Camera CreateCamera(string tagName, Transform _parent = null)
@@ -129,9 +161,7 @@ public class MyUtility : MonoBehaviour
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
         text.verticalOverflow = VerticalWrapMode.Overflow;
         text.color = new Color(0, 0, 0);
-        text.transform.Rotate(new Vector3(0, 0, 1), -90);
-
-
+		text.transform.rotation = Quaternion.Euler (_rotation);
 
         return text;
     }
@@ -157,6 +187,41 @@ public class MyUtility : MonoBehaviour
 
 		return buttonObj;
 	}
+
+
+    public static GameObject CreateSlider(string _name, string _imagePath, Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
+    {
+        GameObject sliderObj = new GameObject(_name);
+        Slider slider = sliderObj.AddComponent<Slider>();
+        sliderObj.transform.SetParent(_parent);
+
+        GameObject fillObj = new GameObject("fill");
+        Image image = fillObj.AddComponent<Image>();
+        image.sprite = Resources.Load(_imagePath, typeof(Sprite)) as Sprite;
+
+        fillObj.transform.SetParent(sliderObj.transform);
+
+        RectTransform rectTransform = sliderObj.GetComponent<RectTransform>();
+        RectTransform fillRectTransform = fillObj.GetComponent<RectTransform>();
+
+        rectTransform.pivot      = new Vector2(0, 1);
+        fillRectTransform.pivot  = new Vector2(0, 1);
+
+        rectTransform.anchoredPosition3D        = new Vector3(0, 0, 0);
+        fillRectTransform.anchoredPosition3D    = new Vector3(0, 0, 0);
+
+        rectTransform.sizeDelta             = new Vector2(0, 0);
+        fillRectTransform.sizeDelta          = new Vector2(0, 0);
+
+        rectTransform.anchorMin = _anchorMin;
+        fillRectTransform.anchorMin = _anchorMin;
+        rectTransform.anchorMax = _anchorMax;
+        fillRectTransform.anchorMax = _anchorMax;
+
+        slider.fillRect = fillRectTransform;
+
+        return sliderObj;
+    }
 
 	public static GameObject CreateSprite(Transform _parent,string _name,string _resourcesFolder)
 	{

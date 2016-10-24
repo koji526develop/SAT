@@ -4,21 +4,16 @@ using System.Collections;
 
 public class GameTimeControl : MonoBehaviour {
 
-    public float m_TimeRemaining;
-
-    private Slider m_blueTimeSliber;
-    private Slider m_redTimeSliber;
+    public  float m_TimeRemaining=60;
+   
+    private Text text;
+   
 
 	// Use this for initialization
 	void Start () {
 
-        //青と赤ゲージのコンポーネントをそれぞれ検索。格納する。
-        m_blueTimeSliber        = transform.FindChild("BlueTimeGauge").GetComponent<Slider>();
-        m_redTimeSliber         = transform.FindChild("RedTimeGauge").GetComponent<Slider>();
-
-        m_blueTimeSliber.maxValue = m_redTimeSliber.maxValue    = m_TimeRemaining;
-        m_blueTimeSliber.value    = m_redTimeSliber.value       = m_TimeRemaining;
-
+        text = GameObject.Find("Canvas/Text").GetComponent<Text>();
+      
     }
 
     // Update is called once per frame
@@ -30,7 +25,9 @@ public class GameTimeControl : MonoBehaviour {
         {
             m_TimeRemaining = 0.0f;
         }
-        m_blueTimeSliber.value = m_redTimeSliber.value = m_TimeRemaining;
 
+        int m_IntTimeRemaing = (int)m_TimeRemaining;
+        text.text = m_IntTimeRemaing.ToString();
+    
     }
 }
