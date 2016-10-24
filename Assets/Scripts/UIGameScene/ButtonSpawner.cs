@@ -12,9 +12,7 @@ public class ButtonSpawner : MonoBehaviour {
     public Character.CharacterType type;
     void Awake()
     {
-        // BattleManager作成
-        battleManager = new GameObject("BattleManager").transform;
-
+       
         if (!debug) {
             this.GetComponent<Button>().onClick.AddListener(SolderChange);
             EventTrigger trigger = gameObject.GetComponent<EventTrigger>();
