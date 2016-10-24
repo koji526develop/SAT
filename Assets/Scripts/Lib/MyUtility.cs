@@ -5,25 +5,25 @@ using System.Collections;
 // 動的にオブジェクト作ったりするクラス
 public class MyUtility : MonoBehaviour
 {
-	public readonly int SWORD_LIFE = 2;
-	public readonly int SWORD_ATTACK = 4;
-	public readonly int SWORD_ATTACKDISTANCE = 1;
-	public readonly float SWORD_MOCESPEED = 1.0f;
+	public static int SWORD_LIFE = 2;
+	public static int SWORD_ATTACK = 4;
+	public static int SWORD_ATTACKDISTANCE = 1;
+	public static float SWORD_MOCESPEED = 1.0f;
 
-	public readonly int SPEAR_LIFE = 10;
-	public readonly int SPEAR_ATTACK = 1;
-	public readonly int SPEAR_ATTACKDISTANCE = 1;
-	public readonly float SPEAR_MOCESPEED = 1.0f;
+	public static int SPEAR_LIFE = 10;
+	public static int SPEAR_ATTACK = 1;
+	public static int SPEAR_ATTACKDISTANCE = 1;
+	public static float SPEAR_MOCESPEED = 1.0f;
 
-	public readonly int AX_LIFE = 6;
-	public readonly int AX_ATTACK = 2;
-	public readonly int AX_ATTACKDISTANCE = 1;
-	public readonly float AX_MOCESPEED = 1.0f;
+	public static int AX_LIFE = 6;
+	public static int AX_ATTACK = 2;
+	public static int AX_ATTACKDISTANCE = 1;
+	public static float AX_MOCESPEED = 1.0f;
 
-	public readonly int SHIELD_LIFE = 2;
-	public readonly int SHIELD_ATTACK = 2;
-	public readonly int SHIELD_ATTACKDISTANCE = 2;
-	public readonly float SHIELD_MOCESPEED = 1.0f;
+	public static int SHIELD_LIFE = 2;
+	public static int SHIELD_ATTACK = 2;
+	public static int SHIELD_ATTACKDISTANCE = 2;
+	public static float SHIELD_MOCESPEED = 1.0f;
 	
 	public static void CreateDirectionalLight()
 	{
