@@ -8,6 +8,7 @@ TagManager:
   - BattleCamera
   - Character
   - Card
+  - CardFrame
   layers:
   - Default
   - TransparentFX
