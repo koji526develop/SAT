@@ -49,32 +49,57 @@ public class MySceneManager : MonoBehaviour {
 
     //非同期でフェードイン・アウトと画面遷移の処理を行う。
     private IEnumerator TransScene()
-    {
-        //画面遷移を非同期で処理を開始させる。
-        this.m_async = SceneManager.LoadSceneAsync(m_nextScene);
-        this.m_async.allowSceneActivation = false;  //自動で画面遷移をオフに
+	{
+		//画面遷移を非同期で処理を開始させる。
 
-        //フェードスタートと初期化を行う。
-        this.m_isFade = true;
-        this.m_nowTime = 0.0f;
+		//フェードスタートと初期化を行う。
+		this.m_isFade = true;
+		this.m_nowTime = 0.0f;
 
-        //フェードアウトしたか確認
-        while (m_nowTime <= m_intervalTime)
-        {
-            this.m_fadeAlpha = Mathf.Lerp(0.0f, 1.0f, m_nowTime / m_intervalTime);
+		//フェードアウトしたか確認
+		while (m_nowTime <= m_intervalTime) {
+			this.m_fadeAlpha = Mathf.Lerp (0.0f, 1.0f, m_nowTime / m_intervalTime);
 
-            m_nowTime += Time.deltaTime;
-            yield return 0;
-        }
-
-		if (this.m_async.progress < 0.9f) {
-			SceneManager.LoadScene ("Loading");
+			m_nowTime += Time.deltaTime;
+			yield return 0;
 		}
-        //非同期で画面遷移のロードが終わっているかどうか、(0.9が完了？らしい）
+
+		//if (this.m_async.progress < 0.9f) {
+		SceneManager.LoadScene ("Loading");
+	    //}
+
+		yield return 0;
+		this.m_async = SceneManager.LoadSceneAsync (m_nextScene);
+		this.m_async.allowSceneActivation = false;  //自動で画面遷移をオフに
+
+		//改めて初期化する。
+		this.m_nowTime = 0.0f;
+
+		//フェードインしたかどうか確認する。
+		while (m_nowTime <= m_intervalTime)
+		{
+			this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
+
+			m_nowTime += Time.deltaTime;
+			yield return 0;
+		}
+
+		//非同期で画面遷移のロードが終わっているかどうか、(0.9が完了？らしい）
         while (this.m_async.progress < 0.9f)
         {
             yield return 0;
         }
+
+		//改めて初期化する。
+		this.m_nowTime = 0.0f;
+
+		//フェードアウトしたか確認
+		while (m_nowTime <= m_intervalTime) {
+			this.m_fadeAlpha = Mathf.Lerp (0.0f, 1.0f, m_nowTime / m_intervalTime);
+
+			m_nowTime += Time.deltaTime;
+			yield return 0;
+		}
 
         //画面遷移を許可する
         this.m_async.allowSceneActivation = true;
@@ -82,14 +107,14 @@ public class MySceneManager : MonoBehaviour {
         //改めて初期化する。
         this.m_nowTime = 0.0f;
 
-        //フェードインしたかどうか確認する。
-        while (m_nowTime <= m_intervalTime)
-        {
-            this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
+		//フェードインしたかどうか確認する。
+		while (m_nowTime <= m_intervalTime)
+		{
+			this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
 
-            m_nowTime += Time.deltaTime;
-            yield return 0;
-        }
+			m_nowTime += Time.deltaTime;
+			yield return 0;
+		}
         //暗転処理終了
         this.m_nextScene = "";
         this.m_intervalTime = 0.0f;
