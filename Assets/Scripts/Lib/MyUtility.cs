@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -246,3 +247,5 @@ public class MyUtility : MonoBehaviour
         return size;
     }
 }
+=======
+>>>>>>> Nozawa_dev
