@@ -70,8 +70,19 @@ public class ResultManager : MonoBehaviour
 
     }
 
+    //仮タイム
+    private float time = 5.0f;
+    bool flag = false;
+
     void Update()
     {
+        if(!flag)time -= Time.deltaTime;
 
+        if(time <= 0.0f)
+        {
+            SceneChanger sChange = new SceneChanger();
+            sChange.ChangeToTitle();
+            flag = true;
+        }
     }
 }

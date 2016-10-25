@@ -229,7 +229,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 273113389}
-        m_MethodName: ChangeToGame
+        m_MethodName: ChangeToSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

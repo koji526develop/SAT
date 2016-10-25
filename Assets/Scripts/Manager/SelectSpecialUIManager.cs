@@ -100,12 +100,15 @@ public class SelectSpecialUIManager : MonoBehaviour
 			transform                           // 親のTransform
 		);
 		// Text追加
-		MyUtility.AddText ("決定", backObj.transform);
+		MyUtility.AddText ("戻る", backObj.transform);
+        GameObject sceneChangerObj = new GameObject();
+        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
 
-		/***********************************************
+        /***********************************************
 		// 決定ボタン作成
 		***********************************************/
-		GameObject enterObj = MyUtility.CreateButton (
+        GameObject enterObj = MyUtility.CreateButton (
 			"Enter",							 // オブジェクト名
 			"Image/karie/waku5",				 // 画像Path
 			new Vector2 (23 / 32.0f, 1 / 25.0f), // アンカーの最小値
@@ -113,8 +116,9 @@ public class SelectSpecialUIManager : MonoBehaviour
 			transform							 // 親のTransform
 		);
 		// Text追加
-		MyUtility.AddText ("戻る", enterObj.transform);
-	}
+		MyUtility.AddText ("決定", enterObj.transform);
+        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
+    }
 
 	void Update ()
 	{

@@ -16,14 +16,27 @@ public class SceneChanger : MonoBehaviour
         MySceneManager.m_instance.LoadLevel("Operating", 1.0f);
     }
 
+    //兵士選択画面に行く
+    public void ChangeToSelect()
+    {
+        MySceneManager.m_instance.LoadLevel("Select", 1.0f);
+    }
+
+    //特殊カード選択に行く
+    public void ChangeToSelectSpecial()
+    {
+        MySceneManager.m_instance.LoadLevel("SelectSpecial", 1.0f);
+    }
+
     //ゲームに行く
     public void ChangeToGame()
     {
-        MySceneManager.m_instance.LoadLevel("Game", 1.0f);
+        //MySceneManager.m_instance.LoadLevel("Game", 1.0f);
+        MySceneManager.m_instance.LoadLevel("GameAndUI", 1.0f);
     }
 
     //リザルトに行く
-    public void ChangeToResukt()
+    public void ChangeToResult()
     {
         MySceneManager.m_instance.LoadLevel("Result", 1.0f);
     }

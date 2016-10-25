@@ -114,7 +114,10 @@ public class SelectUIManager : MonoBehaviour
 			new Vector2 (9 / 32.0f, 4 / 25.0f), 
 			transform
 		);
-		MyUtility.AddText ("決定", backObj.transform);
+		MyUtility.AddText ("戻る", backObj.transform);
+        GameObject sceneChangerObj = new GameObject();
+        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
 
 		// 決定ボタン作成
 		GameObject enterObj = MyUtility.CreateButton (
@@ -124,8 +127,10 @@ public class SelectUIManager : MonoBehaviour
 			new Vector2 (29 / 32.0f, 4 / 25.0f), 
 			transform
 		);
-		MyUtility.AddText ("戻る", enterObj.transform);
-	}
+		MyUtility.AddText ("決定", enterObj.transform);
+        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+
+    }
 
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
 	{
