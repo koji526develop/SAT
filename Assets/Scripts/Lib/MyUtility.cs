@@ -131,8 +131,6 @@ public class MyUtility : MonoBehaviour
         text.color = new Color(0, 0, 0);
         text.transform.Rotate(new Vector3(0, 0, 1), -90);
 
-
-
         return text;
     }
 
@@ -157,6 +155,41 @@ public class MyUtility : MonoBehaviour
 
 		return buttonObj;
 	}
+
+
+    public static GameObject CreateSlider(string _name, string _imagePath, Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
+    {
+        GameObject sliderObj = new GameObject(_name);
+        Slider slider = sliderObj.AddComponent<Slider>();
+        sliderObj.transform.SetParent(_parent);
+
+        GameObject fillObj = new GameObject("fill");
+        Image image = fillObj.AddComponent<Image>();
+        image.sprite = Resources.Load(_imagePath, typeof(Sprite)) as Sprite;
+
+        fillObj.transform.SetParent(sliderObj.transform);
+
+        RectTransform rectTransform = sliderObj.GetComponent<RectTransform>();
+        RectTransform fillRectTransform = fillObj.GetComponent<RectTransform>();
+
+        rectTransform.pivot      = new Vector2(0, 1);
+        fillRectTransform.pivot  = new Vector2(0, 1);
+
+        rectTransform.anchoredPosition3D        = new Vector3(0, 0, 0);
+        fillRectTransform.anchoredPosition3D    = new Vector3(0, 0, 0);
+
+        rectTransform.sizeDelta             = new Vector2(0, 0);
+        fillRectTransform.sizeDelta          = new Vector2(0, 0);
+
+        rectTransform.anchorMin = _anchorMin;
+        fillRectTransform.anchorMin = _anchorMin;
+        rectTransform.anchorMax = _anchorMax;
+        fillRectTransform.anchorMax = _anchorMax;
+
+        slider.fillRect = fillRectTransform;
+
+        return sliderObj;
+    }
 
 	public static GameObject CreateSprite(Transform _parent,string _name,string _resourcesFolder)
 	{
