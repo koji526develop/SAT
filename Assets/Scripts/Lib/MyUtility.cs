@@ -25,7 +25,7 @@ public class MyUtility : MonoBehaviour
 	public static int SHIELD_ATTACKDISTANCE = 2;
 	public static float SHIELD_MOCESPEED = 1.0f;
 
-    public static int MAX_WARPOTENTIAL = 500;
+    public static readonly int MAX_WARPOTENTIAL = 500;
 	
 	public static void CreateDirectionalLight()
 	{
@@ -248,3 +248,4 @@ public class MyUtility : MonoBehaviour
         return size;
     }
 }
+
