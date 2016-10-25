@@ -5,10 +5,16 @@ using UnityEngine.UI;
 public class DebugUI : MonoBehaviour 
 {
 	// タッチ開始座標
-	Vector3 m_touchBeganPos = Vector3.zero;
+	Vector3 m_touchBeganPos;
 
 	// タッチ終了座標
-	Vector3 m_touchEndedPos = Vector3.zero;
+	Vector3 m_touchEndedPos;
+
+	void Start()
+	{
+		m_touchBeganPos.x = Screen.width/2;
+		m_touchEndedPos.x = Screen.width/2;
+	}
 
 	void Update () 
 	{
@@ -41,8 +47,8 @@ public class DebugUI : MonoBehaviour
 
             if (touchInfo == TouchInfo.Ended)
             {
-                m_touchBeganPos = Vector3.zero;
-                m_touchEndedPos = Vector3.zero;
+				m_touchBeganPos.x = Screen.width/2;
+				m_touchEndedPos.x = Screen.height/2;
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class GameUIManager : MonoBehaviour {
 
@@ -72,12 +74,17 @@ public class GameUIManager : MonoBehaviour {
         {
             for (int j = 0; j < 2; j++)
             {
-                MyUtility.CreateButton(
+                obj=MyUtility.CreateButton(
                    "SoldierButton",
                    "Image/TimeWaku",
                     new Vector2((5.0f + 20.0f * j) / 32.0f, (20.0f - 3.0f * i) / 25.0f),
                     new Vector2((7.0f + 20.0f * j) / 32.0f, (23.0f - 3.0f * i) / 25.0f),
                   GameObject.Find("Canvas").transform);
+
+    
+                obj.AddComponent<EventTrigger>();
+                obj.AddComponent<ButtonSpawner>();
+
             }
         }
 
@@ -85,8 +92,9 @@ public class GameUIManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-	
-	}
+       
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -7,6 +7,8 @@ TagManager:
   - UICamera
   - BattleCamera
   - Character
+  - Card
+  - CardFrame
   layers:
   - Default
   - TransparentFX
