@@ -3,16 +3,32 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SelectUIManager : MonoBehaviour 
 {
-	int m_num;
-	int m_count;
+	int m_soldierTotalNum;
+	int m_gaugeCount;
+
+	List<int> m_soldierNumList = new List<int>();
+
+	bool m_isMinusPlus = true;
+
+	Text [] m_soldierText = new Text[4];
 	List<GameObject> gaugeList = new List<GameObject>();
+
+	enum PlusOrMinus
+	{
+		Plus,
+		Minus
+	}
 
 	void Awake () 
 	{
 		string[] WeaponName = { "剣", "槍", "斧", "盾" };
+
+		for (int i = 0; i < 4; i++)
+			m_soldierNumList.Add (0);
 
 		// 武器の名前がついた丸４つ作成
 		for (int i = 0; i < 4; i++) 
@@ -27,19 +43,29 @@ public class SelectUIManager : MonoBehaviour
 			MyUtility.AddText (WeaponName[i], obj.transform);
 		}
 
-		// 配置する場所用の画像４つ作成
-		for (int i = 0; i < 4; i++) 
+		float [,] value = {
+			{ MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, MyUtility.SWORD_MOCESPEED,0 },
+			{ MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, MyUtility.SPEAR_MOCESPEED,0 },
+			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOCESPEED,0 },
+			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOCESPEED,0 }
+		};
+		for (int i = 0; i < 5; i++) 
 		{
-			MyUtility.CreateImage (
-				"LongBar",
-				"Image/karie/waku",
-				new Vector2 (6 / 32.0f, (21 - i * 4) / 25.0f),
-				new Vector2 (22 / 32.0f, (24 - i * 4) / 25.0f), 
-				transform
-			);
+			for (int j = 0; j < 4; j++) 
+			{
+				Text text = MyUtility.CreateText (
+				"Text",
+				transform,
+		        35,
+		        Vector3.zero,
+					new Vector2 ((6 + i * 3) / 32.0f, (21 - j * 4) / 25.0f),
+					new Vector2 ((9 + i * 3) / 32.0f, (24 - j * 4) / 25.0f));
+				text.text = value[j,i].ToString();
+				if (i == 4)
+					m_soldierText [j] = text;
+			}
 		}
-
-		UnityAction[] plusFunc = { Plus, Plus, Plus, Plus };
+			
 		// +ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -50,10 +76,9 @@ public class SelectUIManager : MonoBehaviour
 				new Vector2 (30 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
-			buttonObj.GetComponent<Button> ().onClick.AddListener (plusFunc[i]);
+			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Plus);
 		}
 			
-		UnityAction[] minusFunc = { Minus, Minus, Minus, Minus };
 		// -ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -64,7 +89,7 @@ public class SelectUIManager : MonoBehaviour
 				new Vector2 (26 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
-			buttonObj.GetComponent<Button> ().onClick.AddListener (minusFunc[i]);
+			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Minus);
 		}
 	
 		// ゲージ９つ作成
@@ -102,54 +127,79 @@ public class SelectUIManager : MonoBehaviour
 		MyUtility.AddText ("戻る", enterObj.transform);
 	}
 
-	void Plus()
-	{
-		m_num++;
-
-		gaugeList [m_count].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Plus);
-
-		if (m_num % 2 == 0)
-		{
-			m_count++;
-		}
-	}
-
-	void Minus()
-	{
-		m_num--;
-
-		if (m_num % 2 == 1) 
-		{
-			m_count--;
-		}
-
-		gaugeList [m_count].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Minus);
-	}
-
-	enum PlusOrMinus
-	{
-		Plus,
-		Minus
-	}
-
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
 	{
 		if (_plusOrMinus == PlusOrMinus.Plus) {
-			switch (m_num % 2) {
+			switch (m_soldierTotalNum % 2) {
 			case 0:
-				return Resources.Load ("Image/karie/waku4", typeof(Sprite)) as Sprite;
-			case 1:
 				return Resources.Load ("Image/karie/waku3", typeof(Sprite)) as Sprite;
+			case 1:
+				return Resources.Load ("Image/karie/waku4", typeof(Sprite)) as Sprite;
 			}
 		} else {
-			switch (m_num % 2) 
+			switch (m_soldierTotalNum % 2) 
 			{
 			case 0:
-				return Resources.Load ("Image/karie/waku2", typeof(Sprite)) as Sprite;
-			case 1:
 				return Resources.Load ("Image/karie/waku3", typeof(Sprite)) as Sprite;
+			case 1:
+				return Resources.Load ("Image/karie/waku2", typeof(Sprite)) as Sprite;
 			}
 		}
 		return null;
+	}
+			
+		// ボタンに機能を付与する
+	void AddButtonEvent(Button button, int num, PlusOrMinus _plusOrMinus)
+	{
+		if(_plusOrMinus == PlusOrMinus.Plus)
+			button.onClick.AddListener(() => {	this.Plus(num);	});
+		else
+			button.onClick.AddListener(() => {	this.Minus(num);	});
+	}
+
+	void Plus(int num)
+	{
+		// 兵士の合計数が兵士最大数より多かったら抜ける
+		if (m_soldierTotalNum >= 18)
+			return;
+
+		// 兵士の合計数が偶数かつ兵士合計数が０でなかったら
+		if (m_soldierTotalNum % 2 == 0 && m_soldierTotalNum != 0) {
+			m_gaugeCount++;
+			gaugeList [m_gaugeCount].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Plus);
+		}
+		else 
+		{
+			gaugeList [m_gaugeCount].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Plus);
+		}
+			
+		m_soldierNumList[num]++;
+
+		m_soldierTotalNum = m_soldierNumList.Sum();
+
+		m_soldierText [num].text = m_soldierNumList[num].ToString();
+	}
+
+	void Minus(int num)
+	{
+		// 兵士の合計数が０以下または各兵士の数が０以下だったら抜ける
+		if (m_soldierTotalNum <= 0 || m_soldierNumList[num] <= 0)
+			return;
+
+		// 兵士の合計数が偶数または兵士の合計数が1だったら
+		if (m_soldierTotalNum % 2 == 0 || m_soldierTotalNum == 1) {
+			gaugeList [m_gaugeCount].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Minus);
+		} 
+		else
+		{
+			gaugeList [m_gaugeCount].GetComponent<Image> ().sprite = GetGaugeSprite (PlusOrMinus.Minus);
+			m_gaugeCount--;
+		}
+			
+		m_soldierNumList[num]--;
+
+		m_soldierTotalNum = m_soldierNumList.Sum();
+
+		m_soldierText [num].text = m_soldierNumList[num].ToString();
 	}
 }
