@@ -5,7 +5,7 @@ using System.Collections;
 public class WarPotential : MonoBehaviour {
 
     //public関数
-    public int m_maxWarPotentialValue=500;  //戦力ゲージの総数
+    public int m_maxWarPotentialValue=MyUtility.MAX_WARPOTENTIAL;  //戦力ゲージの総数
     public float m_valueMoveSpeed = 1.0f;   //戦力ゲージ移動スピード
 
     //private関数
@@ -13,7 +13,7 @@ public class WarPotential : MonoBehaviour {
     private Slider m_blueSlider;            //青ゲージのコンポーネント
     private Slider m_redSlider;             //赤ゲージのコンポーネント
 
-
+    public static float lastWarPotential;   //最終的な戦力ゲージ
 
     //青ゲージに加算するpublic関数
     public void BluePoint(int _getPoint)
@@ -70,6 +70,8 @@ public class WarPotential : MonoBehaviour {
         //それぞれのゲージのズレを修正。
         m_blueSlider.value = m_warPotentialValue;
         m_redSlider.value = m_maxWarPotentialValue - m_warPotentialValue;
+
+        lastWarPotential = m_warPotentialValue;
     }
     
 	// Update is called once per frame

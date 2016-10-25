@@ -14,10 +14,12 @@ public class OperatingManager : MonoBehaviour
     {
         Transform SpriteManager = new GameObject("SpriteManager").transform;
 
+        //何番目を表示しているかの画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
         {
             m_OperatingSprNumObj[i] = MyUtility.CreateSprite(SpriteManager, "OperatingChoiceSprite" + i, "Image/operatingNoneChoice");
         }
+        //操作説明の画像
         m_OperatingSpriteObj = MyUtility.CreateSprite(SpriteManager, "OperatingSprite", "Image/operating1");
     }
 
