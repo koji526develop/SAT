@@ -9,6 +9,9 @@ public class MySceneManager : MonoBehaviour {
     static public MySceneManager m_instance;//シングルトン　マネージャー変数
     public string m_nextScene;              //次のシーンの名前
     private AsyncOperation m_async;             //シーン情報
+
+	public bool m_flag = false;
+
 	public float Progress
 	{
 		get
@@ -26,7 +29,6 @@ public class MySceneManager : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-
         //シングルトンを作成
         if (m_instance == null)
         {
@@ -42,16 +44,35 @@ public class MySceneManager : MonoBehaviour {
     //外部からシーン遷移関数（これをメインで使う）
     public void LoadLevel(string _nextSceneName,float _fadeTime)
     {
+		//フェードスタートと初期化を行う。
+		this.m_isFade = true;
+		this.m_nowTime = 0.0f;
+
         m_nextScene     = _nextSceneName;
         m_intervalTime  = _fadeTime;
         StartCoroutine(TransScene());
     }
 
     //非同期でフェードイン・アウトと画面遷移の処理を行う。
-    private IEnumerator TransScene()
-	{
-		//画面遷移を非同期で処理を開始させる。
 
+	private IEnumerator FadeIn()
+	{
+		//フェードスタートと初期化を行う。
+		this.m_isFade = true;
+		this.m_nowTime = 0.0f;
+
+		//フェードインしたかどうか確認する。
+		while (m_nowTime <= m_intervalTime)
+		{
+			this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
+
+			m_nowTime += Time.deltaTime;
+			yield return 0;
+		}
+	}
+
+	private IEnumerator FadeOut()
+	{
 		//フェードスタートと初期化を行う。
 		this.m_isFade = true;
 		this.m_nowTime = 0.0f;
@@ -63,67 +84,53 @@ public class MySceneManager : MonoBehaviour {
 			m_nowTime += Time.deltaTime;
 			yield return 0;
 		}
+	}
 
-		//if (this.m_async.progress < 0.9f) {
-		SceneManager.LoadScene ("Loading");
-	    //}
-
-		yield return 0;
-		this.m_async = SceneManager.LoadSceneAsync (m_nextScene);
-		this.m_async.allowSceneActivation = false;  //自動で画面遷移をオフに
-
-		//改めて初期化する。
-		this.m_nowTime = 0.0f;
-
-		//フェードインしたかどうか確認する。
-		while (m_nowTime <= m_intervalTime)
-		{
-			this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
-
-			m_nowTime += Time.deltaTime;
-			yield return 0;
-		}
-
+	private IEnumerator ChaeckChangeSceneLoad()
+	{
 		//非同期で画面遷移のロードが終わっているかどうか、(0.9が完了？らしい）
-        while (this.m_async.progress < 0.9f)
-        {
-            yield return 0;
-        }
-
-		//改めて初期化する。
-		this.m_nowTime = 0.0f;
-
-		//フェードアウトしたか確認
-		while (m_nowTime <= m_intervalTime) {
-			this.m_fadeAlpha = Mathf.Lerp (0.0f, 1.0f, m_nowTime / m_intervalTime);
-
-			m_nowTime += Time.deltaTime;
+		while (this.m_async.progress < 0.9f)
+		{
 			yield return 0;
 		}
+	}
 
-        //画面遷移を許可する
+	//画面遷移を非同期で処理を開始させる。
+    private IEnumerator TransScene()
+	{
+		// フェードアウト開始
+		yield return StartCoroutine (FadeOut ());
+
+		// ロード画面に遷移
+		yield return 0;
+
+		// 次のシーンを読み込んでおく
+		this.m_async = SceneManager.LoadSceneAsync (m_nextScene);
+		// 自動で画面遷移をオフに
+		this.m_async.allowSceneActivation = false;  
+
+		// フェードイン開始
+		yield return StartCoroutine (FadeIn ());
+
+		// 非同期で画面遷移のロードが終わっているかどうかのチェック
+		yield return StartCoroutine (ChaeckChangeSceneLoad ());
+
+		yield return StartCoroutine (FadeOut ());
+
+        // 画面遷移を許可する
         this.m_async.allowSceneActivation = true;
 
-        //改めて初期化する。
-        this.m_nowTime = 0.0f;
+		yield return StartCoroutine (FadeIn ());
 
-		//フェードインしたかどうか確認する。
-		while (m_nowTime <= m_intervalTime)
-		{
-			this.m_fadeAlpha = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_intervalTime);
-
-			m_nowTime += Time.deltaTime;
-			yield return 0;
-		}
         //暗転処理終了
         this.m_nextScene = "";
         this.m_intervalTime = 0.0f;
-        this.m_isFade = false;
+		this.m_isFade = false;
+		m_flag = false;
     }
 
     public void OnGUI()
     {
-
         //もし暗転中のフラグがたっていたら
         if (this.m_isFade)
         {
@@ -141,7 +148,7 @@ public class MySceneManager : MonoBehaviour {
         //デバッグで画面遷移の内容を確認する
         if (m_nextScene != "")
         {
-            Debug.Log(" [次のシーンの名前->" + m_nextScene + "] [読み込み進捗度->" + this.m_async.progress + "]");
+            //Debug.Log(" [次のシーンの名前->" + m_nextScene + "] [読み込み進捗度->" + this.m_async.progress + "]");
         }
     }
 }
