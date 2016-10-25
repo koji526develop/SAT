@@ -23,10 +23,15 @@ public class SelectUIManager : MonoBehaviour
 		Minus
 	}
 
+	string[] WEAPON_NAME = { "剣", "槍", "斧", "盾" };
+
 	void Awake () 
 	{
-		string[] WeaponName = { "剣", "槍", "斧", "盾" };
+		StartCoroutine (CreateUI ());
+	}
 
+	IEnumerator CreateUI()
+	{
 		for (int i = 0; i < 4; i++)
 			m_soldierNumList.Add (0);
 
@@ -34,13 +39,14 @@ public class SelectUIManager : MonoBehaviour
 		for (int i = 0; i < 4; i++) 
 		{
 			GameObject obj = MyUtility.CreateImage (
-				WeaponName[i],
+				WEAPON_NAME[i],
 				"Image/karie/maru",
 				new Vector2 (3 / 32.0f, (21 - i * 4) / 25.0f),
 				new Vector2 (6 / 32.0f, (24 - i * 4) / 25.0f), 
 				transform
 			);
-			MyUtility.AddText (WeaponName[i], obj.transform);
+			MyUtility.AddText (WEAPON_NAME[i], obj.transform);
+			yield return null;
 		}
 
 		float [,] value = {
@@ -54,18 +60,19 @@ public class SelectUIManager : MonoBehaviour
 			for (int j = 0; j < 4; j++) 
 			{
 				Text text = MyUtility.CreateText (
-				"Text",
-				transform,
-		        35,
-		        Vector3.zero,
+					"Text",
+					transform,
+					35,
+					Vector3.zero,
 					new Vector2 ((6 + i * 3) / 32.0f, (21 - j * 4) / 25.0f),
 					new Vector2 ((9 + i * 3) / 32.0f, (24 - j * 4) / 25.0f));
 				text.text = value[j,i].ToString();
 				if (i == 4)
 					m_soldierText [j] = text;
+				yield return null;
 			}
 		}
-			
+
 		// +ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -77,8 +84,9 @@ public class SelectUIManager : MonoBehaviour
 				transform
 			);
 			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Plus);
+			yield return null;
 		}
-			
+
 		// -ボタン４つ作成
 		for (int i = 0; i < 4; i++) 
 		{
@@ -90,20 +98,22 @@ public class SelectUIManager : MonoBehaviour
 				transform
 			);
 			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Minus);
+			yield return null;
 		}
-	
+
 		// ゲージ９つ作成
 		for (int i = 0; i < 9; i++) 
 		{
 			GameObject obj = MyUtility.CreateImage 
-			(
-				"Gauge",
-				"Image/karie/waku2",
-				new Vector2 ((6 + i * 2) / 32.0f, 5 / 25.0f),
-				new Vector2 ((8 + i * 2) / 32.0f, 8 / 25.0f), 
-				transform
-			);
+				(
+					"Gauge",
+					"Image/karie/waku2",
+					new Vector2 ((6 + i * 2) / 32.0f, 5 / 25.0f),
+					new Vector2 ((8 + i * 2) / 32.0f, 8 / 25.0f), 
+					transform
+				);
 			gaugeList.Add (obj);
+			yield return null;
 		}
 
 		// 戻るボタン作成
@@ -115,9 +125,11 @@ public class SelectUIManager : MonoBehaviour
 			transform
 		);
 		MyUtility.AddText ("戻る", backObj.transform);
-        GameObject sceneChangerObj = new GameObject();
-        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
+		GameObject sceneChangerObj = new GameObject();
+		SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+		backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
+
+		yield return null;
 
 		// 決定ボタン作成
 		GameObject enterObj = MyUtility.CreateButton (
@@ -128,9 +140,12 @@ public class SelectUIManager : MonoBehaviour
 			transform
 		);
 		MyUtility.AddText ("決定", enterObj.transform);
-        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+		enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
 
-    }
+		yield return null;
+
+		MySceneManager.m_instance.m_flag = true;
+	}
 
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
 	{
