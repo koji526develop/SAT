@@ -27,11 +27,6 @@ public class SelectUIManager : MonoBehaviour
 
 	void Awake () 
 	{
-		StartCoroutine (CreateUI ());
-	}
-
-	IEnumerator CreateUI()
-	{
 		for (int i = 0; i < 4; i++)
 			m_soldierNumList.Add (0);
 
@@ -46,7 +41,6 @@ public class SelectUIManager : MonoBehaviour
 				transform
 			);
 			MyUtility.AddText (WEAPON_NAME[i], obj.transform);
-			yield return null;
 		}
 
 		float [,] value = {
@@ -69,7 +63,6 @@ public class SelectUIManager : MonoBehaviour
 				text.text = value[j,i].ToString();
 				if (i == 4)
 					m_soldierText [j] = text;
-				yield return null;
 			}
 		}
 
@@ -84,7 +77,6 @@ public class SelectUIManager : MonoBehaviour
 				transform
 			);
 			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Plus);
-			yield return null;
 		}
 
 		// -ボタン４つ作成
@@ -98,7 +90,6 @@ public class SelectUIManager : MonoBehaviour
 				transform
 			);
 			AddButtonEvent (buttonObj.GetComponent<Button> (),i,PlusOrMinus.Minus);
-			yield return null;
 		}
 
 		// ゲージ９つ作成
@@ -113,7 +104,6 @@ public class SelectUIManager : MonoBehaviour
 					transform
 				);
 			gaugeList.Add (obj);
-			yield return null;
 		}
 
 		// 戻るボタン作成
@@ -129,8 +119,6 @@ public class SelectUIManager : MonoBehaviour
 		SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 		backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
 
-		yield return null;
-
 		// 決定ボタン作成
 		GameObject enterObj = MyUtility.CreateButton (
 			"Enter",
@@ -142,9 +130,6 @@ public class SelectUIManager : MonoBehaviour
 		MyUtility.AddText ("決定", enterObj.transform);
 		enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
 
-		yield return null;
-
-		MySceneManager.m_instance.m_flag = true;
 	}
 
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)

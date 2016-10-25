@@ -10,8 +10,6 @@ public class MySceneManager : MonoBehaviour {
     public string m_nextScene;              //次のシーンの名前
     private AsyncOperation m_async;             //シーン情報
 
-	public bool m_flag = false;
-
 	public float Progress
 	{
 		get
@@ -102,6 +100,7 @@ public class MySceneManager : MonoBehaviour {
 		yield return StartCoroutine (FadeOut ());
 
 		// ロード画面に遷移
+		SceneManager.LoadScene("Loading");
 		yield return 0;
 
 		// 次のシーンを読み込んでおく
@@ -126,7 +125,6 @@ public class MySceneManager : MonoBehaviour {
         this.m_nextScene = "";
         this.m_intervalTime = 0.0f;
 		this.m_isFade = false;
-		m_flag = false;
     }
 
     public void OnGUI()

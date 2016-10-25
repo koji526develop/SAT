@@ -22,7 +22,6 @@ public class OperatingManager : MonoBehaviour
         //操作説明の画像
         m_OperatingSpriteObj = MyUtility.CreateSprite(SpriteManager, "OperatingSprite", "Image/operating1");
 
-		MySceneManager.m_instance.m_flag = true;
 
     }
 
