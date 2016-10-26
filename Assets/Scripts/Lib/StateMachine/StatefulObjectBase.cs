@@ -13,7 +13,7 @@ public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
 	protected List<State<T>> stateList = new List<State<T>> ();
 
 	// ステートマシーン
-	protected StateMachine<T> stateMachine;
+	protected StateMachine<T> stateMachine = new StateMachine<T>();
 
 	// ステートの変更
 	public void ChangeState(TEnum _state)
