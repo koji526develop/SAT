@@ -20,7 +20,7 @@ public class SelectManager : MonoBehaviour
 		plane.transform.localScale = new Vector3 (2, 1, 2);
 
 		// MAINカメラ作成
-		Camera mainCamera = MyUtility.CreateCamera ("MainCamera");
+		MyUtility.CreateCamera ("MainCamera");
 
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);

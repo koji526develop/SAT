@@ -25,10 +25,12 @@ public class RotateTo : MonoBehaviour
 	float m_delay;
 
 	// 回転開始角度
-	Quaternion m_startRotation;
+	Vector3 m_startRotation;
 
 	// 回転終了角度
-	Quaternion	m_endRotation;
+	Vector3	m_endRotation;
+
+	Vector3 m_diffRotation;
 
 	void Awake()
 	{
@@ -42,15 +44,17 @@ public class RotateTo : MonoBehaviour
 		m_elapsedTime = 0.0f;
 
 
-		m_startRotation = transform.rotation;
-		m_endRotation = Quaternion.Euler(_endRotation);
+		m_startRotation = transform.rotation.eulerAngles;
+		m_endRotation = _endRotation;
+
+		m_diffRotation = m_endRotation - m_startRotation;
 
 		m_duration = _duration;
 		m_delay = _delay;
 
 		if (m_duration <= 0) 
 		{
-			transform.rotation = m_endRotation;
+			transform.rotation = Quaternion.Euler(m_endRotation);
 			enabled = false;
 			return;
 		}
@@ -64,17 +68,40 @@ public class RotateTo : MonoBehaviour
 			return;
 
 		// 経過時間が回転時間を超えたら
-		if (m_elapsedTime - m_delay > m_duration) 
+		/*if (m_elapsedTime - m_delay > m_duration) 
 		{
-			transform.rotation = m_endRotation;
-			m_isRotate = false;
-			enabled = false;
-		}
+			//transform.LookAt(m_diffRotation);
+
+		}*/
 
 		// 割合
 		float rate = m_elapsedTime / m_duration;
 
-		// 割合から出した２点間の角度を入れる
-		transform.rotation = Quaternion.Lerp (m_startRotation, m_endRotation, rate);
+		/*if (m_endRotation.x > 180) 
+		{
+			m_endRotation.x = m_endRotation.x - 180;
+		}*/
+
+		if (m_endRotation.x > 0)
+		{
+			if (Mathf.Abs(Mathf.DeltaAngle (transform.eulerAngles.x, m_endRotation.x)) > 0.1f) {
+				transform.Rotate (new Vector3 (5f, 0f, 0f));
+			} else 
+			{
+				m_isRotate = false;
+				enabled = false;
+			}
+		} 
+		else
+		{
+			if (Mathf.DeltaAngle (transform.eulerAngles.x, m_endRotation.x) < -0.1f) {
+				transform.Rotate (new Vector3 (-5f, 0f, 0f));
+			} else {
+				m_isRotate = false;
+				enabled = false;
+			}
+		}
+
+
 	}
 }
