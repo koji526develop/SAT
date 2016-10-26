@@ -56,7 +56,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		playerObj.name = _characterType.ToString();
 		playerObj.transform.SetParent (_parent);
-		playerObj.transform.position=new Vector3(GameManager.j,0,0);
+		playerObj.transform.position=new Vector3(0,0,0);
 		playerObj.tag="Character";
 
 		character.characterType = _characterType;

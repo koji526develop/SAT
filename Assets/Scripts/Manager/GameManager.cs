@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour 
 {
-	public static int j=0;
+	//public static int j=0;
 	// ゲーム開始時
 	void Awake()
 	{
@@ -31,16 +31,16 @@ public class GameManager : MonoBehaviour
 		MyUtility.CreateCamera ("BattleCamera", battleManager);
 
 		// プレイヤーオブジェクト作成
-		for (int i = 0; i < 2; i++) 
-		{
-			j=j+2;
-
-			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword);
-
-		}
+//		for (int i = 0; i < 2; i++) 
+//		{
+//			j=j+2;
+//
+//			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword);
+//
+//		}
 
         //応急処置
-        j = j - 4;
+//        j = j - 4;
 
 	}
 
