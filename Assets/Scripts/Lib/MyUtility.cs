@@ -72,7 +72,8 @@ public class MyUtility : MonoBehaviour
 		GameObject cameraObj = new GameObject (tagName);
 		Camera camera = cameraObj.AddComponent<Camera> ();
 
-		camera.transform.position = new Vector3 (0, 1, -10);
+		camera.transform.position = new Vector3 (0, 15, -0);
+		camera.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
 		cameraObj.tag = tagName;
 
 		cameraObj.AddComponent<GUILayer> ();
