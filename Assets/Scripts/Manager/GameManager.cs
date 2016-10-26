@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour 
 {
@@ -40,12 +41,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //TouchInfo touch = TouchManager.GetTouchInfo(0);
-        //if (touch == TouchInfo.Began)
-        //{
-        //    SceneChanger sChange = new SceneChanger();
-        //    sChange.ChangeToResult();
-        //}
+    
     }
 
 }

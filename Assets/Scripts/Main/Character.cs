@@ -41,6 +41,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		Ax,
 		Shield
 	}
+
 	public CharacterType characterType
 	{
 		set
@@ -49,14 +50,36 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		}
 	}
 
+	RotateTo m_rotateTo;
+	public RotateTo rotateTo
+	{
+		get{ 
+			return m_rotateTo;
+		}
+	}
+
+	MoveTo m_moveTo;
+	public MoveTo moveTo
+	{
+		get{ 
+			return m_moveTo;
+		}
+	}
+
+	Camera m_mainCamera;
+	public Camera MainCamera
+	{
+		get{ 
+			return m_mainCamera;
+		}
+	}
+
 	// キャラクターのオブジェクト作成
 	public static GameObject CreateObject(Transform _parent,CharacterType _characterType, Vector3 _position)
 	{
 		GameObject characterObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		Character character = characterObj.AddComponent<Character> ();
-		characterObj.AddComponent<RotateTo> ();
-		characterObj.AddComponent<MoveTo> ();
-
+	
 		characterObj.name = _characterType.ToString();
 		characterObj.transform.SetParent (_parent);
 		characterObj.transform.position = _position;
@@ -113,11 +136,13 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		m_status.attack = _attack;
 		m_status.attackDistance = _attackDistance;
 		m_status.moveSpeed = _moveSpeed;
-
 	}
 
 	void Start () 
 	{
+		m_rotateTo = gameObject.AddComponent<RotateTo> ();
+		m_moveTo = gameObject.AddComponent<MoveTo> ();
+
 		// ステートマシンの初期設定
 		stateList.Add(new CharacterNone(this));
 		stateList.Add(new CharacterAttack(this));
@@ -125,6 +150,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		stateList.Add(new CharacterRotate(this));
 
 		stateMachine = new StateMachine<Character>();
+
+		m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
 
 		ChangeState(CharacterState.Move);
 	}

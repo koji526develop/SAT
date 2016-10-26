@@ -25,7 +25,7 @@ public class ButtonSpawner : MonoBehaviour {
     }
     public void Spawner()
     {
-		GameObject character = Character.CreateObject(battleManager, type, Vector3.zero);
+		//GameObject character = Character.CreateObject(battleManager, type, Vector3.zero);
 
     }
     public void SolderChange()
