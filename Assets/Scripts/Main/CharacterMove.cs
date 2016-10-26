@@ -24,30 +24,28 @@ public class CharacterMove :  State<Character> {
 		if(touch == TouchInfo.Began)
 		{
 			GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, 0);
-			if (characterObj != null) {
+			if (characterObj != null) 
+			{
 				m_CharacterTouch = true;
-			} else {
+			} 
+			else
+			{
 				m_CharacterTouch = false;
 			}
 		}
 
 		if(touch == TouchInfo.Moved)
 		{
-			if(TouchManager.GetTouchMoveDistanceY (0)>50.0f)
+			if (m_CharacterTouch) 
 			{
-				if(m_CharacterTouch)
-				{
-					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x+90.0f, 0, 0), 1.0f);
-
+				if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f)
+				{	
+					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x + 90.0f, 0, 0), 1.0f);
 					m_instance.ChangeState (Character.CharacterState.Rotate);
-				}
-			}
-			else if(TouchManager.GetTouchMoveDistanceY (0) < -50.0f)
-			{
-				if(m_CharacterTouch)
+				} 
+				else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
 				{
-					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x-90.0f, 0, 0), 1.0f);
-
+					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x - 90.0f, 0, 0), 1.0f);
 					m_instance.ChangeState (Character.CharacterState.Rotate);
 				}
 			}
