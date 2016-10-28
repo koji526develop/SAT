@@ -81,6 +81,8 @@ public class GameUIManager : MonoBehaviour {
                     new Vector2((7.0f + 20.0f * j) / 32.0f, (23.0f - 3.0f * i) / 25.0f),
                   GameObject.Find("Canvas").transform);
 
+					obj.tag ="Player"+(j+1).ToString();
+
     
                 obj.AddComponent<EventTrigger>();
                 obj.AddComponent<ButtonSpawner>();

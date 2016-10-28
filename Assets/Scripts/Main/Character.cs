@@ -13,6 +13,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		public int attackDistance;
 		public float moveSpeed;
 		public CharacterType characterType;
+		public int PlayerID;
+
 	}
 
 	Status m_status;
@@ -75,7 +77,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	}
 
 	// キャラクターのオブジェクト作成
-	public static GameObject CreateObject(Transform _parent,CharacterType _characterType, Vector3 _position)
+	public static GameObject CreateObject(Transform _parent,CharacterType _characterType, Vector3 _position, int _playerID)
 	{
 		GameObject characterObj = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		Character character = characterObj.AddComponent<Character> ();
@@ -85,13 +87,13 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		characterObj.transform.position = _position;
 		characterObj.tag="Character";
 
-		SetCharacterType (character, _characterType);
+		SetCharacterType (character, _characterType,_playerID);
 
 		return characterObj;
 	}
 
 	// キャラクターの種類のセット
-	private static void SetCharacterType(Character character, CharacterType _characterType)
+	private static void SetCharacterType(Character character, CharacterType _characterType, int _playerID)
 	{
 		character.characterType = _characterType;
 
@@ -103,39 +105,44 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 				MyUtility.SWORD_LIFE,
 				MyUtility.SWORD_ATTACK,
 				MyUtility.SWORD_ATTACKDISTANCE,
-				MyUtility.SWORD_MOCESPEED);
+				MyUtility.SWORD_MOCESPEED,
+				_playerID);
 			break;
 		case CharacterType.Shield:
 			character.SetParametor (
 				MyUtility.SHIELD_LIFE,
 				MyUtility.SHIELD_ATTACK,
 				MyUtility.SHIELD_ATTACKDISTANCE,
-				MyUtility.SHIELD_MOCESPEED);
+				MyUtility.SHIELD_MOCESPEED,
+				_playerID);
 			break;
 		case CharacterType.Ax:
 			character.SetParametor (
 				MyUtility.AX_LIFE,
 				MyUtility.AX_ATTACK,
 				MyUtility.AX_ATTACKDISTANCE,
-				MyUtility.AX_MOCESPEED);
+				MyUtility.AX_MOCESPEED,
+				_playerID);
 			break;
 		case CharacterType.Spear:
 			character.SetParametor (
 				MyUtility.AX_LIFE,
 				MyUtility.AX_ATTACK,
 				MyUtility.AX_ATTACKDISTANCE,
-				MyUtility.AX_MOCESPEED);
+				MyUtility.AX_MOCESPEED,
+				_playerID);
 			break;
 		}
 	}
 		
 	// パラメーターセット
-	public void SetParametor(int _life,int _attack,int _attackDistance,float _moveSpeed)
+	public void SetParametor(int _life,int _attack,int _attackDistance,float _moveSpeed,int _playerID)
 	{
 		m_status.life = _life;
 		m_status.attack = _attack;
 		m_status.attackDistance = _attackDistance;
 		m_status.moveSpeed = _moveSpeed;
+		m_status.PlayerID = _playerID;
 	}
 
 	void Start () 

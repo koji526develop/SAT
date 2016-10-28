@@ -60,10 +60,14 @@ public class CharacterMove :  State<Character> {
 			if (m_instance.gameObject == gameobject [i])
 				continue;
 
-			if(gameobject[i].CompareTag("Character") && IsHit(m_instance.gameObject, gameobject[i],m_instance.status.attackDistance)) 
+			if(gameobject[i].CompareTag("Character") && IsHit(m_instance.gameObject, gameobject[i],m_instance.status.attackDistance))
 			{
+				int HitObjID = gameobject [i].GetComponent<Character> ().status.PlayerID;
+				if(m_instance.status.PlayerID != HitObjID)
+				{
 				m_instance.ChangeState (Character.CharacterState.Attack);
 				Debug.Log("当たったー");
+				}
 			}
 		}
 	}
