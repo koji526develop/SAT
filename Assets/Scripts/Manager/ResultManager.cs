@@ -5,6 +5,9 @@ using UnityEngine.UI;
 public class ResultManager : MonoBehaviour
 {
 
+    private bool m_ChangeFlag;
+    private float m_ChangeTime;
+
     void Awake()
     {
         Canvas canvas = MyUtility.CreateCanvas();
@@ -129,17 +132,30 @@ public class ResultManager : MonoBehaviour
         //作ったもの一つを対になるように配置
         m_ResultObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
         m_ResultObj[1].transform.position = new Vector3(Screen.width / 32.0f * 16, Screen.height / 25.0f * 12.5f, 0.0f);
-
     }
 
     void Start()
     {
-
+        m_ChangeFlag = false;
+        m_ChangeTime = 5.0f;
     }
 
 
     void Update()
     {
-
+        if(m_ChangeTime >= 0.0f)
+        {
+            m_ChangeTime -= Time.deltaTime;
+        }
+        else
+        {
+            m_ChangeFlag = true;
+        }
+        if(m_ChangeFlag)
+        {
+            SceneChanger sChange = new SceneChanger();
+            sChange.ChangeToTitle();
+            m_ChangeFlag = false;
+        }
     }
 }
