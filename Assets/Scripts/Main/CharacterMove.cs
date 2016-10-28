@@ -40,12 +40,12 @@ public class CharacterMove :  State<Character> {
 			{
 				if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f)
 				{	
-					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x + 90.0f, 0, 0), 1.0f);
+					iTween.RotateBy(m_instance.gameObject, new Vector3(1/4.0f,0,0),1.0f);
 					m_instance.ChangeState (Character.CharacterState.Rotate);
 				} 
 				else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
 				{
-					m_instance.GetComponent<RotateTo> ().SetRotateTo (new Vector3 (m_instance.transform.rotation.eulerAngles.x - 90.0f, 0, 0), 1.0f);
+					iTween.RotateBy(m_instance.gameObject, new Vector3(-1/4.0f,0,0),1.0f);
 					m_instance.ChangeState (Character.CharacterState.Rotate);
 				}
 			}

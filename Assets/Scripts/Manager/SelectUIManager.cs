@@ -12,8 +12,6 @@ public class SelectUIManager : MonoBehaviour
 
 	List<int> m_soldierNumList = new List<int>();
 
-	bool m_isMinusPlus = true;
-
 	Text [] m_soldierText = new Text[4];
 	List<GameObject> gaugeList = new List<GameObject>();
 
