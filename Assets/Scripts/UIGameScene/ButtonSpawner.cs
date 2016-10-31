@@ -39,7 +39,7 @@ public class ButtonSpawner : MonoBehaviour
 	
 				GameObject character = Character.CreateObject (battleManager, type, transform.position, i);
 
-				Debug.Log (i);
+
                 Vector3 SpawnerPos;
 
                 if (i==1)
