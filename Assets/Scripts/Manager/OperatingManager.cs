@@ -15,6 +15,9 @@ public class OperatingManager : MonoBehaviour
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
 
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+
         //イベントシステム作成
         MyUtility.CreateEventSystem(transform);
 

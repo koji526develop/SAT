@@ -5,7 +5,10 @@ public class LoadingManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		string[] str = { "N", "o", "w", " ", "L", "o", "a", "d", "i", "n", "g" };
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+
+        string[] str = { "N", "o", "w", " ", "L", "o", "a", "d", "i", "n", "g" };
 		for(int i = 0; i < str.GetLength(0);i++)
 		{
 			GameObject nowLoadingObj = MyUtility.CreateText (str [i], transform, 65, Vector3.zero, new Vector3 ((14 + i * 1.5f) / 32.0f, 3 / 25.0f), new Vector3 ((14 + i * 1.5f) / 32.0f, 3 / 25.0f)).gameObject;

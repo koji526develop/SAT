@@ -253,5 +253,12 @@ public class MyUtility : MonoBehaviour
         }
         return size;
     }
+
+    public static void CreateTapEffect(Transform _parent)
+    {
+        GameObject tapEffectObj = Instantiate(Resources.Load("Prefabs/TapEffect") as GameObject);
+        tapEffectObj.name = "TapEffect";
+        tapEffectObj.transform.SetParent(_parent);
+    }
 }
 
