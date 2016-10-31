@@ -33,8 +33,8 @@ public class ButtonSpawner : MonoBehaviour
 		for (int i = 1; i < 3; i++) {
 			if(transform.tag == "Player"+i.ToString())
 			{
-				Debug.Log (i);
-				GameObject character = Character.CreateObject (battleManager, type, Vector3.zero, i);
+	
+				GameObject character = Character.CreateObject (battleManager, type, transform.position, i);
 
 			}
 
