@@ -12,6 +12,7 @@ TagManager:
   - Canvas
   - Player1
   - Player2
+  - BattleManager
   layers:
   - Default
   - TransparentFX
