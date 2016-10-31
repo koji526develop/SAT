@@ -4,7 +4,7 @@ using System.Collections;
 public class CharacterMove :  State<Character>
 {
 
-	bool m_CharacterTouch;
+	bool m_isCharacterTouch;
 
 	public CharacterMove (Character _instance) : base (_instance)
 	{
@@ -12,54 +12,50 @@ public class CharacterMove :  State<Character>
 
 	public override void Enter ()
 	{
-		m_CharacterTouch = false;
+		m_isCharacterTouch = false;
 	}
 
 	public override void Update ()
 	{
+		/***********************************************
+		// キャラクターの移動処理
+		***********************************************/
 
 		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (0.005f, 0, 0);
 		else m_instance.transform.position -= new Vector3 (0.005f, 0, 0);
 
-		TouchInfo touch = TouchManager.GetTouchInfo (0);
-
 		/***********************************************
 		// キャラクターのタッチ判定
 		***********************************************/
+
+		TouchInfo touch = TouchManager.GetTouchInfo (0);
+
 		if (touch == TouchInfo.Began) {
-			GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, 0);
-			if (characterObj != null) {
-				m_CharacterTouch = true;
-			} else {
-				m_CharacterTouch = false;
-			}
+			// キャラクターがタッチされているか判定
+			m_isCharacterTouch = IsCharacterTouch ();
 		}
 
 		if (touch == TouchInfo.Moved) 
 		{
-			if (m_CharacterTouch&& !NotCharacterRota ()) 
+			if (m_isCharacterTouch) 
 			{
-				int DirectionRote;
-				if (m_instance.status.PlayerID == 1) {
-					DirectionRote = 1;
-				} else {
-					DirectionRote = -1;
-				}
+				// もし境界線を超えていたら何もしない
+				if (IsBeyondCenterLine()) return;
 
-					if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f) 
-					{	
-					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*DirectionRote) / 4.0f, 0), 1.0f);
-						m_instance.ChangeState (Character.CharacterState.Rotate);
-					} 
-					else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
-					{
-					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*DirectionRote) / 4.0f, 0), 1.0f);
-						m_instance.ChangeState (Character.CharacterState.Rotate);
-					}
+				if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f) 
+				{	
+					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+					m_instance.ChangeState (Character.CharacterState.Rotate);
+				} 
+				else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
+				{
+					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+					m_instance.ChangeState (Character.CharacterState.Rotate);
+				}
 			}
 			/***********************************************
-		// 全てのキャラクター同士の衝突判定
-		***********************************************/
+			// 全てのキャラクター同士の衝突判定
+			***********************************************/
 			GameObject[] gameobject = GameObject.FindGameObjectsWithTag ("Character");
 
 			for (int i = 0; i < gameobject.Length; i++) {
@@ -78,14 +74,30 @@ public class CharacterMove :  State<Character>
 		}
 	}
 
-	bool NotCharacterRota ()
+	// キャラクターの回転方向取得(1Pと2Pで回転させる方向を変えるため)
+	int GetCharacterRote()
+	{
+		if (m_instance.status.PlayerID == 1) return 1;
+		else return -1;
+	}
+
+	// キャラクターがタッチされたかどうかの判定
+	bool IsCharacterTouch()
+	{
+		GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, 0);
+		if (characterObj) return true;
+		return false;
+	}
+
+	// 境界線を超えてるかどうかの判定
+	bool IsBeyondCenterLine ()
 	{
 		if (m_instance.status.PlayerID == 1) {
-			if (m_instance.transform.position.x >= 0.0f) {
+			if (m_instance.transform.position.x >= MyUtility.CENTER_LINE_X) {
 				return true;
 			}
 		} else {
-			if (m_instance.transform.position.x <= 0.0f) {
+			if (m_instance.transform.position.x <= MyUtility.CENTER_LINE_X) {
 				return true;
 			}
 		}
