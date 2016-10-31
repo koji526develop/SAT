@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class NowLoading : MonoBehaviour
 {
-	Text m_text;
 	// 経過時間
 	int m_elapsedCount;
 
@@ -17,7 +16,6 @@ public class NowLoading : MonoBehaviour
 	void Awake()
 	{
 		enabled = true;
-		m_text = gameObject.GetComponent<Text> ();
 	}
 		
 	void Update ()

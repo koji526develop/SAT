@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 		// BattleManager作成
 		Transform battleManager = new GameObject ("BattleManager").transform;
+		battleManager.tag = "BattleManager";
 
 		// バトル用のカメラ作成
 		MyUtility.CreateCamera ("BattleCamera", battleManager);

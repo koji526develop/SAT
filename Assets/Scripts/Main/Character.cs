@@ -90,14 +90,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		}
 	}
 
-	RotateTo m_rotateTo;
-	public RotateTo rotateTo
-	{
-		get{ 
-			return m_rotateTo;
-		}
-	}
-
 	MoveTo m_moveTo;
 	public MoveTo moveTo
 	{
@@ -185,7 +177,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	void Start () 
 	{
-		m_rotateTo = gameObject.AddComponent<RotateTo> ();
 		m_moveTo = gameObject.AddComponent<MoveTo> ();
 
 		// ステートマシンの初期設定

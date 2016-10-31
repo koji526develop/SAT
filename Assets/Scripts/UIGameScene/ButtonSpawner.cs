@@ -8,7 +8,7 @@ public class ButtonSpawner : MonoBehaviour
 {
 
 	public bool debug;
-	Transform battleManager;
+	Transform m_battleManager;
 
     public int PlayerID;
     public int ButtonID;
@@ -16,7 +16,6 @@ public class ButtonSpawner : MonoBehaviour
 
 	void Awake ()
 	{
-       
 		if (!debug) {
 			this.GetComponent<Button> ().onClick.AddListener (SolderChange);
 			EventTrigger trigger = gameObject.GetComponent<EventTrigger> ();
@@ -30,19 +29,21 @@ public class ButtonSpawner : MonoBehaviour
 		}
 	}
 
+	void start()
+	{
+		m_battleManager = GameObject.FindWithTag ("BattleManager").transform;
+	}
+
 	public void Spawner ()
 	{
 		for (int i = 1; i < 3; i++) {
 			if(transform.tag == "Player"+i.ToString())
 			{
 				int column = ButtonID + 1;
-				Character character = Character.CreateObject (battleManager, type, Character.GetSpawnPosition(i,column), i).GetComponent<Character>();
+				Character character = Character.CreateObject (m_battleManager, type, Character.GetSpawnPosition(i,column), i).GetComponent<Character>();
 				character.mapColumn = column;
 			}
-
-
 		}
-
 	}
 
 	public void SolderChange ()
