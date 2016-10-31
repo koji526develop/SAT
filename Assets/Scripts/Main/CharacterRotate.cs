@@ -7,31 +7,40 @@ public class CharacterRotate : State<Character>
 
 	float m_rotateTime;
 
-	bool flag = false;
-
 	public override void Enter() 
 	{
 		m_rotateTime = 0.0f;
-		flag = false;
+
+		if(m_instance.rotateDirection == Character.Direction.Right)
+			iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+		else
+			iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+
 	}
 
 	public override void Update()
 	{
 		m_rotateTime += Time.deltaTime;
 
-		if(m_rotateTime > 0.5f && !flag)
+		if (m_rotateTime > 0.5f) 
 		{
-			flag = true;
-			m_instance.ChangeColumn (Character.Direction.Down);
+			if(m_instance.rotateDirection == Character.Direction.Right)
+				m_instance.ChangeColumn (Character.Direction.Down);
+			else
+				m_instance.ChangeColumn (Character.Direction.Up);
+			m_instance.ChangeState(Character.CharacterState.BackRotate);
 		}
-
-		if(!m_instance.moveTo.isMove && flag)
-			//iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
-			m_instance.ChangeState (Character.CharacterState.Move);
 	}
 
 	public override void Exit()
 	{
 
+	}
+
+	// キャラクターの回転方向取得(1Pと2Pで回転させる方向を変えるため)
+	int GetCharacterRote()
+	{
+		if (m_instance.status.PlayerID == 1) return 1;
+		else return -1;
 	}
 }

@@ -5,6 +5,9 @@ using System.Collections;
 // 動的にオブジェクト作ったりするクラス
 public class MyUtility : MonoBehaviour
 {
+	public static readonly int MIX_COLUMN = 1;
+	public static readonly int MAX_COLUMN = 6;
+
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;

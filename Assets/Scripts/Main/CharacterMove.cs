@@ -49,48 +49,40 @@ public class CharacterMove :  State<Character>
 
 				if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f) 
 				{	
-					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+					if (m_instance.mapColumn <= MyUtility.MIX_COLUMN) return;
+					m_instance.rotateDirection = Character.Direction.Left;
 					m_instance.ChangeState (Character.CharacterState.Rotate);
 				} 
 				else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
 				{
-					iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+					if (m_instance.mapColumn >= MyUtility.MAX_COLUMN) return;
+					m_instance.rotateDirection = Character.Direction.Right;
 					m_instance.ChangeState (Character.CharacterState.Rotate);
 				}
 			}
-			/***********************************************
+		}
+		/***********************************************
 			// 全てのキャラクター同士の衝突判定
-			***********************************************/
-			GameObject[] gameobject = GameObject.FindGameObjectsWithTag ("Character");
+		***********************************************/
+		GameObject[] gameobject = GameObject.FindGameObjectsWithTag ("Character");
 
-			for (int i = 0; i < gameobject.Length; i++) {
-			
-				if (m_instance.gameObject == gameobject [i])
-					continue;
+		for (int i = 0; i < gameobject.Length; i++) {
 
-				if (gameobject [i].CompareTag ("Character") && IsHit (m_instance.gameObject, gameobject [i], m_instance.status.attackDistance)) {
-					int HitObjID = gameobject [i].GetComponent<Character> ().status.PlayerID;
-					if (m_instance.status.PlayerID != HitObjID) {
-						m_instance.ChangeState (Character.CharacterState.Attack);
-						Debug.Log ("当たったー");
-					}
-				}
+			if (m_instance.gameObject == gameobject [i])
+				continue;
+
+			if (IsHit (m_instance.gameObject, gameobject [i])) 
+			{
+				Debug.Log ("当たったー");
 			}
 		}
-	}
-
-	// キャラクターの回転方向取得(1Pと2Pで回転させる方向を変えるため)
-	int GetCharacterRote()
-	{
-		if (m_instance.status.PlayerID == 1) return 1;
-		else return -1;
 	}
 
 	// キャラクターがタッチされたかどうかの判定
 	bool IsCharacterTouch()
 	{
 		GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, 0);
-		if (characterObj) return true;
+		if (characterObj && characterObj == m_instance.gameObject) return true;
 		return false;
 	}
 
@@ -123,9 +115,28 @@ public class CharacterMove :  State<Character>
 	}
 
 	// キャラクターの衝突判定
-	bool IsHit (GameObject obj1, GameObject obj2, float distance)
+	bool IsHit (GameObject obj1, GameObject obj2)
 	{
-		return Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance;
+		float distance = obj1.GetComponent<Character> ().status.attackDistance;
+
+		if (!obj2.CompareTag ("Character"))
+			return false;
+
+		Character character1 = obj1.GetComponent<Character>();
+		Character character2 = obj2.GetComponent<Character>();
+
+		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance))
+			return false;
+
+		if (character1.status.PlayerID == character2.status.PlayerID) {
+			return false;
+		}
+
+		if (character1.mapColumn != character2.mapColumn) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public override void Exit ()

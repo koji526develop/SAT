@@ -20,7 +20,22 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	public enum Direction
 	{
 		Up,
-		Down
+		Down,
+		Right,
+		Left
+	}
+
+	Direction m_rotateDirection;
+	public Direction rotateDirection
+	{
+		get
+		{
+			return m_rotateDirection;
+		}
+		set 
+		{
+			m_rotateDirection = value;
+		}
 	}
 
 	Status m_status;
@@ -33,7 +48,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	}
 
 
-	int m_mapColumn;
+	public int m_mapColumn;
 	public int mapColumn
 	{
 		get
@@ -53,7 +68,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		None,
 		Attack,
 		Move,
-		Rotate
+		Rotate,
+		BackRotate
 	}
 
 	// キャラクターの種類
@@ -176,6 +192,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		stateList.Add(new CharacterAttack(this));
 		stateList.Add(new CharacterMove(this));
 		stateList.Add(new CharacterRotate(this));
+		stateList.Add(new CharacterBackRotate(this));
 
 		stateMachine = new StateMachine<Character>();
 
