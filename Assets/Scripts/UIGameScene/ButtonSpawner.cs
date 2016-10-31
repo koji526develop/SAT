@@ -10,6 +10,8 @@ public class ButtonSpawner : MonoBehaviour
 	public bool debug;
 	Transform battleManager;
 
+    public int PlayerID;
+    public int ButtonID;
 	public Character.CharacterType type;
 
 	void Awake ()
@@ -33,8 +35,23 @@ public class ButtonSpawner : MonoBehaviour
 		for (int i = 1; i < 3; i++) {
 			if(transform.tag == "Player"+i.ToString())
 			{
+<<<<<<< HEAD
 	
 				GameObject character = Character.CreateObject (battleManager, type, transform.position, i);
+=======
+				Debug.Log (i);
+                Vector3 SpawnerPos;
+
+                if (i==1)
+                {
+                    SpawnerPos = new Vector3(-7.0f,0.0f, 6.0f - (2.0f * ButtonID));
+                }
+                else
+                {
+                    SpawnerPos = new Vector3(7.0f, 0.0f, 6.0f - (2.0f * ButtonID));
+                }
+				GameObject character = Character.CreateObject (battleManager, type, SpawnerPos, i);
+>>>>>>> a9e87dbf01483978eb253256886b19f953a69140
 
 			}
 

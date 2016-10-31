@@ -23,6 +23,8 @@ public class MySceneManager : MonoBehaviour {
     private float   m_intervalTime = 0.0f;      //どのぐらいの時間かけてフェードイン・アウトさせるか保存
     private float   m_fadeAlpha = 0.0f;         //アルファ値
     private bool    m_isFade=false;             //フェードインアウトスイッチ
+
+    static public bool m_SceneChangeFlag = true;  //シーンチェンジしていいかのフラグ
    
     // Use this for initialization
     void Awake()
@@ -42,13 +44,18 @@ public class MySceneManager : MonoBehaviour {
     //外部からシーン遷移関数（これをメインで使う）
     public void LoadLevel(string _nextSceneName,float _fadeTime)
     {
-		//フェードスタートと初期化を行う。
-		this.m_isFade = true;
-		this.m_nowTime = 0.0f;
+        if(m_SceneChangeFlag)
+        {
+            //フェードスタートと初期化を行う。
+            this.m_isFade = true;
+            this.m_nowTime = 0.0f;
 
-        m_nextScene     = _nextSceneName;
-        m_intervalTime  = _fadeTime;
-        StartCoroutine(TransScene());
+            m_nextScene = _nextSceneName;
+            m_intervalTime = _fadeTime;
+            StartCoroutine(TransScene());
+
+            m_SceneChangeFlag = false;
+        }
     }
 
     //非同期でフェードイン・アウトと画面遷移の処理を行う。
@@ -122,6 +129,7 @@ public class MySceneManager : MonoBehaviour {
 		yield return StartCoroutine (FadeIn ());
 
         //暗転処理終了
+        m_SceneChangeFlag = true;
         this.m_nextScene = "";
         this.m_intervalTime = 0.0f;
 		this.m_isFade = false;
