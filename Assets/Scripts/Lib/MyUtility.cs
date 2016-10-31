@@ -25,6 +25,8 @@ public class MyUtility : MonoBehaviour
 	public static int SHIELD_ATTACKDISTANCE = 2;
 	public static float SHIELD_MOCESPEED = 1.0f;
 
+	public static readonly float CENTER_LINE_X = 0.0f;
+
     public static readonly int MAX_WARPOTENTIAL = 500;
 	
 	public static void CreateDirectionalLight()

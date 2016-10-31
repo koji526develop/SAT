@@ -31,11 +31,11 @@ public class GameManager : MonoBehaviour
 		MyUtility.CreateCamera ("BattleCamera", battleManager);
 
 		// プレイヤーオブジェクト作成
-//		for (int i = 0; i < 2; i++) 
-//		{
-//			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword, new Vector3(i*2,0,0));
-//
-//		}
+		/*for (int i = 0; i < 2; i++) 
+		{
+			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword, new Vector3(i*2,0,0),1);
+
+		}*/
 	}
 
 
