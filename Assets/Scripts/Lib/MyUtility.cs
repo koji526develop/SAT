@@ -8,27 +8,30 @@ public class MyUtility : MonoBehaviour
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;
-	public static float SWORD_MOCESPEED = 1.0f;
+	public static float SWORD_MOCESPEED = 0.025f;
 
 	public static int SPEAR_LIFE = 10;
 	public static int SPEAR_ATTACK = 1;
 	public static int SPEAR_ATTACKDISTANCE = 1;
-	public static float SPEAR_MOCESPEED = 1.0f;
+	public static float SPEAR_MOCESPEED = 0.025f;
 
 	public static int AX_LIFE = 6;
 	public static int AX_ATTACK = 2;
 	public static int AX_ATTACKDISTANCE = 1;
-	public static float AX_MOCESPEED = 1.0f;
+	public static float AX_MOCESPEED = 0.025f;
 
 	public static int SHIELD_LIFE = 2;
 	public static int SHIELD_ATTACK = 2;
 	public static int SHIELD_ATTACKDISTANCE = 2;
-	public static float SHIELD_MOCESPEED = 1.0f;
+	public static float SHIELD_MOCESPEED = 0.025f;
 
 	public static readonly float CENTER_LINE_X = 0.0f;
 
     public static readonly int MAX_WARPOTENTIAL = 500;
-	
+
+	public static float DESTROY_LINE_X_1P=7.0f;
+	public static float DESTROY_LINE_X_2P=-7.0f;
+
 	public static void CreateDirectionalLight()
 	{
 		GameObject lightObj = new GameObject ("DirectionalLight");

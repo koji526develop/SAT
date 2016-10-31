@@ -35,24 +35,9 @@ public class ButtonSpawner : MonoBehaviour
 		for (int i = 1; i < 3; i++) {
 			if(transform.tag == "Player"+i.ToString())
 			{
-
-	
-				GameObject character = Character.CreateObject (battleManager, type, transform.position, i);
-
-
-                Vector3 SpawnerPos;
-
-                if (i==1)
-                {
-                    SpawnerPos = new Vector3(-7.0f,0.0f, 6.0f - (2.0f * ButtonID));
-                }
-                else
-                {
-                    SpawnerPos = new Vector3(7.0f, 0.0f, 6.0f - (2.0f * ButtonID));
-                }
-				//GameObject character = Character.CreateObject (battleManager, type, SpawnerPos, i);
-
-
+				int column = ButtonID + 1;
+				Character character = Character.CreateObject (battleManager, type, Character.GetSpawnPosition(i,column), i).GetComponent<Character>();
+				character.mapColumn = column;
 			}
 
 

@@ -17,6 +17,12 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	}
 
+	public enum Direction
+	{
+		Up,
+		Down
+	}
+
 	Status m_status;
 	public Status status
 	{
@@ -25,6 +31,21 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			return m_status;
 		}
 	}
+
+
+	int m_mapColumn;
+	public int mapColumn
+	{
+		get
+		{
+			return m_mapColumn;
+		}
+		set 
+		{
+			m_mapColumn = value;
+		}
+	}
+
 
 	// キャラクターのステート
 	public enum CharacterState
@@ -167,5 +188,30 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		// ステートマシーン更新
 		stateMachine.Update();
+	}
+	public void Destroy()
+	{
+		Destroy (gameObject);
+	}
+	public static Vector3 GetSpawnPosition(int _playerID,int _Column)
+	{
+		if (_playerID==1)
+		{
+			return new Vector3(-7.0f,0.0f, 8.0f - (2.0f * _Column));
+		}
+		else
+		{
+			return new Vector3(7.0f, 0.0f, 8.0f - (2.0f * _Column));
+		}
+	}
+	public void ChangeColumn(Direction _direction)
+	{
+		if (_direction == Direction.Up) {
+			mapColumn -= 1;
+		} else {
+			mapColumn += 1;
+		}
+			
+		moveTo.SetMoveTo (new Vector3(transform.position.x,transform.position.y, 8.0f - (2.0f * mapColumn)),1.0f);
 	}
 }

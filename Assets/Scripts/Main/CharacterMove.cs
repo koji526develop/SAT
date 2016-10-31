@@ -21,8 +21,13 @@ public class CharacterMove :  State<Character>
 		// キャラクターの移動処理
 		***********************************************/
 
-		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (0.005f, 0, 0);
-		else m_instance.transform.position -= new Vector3 (0.005f, 0, 0);
+		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (m_instance.status.moveSpeed, 0, 0);
+		else m_instance.transform.position -= new Vector3 (m_instance.status.moveSpeed, 0, 0);
+		/***********************************************
+		// キャラクター削除判定
+		***********************************************/
+
+		if (IsCharacterDestroy ()) m_instance.Destroy();
 
 		/***********************************************
 		// キャラクターのタッチ判定
@@ -102,6 +107,18 @@ public class CharacterMove :  State<Character>
 			}
 		}
 
+		return false;
+	}
+	bool IsCharacterDestroy()
+	{
+		if(m_instance.transform.position.x>=MyUtility.DESTROY_LINE_X_1P)
+		{
+			return true;
+		}
+		else if(m_instance.transform.position.x<=MyUtility.DESTROY_LINE_X_2P)
+		{
+			return true;
+		}
 		return false;
 	}
 
