@@ -19,6 +19,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	public enum Direction
 	{
+		None,
 		Up,
 		Down,
 		Right,
@@ -214,13 +215,15 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		if (_playerID==1)
 		{
-			return new Vector3(-7.0f,0.0f, 8.0f - (2.0f * _Column));
+			return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_1P,0.0f, 8.0f - (2.0f * _Column));
 		}
 		else
 		{
-			return new Vector3(7.0f, 0.0f, 8.0f - (2.0f * _Column));
+			return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 8.0f - (2.0f * _Column));
 		}
 	}
+
+	// 行の変更(変更した行に移動も兼ねる)
 	public void ChangeColumn(Direction _direction)
 	{
 		if (_direction == Direction.Up) {
@@ -229,6 +232,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			mapColumn += 1;
 		}
 			
+		// 変更した行に移動
 		moveTo.SetMoveTo (new Vector3(transform.position.x,transform.position.y, 8.0f - (2.0f * mapColumn)),1.0f);
 	}
 }

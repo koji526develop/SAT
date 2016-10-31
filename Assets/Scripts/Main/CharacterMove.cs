@@ -3,12 +3,9 @@ using System.Collections;
 
 public class CharacterMove :  State<Character>
 {
-
 	bool m_isCharacterTouch;
 
-	public CharacterMove (Character _instance) : base (_instance)
-	{
-	}
+	public CharacterMove (Character _instance) : base (_instance) {}
 
 	public override void Enter ()
 	{
@@ -17,65 +14,92 @@ public class CharacterMove :  State<Character>
 
 	public override void Update ()
 	{
-		/***********************************************
 		// キャラクターの移動処理
-		***********************************************/
-
 		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (m_instance.status.moveSpeed, 0, 0);
 		else m_instance.transform.position -= new Vector3 (m_instance.status.moveSpeed, 0, 0);
-		/***********************************************
-		// キャラクター削除判定
-		***********************************************/
 
+		// キャラクターが削除判定にはいっていたら削除
 		if (IsCharacterDestroy ()) m_instance.Destroy();
 
-		/***********************************************
-		// キャラクターのタッチ判定
-		***********************************************/
+		// 全てのキャラクター同士の衝突判定
+		CollisionCheck ();
 
-		TouchInfo touch = TouchManager.GetTouchInfo (0);
-
-		if (touch == TouchInfo.Began) {
+		TouchInfo touchInfo = TouchManager.GetTouchInfo (0);
+		// タッチ開始時
+		if (touchInfo == TouchInfo.Began)
+		{
 			// キャラクターがタッチされているか判定
 			m_isCharacterTouch = IsCharacterTouch ();
 		}
-
-		if (touch == TouchInfo.Moved) 
+		// タッチ移動中
+		else if (touchInfo == TouchInfo.Moved) 
 		{
+			// キャラクターがタッチされていたら
 			if (m_isCharacterTouch) 
 			{
-				// もし境界線を超えていたら何もしない
+				// キャラクターが境界線を超えていたら何もしない
 				if (IsBeyondCenterLine()) return;
 
-				if (TouchManager.GetTouchMoveDistanceY (0) > 50.0f) 
-				{	
-					if (m_instance.mapColumn <= MyUtility.MIX_COLUMN) return;
-					m_instance.rotateDirection = Character.Direction.Left;
-					m_instance.ChangeState (Character.CharacterState.Rotate);
-				} 
-				else if (TouchManager.GetTouchMoveDistanceY (0) < -50.0f) 
-				{
-					if (m_instance.mapColumn >= MyUtility.MAX_COLUMN) return;
-					m_instance.rotateDirection = Character.Direction.Right;
-					m_instance.ChangeState (Character.CharacterState.Rotate);
-				}
+				// キャラクターが上にフリックされていたら右回転させる
+				if (IsUpFlick()) RotateRight();
+
+				// キャラクターが下にフリックされていたら左回転させる
+				else if (IsDownFlick()) RotateLeft();
 			}
 		}
-		/***********************************************
-			// 全てのキャラクター同士の衝突判定
-		***********************************************/
-		GameObject[] gameobject = GameObject.FindGameObjectsWithTag ("Character");
+	}
 
-		for (int i = 0; i < gameobject.Length; i++) {
+	public override void Exit ()
+	{
 
-			if (m_instance.gameObject == gameobject [i])
-				continue;
+	}
 
-			if (IsHit (m_instance.gameObject, gameobject [i])) 
-			{
-				Debug.Log ("当たったー");
-			}
+	// キャラクターを右回転させるステートにする
+	void RotateRight()
+	{
+		m_instance.rotateDirection = Character.Direction.Left;
+		m_instance.ChangeState (Character.CharacterState.Rotate);
+	}
+
+	// キャラクターを左回転させるステートにする
+	void RotateLeft()
+	{
+		m_instance.rotateDirection = Character.Direction.Right;
+		m_instance.ChangeState (Character.CharacterState.Rotate);
+	}
+
+	// 全てのキャラクター同士の衝突判定
+	void CollisionCheck()
+	{
+		GameObject[] charaObj = GameObject.FindGameObjectsWithTag ("Character");
+
+		for (int i = 0; i < charaObj.Length; i++)
+		{
+			if (m_instance.gameObject == charaObj [i]) continue;
+
+			if (IsHit (m_instance.gameObject, charaObj [i])) Debug.Log ("当たったー");
 		}
+	}
+
+	// キャラクターが上にフリックされたかどうかの判定
+	bool IsUpFlick()
+	{
+		if (!(TouchManager.GetTouchMoveDistanceY (0) > 50.0f)) return false;
+			
+		if (m_instance.mapColumn <= MyUtility.MIX_COLUMN) return false;
+
+		return true;
+	}
+
+	// キャラクターが下にフリックされたかどうかの判定
+	bool IsDownFlick()
+	{
+		if (!(TouchManager.GetTouchMoveDistanceY (0) < -50.0f)) return false;
+
+		if (m_instance.mapColumn >= MyUtility.MAX_COLUMN) return false;
+
+		return true;
+
 	}
 
 	// キャラクターがタッチされたかどうかの判定
@@ -89,58 +113,54 @@ public class CharacterMove :  State<Character>
 	// 境界線を超えてるかどうかの判定
 	bool IsBeyondCenterLine ()
 	{
-		if (m_instance.status.PlayerID == 1) {
-			if (m_instance.transform.position.x >= MyUtility.CENTER_LINE_X) {
-				return true;
-			}
-		} else {
-			if (m_instance.transform.position.x <= MyUtility.CENTER_LINE_X) {
-				return true;
-			}
-		}
+		int id = m_instance.status.PlayerID;
+		float charaPosX = m_instance.transform.position.x;
+
+		// プレイヤー１のキャラがセンターラインより右にいたら
+		if (id == 1 && charaPosX >= MyUtility.CENTER_LINE_X) return true;
+
+		// プレイヤー２のキャラがセンターラインより左にいたら
+		else if (id == 2 && charaPosX <= MyUtility.CENTER_LINE_X) return true;
 
 		return false;
 	}
+
+	// キャラクターを削除するかどうかの判定
 	bool IsCharacterDestroy()
 	{
-		if(m_instance.transform.position.x>=MyUtility.DESTROY_LINE_X_1P)
-		{
-			return true;
-		}
-		else if(m_instance.transform.position.x<=MyUtility.DESTROY_LINE_X_2P)
-		{
-			return true;
-		}
+		int id = m_instance.status.PlayerID;
+		float charaPosX = m_instance.transform.position.x;
+
+		// プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら
+		if(id == 1 && charaPosX >= MyUtility.SOLDIER_CREATE_LINE_X_2P) return true;
+
+		// プレイヤー２のキャラがプレイヤー１のキャラクター生成ラインより左に行ったら
+		else if(id == 2 && charaPosX <= MyUtility.SOLDIER_CREATE_LINE_X_1P) return true;
+		
 		return false;
 	}
 
 	// キャラクターの衝突判定
 	bool IsHit (GameObject obj1, GameObject obj2)
 	{
+		// 衝突判定を行う距離
 		float distance = obj1.GetComponent<Character> ().status.attackDistance;
-
-		if (!obj2.CompareTag ("Character"))
-			return false;
 
 		Character character1 = obj1.GetComponent<Character>();
 		Character character2 = obj2.GetComponent<Character>();
 
-		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance))
-			return false;
+		// キャラクターでなかったら抜ける
+		if (!obj2.CompareTag ("Character")) return false;
 
-		if (character1.status.PlayerID == character2.status.PlayerID) {
-			return false;
-		}
+		// 攻撃範囲に入ってなかったら抜ける
+		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance)) return false;
 
-		if (character1.mapColumn != character2.mapColumn) {
-			return false;
-		}
+		// PlayerIDが同じだったら抜ける
+		if (character1.status.PlayerID == character2.status.PlayerID)  return false;
+
+		// 行が違ったら抜ける
+		if (character1.mapColumn != character2.mapColumn) return false;
 
 		return true;
-	}
-
-	public override void Exit ()
-	{
-		
 	}
 }

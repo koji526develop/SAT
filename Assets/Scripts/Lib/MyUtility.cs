@@ -2,39 +2,50 @@
 using UnityEngine.UI;
 using System.Collections;
 
-// 動的にオブジェクト作ったりするクラス
+// 動的にオブジェクト作ったり,するクラス
 public class MyUtility : MonoBehaviour
 {
+	// 兵士が移動する行の最小値
 	public static readonly int MIX_COLUMN = 1;
+	// 兵士が移動する行の最大値
 	public static readonly int MAX_COLUMN = 6;
 
+	// 剣士のパラメータ
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;
 	public static float SWORD_MOCESPEED = 0.025f;
 
+	// 槍のパラメータ
 	public static int SPEAR_LIFE = 10;
 	public static int SPEAR_ATTACK = 1;
 	public static int SPEAR_ATTACKDISTANCE = 1;
 	public static float SPEAR_MOCESPEED = 0.025f;
 
+	// 斧のパラメータ
 	public static int AX_LIFE = 6;
 	public static int AX_ATTACK = 2;
 	public static int AX_ATTACKDISTANCE = 1;
 	public static float AX_MOCESPEED = 0.025f;
 
+	// 盾のパラメータ
 	public static int SHIELD_LIFE = 2;
 	public static int SHIELD_ATTACK = 2;
 	public static int SHIELD_ATTACKDISTANCE = 2;
 	public static float SHIELD_MOCESPEED = 0.025f;
 
+	// ゲーム画面の中心のX軸
 	public static readonly float CENTER_LINE_X = 0.0f;
 
+	// 
     public static readonly int MAX_WARPOTENTIAL = 500;
 
-	public static float DESTROY_LINE_X_1P=7.0f;
-	public static float DESTROY_LINE_X_2P=-7.0f;
+	// 1Pの兵士が生成されるライン
+	public static float SOLDIER_CREATE_LINE_X_1P = -7.0f;
+	// 2Pの兵士が生成されるライン
+	public static float SOLDIER_CREATE_LINE_X_2P = 7.0f;
 
+	// ディレクショナルライト作成
 	public static void CreateDirectionalLight()
 	{
 		GameObject lightObj = new GameObject ("DirectionalLight");
@@ -43,6 +54,7 @@ public class MyUtility : MonoBehaviour
 		light.type = LightType.Directional;
 	}
 
+	// キャンバス作成
 	public static Canvas CreateCanvas(Transform _parent = null)
 	{
 		GameObject canvasObj = new GameObject ("Canvas");
@@ -60,6 +72,7 @@ public class MyUtility : MonoBehaviour
 		return canvas;
 	}
 
+	// 空のUIオブジェクト作成
 	public static GameObject CreateEmpty(string _name, Transform _parent)
 	{
 		GameObject emptyObj = new GameObject (_name);
@@ -75,6 +88,7 @@ public class MyUtility : MonoBehaviour
 		return emptyObj;
 	}
 
+	// カメラ作成
 	public static Camera CreateCamera(string tagName, Transform _parent = null)
 	{
 		GameObject cameraObj = new GameObject (tagName);
@@ -92,7 +106,7 @@ public class MyUtility : MonoBehaviour
 
 		return camera;
 	}
-
+		
 	public static void CreateUICanvas(Transform _parent)
 	{
 		GameObject uiObj = Instantiate(Resources.Load("Prefabs/UI") as GameObject);
@@ -100,6 +114,7 @@ public class MyUtility : MonoBehaviour
 		uiObj.transform.SetParent (_parent);
 	}
 
+	// イベントシステム作成
 	public static void CreateEventSystem(Transform _parent)
 	{
 		GameObject eventSystemObj = Instantiate(Resources.Load("Prefabs/EventSystem") as GameObject);
@@ -107,6 +122,7 @@ public class MyUtility : MonoBehaviour
 		eventSystemObj.transform.SetParent (_parent);
 	}
 
+	// UIImage作成
 	public static GameObject CreateImage(string _name, string _imagePath , Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
 	{
 		GameObject imageObj = new GameObject (_name);
@@ -126,6 +142,7 @@ public class MyUtility : MonoBehaviour
 		return imageObj;
 	}
 
+	// UIにテキスト追加
 	public static Text AddText(string _text, Transform _parent)
 	{
 		GameObject obj = new GameObject ("Text");
@@ -151,6 +168,7 @@ public class MyUtility : MonoBehaviour
         return text;
 	}
 
+	// テキスト作成
     public static Text CreateText(string _text, Transform _parent, int _fontSize,Vector3 _rotation, Vector2 _anchorMin, Vector2 _anchorMax)
     {
         GameObject obj = new GameObject("Text");
@@ -177,6 +195,7 @@ public class MyUtility : MonoBehaviour
         return text;
     }
 
+	// ボタン作成
     public static GameObject CreateButton(string _name, string _imagePath,Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
 	{
 		GameObject buttonObj = new GameObject (_name);
@@ -199,7 +218,7 @@ public class MyUtility : MonoBehaviour
 		return buttonObj;
 	}
 
-
+	// スライダー作成
     public static GameObject CreateSlider(string _name, string _imagePath, Vector2 _anchorMin, Vector2 _anchorMax, Transform _parent)
     {
         GameObject sliderObj = new GameObject(_name);
@@ -234,6 +253,7 @@ public class MyUtility : MonoBehaviour
         return sliderObj;
     }
 
+	// スプライト作成
 	public static GameObject CreateSprite(Transform _parent,string _name,string _resourcesFolder)
 	{
 		GameObject spriteObj = new GameObject(_name);

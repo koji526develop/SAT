@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 		// Light作成
 		MyUtility.CreateDirectionalLight ();
 
+		/*
 		// UIManager作成
 		Transform UIManager = new GameObject ("UIManager").transform;
 
@@ -20,9 +21,10 @@ public class GameManager : MonoBehaviour
 
 		// UICanvas作成(UICameraの子オブジェクトにする)
 		MyUtility.CreateUICanvas (uiCamera.transform);
+		*/
 
 		// イベントシステム作成
-		MyUtility.CreateEventSystem (UIManager);
+		//MyUtility.CreateEventSystem (UIManager);
 
 		// BattleManager作成
 		Transform battleManager = new GameObject ("BattleManager").transform;
