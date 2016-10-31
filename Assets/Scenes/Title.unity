@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nextScene: 
-  m_flag: 0
 --- !u!4 &2140668081
 Transform:
   m_ObjectHideFlags: 0

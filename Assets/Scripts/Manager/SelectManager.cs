@@ -24,7 +24,10 @@ public class SelectManager : MonoBehaviour
 
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);
-	}
+
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+    }
 
 	void Update () 
 	{

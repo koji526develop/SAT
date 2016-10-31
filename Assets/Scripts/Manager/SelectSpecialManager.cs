@@ -15,7 +15,10 @@ public class SelectSpecialManager : MonoBehaviour
 
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);
-	}
+
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+    }
 	
 	// Update is called once per frame
 	void Update () {

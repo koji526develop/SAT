@@ -128,7 +128,7 @@ public class SelectUIManager : MonoBehaviour
 		MyUtility.AddText ("決定", enterObj.transform);
 		enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
 
-	}
+    }
 
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
 	{
