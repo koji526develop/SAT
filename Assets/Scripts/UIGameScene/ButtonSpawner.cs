@@ -50,7 +50,7 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     SpawnerPos = new Vector3(7.0f, 0.0f, 6.0f - (2.0f * ButtonID));
                 }
-				GameObject character = Character.CreateObject (battleManager, type, SpawnerPos, i);
+				//GameObject character = Character.CreateObject (battleManager, type, SpawnerPos, i);
 
 
 			}
