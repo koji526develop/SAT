@@ -29,11 +29,6 @@ public class ButtonSpawner : MonoBehaviour
 		}
 	}
 
-	void start()
-	{
-		m_battleManager = GameObject.FindWithTag ("BattleManager").transform;
-	}
-
 	public void Spawner ()
 	{
 		for (int i = 1; i < 3; i++) {
@@ -64,6 +59,8 @@ public class ButtonSpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		m_battleManager = GameObject.FindWithTag ("BattleManager").transform;
+
 		type = Character.CharacterType.Sword;
 		gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/TimeWaku", typeof(Sprite)) as Sprite;
 
