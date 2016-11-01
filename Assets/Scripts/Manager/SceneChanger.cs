@@ -32,7 +32,8 @@ public class SceneChanger : MonoBehaviour
     public void ChangeToGame()
     {
         //MySceneManager.m_instance.LoadLevel("Game", 1.0f);
-        MySceneManager.m_instance.LoadLevel("GameAndUI", 1.0f);
+        //MySceneManager.m_instance.LoadLevel("GameAndUI", 1.0f);
+        MySceneManager.m_instance.LoadLevel("GameAndUI_nozawa", 1.0f);
     }
 
     //リザルトに行く
