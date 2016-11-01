@@ -6,69 +6,79 @@ using System.Collections.Generic;
 
 public class ButtonSpawner : MonoBehaviour
 {
+    Transform m_battleManager;
 
-	public bool debug;
-	Transform m_battleManager;
+    public int m_PlayerID;
+    public int m_ButtonID;
+    public Character.CharacterType m_type;
 
-    public int PlayerID;
-    public int ButtonID;
-	public Character.CharacterType type;
+    void Awake()
+    {
+     
+            //ボタン押すことで兵種を切り替える処理を行う。  
+            this.GetComponent<Button>().onClick.AddListener(SolderChange);
 
-	void Awake ()
-	{
-		if (!debug) {
-			this.GetComponent<Button> ().onClick.AddListener (SolderChange);
-			EventTrigger trigger = gameObject.GetComponent<EventTrigger> ();
+        //スライドで出現処理を行えるようにする処理を行う。
 
-			EventTrigger.Entry entry = new EventTrigger.Entry ();
-			entry.eventID = EventTriggerType.EndDrag;
-			entry.callback.AddListener ((data) => {
-				Spawner ();
-			});
-			trigger.triggers.Add (entry);
-		}
-	}
+        EventTrigger dragEndtrigger = gameObject.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.EndDrag;
+        entry.callback.AddListener((data) => {Spawner();});
+        dragEndtrigger.triggers.Add(entry);
 
-	public void Spawner ()
-	{
-		for (int i = 1; i < 3; i++) {
-			if(transform.tag == "Player"+i.ToString())
-			{
-				int column = ButtonID + 1;
-				Character character = Character.CreateObject (m_battleManager, type, Character.GetSpawnPosition(i,column), i).GetComponent<Character>();
-				character.mapColumn = column;
-			}
-		}
-	}
+    }
 
-	public void SolderChange ()
-	{
-		if (Character.CharacterType.Sword == type) {
-			type = Character.CharacterType.Spear;
-			gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/gauge_blue", typeof(Sprite)) as Sprite;
-		} else if (Character.CharacterType.Spear == type) {
-			type = Character.CharacterType.Ax;
-			gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/gage-akapng", typeof(Sprite)) as Sprite;
+    //兵士出現処理
+    public void Spawner()
+    {
+     
+            Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
+        character.mapColumn = m_ButtonID;
+    }
 
-		} else if (Character.CharacterType.Ax == type) {
-			type = Character.CharacterType.Sword;
-			gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/TimeWaku", typeof(Sprite)) as Sprite;
-		}
+    //兵士の選択を変える処理に入る
+    public void SolderChange()
+    {
+        switch (m_type)
+        {
+            
+            //剣から槍へ
+            case Character.CharacterType.Sword:
 
-	}
-	// Use this for initialization
-	void Start ()
-	{
-		m_battleManager = GameObject.FindWithTag ("BattleManager").transform;
+                m_type = Character.CharacterType.Spear;
+                gameObject.GetComponent<Image>().sprite = Resources.Load("Image/gauge_blue", typeof(Sprite)) as Sprite;
+                break;
 
-		type = Character.CharacterType.Sword;
-		gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/TimeWaku", typeof(Sprite)) as Sprite;
+            //槍から斧へ
+            case Character.CharacterType.Spear:
 
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-       
-	}
+                m_type = Character.CharacterType.Ax;
+                gameObject.GetComponent<Image>().sprite = Resources.Load("Image/gauge_blue", typeof(Sprite)) as Sprite;
+                break;
+            
+            //斧から盾へ
+            case Character.CharacterType.Ax:
+
+                m_type = Character.CharacterType.Shield;
+                gameObject.GetComponent<Image>().sprite = Resources.Load("Image/gage-akapng", typeof(Sprite)) as Sprite;
+                break;
+
+            //盾から剣へ
+            case Character.CharacterType.Shield:
+
+                m_type = Character.CharacterType.Sword;
+                gameObject.GetComponent<Image>().sprite = Resources.Load("Image/TimeWaku", typeof(Sprite)) as Sprite;
+                break;
+        }
+    }
+    // Use this for initialization
+    void Start()
+    {
+        //初期設定を行う。
+        m_battleManager = GameObject.FindWithTag("BattleManager").transform;
+
+        m_type = Character.CharacterType.Sword;
+        gameObject.GetComponent<Image>().sprite = Resources.Load("Image/TimeWaku", typeof(Sprite)) as Sprite;
+
+    }
 }

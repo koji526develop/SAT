@@ -83,11 +83,10 @@ public class GameUIManager : MonoBehaviour {
 
 				obj.tag ="Player"+(j+1).ToString();
     
-                obj.AddComponent<EventTrigger>();
                 ButtonSpawner btnCmp=obj.AddComponent<ButtonSpawner>();
 
-                btnCmp.PlayerID = j + 1;
-                btnCmp.ButtonID = i;
+                btnCmp.m_PlayerID = j + 1;
+                btnCmp.m_ButtonID = i+1;
             }
         }
 
