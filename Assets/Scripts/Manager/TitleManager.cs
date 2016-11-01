@@ -20,8 +20,8 @@ public class TitleManager : MonoBehaviour
         TouchInfo touch = TouchManager.GetTouchInfo(0);
         if (touch == TouchInfo.Began)
         {
-            SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToOperating();
+            //SceneChanger sChange = new SceneChanger();
+            //sChange.ChangeToOperating();
         }
     }
 }
