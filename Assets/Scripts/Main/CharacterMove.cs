@@ -15,8 +15,7 @@ public class CharacterMove :  State<Character>
 	public override void Update ()
 	{
 		// キャラクターの移動処理
-		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (m_instance.status.moveSpeed, 0, 0);
-		else m_instance.transform.position -= new Vector3 (m_instance.status.moveSpeed, 0, 0);
+		Move();
 
 		// キャラクターが削除判定にはいっていたら削除
 		if (IsCharacterDestroy ()) m_instance.Destroy();
@@ -34,24 +33,30 @@ public class CharacterMove :  State<Character>
 		// タッチ移動中
 		else if (touchInfo == TouchInfo.Moved) 
 		{
-			// キャラクターがタッチされていたら
-			if (m_isCharacterTouch) 
-			{
-				// キャラクターが境界線を超えていたら何もしない
-				if (IsBeyondCenterLine()) return;
+			// キャラクターがタッチされていなかったら何もしない
+			if (!m_isCharacterTouch) return;
 
-				// キャラクターが上にフリックされていたら右回転させる
-				if (IsUpFlick()) RotateRight();
+			// キャラクターが境界線を超えていたら何もしない
+			if (IsBeyondCenterLine()) return;
 
-				// キャラクターが下にフリックされていたら左回転させる
-				else if (IsDownFlick()) RotateLeft();
-			}
+			// キャラクターが上にフリックされていたら右回転させる
+			if (IsUpFlick()) RotateRight();
+
+			// キャラクターが下にフリックされていたら左回転させる
+			else if (IsDownFlick()) RotateLeft();
 		}
 	}
 
 	public override void Exit ()
 	{
 
+	}
+
+	// キャラクターの移動
+	void Move()
+	{
+		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (m_instance.status.moveSpeed, 0, 0);
+		else m_instance.transform.position -= new Vector3 (m_instance.status.moveSpeed, 0, 0);
 	}
 
 	// キャラクターを右回転させるステートにする
