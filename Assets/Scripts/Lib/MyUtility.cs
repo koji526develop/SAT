@@ -19,7 +19,7 @@ public class MyUtility : MonoBehaviour
 	// 槍のパラメータ
 	public static int SPEAR_LIFE = 10;
 	public static int SPEAR_ATTACK = 1;
-	public static int SPEAR_ATTACKDISTANCE = 1;
+	public static int SPEAR_ATTACKDISTANCE = 2;
 	public static float SPEAR_MOCESPEED = 0.025f;
 
 	// 斧のパラメータ
