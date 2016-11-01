@@ -131,7 +131,8 @@ public class ResultManager : MonoBehaviour
         }
         //作ったもの一つを対になるように配置
         m_ResultObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
-        m_ResultObj[1].transform.position = new Vector3(Screen.width / 32.0f * 16, Screen.height / 25.0f * 12.5f, 0.0f);
+        Vector2 tmpPos = new Vector2(Screen.width-m_ResultObj[0].transform.position.x,Screen.height - m_ResultObj[0].transform.position.y);
+        m_ResultObj[1].transform.position = new Vector3(tmpPos.x,tmpPos.y, 0.0f);
     }
 
     void Start()

@@ -20,8 +20,16 @@ public class SoldierSurvival : MonoBehaviour
             m_SoldierNumber[i] = i * 10;
         }
 
-        m_SoldierNumberName[0] = "剣×" + m_SoldierNumber[0].ToString() + "槍×" + m_SoldierNumber[1].ToString() + "斧×" + m_SoldierNumber[2].ToString() + "盾×" + m_SoldierNumber[3].ToString();
-        m_SoldierNumberName[1] = "剣×" + m_SoldierNumber[0].ToString() + "槍×" + m_SoldierNumber[1].ToString() + "斧×" + m_SoldierNumber[2].ToString() + "盾×" + m_SoldierNumber[3].ToString();
+        m_SoldierNumberName[0] = m_SoldierNumber[0].ToString() + "      " + m_SoldierNumber[1].ToString() + "      " + m_SoldierNumber[2].ToString() + "      " + m_SoldierNumber[3].ToString();
+        m_SoldierNumberName[1] = m_SoldierNumber[0].ToString() + "      " + m_SoldierNumber[1].ToString() + "      " + m_SoldierNumber[2].ToString() + "      " + m_SoldierNumber[3].ToString();
+
+
+        MyUtility.CreateImage(
+            "SoldierIcon",
+            "Image/Icon1",
+            new Vector2(1 / 32.0f, 23 / 25.0f),
+            new Vector2(3 / 32.0f, 21 / 25.0f),
+            transform);
 
 
         for (int i = 0; i < 2; i++)
@@ -30,51 +38,34 @@ public class SoldierSurvival : MonoBehaviour
             m_SoldierImgObj[i] = MyUtility.CreateImage(
             "LongBar",
             "Image/karie/waku6",
-            new Vector2(2 / 32.0f, 12 / 25.0f),
-            new Vector2(5 / 32.0f, 23 / 25.0f),
+            new Vector2(1 / 32.0f, 12 / 25.0f),
+            new Vector2(4 / 32.0f, 23 / 25.0f),
             transform);
 
+            //for (int j = 1; j < 2; j++)
+            //{
+            //    MyUtility.CreateImage(
+            //    "SoldierIcon",
+            //    "Image/Icon" + j.ToString(),
+            //    new Vector2(0.5f, (1.0f - (j * 0.2f))),
+            //    new Vector2(0.5f, (1.0f - (j * 0.2f))),
+            //    m_SoldierImgObj[i].transform);
+            //}
 
-            m_SoldierText[i] = MyUtility.CreateText(
-                m_SoldierNumberName[i],
-                m_SoldierImgObj[i].transform,
-                30,
-                new Vector3(0.0f, 0.0f, -90.0f),
-                new Vector2(13 / 32.0f, 14 / 25.0f),
-                new Vector2(13 / 32.0f, 14 / 25.0f)
-                );
+            //m_SoldierText[i] = MyUtility.CreateText(
+            //    m_SoldierNumberName[i],
+            //    m_SoldierImgObj[i].transform,
+            //    30,
+            //    new Vector3(0.0f, 0.0f, -90.0f),
+            //    new Vector2(13 / 32.0f, 11.5f / 25.0f),
+            //    new Vector2(13 / 32.0f, 11.5f / 25.0f)
+            //    );
         }
 
-        ////兵士の名前のテキスト
-        //for (int j = 0; j < 4; j++)
-        //{
-        //    MyUtility.CreateText(
-        //        SoldierName[j],
-        //        m_SoldierImgObj[i].transform,
-        //        30,
-        //    new Vector3(0.0f, 0.0f, -90.0f),
-        //    new Vector2(13.0f / 32.0f, (23.5f - (j * 6.0f)) / 25.0f),
-        //    new Vector2(13.0f / 32.0f, (23.5f - (j * 6.0f)) / 25.0f));
-        //    //new Vector2(3.15f / 32.0f, (22.6f - (i * 2.7f)) / 25.0f),
-        //    //new Vector2(3.15f / 32.0f, (22.6f - (i * 2.7f)) / 25.0f));
-        //}
+        m_SoldierImgObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
+        Vector2 tmpPos = new Vector2(Screen.width - m_SoldierImgObj[0].transform.position.x, Screen.height - m_SoldierImgObj[0].transform.position.y);
+        m_SoldierImgObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y + 92.0f, 0.0f);
 
-        //////兵士の数のテキスト
-        //for (int j = 0; j < 4; j++)
-        //{
-        //    m_SoldierText[j] = MyUtility.CreateText(
-        //        m_SoldierNumber[j].ToString(),
-        //        m_SoldierImgObj[i].transform,
-        //        30,
-        //        new Vector3(0.0f, 0.0f, -90.0f),
-        //        new Vector2(13.0f / 32.0f, (20.5f - (j * 6.0f)) / 25.0f),
-        //        new Vector2(13.0f / 32.0f, (20.5f - (j * 6.0f)) / 25.0f));
-        //    //new Vector2(3.15f / 32.0f, (21.3f - (i * 2.7f)) / 25.0f),
-        //    //new Vector2(3.15f / 32.0f, (21.3f - (i * 2.7f)) / 25.0f));
-        //}
-
-        //m_SoldierImgObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
-        //m_SoldierImgObj[1].transform.position = new Vector3(Screen.width / 32 * 30.5f, Screen.height / 25 * 5, 0.0f);
     }
 
     void Start()
