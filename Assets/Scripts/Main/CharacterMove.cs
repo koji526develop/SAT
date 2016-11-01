@@ -82,7 +82,12 @@ public class CharacterMove :  State<Character>
 		{
 			if (m_instance.gameObject == charaObj [i]) continue;
 
-			if (IsHit (m_instance.gameObject, charaObj [i]))m_instance.ChangeState (Character.CharacterState.Attack); Debug.Log ("当たったー");
+			if (IsHit (m_instance.gameObject, charaObj [i]))
+			{
+				m_instance.characterAttackState.enemyObj = charaObj [i];
+				m_instance.ChangeState (Character.CharacterState.Attack); 
+				Debug.Log ("当たったー");
+			}
 		}
 	}
 

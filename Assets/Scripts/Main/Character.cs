@@ -17,6 +17,14 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	}
 
+	CharacterAttack m_characterAttackState;
+	public CharacterAttack characterAttackState
+	{
+		get
+		{
+			return m_characterAttackState;
+		}
+	}
 	public enum Direction
 	{
 		None,
@@ -45,6 +53,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		get
 		{
 			return m_status;
+		}
+		set 
+		{
+			m_status = value;
 		}
 	}
 
@@ -181,7 +193,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		// ステートマシンの初期設定
 		stateList.Add(new CharacterNone(this));
-		stateList.Add(new CharacterAttack(this));
+		m_characterAttackState = new CharacterAttack(this);
+		stateList.Add(m_characterAttackState);
 		stateList.Add(new CharacterMove(this));
 		stateList.Add(new CharacterRotate(this));
 		stateList.Add(new CharacterBackRotate(this));
