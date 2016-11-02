@@ -164,6 +164,9 @@ public class SelectSpecialUIManager : MonoBehaviour
 			if (m_touchCardObject.tag != "Card")
 				return;
 
+			if (m_touchCardObject.GetComponent<SpriteRenderer> ().color == new Color (1.0f, 1.0f, 1.0f, 0.5f))
+				return;
+
 			// タッチした特殊カードを半透明にする
 			m_touchCardObject.GetComponent<SpriteRenderer> ().color = new Color (1.0f, 1.0f, 1.0f, 0.5f);
 
@@ -181,7 +184,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		}
 		else if(touchInfo == TouchInfo.Ended)
 		{
-			if (m_touchCardObject == null)
+			if (m_touchCardObject == null || m_moveObject == null)
 				return;
 			
 			Vector2 point = m_uiCamera.ScreenToWorldPoint (Input.mousePosition); 
@@ -189,7 +192,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
 			if (collition2d)
 			{
-				if (collition2d.gameObject.tag == "CardFrame") 
+				if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3) 
 				{
 					m_selectedObj [m_selectedCount].SetActive (true);
 					m_selectedCount++;

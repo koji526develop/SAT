@@ -5,9 +5,13 @@ public class CharacterAttack : State<Character>
 {
 	public CharacterAttack(Character _instance) : base(_instance) {}
 
+	// 敵のキャラクターオブジェクト
 	GameObject m_enemyObj;
+
+	// 敵のキャラクター
 	Character m_enemyCharacter;
 
+	// 攻撃のインターバル
 	float m_attackTime;
 
 	public GameObject enemyObj
@@ -37,12 +41,11 @@ public class CharacterAttack : State<Character>
 
 	void Attak()
 	{
-		
-		Character.Status changeStatus = m_instance.status;
+		Character.Status changeStatus = m_enemyCharacter.status;
 
-		changeStatus.life -= m_enemyCharacter.status.attack;
+		changeStatus.life -= m_instance.status.attack;
 
-		m_instance.status = changeStatus;
+		m_enemyCharacter.status = changeStatus;
 	}
 	public override void Exit() 
 	{
