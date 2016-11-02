@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ButtonSpawner : MonoBehaviour
 {
     Transform m_battleManager;
+    private ScoreManager m_scoreManager;
 
     public int m_PlayerID;
     public int m_ButtonID;
@@ -32,8 +33,9 @@ public class ButtonSpawner : MonoBehaviour
     public void Spawner()
     {
      
-            Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
+        Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
         character.mapColumn = m_ButtonID;
+        m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
     }
 
     //兵士の選択を変える処理に入る
@@ -80,5 +82,6 @@ public class ButtonSpawner : MonoBehaviour
         m_type = Character.CharacterType.Sword;
         gameObject.GetComponent<Image>().sprite = Resources.Load("Image/TimeWaku", typeof(Sprite)) as Sprite;
 
+        m_scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
     }
 }
