@@ -7,7 +7,6 @@ using System.Collections.Generic;
 public class ButtonSpawner : MonoBehaviour
 {
     Transform m_battleManager;
-	Camera m_battleCamera;
     public int m_PlayerID;
     public int m_ButtonID;
 	public GameObject changeImgObj;
@@ -16,11 +15,10 @@ public class ButtonSpawner : MonoBehaviour
     void Awake()
     {
      
-            //ボタン押すことで兵種を切り替える処理を行う。  
-            this.GetComponent<Button>().onClick.AddListener(SolderChange);
+        //ボタン押すことで兵種を切り替える処理を行う。  
+        this.GetComponent<Button>().onClick.AddListener(SolderChange);
 
         //スライドで出現処理を行えるようにする処理を行う。
-
         EventTrigger dragEndtrigger = gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.EndDrag;
@@ -31,32 +29,27 @@ public class ButtonSpawner : MonoBehaviour
     //兵士出現処理
     public void Spawner()
     {
-     
-            Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
+        Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
         character.mapColumn = m_ButtonID;
     }
 		
-	void OnGUI() {
+	void OnGUI()
+	{
+		RectTransform uiRectTransForm = gameObject.GetComponent<RectTransform> ();
+		Vector2 uiPos = new Vector2 ( uiRectTransForm.localPosition.x + Screen.width / 2,
+									  -uiRectTransForm.localPosition.y + Screen.height / 2 );
+		Texture changeTexture = changeImgObj.GetComponent<Image> ().mainTexture;
+
+		// UIのテクスチャの向きを1Pと2P用に帰る処理
 		Matrix4x4 matrix = GUI.matrix;
 		{
-			if (m_PlayerID == 1) {
-				GUIUtility.RotateAroundPivot (90,
-					new Vector2 (
-						gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2,
-						-gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2
-					)
-				);
-				GUI.DrawTexture (new Rect (gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2, -gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2 - 64, 46.08f, 64),
-					changeImgObj.GetComponent<Image>().mainTexture);
+			if (m_PlayerID == 1)
+			{
+				GUIUtility.RotateAroundPivot (90, uiPos);
+				GUI.DrawTexture (new Rect (uiPos.x, uiPos.y - 64, 46.08f, 64), changeTexture);
 			} else {
-				GUIUtility.RotateAroundPivot (-90,
-					new Vector2 (
-						gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2,
-						-gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2
-					)
-				);
-				GUI.DrawTexture (new Rect (gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2 - (92.16f), -gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2, 46.08f, 64),
-					changeImgObj.GetComponent<Image>().mainTexture);
+				GUIUtility.RotateAroundPivot (-90, uiPos);
+				GUI.DrawTexture (new Rect (uiPos.x - 92.16f, uiPos.y, 46.08f, 64), changeTexture);
 			}
 		}
 		GUI.matrix = matrix;
@@ -97,13 +90,11 @@ public class ButtonSpawner : MonoBehaviour
                 break;
         }
     }
-
-    // Use this for initialization
+		
     void Start()
     {
         //初期設定を行う。
         m_battleManager = GameObject.FindWithTag("BattleManager").transform;
-		m_battleCamera = GameObject.FindWithTag ("BattleCamera").GetComponent<Camera> ();
         m_type = Character.CharacterType.Sword;
     }
 }
