@@ -10,6 +10,7 @@ public class ButtonSpawner : MonoBehaviour
 	Camera m_battleCamera;
     public int m_PlayerID;
     public int m_ButtonID;
+	public GameObject changeImgObj;
     public Character.CharacterType m_type;
 
     void Awake()
@@ -46,7 +47,7 @@ public class ButtonSpawner : MonoBehaviour
 					)
 				);
 				GUI.DrawTexture (new Rect (gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2, -gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2 - 64, 46.08f, 64),
-					gameObject.GetComponent<Image> ().mainTexture);
+					changeImgObj.GetComponent<Image>().mainTexture);
 			} else {
 				GUIUtility.RotateAroundPivot (-90,
 					new Vector2 (
@@ -54,8 +55,8 @@ public class ButtonSpawner : MonoBehaviour
 						-gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2
 					)
 				);
-				GUI.DrawTexture (new Rect (gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2 - 46.08f, -gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2, 46.08f, 64),
-					gameObject.GetComponent<Image> ().mainTexture);
+				GUI.DrawTexture (new Rect (gameObject.GetComponent<RectTransform> ().localPosition.x + Screen.width / 2 - (92.16f), -gameObject.GetComponent<RectTransform> ().localPosition.y + Screen.height / 2, 46.08f, 64),
+					changeImgObj.GetComponent<Image>().mainTexture);
 			}
 		}
 		GUI.matrix = matrix;
@@ -71,28 +72,28 @@ public class ButtonSpawner : MonoBehaviour
 		case Character.CharacterType.Sword:
 
 			m_type = Character.CharacterType.Spear;
-			gameObject.GetComponent<Image> ().sprite = Resources.Load ("Image/spear_I", typeof(Sprite)) as Sprite;
+			changeImgObj.GetComponent<Image> ().sprite = Resources.Load ("Image/spear_I", typeof(Sprite)) as Sprite;
                 break;
 
             //槍から斧へ
             case Character.CharacterType.Spear:
 
                 m_type = Character.CharacterType.Ax;
-			gameObject.GetComponent<Image>().sprite = Resources.Load("Image/ax_I", typeof(Sprite)) as Sprite;
+			changeImgObj.GetComponent<Image>().sprite = Resources.Load("Image/ax_I", typeof(Sprite)) as Sprite;
                 break;
             
             //斧から盾へ
             case Character.CharacterType.Ax:
 
                 m_type = Character.CharacterType.Shield;
-			gameObject.GetComponent<Image>().sprite = Resources.Load("Image/shield_I", typeof(Sprite)) as Sprite;
+			changeImgObj.GetComponent<Image>().sprite = Resources.Load("Image/shield_I", typeof(Sprite)) as Sprite;
                 break;
 
             //盾から剣へ
             case Character.CharacterType.Shield:
 
                 m_type = Character.CharacterType.Sword;
-			gameObject.GetComponent<Image>().sprite = Resources.Load("Image/sword_I", typeof(Sprite)) as Sprite;
+			changeImgObj.GetComponent<Image>().sprite = Resources.Load("Image/sword_I", typeof(Sprite)) as Sprite;
                 break;
         }
     }
