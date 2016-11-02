@@ -77,8 +77,8 @@ public class GameUIManager : MonoBehaviour {
                 obj=MyUtility.CreateButton(
                    "SoldierButton",
                    "Image/TimeWaku",
-                    new Vector2((5.0f + 20.0f * (j-1)) / 32.0f, (20.0f - 3.0f * (i-1)) / 25.0f),
-                    new Vector2((7.0f + 20.0f * (j-1)) / 32.0f, (23.0f - 3.0f * (i-1)) / 25.0f),
+					new Vector2((5.0f + 20.0f * (j-1)) / 32.0f, (21.5f - 3.0f * (i-1) - (j - 1)*1.5f) / 25.0f),
+					new Vector2((7.0f + 20.0f * (j-1)) / 32.0f, (23.0f - 3.0f * (i-1) - (j - 1)*1.5f) / 25.0f),
                   GameObject.Find("Canvas").transform);
 
 				obj.tag ="Player"+j.ToString();
