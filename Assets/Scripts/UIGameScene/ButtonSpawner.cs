@@ -104,7 +104,5 @@ public class ButtonSpawner : MonoBehaviour
         m_battleManager = GameObject.FindWithTag("BattleManager").transform;
 		m_battleCamera = GameObject.FindWithTag ("BattleCamera").GetComponent<Camera> ();
         m_type = Character.CharacterType.Sword;
-        gameObject.GetComponent<Image>().sprite = Resources.Load("Image/TimeWaku", typeof(Sprite)) as Sprite;
-
     }
 }
