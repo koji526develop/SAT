@@ -72,32 +72,26 @@ public class GameUIManager : MonoBehaviour {
 		{
 			for (int j = 1; j <= 2; j++)
 			{
-				GameObject imgObj = MyUtility.CreateImage(
-					"SoldierButton",
-					"Image/sword_I",
-					new Vector2((5.0f + 20.0f * (j-1)) / 32.0f, (21.5f - 3.0f * (i-1) - (j - 1)*1.5f) / 25.0f),
-					new Vector2((7.0f + 20.0f * (j-1)) / 32.0f, (23.0f - 3.0f * (i-1) - (j - 1)*1.5f) / 25.0f),
-					canvasTransForm);
-
-				imgObj.tag ="Player"+j.ToString();
-
 				obj = MyUtility.CreateButton(
 					"SoldierButton",
-					"Image/TimeWaku",
+					"Image/sword_I",
 					new Vector2((5.0f + 20.0f * (j-1)) / 32.0f, (20.0f - 3.0f * (i-1)) / 25.0f),
 					new Vector2((7.0f + 20.0f * (j-1)) / 32.0f, (23.0f - 3.0f * (i-1)) / 25.0f),
 					canvasTransForm);
 
-				obj.tag ="Player"+j.ToString();
-
 				ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
-
-				btnCmp.changeImgObj = imgObj;
 				btnCmp.m_PlayerID = j;
 				btnCmp.m_ButtonID = i;
 			}
 		}
         //ここまで
+
+		float [,] value = {
+			{ MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, MyUtility.SWORD_MOCESPEED,0 },
+			{ MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, MyUtility.SPEAR_MOCESPEED,0 },
+			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOCESPEED,0 },
+			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOCESPEED,0 }
+		};
     }
     // Use this for initialization
     void Start () {
