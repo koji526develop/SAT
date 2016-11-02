@@ -5,32 +5,35 @@ using System.Collections;
 public class WarPotential : MonoBehaviour {
 
     //public関数
-    public int m_maxWarPotentialValue=MyUtility.MAX_WARPOTENTIAL;  //戦力ゲージの総数
+   
     public float m_valueMoveSpeed = 1.0f;   //戦力ゲージ移動スピード
 
     //private関数
+    private int m_maxWarPotentialValue = MyUtility.MAX_WARPOTENTIAL;  //戦力ゲージの総数
     private float m_warPotentialValue;      //現在の戦力ゲージ（青を基準とする）
+    private ScoreManager m_socreManager;    //スコアマネージャーのコンポーネント
     private Slider m_blueSlider;            //青ゲージのコンポーネント
     private Slider m_redSlider;             //赤ゲージのコンポーネント
 
     public static float lastWarPotential;   //最終的な戦力ゲージ
 
-    //青ゲージに加算するpublic関数
-    public void BluePoint(int _getPoint)
-    {
-        StartCoroutine(SliderMove(_getPoint));
-    }
+    ////青ゲージに加算するpublic関数
+    //public void BluePoint(int _getPoint)
+    //{
+    //    StartCoroutine(SliderMove(_getPoint));
+    //}
 
-    //赤ゲージに加算するpublic関数
-    public void RedPoint(int _getPoint)
-    {
-        StartCoroutine(SliderMove(-_getPoint));
-    }
+    ////赤ゲージに加算するpublic関数
+    //public void RedPoint(int _getPoint)
+    //{
+    //    StartCoroutine(SliderMove(-_getPoint));
+    //}
 
 
     // Use this for initialization
     void Start () {
 
+        m_socreManager          = GameObject.Find("GameManager").GetComponent<ScoreManager>();
         //青と赤ゲージのコンポーネントをそれぞれ検索。格納する。
         m_blueSlider            = transform.FindChild("BlueSlider").GetComponent<Slider>();
         m_redSlider             = transform.FindChild("RedSlider").GetComponent<Slider>();
@@ -45,7 +48,7 @@ public class WarPotential : MonoBehaviour {
     private IEnumerator SliderMove(int _getPoint)
     {
         //戦力ゲージの変数を変更
-        m_warPotentialValue+=_getPoint;
+        m_warPotentialValue=_getPoint;
 
         //↓戦力ゲージの移動演出を行う。
 
@@ -75,15 +78,11 @@ public class WarPotential : MonoBehaviour {
     }
     
 	// Update is called once per frame
-	void Update () {
-
-        if (Input.GetKeyDown(KeyCode.A))
+	void Update ()
+    {
+        if (m_warPotentialValue != m_socreManager.m_Score)
         {
-            BluePoint(10);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            RedPoint(10);
+            StartCoroutine(SliderMove(m_socreManager.m_Score));
         }
     }
 }

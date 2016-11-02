@@ -139,13 +139,21 @@ public class CharacterMove :  State<Character>
 	bool IsCharacterDestroy()
 	{
 		int id = m_instance.status.PlayerID;
+        int column = m_instance.mapColumn;
 		float charaPosX = m_instance.transform.position.x;
 
-		// プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら
-		if(id == 1 && charaPosX >= MyUtility.SOLDIER_CREATE_LINE_X_2P) return true;
-
-		// プレイヤー２のキャラがプレイヤー１のキャラクター生成ラインより左に行ったら
-		else if(id == 2 && charaPosX <= MyUtility.SOLDIER_CREATE_LINE_X_1P) return true;
+        // プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら
+        if (id == 1 && charaPosX >= MyUtility.SOLDIER_CREATE_LINE_X_2P)
+        {
+            GameObject.Find("GameManager").GetComponent<ScoreManager>().GetPoint(id,column);
+            return true;
+        }
+        // プレイヤー２のキャラがプレイヤー１のキャラクター生成ラインより左に行ったら
+        else if (id == 2 && charaPosX <= MyUtility.SOLDIER_CREATE_LINE_X_1P)
+        {
+            GameObject.Find("GameManager").GetComponent<ScoreManager>().GetPoint(id, column);
+            return true;
+        }
 		
 		return false;
 	}
