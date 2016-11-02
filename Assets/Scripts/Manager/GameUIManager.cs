@@ -14,7 +14,7 @@ public class GameUIManager : MonoBehaviour {
         GameObject obj = MyUtility.CreateSlider(
             "BlueSlider",
             "Image/gage-ao",
-            new Vector2(5 / 32.0f, 2 / 25.0f),
+            new Vector2(5 / 32.0f, 1 / 25.0f),
             new Vector2(27 / 32.0f, 5.0f / 25.0f),
             GameObject.Find("Canvas").transform
             );
@@ -22,7 +22,7 @@ public class GameUIManager : MonoBehaviour {
         obj = MyUtility.CreateSlider(
             "RedSlider",
             "Image/gage-akapng",
-            new Vector2(5 / 32.0f, 2 / 25.0f),
+            new Vector2(5 / 32.0f, 1 / 25.0f),
             new Vector2(27 / 32.0f, 5.0f / 25.0f),
             GameObject.Find("Canvas").transform
         );
@@ -70,24 +70,23 @@ public class GameUIManager : MonoBehaviour {
 
         //ソルジャーボタンを作成
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 1; i <= 6; i++)
         {
-            for (int j = 0; j < 2; j++)
+            for (int j = 1; j <= 2; j++)
             {
                 obj=MyUtility.CreateButton(
                    "SoldierButton",
                    "Image/TimeWaku",
-                    new Vector2((5.0f + 20.0f * j) / 32.0f, (20.0f - 3.0f * i) / 25.0f),
-                    new Vector2((7.0f + 20.0f * j) / 32.0f, (23.0f - 3.0f * i) / 25.0f),
+                    new Vector2((5.0f + 20.0f * (j-1)) / 32.0f, (20.0f - 3.0f * (i-1)) / 25.0f),
+                    new Vector2((7.0f + 20.0f * (j-1)) / 32.0f, (23.0f - 3.0f * (i-1)) / 25.0f),
                   GameObject.Find("Canvas").transform);
 
-				obj.tag ="Player"+(j+1).ToString();
+				obj.tag ="Player"+j.ToString();
     
-                obj.AddComponent<EventTrigger>();
                 ButtonSpawner btnCmp=obj.AddComponent<ButtonSpawner>();
 
-                btnCmp.PlayerID = j + 1;
-                btnCmp.ButtonID = i;
+                btnCmp.m_PlayerID = j;
+                btnCmp.m_ButtonID = i;
             }
         }
 

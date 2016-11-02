@@ -36,16 +36,15 @@ public class MyUtility : MonoBehaviour
 
 	// ゲーム画面の中心のX軸
 	public static readonly float CENTER_LINE_X = 0.0f;
-
-	// 
-    public static readonly int MAX_WARPOTENTIAL = 500;
-
+    
 	// 1Pの兵士が生成されるライン
 	public static float SOLDIER_CREATE_LINE_X_1P = -7.0f;
 	// 2Pの兵士が生成されるライン
 	public static float SOLDIER_CREATE_LINE_X_2P = 7.0f;
 
 	// ディレクショナルライト作成
+    public static readonly int MAX_WARPOTENTIAL = 500;
+	
 	public static void CreateDirectionalLight()
 	{
 		GameObject lightObj = new GameObject ("DirectionalLight");
