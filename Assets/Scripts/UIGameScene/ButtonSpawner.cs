@@ -7,12 +7,17 @@ using System.Collections.Generic;
 public class ButtonSpawner : MonoBehaviour
 {
     Transform m_battleManager;
+    ScoreManager m_scoreManager;
+
     public int m_PlayerID;
     public int m_ButtonID;
     public Character.CharacterType m_type;
+   
 
     void Awake()
     {
+
+        m_scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
      
         //ボタン押すことで兵種を切り替える処理を行う。  
         this.GetComponent<Button>().onClick.AddListener(SolderChange);
@@ -30,6 +35,7 @@ public class ButtonSpawner : MonoBehaviour
     {
         Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
         character.mapColumn = m_ButtonID;
+        m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
     }
 		
 	void OnGUI()

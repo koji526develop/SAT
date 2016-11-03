@@ -57,7 +57,7 @@ public class ScoreManager : MonoBehaviour {
         }
 
         //カウントを一度取る
-        int checkCount = m_countSpawner[enemyPlayerID, _Column];
+        int checkCount = m_countSpawner[enemyPlayerID, _Column-1];
         int countStage=m_countAreaStage-1;
 
         for (int i = 0; i <= m_countAreaStage; i++)
@@ -79,69 +79,5 @@ public class ScoreManager : MonoBehaviour {
         }
 
     }
-    //private int[,] m_GetPointIdx;
-    //private int[,] m_CountSpawner;
 
-    //void Awake() {
-
-    //    m_Score = m_maxScore / m_totalPlayer;
-    //    m_GetPointIdx   = new int[m_totalPlayer, m_totalColumn];
-    //    m_CountSpawner  = new int[m_totalPlayer, m_totalColumn];
-
-    //    for (int i=0; i < m_totalPlayer; i++)
-    //    {
-    //        for(int j = 0; j < m_totalColumn; j++)
-    //        {
-    //            m_GetPointIdx[i, j] = 10;
-    //            m_CountSpawner[i, j] = 0;
-    //        }
-    //    }
-    //}
-
-    //public void GetPoint(int _playerID ,int _Column)
-    //{
-    //    int targetPlayer = 0;
-    //    if (_playerID==1)
-    //    {
-    //        targetPlayer = 1;
-    //    }
-
-    //    _Column--;
-    //    int movePoint = m_GetPointIdx[targetPlayer, _Column];
-
-    //    if (_playerID == 1)
-    //    {
-    //        m_Score += movePoint;
-    //    }
-    //    else
-    //    {
-    //        m_Score -= movePoint;
-    //    }
-    //}
-
-    //public void SpawnerCount(int _playerID, int _Column)
-    //{
-    //    _playerID--;
-    //    _Column--;
-
-    //    m_CountSpawner[_playerID, _Column]++;
-
-    //    if (m_CountSpawner[_playerID, _Column] >= 7)
-    //    {
-    //        m_GetPointIdx[_playerID, _Column] = 100;
-    //    }
-    //    else if (m_CountSpawner[_playerID, _Column] >= 5)
-    //    {
-    //        m_GetPointIdx[_playerID, _Column] = 70;
-    //    }
-    //    else if (m_CountSpawner[_playerID, _Column] >= 3)
-    //    {
-    //        m_GetPointIdx[_playerID, _Column] = 40;
-    //    }
-    //    else if (m_CountSpawner[_playerID, _Column] >= 1)
-    //    {
-    //        m_GetPointIdx[_playerID, _Column] = 20;
-    //    }
-
-    //}
 }
