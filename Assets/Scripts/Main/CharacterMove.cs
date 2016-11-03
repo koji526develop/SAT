@@ -17,8 +17,15 @@ public class CharacterMove :  State<Character>
 		// キャラクターの移動処理
 		Move();
 
-		// キャラクターが削除判定にはいっていたら削除
-		if (IsCharacterDestroy ()) m_instance.Destroy();
+		// キャラクターがゴールに到着しているかどうかの判定
+		if (IsArrivalGoal ())
+		{
+			// ゴール処理
+			Goal ();
+
+			// キャラクターの削除
+			m_instance.Destroy ();
+		}
 
 		// 全てのキャラクター同士の衝突判定
 		CollisionCheck ();
@@ -50,6 +57,14 @@ public class CharacterMove :  State<Character>
 	public override void Exit ()
 	{
 
+	}
+
+	void Goal()
+	{
+		int id = m_instance.status.PlayerID;
+		int column = m_instance.mapColumn;
+
+		GameObject.Find("GameManager").GetComponent<ScoreManager>().GetPoint(id,column);
 	}
 
 	// キャラクターの移動
@@ -95,7 +110,7 @@ public class CharacterMove :  State<Character>
 	bool IsUpFlick()
 	{
 		if (!(TouchManager.GetTouchMoveDistanceY (0) > 50.0f)) return false;
-			
+
 		if (m_instance.mapColumn <= MyUtility.MIX_COLUMN) return false;
 
 		return true;
@@ -135,26 +150,19 @@ public class CharacterMove :  State<Character>
 		return false;
 	}
 
-	// キャラクターを削除するかどうかの判定
-	bool IsCharacterDestroy()
+	// キャラクターがゴール（相手の適正性ボタンの位置）についたかどうか
+	bool IsArrivalGoal()
 	{
 		int id = m_instance.status.PlayerID;
-        int column = m_instance.mapColumn;
+		int column = m_instance.mapColumn;
 		float charaPosX = m_instance.transform.position.x;
 
-        // プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら
-        if (id == 1 && charaPosX >= MyUtility.SOLDIER_CREATE_LINE_X_2P)
-        {
-            GameObject.Find("GameManager").GetComponent<ScoreManager>().GetPoint(id,column);
-            return true;
-        }
-        // プレイヤー２のキャラがプレイヤー１のキャラクター生成ラインより左に行ったら
-        else if (id == 2 && charaPosX <= MyUtility.SOLDIER_CREATE_LINE_X_1P)
-        {
-            GameObject.Find("GameManager").GetComponent<ScoreManager>().GetPoint(id, column);
-            return true;
-        }
-		
+		// プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら
+		if (id == 1 && charaPosX >= MyUtility.SOLDIER_CREATE_LINE_X_2P) return true;
+
+		// プレイヤー２のキャラがプレイヤー１のキャラクター生成ラインより左に行ったら
+		else if (id == 2 && charaPosX <= MyUtility.SOLDIER_CREATE_LINE_X_1P) return true;
+
 		return false;
 	}
 
