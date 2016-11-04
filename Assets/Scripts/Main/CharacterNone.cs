@@ -7,7 +7,7 @@ public class CharacterNone : State<Character>
 
 	public override void Enter() 
 	{
-
+		Debug.Log ("入った");
 	}
 
 	public override void Update()

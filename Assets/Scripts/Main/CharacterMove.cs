@@ -30,6 +30,8 @@ public class CharacterMove :  State<Character>
 		// 全てのキャラクター同士の衝突判定
 		CollisionCheck ();
 
+	
+
 		TouchInfo touchInfo = TouchManager.GetTouchInfo (0);
 		// タッチ開始時
 		if (touchInfo == TouchInfo.Began)
@@ -103,6 +105,7 @@ public class CharacterMove :  State<Character>
 				m_instance.ChangeState (Character.CharacterState.Attack); 
 				Debug.Log ("当たったー");
 			}
+		
 		}
 	}
 
@@ -180,10 +183,8 @@ public class CharacterMove :  State<Character>
 
 		// 攻撃範囲に入ってなかったら抜ける
 		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance)) return false;
-
 		// PlayerIDが同じだったら抜ける
 		if (character1.status.PlayerID == character2.status.PlayerID)  return false;
-
 		// 行が違ったら抜ける
 		if (character1.mapColumn != character2.mapColumn) return false;
 
