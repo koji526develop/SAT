@@ -14,7 +14,7 @@ public class MyUtility : MonoBehaviour
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;
-    public static float SWORD_MOCESPEED = 0.05f;
+	public static float SWORD_MOCESPEED = 0.05f;
 
 	// 槍のパラメータ
 	public static int SPEAR_LIFE = 2;
@@ -22,20 +22,20 @@ public class MyUtility : MonoBehaviour
 	public static int SPEAR_ATTACKDISTANCE = 2;
 	public static float SPEAR_MOCESPEED = 0.025f;
 
-    // 斧のパラメータ
-    public static int AX_LIFE = 6;
+	// 斧のパラメータ
+	public static int AX_LIFE = 6;
 	public static int AX_ATTACK = 2;
 	public static int AX_ATTACKDISTANCE = 1;
 	public static float AX_MOCESPEED = 0.025f;
 
-    // 盾のパラメータ
-    public static int SHIELD_LIFE = 10;
+	// 盾のパラメータ
+	public static int SHIELD_LIFE = 10;
 	public static int SHIELD_ATTACK = 1;
 	public static int SHIELD_ATTACKDISTANCE = 1;
 	public static float SHIELD_MOCESPEED = 0.025f;
 
-    // ゲーム画面の中心のX軸
-    public static readonly float CENTER_LINE_X = 0.0f;
+	// ゲーム画面の中心のX軸
+	public static readonly float CENTER_LINE_X = 0.0f;
     
 	// 1Pの兵士が生成されるライン
 	public static float SOLDIER_CREATE_LINE_X_1P = -7.0f;
