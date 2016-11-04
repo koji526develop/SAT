@@ -39,7 +39,7 @@ public class CharacterAttack : State<Character>
 		Debug.Log (m_instance.status.life);
 		PlayerNonLife ();
 		EnemyNonLife ();
-		if(m_attackTime>=2)
+		if(m_attackTime>=1)
 		{
 			Attak ();
 			Debug.Log ("攻撃なう");

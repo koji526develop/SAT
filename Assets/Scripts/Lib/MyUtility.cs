@@ -14,7 +14,7 @@ public class MyUtility : MonoBehaviour
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;
-	public static float SWORD_MOCESPEED = 0.025f;
+	public static float SWORD_MOCESPEED = 0.05f;
 
 	// 槍のパラメータ
 	public static int SPEAR_LIFE = 2;
