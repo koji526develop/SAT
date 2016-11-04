@@ -14,11 +14,11 @@ public class MyUtility : MonoBehaviour
 	public static int SWORD_LIFE = 2;
 	public static int SWORD_ATTACK = 4;
 	public static int SWORD_ATTACKDISTANCE = 1;
-    public static float SWORD_MOCESPEED = 0.025f;
+    public static float SWORD_MOCESPEED = 0.05f;
 
 	// 槍のパラメータ
-	public static int SPEAR_LIFE = 10;
-	public static int SPEAR_ATTACK = 1;
+	public static int SPEAR_LIFE = 2;
+	public static int SPEAR_ATTACK = 2;
 	public static int SPEAR_ATTACKDISTANCE = 2;
 	public static float SPEAR_MOCESPEED = 0.025f;
 
@@ -29,9 +29,9 @@ public class MyUtility : MonoBehaviour
 	public static float AX_MOCESPEED = 0.025f;
 
     // 盾のパラメータ
-    public static int SHIELD_LIFE = 2;
-	public static int SHIELD_ATTACK = 2;
-	public static int SHIELD_ATTACKDISTANCE = 2;
+    public static int SHIELD_LIFE = 10;
+	public static int SHIELD_ATTACK = 1;
+	public static int SHIELD_ATTACKDISTANCE = 1;
 	public static float SHIELD_MOCESPEED = 0.025f;
 
     // ゲーム画面の中心のX軸
