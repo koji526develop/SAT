@@ -7,6 +7,7 @@ public class ResultManager : MonoBehaviour
 
     private bool m_ChangeFlag;
     private float m_ChangeTime;
+    string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
 
     void Awake()
     {
@@ -72,7 +73,12 @@ public class ResultManager : MonoBehaviour
         GameObject[] m_ResultObj = new GameObject[2];
 
         //相手兵士の詳細テキスト
-        string[] m_OpponentSoldierText = { "剣 × " + 10.ToString(), "槍 × " + 10.ToString(), "斧 × " + 10.ToString(), "盾 × " + 10.ToString() };
+        string[] m_OpponentSoldierText = {
+            "×   " + SelectUIManager.SWORD_NUM.ToString(),
+            "×   " + SelectUIManager.SPEAR_NUM.ToString(),
+            "×   " + SelectUIManager.AX_NUM.ToString(),
+            "×   " + SelectUIManager.SHIELD_NUM.ToString()
+        };
 
         for (int i = 0; i < 2; i++)
         {
@@ -86,6 +92,20 @@ public class ResultManager : MonoBehaviour
                 new Vector2(2.0f / 32.0f, 16.0f / 25.0f),
                 new Vector2(10.0f / 32.0f, 23.0f / 25.0f),
                 m_ResultObj[i].transform);
+
+
+            for (int j = 0; j < 4; j++)
+            {
+                GameObject imgobj = MyUtility.CreateImage(
+                "SoldierIcon",
+                m_IconImagePath[j],
+                new Vector2((30.5f - (j * 7.5f)) / 32.0f, 18.5f / 25.0f),
+                new Vector2((36.5f - (j * 7.5f)) / 32.0f, 24.5f / 25.0f),
+                obj.transform);
+
+                imgobj.transform.Rotate(new Vector3(0, 0, 1), -90);
+            }
+
             //文字
             for (int j = 0; j < 4; j++)
             {
@@ -94,8 +114,8 @@ public class ResultManager : MonoBehaviour
                  obj.transform,
                  35,
                  new Vector3(0.0f, 0.0f, -90.0f),
-                 new Vector2((25.5f - (7.0f * j)) / 32.0f, 14.0f / 25.0f),
-                 new Vector2((25.5f - (7.0f * j)) / 32.0f, 14.0f / 25.0f)
+                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 14.0f / 25.0f),
+                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 14.0f / 25.0f)
                  );
             }
 
@@ -131,8 +151,8 @@ public class ResultManager : MonoBehaviour
         }
         //作ったもの一つを対になるように配置
         m_ResultObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
-        Vector2 tmpPos = new Vector2(Screen.width-m_ResultObj[0].transform.position.x,Screen.height - m_ResultObj[0].transform.position.y);
-        m_ResultObj[1].transform.position = new Vector3(tmpPos.x,tmpPos.y, 0.0f);
+        Vector2 tmpPos = new Vector2(Screen.width - m_ResultObj[0].transform.position.x, Screen.height - m_ResultObj[0].transform.position.y);
+        m_ResultObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y, 0.0f);
     }
 
     void Start()
@@ -144,7 +164,7 @@ public class ResultManager : MonoBehaviour
 
     void Update()
     {
-        if(m_ChangeTime >= 0.0f)
+        if (m_ChangeTime >= 0.0f)
         {
             m_ChangeTime -= Time.deltaTime;
         }
@@ -152,7 +172,7 @@ public class ResultManager : MonoBehaviour
         {
             m_ChangeFlag = true;
         }
-        if(m_ChangeFlag)
+        if (m_ChangeFlag)
         {
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToTitle();
