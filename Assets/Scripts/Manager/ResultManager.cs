@@ -41,9 +41,7 @@ public class ResultManager : MonoBehaviour
         //スコア
         //スコアの計算
         float[] m_Score = new float[2];
-        //m_Score[0] = WarPotential.lastWarPotential;
-        //デバッグ
-        m_Score[0] = 250.0f;
+        m_Score[0] = WarPotential.lastWarPotential;
         m_Score[1] = MyUtility.MAX_WARPOTENTIAL - m_Score[0];
         //スコアのテキスト
         string[] m_ScoreText = { m_Score[0].ToString(), m_Score[1].ToString() };
@@ -74,10 +72,14 @@ public class ResultManager : MonoBehaviour
 
         //相手兵士の詳細テキスト
         string[] m_OpponentSoldierText = {
-            "×   " + SelectUIManager.SWORD_NUM.ToString(),
-            "×   " + SelectUIManager.SPEAR_NUM.ToString(),
-            "×   " + SelectUIManager.AX_NUM.ToString(),
-            "×   " + SelectUIManager.SHIELD_NUM.ToString()
+            "×   " + SelectUIManager.SWORD_NUM_1.ToString(),
+            "×   " + SelectUIManager.SPEAR_NUM_1.ToString(),
+            "×   " + SelectUIManager.AX_NUM_1.ToString(),
+            "×   " + SelectUIManager.SHIELD_NUM_1.ToString(),
+            "×   " + SelectUIManager.SWORD_NUM_2.ToString(),
+            "×   " + SelectUIManager.SPEAR_NUM_2.ToString(),
+            "×   " + SelectUIManager.AX_NUM_2.ToString(),
+            "×   " + SelectUIManager.SHIELD_NUM_2.ToString()
         };
 
         for (int i = 0; i < 2; i++)
@@ -110,7 +112,7 @@ public class ResultManager : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 MyUtility.CreateText(
-                m_OpponentSoldierText[j],
+                m_OpponentSoldierText[j + (i * 4)],
                  obj.transform,
                  35,
                  new Vector3(0.0f, 0.0f, -90.0f),

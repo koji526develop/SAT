@@ -7,6 +7,8 @@ using System.Linq;
 
 public class SelectUIManager : MonoBehaviour 
 {
+    public static int PlayerID;
+
 	int m_soldierTotalNum;
 	int m_gaugeCount;
 
@@ -15,10 +17,15 @@ public class SelectUIManager : MonoBehaviour
 	Text [] m_soldierText = new Text[4];
 	List<GameObject> gaugeList = new List<GameObject>();
 
-    public static int SWORD_NUM;
-    public static int SPEAR_NUM;
-    public static int AX_NUM;
-    public static int SHIELD_NUM;
+    public static int SWORD_NUM_1;
+    public static int SPEAR_NUM_1;
+    public static int AX_NUM_1;
+    public static int SHIELD_NUM_1;
+
+    public static int SWORD_NUM_2;
+    public static int SPEAR_NUM_2;
+    public static int AX_NUM_2;
+    public static int SHIELD_NUM_2;
 
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
@@ -33,12 +40,16 @@ public class SelectUIManager : MonoBehaviour
 
 	void Awake () 
 	{
-        SWORD_NUM = 0;
-        SPEAR_NUM = 0;
-        AX_NUM = 0;
-        SHIELD_NUM = 0;
+        SWORD_NUM_1 = 0;
+        SPEAR_NUM_1 = 0;
+        AX_NUM_1 = 0;
+        SHIELD_NUM_1 = 0;
+        SWORD_NUM_2 = 0;
+        SPEAR_NUM_2 = 0;
+        AX_NUM_2 = 0;
+        SHIELD_NUM_2 = 0;
 
-		for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
 			m_soldierNumList.Add (0);
 
 		// 武器の名前がついた丸４つ作成
@@ -145,11 +156,25 @@ public class SelectUIManager : MonoBehaviour
 
     public void EnterProces()
     {
-        //最終的な兵士の値を保存
-        SWORD_NUM = m_soldierNumList[0];
-        SPEAR_NUM = m_soldierNumList[1];
-        AX_NUM = m_soldierNumList[2];
-        SHIELD_NUM = m_soldierNumList[3];
+        if(PlayerID == 1)
+        {
+            //最終的な兵士の値を保存
+            SWORD_NUM_1 = m_soldierNumList[0];
+            SPEAR_NUM_1 = m_soldierNumList[1];
+            AX_NUM_1 = m_soldierNumList[2];
+            SHIELD_NUM_1 = m_soldierNumList[3];
+        }
+        else
+        {
+            //最終的な兵士の値を保存
+            SWORD_NUM_2 = m_soldierNumList[0];
+            SPEAR_NUM_2 = m_soldierNumList[1];
+            AX_NUM_2 = m_soldierNumList[2];
+            SHIELD_NUM_2 = m_soldierNumList[3];
+        }
+
+        PlayerID++;
+
         //シーン遷移
         sceneChanger.ChangeToSelectSpecial();
     }

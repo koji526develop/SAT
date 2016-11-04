@@ -18,13 +18,14 @@ public class SoldierSurvival : MonoBehaviour
     void Awake()
     {
 
-        for (int i = 0; i < 2; i++)
-        {
-            m_SoldierNumberText[0 + (i * 4)] = SelectUIManager.SWORD_NUM.ToString();
-            m_SoldierNumberText[1 + (i * 4)] = SelectUIManager.SPEAR_NUM.ToString();
-            m_SoldierNumberText[2 + (i * 4)] = SelectUIManager.AX_NUM.ToString();
-            m_SoldierNumberText[3 + (i * 4)] = SelectUIManager.SHIELD_NUM.ToString();
-        }
+        m_SoldierNumberText[0] = SelectUIManager.SWORD_NUM_1.ToString();
+        m_SoldierNumberText[1] = SelectUIManager.SPEAR_NUM_1.ToString();
+        m_SoldierNumberText[2] = SelectUIManager.AX_NUM_1.ToString();
+        m_SoldierNumberText[3] = SelectUIManager.SHIELD_NUM_1.ToString();
+        m_SoldierNumberText[4] = SelectUIManager.SWORD_NUM_2.ToString();
+        m_SoldierNumberText[5] = SelectUIManager.SPEAR_NUM_2.ToString();
+        m_SoldierNumberText[6] = SelectUIManager.AX_NUM_2.ToString();
+        m_SoldierNumberText[7] = SelectUIManager.SHIELD_NUM_2.ToString();
 
 
         for (int i = 0; i < 2; i++)
@@ -52,7 +53,7 @@ public class SoldierSurvival : MonoBehaviour
             for (int j = 0; j < 4; j++)
             {
                 m_SoldierText[j + i] = MyUtility.CreateText(
-                   m_SoldierNumberText[j + i],
+                   m_SoldierNumberText[j + (i * 4)],
                    m_SoldierImgObj[i].transform,
                    30,
                    new Vector3(0.0f, 0.0f, -90.0f),

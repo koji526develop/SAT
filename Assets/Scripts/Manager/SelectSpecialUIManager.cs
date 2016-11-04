@@ -113,7 +113,9 @@ public class SelectSpecialUIManager : MonoBehaviour
 		);
 		// Text追加
 		MyUtility.AddText ("決定", enterObj.transform);
-        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
+        // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
+        if(SelectUIManager.PlayerID == 2)enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
+        else enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
     }
 
 	GameObject GetTouchObject()
