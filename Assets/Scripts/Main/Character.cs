@@ -96,6 +96,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	public CharacterType characterType
 	{
+		get
+		{
+			return m_status.characterType;
+		}
 		set
 		{
 			m_status.characterType = value;
@@ -168,10 +172,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			break;
 		case CharacterType.Spear:
 			character.SetParametor (
-				MyUtility.AX_LIFE,
-				MyUtility.AX_ATTACK,
-				MyUtility.AX_ATTACKDISTANCE,
-				MyUtility.AX_MOCESPEED,
+				MyUtility.SPEAR_LIFE,
+				MyUtility.SPEAR_ATTACK,
+				MyUtility.SPEAR_ATTACKDISTANCE,
+				MyUtility.SPEAR_MOCESPEED,
 				_playerID);
 			break;
 		}
