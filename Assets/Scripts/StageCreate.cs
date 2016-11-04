@@ -23,9 +23,9 @@ public class StageCreate : MonoBehaviour {
 					                 "Floor",
 					                 "Image/masu");
 
-				obj.transform.position = new Vector3 (-5.73f + (i * 1.43f), 0.0f, -4.16f+(j*2.1f));
+				obj.transform.position = new Vector3 (-5.73f + (i * 1.43f), 0.0f, -4.20f+(j*2.085f));
 				obj.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
-				obj.transform.localScale = new Vector3 (2.3f, 2.11f, 1.0f);
+				obj.transform.localScale = new Vector3 (2.5f, 2.19f, 1.0f);
 
 
 			}
