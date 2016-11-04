@@ -92,6 +92,8 @@ public class GameUIManager : MonoBehaviour {
 			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOCESPEED,0 },
 			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOCESPEED,0 }
 		};
+
+        canvasTransForm.gameObject.AddComponent<GameTimeControl>();
     }
     // Use this for initialization
     void Start () {

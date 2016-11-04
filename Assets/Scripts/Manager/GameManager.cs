@@ -30,16 +30,20 @@ public class GameManager : MonoBehaviour
 		Transform battleManager = new GameObject ("BattleManager").transform;
 		battleManager.tag = "BattleManager";
 
-		// バトル用のカメラ作成
-		MyUtility.CreateCamera ("BattleCamera", battleManager);
 
-		// プレイヤーオブジェクト作成
-		/*for (int i = 0; i < 2; i++) 
-		{
-			GameObject character = Character.CreateObject (battleManager, Character.CharacterType.Sword, new Vector3(i*2,0,0),1);
 
-		}*/
-	}
+        // バトル用のカメラ作成
+        MyUtility.CreateCamera ("BattleCamera", battleManager);
+
+        //キャンバスを作成
+        Canvas canvas=MyUtility.CreateCanvas();
+        GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+
+        //ゲーム内で使用するマネージャーを作成
+        this.gameObject.AddComponent<ScoreManager>();
+        this.gameObject.AddComponent<GameUIManager>();
+    
+    }
 
 
     void Update()
