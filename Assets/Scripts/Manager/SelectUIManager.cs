@@ -15,7 +15,15 @@ public class SelectUIManager : MonoBehaviour
 	Text [] m_soldierText = new Text[4];
 	List<GameObject> gaugeList = new List<GameObject>();
 
-	enum PlusOrMinus
+    public static int SWORD_NUM;
+    public static int SPEAR_NUM;
+    public static int AX_NUM;
+    public static int SHIELD_NUM;
+
+    GameObject sceneChangerObj;
+    SceneChanger sceneChanger;
+
+    enum PlusOrMinus
 	{
 		Plus,
 		Minus
@@ -25,6 +33,11 @@ public class SelectUIManager : MonoBehaviour
 
 	void Awake () 
 	{
+        SWORD_NUM = 0;
+        SPEAR_NUM = 0;
+        AX_NUM = 0;
+        SHIELD_NUM = 0;
+
 		for (int i = 0; i < 4; i++)
 			m_soldierNumList.Add (0);
 
@@ -113,8 +126,8 @@ public class SelectUIManager : MonoBehaviour
 			transform
 		);
 		MyUtility.AddText ("戻る", backObj.transform);
-		GameObject sceneChangerObj = new GameObject();
-		SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+		sceneChangerObj = new GameObject();
+		sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 		backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
 
 		// 決定ボタン作成
@@ -126,9 +139,21 @@ public class SelectUIManager : MonoBehaviour
 			transform
 		);
 		MyUtility.AddText ("決定", enterObj.transform);
-		enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+		enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
     }
+
+    public void EnterProces()
+    {
+        //最終的な兵士の値を保存
+        SWORD_NUM = m_soldierNumList[0];
+        SPEAR_NUM = m_soldierNumList[1];
+        AX_NUM = m_soldierNumList[2];
+        SHIELD_NUM = m_soldierNumList[3];
+        //シーン遷移
+        sceneChanger.ChangeToSelectSpecial();
+    }
+
 
 	Sprite GetGaugeSprite(PlusOrMinus _plusOrMinus)
 	{

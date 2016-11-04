@@ -1,35 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Linq;
 
 public class SoldierSurvival : MonoBehaviour
 {
-    int[] m_SoldierNumber = new int[4];
+    //int[] m_SoldierNumber = new int[8];
 
     GameObject[] m_SoldierImgObj = new GameObject[2];
 
-    string[] m_SoldierNumberName = { "", "" };
-    Text[] m_SoldierText = new Text[2];
+    string[] m_SoldierNumberText = { "", "", "", "", "", "", "", "" };
+    string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
+    Text[] m_SoldierText = new Text[8];
+
 
     void Awake()
     {
 
-        //兵士の数を仮で数値代入
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
-            m_SoldierNumber[i] = i * 10;
+            m_SoldierNumberText[0 + (i * 4)] = SelectUIManager.SWORD_NUM.ToString();
+            m_SoldierNumberText[1 + (i * 4)] = SelectUIManager.SPEAR_NUM.ToString();
+            m_SoldierNumberText[2 + (i * 4)] = SelectUIManager.AX_NUM.ToString();
+            m_SoldierNumberText[3 + (i * 4)] = SelectUIManager.SHIELD_NUM.ToString();
         }
-
-        m_SoldierNumberName[0] = m_SoldierNumber[0].ToString() + "      " + m_SoldierNumber[1].ToString() + "      " + m_SoldierNumber[2].ToString() + "      " + m_SoldierNumber[3].ToString();
-        m_SoldierNumberName[1] = m_SoldierNumber[0].ToString() + "      " + m_SoldierNumber[1].ToString() + "      " + m_SoldierNumber[2].ToString() + "      " + m_SoldierNumber[3].ToString();
-
-
-        MyUtility.CreateImage(
-            "SoldierIcon",
-            "Image/Icon1",
-            new Vector2(1 / 32.0f, 23 / 25.0f),
-            new Vector2(3 / 32.0f, 21 / 25.0f),
-            transform);
 
 
         for (int i = 0; i < 2; i++)
@@ -42,24 +37,29 @@ public class SoldierSurvival : MonoBehaviour
             new Vector2(4 / 32.0f, 23 / 25.0f),
             transform);
 
-            //for (int j = 1; j < 2; j++)
-            //{
-            //    MyUtility.CreateImage(
-            //    "SoldierIcon",
-            //    "Image/Icon" + j.ToString(),
-            //    new Vector2(0.5f, (1.0f - (j * 0.2f))),
-            //    new Vector2(0.5f, (1.0f - (j * 0.2f))),
-            //    m_SoldierImgObj[i].transform);
-            //}
+            for (int j = 0; j < 4; j++)
+            {
+                GameObject imgobj = MyUtility.CreateImage(
+                "SoldierIcon",
+                m_IconImagePath[j],
+                new Vector2(23 / 32.0f, (21.5f - (j * 6)) / 25.0f),
+                new Vector2(35 / 32.0f, (24.5f - (j * 6)) / 25.0f),
+                m_SoldierImgObj[i].transform);
 
-            //m_SoldierText[i] = MyUtility.CreateText(
-            //    m_SoldierNumberName[i],
-            //    m_SoldierImgObj[i].transform,
-            //    30,
-            //    new Vector3(0.0f, 0.0f, -90.0f),
-            //    new Vector2(13 / 32.0f, 11.5f / 25.0f),
-            //    new Vector2(13 / 32.0f, 11.5f / 25.0f)
-            //    );
+                imgobj.transform.Rotate(new Vector3(0, 0, 1), -90);
+            }
+
+            for (int j = 0; j < 4; j++)
+            {
+                m_SoldierText[j + i] = MyUtility.CreateText(
+                   m_SoldierNumberText[j + i],
+                   m_SoldierImgObj[i].transform,
+                   30,
+                   new Vector3(0.0f, 0.0f, -90.0f),
+                   new Vector2(13 / 32.0f, (20.0f - (j * 6)) / 25.0f),
+                   new Vector2(13 / 32.0f, (22.0f - (j * 6)) / 25.0f)
+                   );
+            }
         }
 
         m_SoldierImgObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
