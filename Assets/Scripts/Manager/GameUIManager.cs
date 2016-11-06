@@ -67,8 +67,29 @@ public class GameUIManager : MonoBehaviour {
 
         //ここまで
 
+
+        obj = MyUtility.CreateButton(
+            "SpecialCardButton",
+            "Image/TimeWaku",
+            new Vector2( 1/ 32.0f, 5/ 25.0f),
+            new Vector2( 4/ 32.0f, 12/ 25.0f),
+            canvasTransForm
+            );
+
+        obj.AddComponent<SpecialCardButton>().m_playerID=1;
+        
+
+        obj = MyUtility.CreateButton(
+            "SpecialCardButton",
+            "Image/TimeWaku",
+            new Vector2(28 / 32.0f, 16 / 25.0f),
+            new Vector2(31 / 32.0f, 24 / 25.0f),
+            canvasTransForm
+    );
+        obj.AddComponent<SpecialCardButton>().m_playerID = 2;
+        
         //ソルジャーボタンを作成
-		for (int i = 1; i <= 6; i++)
+        for (int i = 1; i <= 6; i++)
 		{
 			for (int j = 1; j <= 2; j++)
 			{
