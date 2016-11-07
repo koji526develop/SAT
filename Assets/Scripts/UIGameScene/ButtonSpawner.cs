@@ -12,7 +12,6 @@ public class ButtonSpawner : MonoBehaviour
     public int m_PlayerID;
     public int m_ButtonID;
     public Character.CharacterType m_type;
-   
 
     void Awake()
     {

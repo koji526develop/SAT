@@ -219,6 +219,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	{
 		Destroy (gameObject);
 	}
+
 	public static Vector3 GetSpawnPosition(int _playerID,int _Column)
 	{
 		if (_playerID==1)
