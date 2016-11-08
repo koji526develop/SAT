@@ -7,16 +7,22 @@ using System.Collections;
 
 public class SoldierChange : SpecialCard {
 
-    private Camera m_mainCamera;
-    private GameObject m_1stSolider;
-    private GameObject m_2ndSolider;
+    private Camera      m_mainCamera;
+    private GameObject  m_1stSolider;
+    private GameObject  m_2ndSolider;
+
+    int GetPlayerID(GameObject _targetObject)
+    {
+
+        return _targetObject.GetComponent<Character>().status.PlayerID;
+    }
+
 
     // Use this for initialization
     public override void Start()
     {
         //カメラのコンポーネント取得
         m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
-
     }
 
     // Update is called once per frame
@@ -27,6 +33,17 @@ public class SoldierChange : SpecialCard {
         {
             //対象にタッチしていれば、１個目のオブジェクトに格納
             m_1stSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0);
+
+            if (m_1stSolider == null) return;
+
+            int getint = GetPlayerID(m_1stSolider);
+
+            if (getint != m_UsedPlayerID)
+            {
+                m_1stSolider = null;
+                return;
+            }
+           
         }
 
         //２個目のコマ選択中
@@ -35,6 +52,8 @@ public class SoldierChange : SpecialCard {
             //対象にタッチしていれば、２個目のオブジェクトに格納
             m_2ndSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0);
 
+
+            if (m_2ndSolider == null) return;
             //オブジェクトが同一なら処理はキャンセル
             if(m_2ndSolider == m_1stSolider)
             {
@@ -57,7 +76,6 @@ public class SoldierChange : SpecialCard {
 
                 m_2ndSolider.transform.position = tmpPos;
                 m_2ndSolider.GetComponent<Character>().mapColumn = tmpColumn;
-
 
                 //最後に自身を削除
                 Destroy(this);
