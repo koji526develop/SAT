@@ -101,6 +101,9 @@ public class MyUtility : MonoBehaviour
 		cameraObj.AddComponent<FlareLayer> ();
 		cameraObj.AddComponent<AudioListener> ();
 
+        //TapEffectを表示させない
+        camera.cullingMask &= 8;
+
 		if(_parent) cameraObj.transform.SetParent (_parent);
 
 		return camera;
