@@ -4,6 +4,9 @@ using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
+
+    public bool Debug = false;
+
     void Awake()
     {
         //タップエフェクト
@@ -20,7 +23,7 @@ public class TitleManager : MonoBehaviour
 	void Update ()
     {
         TouchInfo touch = TouchManager.GetTouchInfo(0);
-        if (touch == TouchInfo.Began)
+        if (touch == TouchInfo.Began && !Debug)
         {
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToOperating();
