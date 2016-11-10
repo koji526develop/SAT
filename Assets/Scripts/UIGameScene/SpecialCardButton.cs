@@ -23,7 +23,7 @@ public class SpecialCardButton : MonoBehaviour {
             Destroy(m_usedSpCardState);
             return;
         }
-        this.gameObject.AddComponent<SoldierChange>().m_UsedPlayerID = m_playerID;
+        this.gameObject.AddComponent<Archer>().m_UsedPlayerID = m_playerID;
 
         m_usedSpCardState = this.GetComponent<SpecialCard>();
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class StageCreate : MonoBehaviour {
 	
@@ -27,8 +28,9 @@ public class StageCreate : MonoBehaviour {
 				obj.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
 				obj.transform.localScale = new Vector3 (2.5f, 2.19f, 1.0f);
 
-
-			}
+                obj.tag = "Column" + (7-(j+1));
+                obj.AddComponent<BoxCollider>().isTrigger = true;
+            }
 
 		}
 

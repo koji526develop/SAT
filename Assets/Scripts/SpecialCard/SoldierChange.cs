@@ -2,7 +2,6 @@
 using System.Collections;
 
 //バグあり
-//敵味方関係なく入れ替わる
 //指が一つしか機能しない
 
 public class SoldierChange : SpecialCard {
@@ -28,59 +27,66 @@ public class SoldierChange : SpecialCard {
     // Update is called once per frame
     public override void Update()
     {
-        //はじめのコマ確認中
+        //１個目のコマの処理を行う。
         if (m_1stSolider == null)
         {
-            //対象にタッチしていれば、１個目のオブジェクトに格納
-            m_1stSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0);
-
-            if (m_1stSolider == null) return;
-
-            int getint = GetPlayerID(m_1stSolider);
-
-            if (getint != m_UsedPlayerID)
+            //正しくオブジェクトが処理されているか確認
+            if (m_1stSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0))
             {
-                m_1stSolider = null;
-                return;
+                //対象のゲームオブジェクトのプレイヤーIDを取得
+                int targetPlayerID = GetPlayerID(m_1stSolider);
+
+                //使用したプレイヤーの兵士ではなければ削除して中断する
+                if (targetPlayerID != m_UsedPlayerID)
+                {
+                    m_1stSolider = null;
+                    return;
+                }
             }
-           
         }
 
-        //２個目のコマ選択中
+
+        //２個目のコマの処理を行う。
         else if (m_2ndSolider == null)
         {
             //対象にタッチしていれば、２個目のオブジェクトに格納
-            m_2ndSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0);
-
-
-            if (m_2ndSolider == null) return;
-            //オブジェクトが同一なら処理はキャンセル
-            if(m_2ndSolider == m_1stSolider)
+            if (m_2ndSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0))
             {
-                m_2ndSolider = null;
-                return;
+                //対象のゲームオブジェクトのプレイヤーIDを取得
+                int targetPlayerID = GetPlayerID(m_2ndSolider);
+
+
+                //同一オブジェクトか使用したプレイヤーの兵士ではなければ削除して中断する
+                if (m_2ndSolider == m_1stSolider ||
+                    targetPlayerID != m_UsedPlayerID)
+                {
+                    m_2ndSolider = null;
+                    return;
+                }
+
             }
 
-            //正しく選択されていれば
-            if (m_1stSolider != null && m_2ndSolider != null)
-            {
-                Vector3 tmpPos;
-                int tmpColumn;
+        }
 
-                //座標と列番号定番のやり方で入れ替え
-                tmpPos = m_1stSolider.transform.position;
-                tmpColumn = m_1stSolider.GetComponent<Character>().mapColumn;
+        //正しく選択されていれば
+        if (m_1stSolider != null && m_2ndSolider != null)
+        {
+            Vector3 tmpPos;
+            int tmpColumn;
 
-                m_1stSolider.transform.position = m_2ndSolider.transform.position;
-                m_1stSolider.GetComponent<Character>().mapColumn = m_2ndSolider.GetComponent<Character>().mapColumn;
+            //座標と列番号定番のやり方で入れ替え
+            tmpPos = m_1stSolider.transform.position;
+            tmpColumn = m_1stSolider.GetComponent<Character>().mapColumn;
 
-                m_2ndSolider.transform.position = tmpPos;
-                m_2ndSolider.GetComponent<Character>().mapColumn = tmpColumn;
+            m_1stSolider.transform.position = m_2ndSolider.transform.position;
+            m_1stSolider.GetComponent<Character>().mapColumn = m_2ndSolider.GetComponent<Character>().mapColumn;
 
-                //最後に自身を削除
-                Destroy(this);
+            m_2ndSolider.transform.position = tmpPos;
+            m_2ndSolider.GetComponent<Character>().mapColumn = tmpColumn;
 
-            }
+            //最後に自身を削除
+            Destroy(this);
+
         }
 
 
