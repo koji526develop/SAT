@@ -6,9 +6,9 @@ using System.Collections;
 
 public class SoldierChange : SpecialCard {
 
-    private Camera      m_mainCamera;
-    private GameObject  m_1stSolider;
-    private GameObject  m_2ndSolider;
+   
+    public GameObject  m_1stSolider;
+    public GameObject  m_2ndSolider;
 
     int GetPlayerID(GameObject _targetObject)
     {
@@ -18,11 +18,7 @@ public class SoldierChange : SpecialCard {
 
 
     // Use this for initialization
-    public override void Start()
-    {
-        //カメラのコンポーネント取得
-        m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
-    }
+    
 
     // Update is called once per frame
     public override void Update()
@@ -33,6 +29,12 @@ public class SoldierChange : SpecialCard {
             //正しくオブジェクトが処理されているか確認
             if (m_1stSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0))
             {
+
+                if (m_1stSolider.tag != "Character")
+                {
+                    m_1stSolider = null;
+                    return;
+                }
                 //対象のゲームオブジェクトのプレイヤーIDを取得
                 int targetPlayerID = GetPlayerID(m_1stSolider);
 
@@ -52,6 +54,12 @@ public class SoldierChange : SpecialCard {
             //対象にタッチしていれば、２個目のオブジェクトに格納
             if (m_2ndSolider = TouchManager.GetRaycastHitObject(m_mainCamera, 0))
             {
+
+                if (m_2ndSolider.tag != "Character")
+                {
+                    m_2ndSolider = null;
+                    return;
+                }
                 //対象のゲームオブジェクトのプレイヤーIDを取得
                 int targetPlayerID = GetPlayerID(m_2ndSolider);
 

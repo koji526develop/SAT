@@ -3,16 +3,11 @@ using System.Collections;
 
 public class Archer : SpecialCard {
 
-    private Camera m_mainCamera;
     private GameObject m_obj;
     public GameObject m_Solderobj;
 
     // Use this for initialization
-    public override void Start () {
 
-        //カメラのコンポーネント取得
-        m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
-    }
 
     // Update is called once per frame
     public override void Update () {

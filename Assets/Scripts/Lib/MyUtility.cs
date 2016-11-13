@@ -97,12 +97,12 @@ public class MyUtility : MonoBehaviour
 		camera.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
 		cameraObj.tag = tagName;
 
-		cameraObj.AddComponent<GUILayer> ();
-		cameraObj.AddComponent<FlareLayer> ();
-		cameraObj.AddComponent<AudioListener> ();
+		//cameraObj.AddComponent<GUILayer> ();
+		//cameraObj.AddComponent<FlareLayer> ();
+		//cameraObj.AddComponent<AudioListener> ();
 
         //TapEffectを表示させない
-        camera.cullingMask &= 8;
+       // camera.cullingMask &= 8;
 
 		if(_parent) cameraObj.transform.SetParent (_parent);
 
