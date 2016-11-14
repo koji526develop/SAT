@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
         //ゲーム内で使用するマネージャーを作成
         this.gameObject.AddComponent<ScoreManager>();
         this.gameObject.AddComponent<GameUIManager>();
+
+		//タップエフェクト
+		MyUtility.CreateTapEffect(transform);
     
     }
 
