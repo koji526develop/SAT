@@ -7,6 +7,7 @@ using System.Linq;
 
 public class SelectUIManager : MonoBehaviour 
 {
+    //現在何Pが兵士を選択中か
     public static int PlayerID;
 
 	int m_soldierTotalNum;
@@ -40,14 +41,7 @@ public class SelectUIManager : MonoBehaviour
 
 	void Awake () 
 	{
-        SWORD_NUM_1 = 0;
-        SPEAR_NUM_1 = 0;
-        AX_NUM_1 = 0;
-        SHIELD_NUM_1 = 0;
-        SWORD_NUM_2 = 0;
-        SPEAR_NUM_2 = 0;
-        AX_NUM_2 = 0;
-        SHIELD_NUM_2 = 0;
+        Debug.Log(PlayerID);
 
         for (int i = 0; i < 4; i++)
 			m_soldierNumList.Add (0);
@@ -163,6 +157,7 @@ public class SelectUIManager : MonoBehaviour
             SPEAR_NUM_1 = m_soldierNumList[1];
             AX_NUM_1 = m_soldierNumList[2];
             SHIELD_NUM_1 = m_soldierNumList[3];
+            PlayerID = 2;
         }
         else
         {
@@ -171,9 +166,9 @@ public class SelectUIManager : MonoBehaviour
             SPEAR_NUM_2 = m_soldierNumList[1];
             AX_NUM_2 = m_soldierNumList[2];
             SHIELD_NUM_2 = m_soldierNumList[3];
+            //3Pはいないが次に進めるために3を振る
+            PlayerID = 3;
         }
-
-        PlayerID++;
 
         //シーン遷移
         sceneChanger.ChangeToSelectSpecial();

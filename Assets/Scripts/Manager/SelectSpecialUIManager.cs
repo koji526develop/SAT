@@ -15,7 +15,10 @@ public class SelectSpecialUIManager : MonoBehaviour
 
 	GameObject m_moveObject;
 
-	void Start () 
+    GameObject sceneChangerObj;
+    SceneChanger sceneChanger;
+
+    void Start () 
 	{
 		m_uiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
 
@@ -84,9 +87,9 @@ public class SelectSpecialUIManager : MonoBehaviour
 		);
 		// Text追加
 		MyUtility.AddText ("戻る", backObj.transform);
-		GameObject sceneChangerObj = new GameObject();
-		SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-		backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+		sceneChangerObj = new GameObject();
+		sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+		backObj.GetComponent<Button>().onClick.AddListener(BackProces);
 
 		/***********************************************
 		// リセットボタン作成
@@ -114,11 +117,22 @@ public class SelectSpecialUIManager : MonoBehaviour
 		// Text追加
 		MyUtility.AddText ("決定", enterObj.transform);
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
-        if(SelectUIManager.PlayerID == 2)enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
-        else enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        if(SelectUIManager.PlayerID == 2)enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        else enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
     }
 
-	GameObject GetTouchObject()
+    public void BackProces()
+    {
+        //1Pが特殊選択画面から戻ったとき
+        if(SelectUIManager.PlayerID == 2)
+        {
+            SelectUIManager.PlayerID = 1;
+        }
+        sceneChanger.ChangeToSelect();
+    }
+
+
+    GameObject GetTouchObject()
 	{
 		Vector2 point = m_uiCamera.ScreenToWorldPoint (Input.mousePosition); 
 		Collider2D collition2d = Physics2D.OverlapPoint (point); 

@@ -11,13 +11,11 @@ public class TitleManager : MonoBehaviour
     {
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
-
-        SelectUIManager.PlayerID = 1;
     }
 
 	void Start ()
     {
-		
+
 	}
 	
 	void Update ()

@@ -15,6 +15,8 @@ public class OperatingManager : MonoBehaviour
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
 
+        GameObject opObj= MyUtility.CreateEmpty("Operating", transform); ;
+
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
 
@@ -27,14 +29,14 @@ public class OperatingManager : MonoBehaviour
         //何番目を表示しているかの画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
         {
-            m_OperatingSprNumObj[i] = MyUtility.CreateSprite(uiObj.transform, "OperatingChoiceSprite" + i, "Image/operatingNoneChoice");
+            m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "Image/operatingNoneChoice");
 
             m_OperatingSprNumObj[i].AddComponent<OperatingChoice>();
             m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -2.15f, 0.0f);
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
-        m_OperatingSpriteObj = MyUtility.CreateSprite(uiObj.transform, "OperatingSprite", "Image/operating1");
+        m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "Image/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
         m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
@@ -74,6 +76,18 @@ public class OperatingManager : MonoBehaviour
         );
         MyUtility.AddText("決定", enterObj.transform);
         enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+
+        //兵士の情報を初期化
+        SelectUIManager.SWORD_NUM_1 = 0;
+        SelectUIManager.SPEAR_NUM_1 = 0;
+        SelectUIManager.AX_NUM_1 = 0;
+        SelectUIManager.SHIELD_NUM_1 = 0;
+        SelectUIManager.SWORD_NUM_2 = 0;
+        SelectUIManager.SPEAR_NUM_2 = 0;
+        SelectUIManager.AX_NUM_2 = 0;
+        SelectUIManager.SHIELD_NUM_2 = 0;
+
+        SelectUIManager.PlayerID = 1;
 
     }
 

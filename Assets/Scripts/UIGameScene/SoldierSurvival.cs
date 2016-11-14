@@ -52,7 +52,7 @@ public class SoldierSurvival : MonoBehaviour
 
             for (int j = 0; j < 4; j++)
             {
-                m_SoldierText[j + i] = MyUtility.CreateText(
+                m_SoldierText[j + (4 * i)] = MyUtility.CreateText(
                    m_SoldierNumberText[j + (i * 4)],
                    m_SoldierImgObj[i].transform,
                    30,
@@ -76,6 +76,13 @@ public class SoldierSurvival : MonoBehaviour
 
     void Update()
     {
-
+        m_SoldierText[0].text = SelectUIManager.SWORD_NUM_1.ToString();
+        m_SoldierText[1].text = SelectUIManager.SPEAR_NUM_1.ToString();
+        m_SoldierText[2].text = SelectUIManager.AX_NUM_1.ToString();
+        m_SoldierText[3].text = SelectUIManager.SHIELD_NUM_1.ToString();
+        m_SoldierText[4].text = SelectUIManager.SWORD_NUM_2.ToString();
+        m_SoldierText[5].text = SelectUIManager.SPEAR_NUM_2.ToString();
+        m_SoldierText[6].text = SelectUIManager.AX_NUM_2.ToString();
+        m_SoldierText[7].text = SelectUIManager.SHIELD_NUM_2.ToString();
     }
 }
