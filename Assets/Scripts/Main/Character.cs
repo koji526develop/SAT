@@ -270,6 +270,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         }
 
         // 変更した行に移動
-        moveTo.SetMoveTo(new Vector3(transform.position.x, transform.position.y, 8.0f - (2.0f * mapColumn)), 1.0f);
+		moveTo.SetMoveTo(new Vector3(transform.position.x, transform.position.y, 8.0f - (2.0f * mapColumn)), MyUtility.SIDEMOVE_TIME);
     }
 }

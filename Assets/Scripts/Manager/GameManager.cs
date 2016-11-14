@@ -30,8 +30,6 @@ public class GameManager : MonoBehaviour
 		Transform battleManager = new GameObject ("BattleManager").transform;
 		battleManager.tag = "BattleManager";
 
-
-
         // バトル用のカメラ作成
         Camera camera = MyUtility.CreateCamera ("BattleCamera", battleManager);
 		camera.transform.eulerAngles = new Vector3(90,0,0);

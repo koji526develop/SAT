@@ -14,14 +14,14 @@ public class CharacterRotate : State<Character>
 		// iTweenを初期化する(これないとバグる)
 		iTween.Stop(m_instance.gameObject);
 
-		// 右回転させる
-		if(m_instance.rotateDirection == Character.Direction.Right)
+		// 回転させる
+		if(m_instance.rotateDirection == Character.Direction.Down)
 			iTween.RotateBy (m_instance.gameObject, iTween.Hash(
 				"y", 1*GetCharacterRote() / 4.0f,
 				"time", 1f,
 				"delay", 0.01f
 			));
-		// 左回転させる
+		// 回転させる
 		else
 			iTween.RotateBy (m_instance.gameObject, iTween.Hash(
 				"y", -1*GetCharacterRote() / 4.0f,
@@ -38,7 +38,7 @@ public class CharacterRotate : State<Character>
 		if (m_rotateTime > 0.5f) 
 		{
 			// 回転が終わったら行を変更しその行に移動させる
-			if(m_instance.rotateDirection == Character.Direction.Right)
+			if(m_instance.rotateDirection == Character.Direction.Down)
 				m_instance.ChangeColumn (Character.Direction.Down);
 			else
 				m_instance.ChangeColumn (Character.Direction.Up);
