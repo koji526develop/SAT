@@ -125,7 +125,12 @@ public class GameUIManager : MonoBehaviour {
                      new Vector2((5+23.0f*(j-1)) / 32.0f, (23-(3.0f * (i - 1))) / 25.0f),
                      canvasTransForm
                     );
-            }
+
+                ScoreFlameScript scoreFlameCmp= obj.AddComponent<ScoreFlameScript>();
+                scoreFlameCmp.m_PlayerID = j;
+                scoreFlameCmp.m_Column = i;
+                
+            } 
         }
 
         canvasTransForm.gameObject.AddComponent<GameTimeControl>();
