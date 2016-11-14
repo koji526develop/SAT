@@ -59,7 +59,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        //デバッグ用
+        if(Input.GetMouseButtonDown(1))
+        {
+            SceneChanger sChange = new SceneChanger();
+            sChange.ChangeToResult();
+        }
     }
 
 }

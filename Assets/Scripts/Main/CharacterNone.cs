@@ -20,6 +20,7 @@ public class CharacterNone : State<Character>
 	}
 	bool NonHit(GameObject obj1,GameObject obj2)
 	{
-
+        //何も書かれてなかったんでとりあえずfalse返します。
+        return false;
 	}
 }

@@ -9,6 +9,8 @@ public class ResultManager : MonoBehaviour
     private float m_ChangeTime;
     string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
 
+    public static int[] ResultSoldierNum = new int[8];
+
     void Awake()
     {
         Canvas canvas = MyUtility.CreateCanvas();
@@ -72,14 +74,14 @@ public class ResultManager : MonoBehaviour
 
         //相手兵士の詳細テキスト
         string[] m_OpponentSoldierText = {
-            "×   " + SelectUIManager.SWORD_NUM_1.ToString(),
-            "×   " + SelectUIManager.SPEAR_NUM_1.ToString(),
-            "×   " + SelectUIManager.AX_NUM_1.ToString(),
-            "×   " + SelectUIManager.SHIELD_NUM_1.ToString(),
-            "×   " + SelectUIManager.SWORD_NUM_2.ToString(),
-            "×   " + SelectUIManager.SPEAR_NUM_2.ToString(),
-            "×   " + SelectUIManager.AX_NUM_2.ToString(),
-            "×   " + SelectUIManager.SHIELD_NUM_2.ToString()
+            "×   " + ResultSoldierNum[0].ToString(),
+            "×   " + ResultSoldierNum[1].ToString(),
+            "×   " + ResultSoldierNum[2].ToString(),
+            "×   " + ResultSoldierNum[3].ToString(),
+            "×   " + ResultSoldierNum[4].ToString(),
+            "×   " + ResultSoldierNum[5].ToString(),
+            "×   " + ResultSoldierNum[6].ToString(),
+            "×   " + ResultSoldierNum[7].ToString()
         };
 
         for (int i = 0; i < 2; i++)
