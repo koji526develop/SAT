@@ -101,9 +101,17 @@ public class CharacterMove :  State<Character>
 
 			if (IsHit (m_instance.gameObject, charaObj [i]))
 			{
-				m_instance.characterAttackState.enemyObj = charaObj [i];
-				m_instance.ChangeState (Character.CharacterState.Attack); 
-				Debug.Log ("当たったー");
+				// PlayerIDが同じだったら
+				if (m_instance.gameObject.GetComponent<Character> ().status.PlayerID == charaObj [i].GetComponent<Character> ().status.PlayerID) 
+				{
+					m_instance.ChangeState (Character.CharacterState.None); 
+				} 
+				else
+				{
+					m_instance.characterAttackState.enemyObj = charaObj [i];
+					Debug.Log("アタック");
+					m_instance.ChangeState (Character.CharacterState.Attack); 
+				}
 			}
 		
 		}
@@ -183,11 +191,14 @@ public class CharacterMove :  State<Character>
 
 		// 攻撃範囲に入ってなかったら抜ける
 		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance)) return false;
-		// PlayerIDが同じだったら抜ける
-		if (character1.status.PlayerID == character2.status.PlayerID)  return false;
+
+	
 		// 行が違ったら抜ける
 		if (character1.mapColumn != character2.mapColumn) return false;
 
 		return true;
 	}
+
+
+
 }

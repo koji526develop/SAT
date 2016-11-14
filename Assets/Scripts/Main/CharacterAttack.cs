@@ -35,8 +35,6 @@ public class CharacterAttack : State<Character>
 	public override void Update()
 	{
 		m_attackTime += Time.deltaTime;
-		Debug.Log (m_instance.characterType);
-		Debug.Log (m_instance.status.life);
 		PlayerNonLife ();
 		EnemyNonLife ();
 		if(m_attackTime>=1)
