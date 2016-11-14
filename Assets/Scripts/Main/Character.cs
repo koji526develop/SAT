@@ -16,14 +16,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		public int PlayerID;
 
 	}
-	CharacterNone m_characterNoneState;
-	public CharacterNone characterNoneState
-	{
-		get
-		{
-			return m_characterNoneState;
-		}
-	}
+
 	CharacterAttack m_characterAttackState;
 
 	public CharacterAttack characterAttackState
@@ -205,10 +198,9 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		// ステートマシンの初期設定
 	
+		stateList.Add(new CharacterNone(this));
 		m_characterAttackState = new CharacterAttack(this);
-		stateList.Add(m_characterAttackState);
-		m_characterNoneState = new CharacterNone(this);
-		stateList.Add(m_characterNoneState);
+		stateList.Add (m_characterAttackState);
 		stateList.Add(new CharacterMove(this));
 		stateList.Add(new CharacterRotate(this));
 		stateList.Add(new CharacterBackRotate(this));
