@@ -99,11 +99,19 @@ public class CharacterMove :  State<Character>
 		{
 			if (m_instance.gameObject == charaObj [i]) continue;
 
+			if (hit (m_instance.gameObject, charaObj [i])) 
+			{
+				m_instance.characterNoneState.obj=charaObj [i];
+				Debug.Log("仲間にアタック");
+				m_instance.ChangeState (Character.CharacterState.None);
+			}
+				
 			if (IsHit (m_instance.gameObject, charaObj [i]))
 			{
 				m_instance.characterAttackState.enemyObj = charaObj [i];
+				Debug.Log("アタック");
 				m_instance.ChangeState (Character.CharacterState.Attack); 
-				Debug.Log ("当たったー");
+			
 			}
 		
 		}
@@ -184,10 +192,36 @@ public class CharacterMove :  State<Character>
 		// 攻撃範囲に入ってなかったら抜ける
 		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance)) return false;
 		// PlayerIDが同じだったら抜ける
-		if (character1.status.PlayerID == character2.status.PlayerID)  return false;
+		if (character1.status.PlayerID == character2.status.PlayerID)return false;
+	
 		// 行が違ったら抜ける
 		if (character1.mapColumn != character2.mapColumn) return false;
 
 		return true;
 	}
+	bool hit(GameObject obj1, GameObject obj2)
+	{
+		float distance = obj1.GetComponent<Character> ().status.attackDistance;
+
+		Character character1 = obj1.GetComponent<Character>();
+		Character character2 = obj2.GetComponent<Character>();
+
+		// キャラクターでなかったら抜ける
+		if (!obj2.CompareTag ("Character")) return false;
+
+
+		// 攻撃範囲に入ってなかったら抜ける
+		if (!(Mathf.Abs (obj1.transform.position.x - obj2.transform.position.x) < distance)) return false;
+		 //PlayerIDが同じだったら入る
+
+		if (character1.status.PlayerID != character2.status.PlayerID)return false;
+
+		// 行が違ったら抜ける
+		if (character1.mapColumn != character2.mapColumn) return false;
+
+		return true;
+
+	}
+
+
 }
