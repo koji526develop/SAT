@@ -53,13 +53,19 @@ public class MyUtility : MonoBehaviour
 		light.type = LightType.Directional;
 	}
 
+	public static IEnumerator SetCameraForCanvas(Canvas _canvas, Camera _camera)
+	{
+		yield return null;
+		_canvas.worldCamera = _camera;
+	}
+
 	// キャンバス作成
 	public static Canvas CreateCanvas(Transform _parent = null)
 	{
 		GameObject canvasObj = new GameObject ("Canvas");
 
 		Canvas canvas = canvasObj.AddComponent<Canvas> ();
-		canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+		canvas.renderMode = RenderMode.ScreenSpaceCamera;
 
 		CanvasScaler canvasScaler = canvasObj.AddComponent<CanvasScaler> ();
 		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
@@ -93,8 +99,8 @@ public class MyUtility : MonoBehaviour
 		GameObject cameraObj = new GameObject (tagName);
 		Camera camera = cameraObj.AddComponent<Camera> ();
 
-		camera.transform.position = new Vector3 (0, 15, -0);
-		camera.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
+		camera.transform.position = new Vector3 (0, 0, -800);
+		camera.transform.eulerAngles = new Vector3 (0.0f, 0.0f, 0.0f);
 		cameraObj.tag = tagName;
 
 		//cameraObj.AddComponent<GUILayer> ();
@@ -102,7 +108,9 @@ public class MyUtility : MonoBehaviour
 		//cameraObj.AddComponent<AudioListener> ();
 
         //TapEffectを表示させない
-       // camera.cullingMask &= 8;
+		camera.cullingMask |= (8);
+		int intLayer = LayerMask.NameToLayer ("TapEffect");
+		camera.cullingMask &= ~(1 << intLayer);
 
 		if(_parent) cameraObj.transform.SetParent (_parent);
 
@@ -283,6 +291,9 @@ public class MyUtility : MonoBehaviour
     {
         GameObject tapEffectObj = Instantiate(Resources.Load("Prefabs/TapEffect") as GameObject);
         tapEffectObj.name = "TapEffect";
+		Vector3 tmp = tapEffectObj.transform.position;
+		tmp.z = -100;
+		tapEffectObj.transform.position = tmp;
         tapEffectObj.transform.SetParent(_parent);
     }
 }

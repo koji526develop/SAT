@@ -33,11 +33,19 @@ public class GameManager : MonoBehaviour
 
 
         // バトル用のカメラ作成
-        MyUtility.CreateCamera ("BattleCamera", battleManager);
+        Camera camera = MyUtility.CreateCamera ("BattleCamera", battleManager);
+		camera.transform.eulerAngles = new Vector3(90,0,0);
+		camera.transform.position = new Vector3(0,15f,0);
+
+		Camera uiCamera = MyUtility.CreateCamera ("UICamera");
+		uiCamera.clearFlags = CameraClearFlags.Depth;
+		uiCamera.depth = 1;
 
         //キャンバスを作成
         Canvas canvas=MyUtility.CreateCanvas();
         GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+
+		StartCoroutine (MyUtility.SetCameraForCanvas(canvas,uiCamera));
 
         //ゲーム内で使用するマネージャーを作成
         this.gameObject.AddComponent<ScoreManager>();
