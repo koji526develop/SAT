@@ -83,7 +83,7 @@ public class GameUIManager : MonoBehaviour {
             "SpecialCardButton",
             "Image/TimeWaku",
             new Vector2(28 / 32.0f, 16 / 25.0f),
-            new Vector2(31 / 32.0f, 24 / 25.0f),
+            new Vector2(31 / 32.0f, 23 / 25.0f),
             canvasTransForm
     );
         obj.AddComponent<SpecialCardButton>().m_playerID = 2;
@@ -113,6 +113,20 @@ public class GameUIManager : MonoBehaviour {
 			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOCESPEED,0 },
 			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOCESPEED,0 }
 		};
+
+        for(int i= 1; i <= 6; i++)
+        {
+            for(int j = 1; j <= 2; j++)
+            {
+                obj = MyUtility.CreateImage(
+                    "ScoreFlame",
+                    "Image/ScoreFlame/Scoreflame",
+                    new Vector2((4+23.0f*(j-1)) / 32.0f, (20-(3.0f * (i - 1)) )/ 25.0f),
+                     new Vector2((5+23.0f*(j-1)) / 32.0f, (23-(3.0f * (i - 1))) / 25.0f),
+                     canvasTransForm
+                    );
+            }
+        }
 
         canvasTransForm.gameObject.AddComponent<GameTimeControl>();
     }
