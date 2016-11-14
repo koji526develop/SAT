@@ -20,6 +20,6 @@ public class CharacterNone : State<Character>
 	}
 	bool NonHit(GameObject obj1,GameObject obj2)
 	{
-
+        return false;
 	}
 }
