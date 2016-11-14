@@ -42,6 +42,27 @@ public class ScoreManager : MonoBehaviour {
         m_countSpawner[_playerID, _Column]++;
     }
 
+    public int GetPointLevel(int _playerID, int _Column)
+    {
+        //配列に合わせるためすべて-1にする（修正したい）
+        _playerID--;
+        _Column--;
+
+        int checkCount = m_countSpawner[_playerID, _Column];
+        int countStage = m_countAreaStage - 1;
+
+        for (int i = 0; i <= m_countAreaStage; i++)
+        {
+            if (m_countArea[i] <= checkCount)
+            {
+                countStage = i;
+                break;
+            }
+        }
+
+        return countStage;
+    }
+
     public void GetPoint(int _playerID, int _Column)
     {
         int enemyPlayerID = 0;  //敵対プレイヤーID
@@ -58,7 +79,7 @@ public class ScoreManager : MonoBehaviour {
 
         //カウントを一度取る
         int checkCount = m_countSpawner[enemyPlayerID, _Column-1];
-        int countStage=m_countAreaStage-1;
+        int countStage = m_countAreaStage-1;
 
         for (int i = 0; i <= m_countAreaStage; i++)
         {
