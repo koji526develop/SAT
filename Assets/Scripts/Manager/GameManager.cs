@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         //デバッグ用
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown("return"))
         {
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToResult();

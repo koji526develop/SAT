@@ -177,19 +177,26 @@ public class ResultManager : MonoBehaviour
 
     void Update()
     {
-        if (m_ChangeTime >= 0.0f)
-        {
-            m_ChangeTime -= Time.deltaTime;
-        }
-        else
-        {
-            m_ChangeFlag = true;
-        }
-        if (m_ChangeFlag)
+        //if (m_ChangeTime >= 0.0f)
+        //{
+        //    m_ChangeTime -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    m_ChangeFlag = true;
+        //}
+        //if (m_ChangeFlag)
+        //{
+        //    SceneChanger sChange = new SceneChanger();
+        //    sChange.ChangeToTitle();
+        //    m_ChangeFlag = false;
+        //}
+
+        //デバッグ用
+        if(Input.GetKeyDown("return"))
         {
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToTitle();
-            m_ChangeFlag = false;
         }
     }
 }
