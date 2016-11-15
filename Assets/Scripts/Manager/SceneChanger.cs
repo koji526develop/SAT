@@ -4,28 +4,30 @@ using System.Collections;
 public class SceneChanger : MonoBehaviour
 {
 
+    readonly float fadeOutTime = 0.5f;
+
     //タイトルに行く
     public void ChangeToTitle()
     {
-        MySceneManager.m_instance.LoadLevel("Title", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Title", fadeOutTime);
     }
 
     //操作説明に行く
     public void ChangeToOperating()
     {
-        MySceneManager.m_instance.LoadLevel("Operating", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Operating", fadeOutTime);
     }
 
     //兵士選択画面に行く
     public void ChangeToSelect()
     {
-        MySceneManager.m_instance.LoadLevel("Select", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Select", fadeOutTime);
     }
 
     //特殊カード選択に行く
     public void ChangeToSelectSpecial()
     {
-        MySceneManager.m_instance.LoadLevel("SelectSpecial", 1.0f);
+        MySceneManager.m_instance.LoadLevel("SelectSpecial", fadeOutTime);
     }
 
     //ゲームに行く
@@ -33,12 +35,12 @@ public class SceneChanger : MonoBehaviour
     {
         //MySceneManager.m_instance.LoadLevel("Game", 1.0f);
         //MySceneManager.m_instance.LoadLevel("GameAndUI", 1.0f);
-        MySceneManager.m_instance.LoadLevel("GameAndUI_nozawa", 1.0f);
+        MySceneManager.m_instance.LoadLevel("GameAndUI_nozawa", fadeOutTime);
     }
 
     //リザルトに行く
     public void ChangeToResult()
     {
-        MySceneManager.m_instance.LoadLevel("Result", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Result", fadeOutTime);
     }
 }
