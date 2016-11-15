@@ -24,7 +24,7 @@ public abstract class StatefulObjectBase<T, TEnum> : MonoBehaviour
 	}
 
 	// 現在のステートと同じかどうか判定
-	protected bool IsEqualState(TEnum _state)
+	public bool IsEqualState(TEnum _state)
 	{
 		if (stateMachine == null) return false;
 
