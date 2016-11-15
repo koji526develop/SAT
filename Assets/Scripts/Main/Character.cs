@@ -192,17 +192,17 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     {
         if (_playerID == 1)
         {
-            if (type == CharacterType.Sword) SelectUIManager.SWORD_NUM_1--; if (SelectUIManager.SWORD_NUM_1 < 0) SelectUIManager.SWORD_NUM_1 = 0;
-            if (type == CharacterType.Spear) SelectUIManager.SPEAR_NUM_1--; if (SelectUIManager.SPEAR_NUM_1 < 0) SelectUIManager.SPEAR_NUM_1 = 0;
+            if (type == CharacterType.Sword) SelectUIManager.SWORD_NUM_1--; if (SelectUIManager.SWORD_NUM_1 <= 0) SelectUIManager.SWORD_NUM_1 = 0;
+            if (type == CharacterType.Spear) SelectUIManager.SPEAR_NUM_1--; if (SelectUIManager.SPEAR_NUM_1 <= 0) SelectUIManager.SPEAR_NUM_1 = 0;
             if (type == CharacterType.Ax) SelectUIManager.AX_NUM_1--; if (SelectUIManager.AX_NUM_1 < 0) SelectUIManager.AX_NUM_1 = 0;
-            if (type == CharacterType.Shield) SelectUIManager.SHIELD_NUM_1--; if (SelectUIManager.SHIELD_NUM_1 < 0) SelectUIManager.SHIELD_NUM_1 = 0;
+            if (type == CharacterType.Shield) SelectUIManager.SHIELD_NUM_1--; if (SelectUIManager.SHIELD_NUM_1 <= 0) SelectUIManager.SHIELD_NUM_1 = 0;
         }
         else
         {
-            if (type == CharacterType.Sword) SelectUIManager.SWORD_NUM_2--; if (SelectUIManager.SWORD_NUM_2 < 0) SelectUIManager.SWORD_NUM_2 = 0;
-            if (type == CharacterType.Spear) SelectUIManager.SPEAR_NUM_2--; if (SelectUIManager.SPEAR_NUM_2 < 0) SelectUIManager.SPEAR_NUM_2 = 0;
-            if (type == CharacterType.Ax) SelectUIManager.AX_NUM_2--; if (SelectUIManager.AX_NUM_2 < 0) SelectUIManager.AX_NUM_2 = 0;
-            if (type == CharacterType.Shield) SelectUIManager.SHIELD_NUM_2--; if (SelectUIManager.SHIELD_NUM_2 < 0) SelectUIManager.SHIELD_NUM_2 = 0;
+            if (type == CharacterType.Sword) SelectUIManager.SWORD_NUM_2--; if (SelectUIManager.SWORD_NUM_2 <= 0) SelectUIManager.SWORD_NUM_2 = 0;
+            if (type == CharacterType.Spear) SelectUIManager.SPEAR_NUM_2--; if (SelectUIManager.SPEAR_NUM_2 <= 0) SelectUIManager.SPEAR_NUM_2 = 0;
+            if (type == CharacterType.Ax) SelectUIManager.AX_NUM_2--; if (SelectUIManager.AX_NUM_2 <= 0) SelectUIManager.AX_NUM_2 = 0;
+            if (type == CharacterType.Shield) SelectUIManager.SHIELD_NUM_2--; if (SelectUIManager.SHIELD_NUM_2 <= 0) SelectUIManager.SHIELD_NUM_2 = 0;
         }
     }
 
