@@ -2,22 +2,23 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GameTimeControl : MonoBehaviour {
+public class GameTimeControl : MonoBehaviour
+{
 
-    public  float m_TimeRemaining=60;
-   
-    private Text text;
-   
+    public float m_TimeRemaining = 60;
 
-	// Use this for initialization
-	void Start () {
+    private Text[] text = new Text[2];
 
-        text = GameObject.Find("Canvas/Text").GetComponent<Text>();
-      
+
+    void Start()
+    {
+
+        text[0] = GameObject.Find("Canvas/Text").GetComponent<Text>();
+        text[1] = GameObject.Find("Canvas/Text2").GetComponent<Text>();
     }
 
-    // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
         m_TimeRemaining -= Time.deltaTime;
 
@@ -27,7 +28,11 @@ public class GameTimeControl : MonoBehaviour {
         }
 
         int m_IntTimeRemaing = (int)m_TimeRemaining;
-        text.text = m_IntTimeRemaing.ToString();
-    
+        for (int i = 0; i < 2; i++)
+        {
+            text[i].text = m_IntTimeRemaing.ToString();
+        }
+
+
     }
 }
