@@ -11,17 +11,22 @@ public class OperatingManager : MonoBehaviour
 
     void Awake()
     {
+        // ライト作成
+        MyUtility.CreateDirectionalLight();
+        // MAINカメラ作成
+        Camera camera = MyUtility.CreateCamera("MainCamera");
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+        //イベントシステム作成
+        MyUtility.CreateEventSystem(transform);
+
         Canvas canvas = MyUtility.CreateCanvas();
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
 
         GameObject opObj= MyUtility.CreateEmpty("Operating", transform); ;
 
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
-
-        //イベントシステム作成
-        MyUtility.CreateEventSystem(transform);
+        StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
         GameObject m_OperatingSpriteObj;
 
@@ -32,14 +37,14 @@ public class OperatingManager : MonoBehaviour
             m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "Image/operatingNoneChoice");
 
             m_OperatingSprNumObj[i].AddComponent<OperatingChoice>();
-            m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -2.15f, 0.0f);
+            m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -3.3f, -790.0f);
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
         m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "Image/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
-        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 2.0f, 0.0f);
+        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 1.0f, -790.0f);
         m_OperatingSpriteObj.transform.localScale = new Vector3(1.4f, 1.4f, 0.0f);
 
         //左右矢印の画像
