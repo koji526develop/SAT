@@ -13,10 +13,10 @@ public class DebugListManager : MonoBehaviour
 	enum Item
 	{
 		Close,
-		Test1,
-		Test2,
-		Test4,
-		Test5,
+		SwordMax,
+		SpearMax,
+		AxMax,
+		ShieldMax,
 		Test6,
 		Test7,
 		Test8,
@@ -67,8 +67,32 @@ public class DebugListManager : MonoBehaviour
 		switch (_item) 
 		{
 			case Item.Close: return Close;
+		case Item.SwordMax:return SwordMax;
+		case Item.SpearMax:return SpearMax;
+		case Item.AxMax:return AxMax;
+		case Item.ShieldMax:return ShieldMax;
 			default: return A;
 		}
+	}
+	void SwordMax()
+	{
+		SelectUIManager.SWORD_NUM_1 = 99;
+		SelectUIManager.SWORD_NUM_2 = 99;
+	}
+	void SpearMax()
+	{
+		SelectUIManager.SPEAR_NUM_1 = 99;
+		SelectUIManager.SPEAR_NUM_2 = 99;
+	}
+	void AxMax()
+	{
+		SelectUIManager.AX_NUM_1 = 99;
+		SelectUIManager.AX_NUM_2 = 99;
+	}
+	void ShieldMax()
+	{
+		SelectUIManager.SHIELD_NUM_1 = 99;
+		SelectUIManager.SHIELD_NUM_2 = 99;
 	}
 	void A()
 	{
