@@ -139,7 +139,7 @@ public class ResultManager : MonoBehaviour
                 "OpponentSpecialCard",
                 "Image/Karie/waku6",
                 new Vector2(2.0f / 32.0f, 2.0f / 25.0f),
-                new Vector2(10.0f / 32.0f, 13.0f / 25.0f),
+                new Vector2(10.0f / 32.0f, 15.0f / 25.0f),
                 m_ResultObj[i].transform);
 
             for (int j = 0; j < 3; j++)
@@ -147,7 +147,7 @@ public class ResultManager : MonoBehaviour
                 //個別画像
                 m_SpecialObj[j] = MyUtility.CreateImage(
                     "SpecialCardImg",
-                    "Image/Karie/waku2",
+                    "Image/resultSpecial",
                     new Vector2(3.0f / 32.0f, (2.0f + (j * 7.5f)) / 25.0f),
                     new Vector2(29.0f / 32.0f, (8.0f + (j * 7.5f)) / 25.0f),
                     obj.transform);

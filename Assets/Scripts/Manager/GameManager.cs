@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour 
 {
+	Canvas m_canvas;
 	// ゲーム開始時
 	void Awake()
 	{
@@ -40,10 +41,10 @@ public class GameManager : MonoBehaviour
 		uiCamera.depth = 1;
 
         //キャンバスを作成
-        Canvas canvas=MyUtility.CreateCanvas();
+		m_canvas=MyUtility.CreateCanvas();
         GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
 
-		StartCoroutine (MyUtility.SetCameraForCanvas(canvas,uiCamera));
+		StartCoroutine (MyUtility.SetCameraForCanvas(m_canvas,uiCamera));
 
         //ゲーム内で使用するマネージャーを作成
         this.gameObject.AddComponent<ScoreManager>();
@@ -53,6 +54,14 @@ public class GameManager : MonoBehaviour
 		MyUtility.CreateTapEffect(transform);
     
     }
+
+	void Start()
+	{
+		GameObject debugList = Instantiate (Resources.Load("Prefabs/DebugList") as GameObject);
+		debugList.name = "DebugList";
+		debugList.transform.SetParent (m_canvas.transform);
+		m_canvas.gameObject.AddComponent<DebugUI> ();
+	}
 
 
     void Update()
