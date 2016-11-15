@@ -20,7 +20,8 @@ public class CharacterNone : State<Character>
 	}
 	public override void Update()
 	{
-		if (!NonHit (m_instance.gameObject, m_suppoteObj)) {
+		if (!NonHit (m_instance.gameObject, m_suppoteObj)) 
+		{
 			m_instance.ChangeState (Character.CharacterState.Move); 
 
 		}
@@ -28,6 +29,7 @@ public class CharacterNone : State<Character>
 	public override void Exit() 
 	{
 		m_suppoteObj = null;
+		Debug.Log ("出た");
 	}
 	bool NonHit(GameObject obj1,GameObject obj2)
 	{
