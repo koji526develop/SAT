@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 8488827fafccf46ab99852cee1c6dfec
-timeCreated: 1479188968
+timeCreated: 1479195132
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,26 +9,26 @@ ModelImporter:
     100002: Box004
     100004: Box005
     100006: Box006
-    100008: Line002
-    100010: sotai
-    100012: Sphere001
-    100014: Sphere002
-    100016: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
-    100018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    100020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
-    100022: //RootNode
+    100008: //RootNode
+    100010: Line002
+    100012: sotai
+    100014: Sphere001
+    100016: Sphere002
+    100018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    100020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
+    100022: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
     400000: Box003
     400002: Box004
     400004: Box005
     400006: Box006
-    400008: Line002
-    400010: sotai
-    400012: Sphere001
-    400014: Sphere002
-    400016: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
-    400018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
-    400020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
-    400022: //RootNode
+    400008: //RootNode
+    400010: Line002
+    400012: sotai
+    400014: Sphere001
+    400016: Sphere002
+    400018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8001"
+    400020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8002"
+    400022: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
     2300000: Box003
     2300002: Box004
     2300004: Box005

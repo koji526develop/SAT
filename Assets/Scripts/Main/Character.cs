@@ -127,7 +127,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     // キャラクターのオブジェクト作成
     public static GameObject CreateObject(Transform _parent, CharacterType _characterType, Vector3 _position, int _playerID)
     {
-        GameObject characterObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+		GameObject characterObj = Instantiate (Resources.Load ("CharacterData/character_ax_blue")as GameObject);
         Character character = characterObj.AddComponent<Character>();
 
         characterObj.name = _characterType.ToString();
