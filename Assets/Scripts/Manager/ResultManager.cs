@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ResultManager : MonoBehaviour
 {
 
-    private bool m_ChangeFlag;
-    private float m_ChangeTime;
+    private bool m_TouchFlag;
+    private float m_TouchCoolTime;
     string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
 
     public static int[] ResultSoldierNum = new int[8];
+
+    GameObject sceneChangerObj;
+    SceneChanger sceneChanger;
+
+    GameObject buttonObj;
 
     void Awake()
     {
@@ -166,37 +172,115 @@ public class ResultManager : MonoBehaviour
         m_ResultObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
         Vector2 tmpPos = new Vector2(Screen.width - m_ResultObj[0].transform.position.x, Screen.height - m_ResultObj[0].transform.position.y);
         m_ResultObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y, 0.0f);
+
+        buttonObj = MyUtility.CreateEmpty("Button", canvas.transform);
+
+        //再戦ボタン
+        GameObject rematchObj = MyUtility.CreateButton(
+            "Rematch",
+            "Image/Karie/waku5",
+            new Vector2(10 / 32.0f, 14 / 25.0f),
+            new Vector2(22 / 32.0f, 23 / 25.0f),
+            buttonObj.transform);
+        MyUtility.CreateText(
+            "再戦",
+            rematchObj.transform,
+            35,
+            new Vector3(0, 0, -90),
+            new Vector2(16 / 32.0f, 12.5f / 25.0f),
+            new Vector2(16 / 32.0f, 12.5f / 25.0f)
+            );
+        sceneChangerObj = new GameObject();
+        sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+        rematchObj.GetComponent<Button>().onClick.AddListener(RematchProces);
+
+        //兵士選択へボタン
+        GameObject soldierSelectObj = MyUtility.CreateButton(
+            "Rematch",
+            "Image/Karie/waku5",
+            new Vector2(10 / 32.0f, 2 / 25.0f),
+            new Vector2(22 / 32.0f, 11 / 25.0f),
+            buttonObj.transform);
+        MyUtility.CreateText(
+            "兵士選択へ",
+            soldierSelectObj.transform,
+            35,
+            new Vector3(0, 0, -90),
+            new Vector2(16 / 32.0f, 12.5f / 25.0f),
+            new Vector2(16 / 32.0f, 12.5f / 25.0f)
+            );
+        soldierSelectObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+
+        buttonObj.SetActive(false);
+    }
+
+    public void RematchProces()
+    {
+        //兵士の情報を設定
+        SelectUIManager.SWORD_NUM_1 = ResultManager.ResultSoldierNum[0];
+        SelectUIManager.SPEAR_NUM_1 = ResultManager.ResultSoldierNum[1];
+        SelectUIManager.AX_NUM_1 = ResultManager.ResultSoldierNum[2];
+        SelectUIManager.SHIELD_NUM_1 = ResultManager.ResultSoldierNum[3];
+        SelectUIManager.SWORD_NUM_2 = ResultManager.ResultSoldierNum[4];
+        SelectUIManager.SPEAR_NUM_2 = ResultManager.ResultSoldierNum[5];
+        SelectUIManager.AX_NUM_2 = ResultManager.ResultSoldierNum[6];
+        SelectUIManager.SHIELD_NUM_2 = ResultManager.ResultSoldierNum[7];
+
+        //特殊カード設定
+
+        sceneChanger.ChangeToGame();
     }
 
     void Start()
     {
-        m_ChangeFlag = false;
-        m_ChangeTime = 5.0f;
+        m_TouchFlag = false;
+        m_TouchCoolTime = 3.0f;
     }
 
 
     void Update()
     {
-        //if (m_ChangeTime >= 0.0f)
-        //{
-        //    m_ChangeTime -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    m_ChangeFlag = true;
-        //}
-        //if (m_ChangeFlag)
-        //{
-        //    SceneChanger sChange = new SceneChanger();
-        //    sChange.ChangeToTitle();
-        //    m_ChangeFlag = false;
-        //}
-
-        //デバッグ用
-        if(Input.GetKeyDown("return"))
+        if (m_TouchCoolTime >= 0.0f)
         {
-            SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToTitle();
+            m_TouchCoolTime -= Time.deltaTime;
         }
+        else
+        {
+            m_TouchFlag = true;
+        }
+
+        TouchInfo touch = TouchManager.GetTouchInfo(0);
+        if (touch == TouchInfo.Began)
+        {
+            if (m_TouchFlag && !buttonObj.active)
+            {
+                buttonObj.SetActive(true);
+            }
+            else if(!IsPointerOverUGUIObject(0))
+            {
+                buttonObj.SetActive(false);
+            }
+            
+        }
+    }
+
+    private bool IsPointerOverUGUIObject(int fingerId)
+    {
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem != null)
+        {
+            // マウスでの判定
+            if (eventSystem.IsPointerOverGameObject())
+            {
+                return true;
+            }
+
+            // タッチでの判定
+            if (eventSystem.IsPointerOverGameObject(fingerId))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
