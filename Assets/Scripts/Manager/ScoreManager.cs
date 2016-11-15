@@ -10,8 +10,8 @@ public class ScoreManager : MonoBehaviour {
     private int m_totalColumn = 6;  //列
 
     private int[,] m_countSpawner;
-    private int[] m_countArea= {7,5,3,1,0};
-    private int[] m_scoreArea = { 100, 70, 40, 20 ,10};
+    private int[] m_countArea= { 0, 1, 3, 5, 7 };
+    private int[] m_scoreArea = { 10, 20, 40, 70, 100 };
     private int m_countAreaStage;
 
     void Awake()
@@ -44,23 +44,26 @@ public class ScoreManager : MonoBehaviour {
 
     public int GetPointLevel(int _playerID, int _Column)
     {
-        //配列に合わせるためすべて-1にする（修正したい）
+        ////配列に合わせるためすべて-1にする（修正したい）
         _playerID--;
         _Column--;
 
         int checkCount = m_countSpawner[_playerID, _Column];
-        int countStage = m_countAreaStage - 1;
-
-        for (int i = 0; i <= m_countAreaStage; i++)
+        int allCountStage = m_countAreaStage - 1;
+    
+        for(int i=0; i <= m_countAreaStage; i++)
         {
             if (m_countArea[i] <= checkCount)
             {
-                countStage = i;
-                break;
+                allCountStage = i;
             }
-        }
+            else
+            {
+                return allCountStage;
+            }
 
-        return countStage;
+        }
+        return 0;
     }
 
     public void GetPoint(int _playerID, int _Column)
@@ -77,26 +80,13 @@ public class ScoreManager : MonoBehaviour {
             enemyPlayerID = 0;
         }
 
-        //カウントを一度取る
-        int checkCount = m_countSpawner[enemyPlayerID, _Column-1];
-        int countStage = m_countAreaStage-1;
-
-        for (int i = 0; i <= m_countAreaStage; i++)
-        {
-            if (m_countArea[i] <= checkCount)
-            {
-                countStage = i;
-                break;
-            }
-        }
-
         if (_playerID == 1)
         {
-            m_Score += m_scoreArea[countStage];
+            m_Score += m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
         }
         else
         {
-            m_Score -= m_scoreArea[countStage];
+            m_Score -= m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
         }
 
         m_countSpawner[enemyPlayerID, _Column - 1] = 0;
