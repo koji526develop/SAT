@@ -99,6 +99,7 @@ public class ScoreManager : MonoBehaviour {
             m_Score -= m_scoreArea[countStage];
         }
 
+        m_countSpawner[enemyPlayerID, _Column - 1] = 0;
     }
 
 }

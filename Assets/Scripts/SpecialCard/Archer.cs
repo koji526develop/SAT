@@ -36,13 +36,16 @@ public class Archer : SpecialCard {
                         if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
                         {
                             m_Solderobj = childObj.gameObject;
+
+                            //対象を削除
+                            Destroy(m_Solderobj);
+                            Destroy(this);
+                            return;
                         }
                     }
                 }
             }
-            //対象を削除
-            Destroy(m_Solderobj);
-            Destroy(this);
+
         }
    }
 }
