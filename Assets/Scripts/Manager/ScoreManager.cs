@@ -9,17 +9,19 @@ public class ScoreManager : MonoBehaviour {
     private int m_totalPlayer = 2;  //総プレイヤー数
     private int m_totalColumn = 6;  //列
 
-    private int[,] m_countSpawner;
-    private int[] m_countArea= { 0, 1, 3, 5, 7 };
-    private int[] m_scoreArea = { 10, 20, 40, 70, 100 };
+    private int[,] m_countSpawner;  //それぞれの出現させた回数
+    private int[] m_countArea= { 0, 1, 3, 5, 7 };   //フェーズの推移
+    private int[] m_scoreArea = { 10, 20, 40, 70, 100 };    //フェーズごとの得点情報
     private int m_countAreaStage;
 
     void Awake()
     {
-        //スコアの初期設定
+        //スコアの初期設定を行う。
         m_Score = m_maxScore / m_totalPlayer;
 
+        //動的にスポーン回数を記憶するためのプレイヤー数と列分の配列を確保
         m_countSpawner = new int[m_totalPlayer, m_totalColumn];
+
 
         for (int i = 0; i < m_totalPlayer; i++)
         {
@@ -51,7 +53,7 @@ public class ScoreManager : MonoBehaviour {
         int checkCount = m_countSpawner[_playerID, _Column];
         int allCountStage = m_countAreaStage - 1;
     
-        for(int i=0; i <= m_countAreaStage; i++)
+        for(int i=0; i < m_countAreaStage; i++)
         {
             if (m_countArea[i] <= checkCount)
             {
@@ -63,7 +65,7 @@ public class ScoreManager : MonoBehaviour {
             }
 
         }
-        return 0;
+        return m_countAreaStage - 1;
     }
 
     public void GetPoint(int _playerID, int _Column)
