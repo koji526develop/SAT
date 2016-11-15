@@ -18,6 +18,7 @@ public class ScoreFlameScript : MonoBehaviour {
 
        m_scoreManagerCmp = GameObject.Find("GameManager").GetComponent<ScoreManager>();
 
+        m_count = 4;
 	}
 
     // Update is called once per frame
@@ -35,24 +36,24 @@ public class ScoreFlameScript : MonoBehaviour {
             switch (m_count)
             {
 
-                case 4:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame6", typeof(Sprite)) as Sprite;
-                    break;
-
-                case 3:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame7", typeof(Sprite)) as Sprite;
-                    break;
-
-                case 2:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame8", typeof(Sprite)) as Sprite;
+                case 0:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue1", typeof(Sprite)) as Sprite;
                     break;
 
                 case 1:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame9", typeof(Sprite)) as Sprite;
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue2", typeof(Sprite)) as Sprite;
                     break;
 
-                case 0:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame10", typeof(Sprite)) as Sprite;
+                case 2:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue3", typeof(Sprite)) as Sprite;
+                    break;
+
+                case 3:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue4", typeof(Sprite)) as Sprite;
+                    break;
+
+                case 4:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue5", typeof(Sprite)) as Sprite;
                     break;
 
             }
@@ -62,24 +63,24 @@ public class ScoreFlameScript : MonoBehaviour {
             switch (m_count)
             {
 
-                case 4:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame1", typeof(Sprite)) as Sprite;
-                    break;
-
-                case 3:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame2", typeof(Sprite)) as Sprite;
-                    break;
-
-                case 2:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame3", typeof(Sprite)) as Sprite;
+                case 0:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed1", typeof(Sprite)) as Sprite;
                     break;
 
                 case 1:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame4", typeof(Sprite)) as Sprite;
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed2", typeof(Sprite)) as Sprite;
                     break;
 
-                case 0:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/Scoreflame", typeof(Sprite)) as Sprite;
+                case 2:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed3", typeof(Sprite)) as Sprite;
+                    break;
+
+                case 3:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed4", typeof(Sprite)) as Sprite;
+                    break;
+
+                case 4:
+                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed5", typeof(Sprite)) as Sprite;
                     break;
 
             }

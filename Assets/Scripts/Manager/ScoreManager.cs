@@ -9,17 +9,19 @@ public class ScoreManager : MonoBehaviour {
     private int m_totalPlayer = 2;  //総プレイヤー数
     private int m_totalColumn = 6;  //列
 
-    private int[,] m_countSpawner;
-    private int[] m_countArea= {7,5,3,1,0};
-    private int[] m_scoreArea = { 100, 70, 40, 20 ,10};
+    private int[,] m_countSpawner;  //それぞれの出現させた回数
+    private int[] m_countArea= { 0, 1, 3, 5, 7 };   //フェーズの推移
+    private int[] m_scoreArea = { 10, 20, 40, 70, 100 };    //フェーズごとの得点情報
     private int m_countAreaStage;
 
     void Awake()
     {
-        //スコアの初期設定
+        //スコアの初期設定を行う。
         m_Score = m_maxScore / m_totalPlayer;
 
+        //動的にスポーン回数を記憶するためのプレイヤー数と列分の配列を確保
         m_countSpawner = new int[m_totalPlayer, m_totalColumn];
+
 
         for (int i = 0; i < m_totalPlayer; i++)
         {
@@ -44,23 +46,26 @@ public class ScoreManager : MonoBehaviour {
 
     public int GetPointLevel(int _playerID, int _Column)
     {
-        //配列に合わせるためすべて-1にする（修正したい）
+        ////配列に合わせるためすべて-1にする（修正したい）
         _playerID--;
         _Column--;
 
         int checkCount = m_countSpawner[_playerID, _Column];
-        int countStage = m_countAreaStage - 1;
-
-        for (int i = 0; i <= m_countAreaStage; i++)
+        int allCountStage = m_countAreaStage - 1;
+    
+        for(int i=0; i < m_countAreaStage; i++)
         {
             if (m_countArea[i] <= checkCount)
             {
-                countStage = i;
-                break;
+                allCountStage = i;
             }
-        }
+            else
+            {
+                return allCountStage;
+            }
 
-        return countStage;
+        }
+        return m_countAreaStage - 1;
     }
 
     public void GetPoint(int _playerID, int _Column)
@@ -77,26 +82,13 @@ public class ScoreManager : MonoBehaviour {
             enemyPlayerID = 0;
         }
 
-        //カウントを一度取る
-        int checkCount = m_countSpawner[enemyPlayerID, _Column-1];
-        int countStage = m_countAreaStage-1;
-
-        for (int i = 0; i <= m_countAreaStage; i++)
-        {
-            if (m_countArea[i] <= checkCount)
-            {
-                countStage = i;
-                break;
-            }
-        }
-
         if (_playerID == 1)
         {
-            m_Score += m_scoreArea[countStage];
+            m_Score += m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
         }
         else
         {
-            m_Score -= m_scoreArea[countStage];
+            m_Score -= m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
         }
 
         m_countSpawner[enemyPlayerID, _Column - 1] = 0;
