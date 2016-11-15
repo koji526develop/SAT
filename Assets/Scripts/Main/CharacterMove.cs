@@ -145,7 +145,8 @@ public class CharacterMove :  State<Character>
 				// PlayerIDが同じだったら
 				if (m_instance.gameObject.GetComponent<Character> ().status.PlayerID == charaObj [i].GetComponent<Character> ().status.PlayerID) 
 				{
-					//m_instance.ChangeState (Character.CharacterState.None); 
+					m_instance.characterNoneState.suppoteObj = charaObj [i];
+					m_instance.ChangeState (Character.CharacterState.None); 
 				} 
 				else
 				{
