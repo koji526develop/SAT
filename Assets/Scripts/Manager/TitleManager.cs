@@ -5,10 +5,12 @@ using System.Collections;
 public class TitleManager : MonoBehaviour
 {
 
-    public bool Debug = false;
-
     void Awake()
     {
+        // ライト作成
+        MyUtility.CreateDirectionalLight();
+        // MAINカメラ作成
+        Camera camera = MyUtility.CreateCamera("MainCamera");
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
     }
@@ -21,7 +23,7 @@ public class TitleManager : MonoBehaviour
 	void Update ()
     {
         TouchInfo touch = TouchManager.GetTouchInfo(0);
-        if (touch == TouchInfo.Began && !Debug)
+        if (touch == TouchInfo.Began)
         {
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToOperating();

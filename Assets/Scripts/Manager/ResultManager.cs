@@ -13,13 +13,22 @@ public class ResultManager : MonoBehaviour
 
     void Awake()
     {
+        // ライト作成
+        MyUtility.CreateDirectionalLight();
+        // MAINカメラ作成
+        Camera camera = MyUtility.CreateCamera("MainCamera");
+        //タップエフェクト
+        MyUtility.CreateTapEffect(transform);
+        //イベントシステム作成
+        MyUtility.CreateEventSystem(transform);
+
         Canvas canvas = MyUtility.CreateCanvas();
+
+        StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
         uiObj.AddComponent<ResultWarPotential>();
 
-        // イベントシステム作成
-        MyUtility.CreateEventSystem(transform);
 
         //戦力ゲージ作成
         GameObject slideroObj = MyUtility.CreateSlider(
