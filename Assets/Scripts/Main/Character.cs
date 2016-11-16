@@ -134,7 +134,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     // キャラクターのオブジェクト作成
     public static GameObject CreateObject(Transform _parent, CharacterType _characterType, Vector3 _position, int _playerID)
     {
-		GameObject characterObj = Instantiate (Resources.Load ("CharacterData/character_ax_blue")as GameObject);
+		GameObject characterObj = Instantiate (Resources.Load (GetCharacterObjPath(_characterType, _playerID))as GameObject);
         Character character = characterObj.AddComponent<Character>();
 
         characterObj.name = _characterType.ToString();
@@ -142,10 +142,33 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         characterObj.transform.position = _position;
         characterObj.tag = "Character";
 
+		if (_playerID == 1)
+			characterObj.transform.eulerAngles = new Vector3 (0, 90, 0);
+		else
+			characterObj.transform.eulerAngles = new Vector3 (0, -90, 0);
+			
+		characterObj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
         SetCharacterType(character, _characterType, _playerID);
 
         return characterObj;
     }
+
+	private static string GetCharacterObjPath(CharacterType _characterType, int _playerID)
+	{
+		string colorStr;
+		if(_playerID == 1) colorStr = "red";
+		else 			   colorStr = "blue";
+
+		switch (_characterType)
+		{
+		case CharacterType.Sword:  return "CharacterData/character_sword_" + colorStr;
+		case CharacterType.Shield: return "CharacterData/character_shield_" + colorStr;
+		case CharacterType.Ax:     return "CharacterData/character_ax_" + colorStr;
+		case CharacterType.Spear:  return "CharacterData/character_spear_" + colorStr;
+		}
+		return null;
+	}
 
     // キャラクターの種類のセット
     private static void SetCharacterType(Character character, CharacterType _characterType, int _playerID)
