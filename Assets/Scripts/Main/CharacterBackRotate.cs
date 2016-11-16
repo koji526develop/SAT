@@ -17,11 +17,11 @@ public class CharacterBackRotate : State<Character>
 		// 移動が終わったら
 		if (!m_instance.moveTo.isMove) 
 		{
-			// 左へ回転
-			if(m_instance.rotateDirection == Character.Direction.Right)
+			// 回転
+			if(m_instance.rotateDirection == Character.Direction.Down)
 				iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
-			// 右へ回転
-			else if(m_instance.rotateDirection == Character.Direction.Left)
+			// 回転
+			else if(m_instance.rotateDirection == Character.Direction.Up)
 				iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
 
 			// 回転方向の指定をなくす
