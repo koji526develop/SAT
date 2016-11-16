@@ -22,10 +22,16 @@ public class CharacterNone : State<Character>
 	}
 	public override void Update()
 	{
-		if (m_suppoteObjCharacter.IsEqualState(Character.CharacterState.Move)|| m_suppoteObj==null) 
+		if(m_suppoteObjCharacter.IsEqualState(Character.CharacterState.Move)|| m_suppoteObj==null) 
 		{
 			m_instance.ChangeState (Character.CharacterState.Move);
 		}
+		if (m_suppoteObjCharacter.IsEqualState (Character.CharacterState.Attack)) 
+		{
+			m_instance.ChangeState (Character.CharacterState.None);
+		}
+	
+
 	}
 	public override void Exit() 
 	{

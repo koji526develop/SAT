@@ -147,6 +147,7 @@ public class CharacterMove :  State<Character>
 				{
 					m_instance.characterNoneState.suppoteObj = charaObj [i];
 					m_instance.ChangeState (Character.CharacterState.None); 
+					Debug.Log("仲間にアタック");
 				} 
 				else
 				{
