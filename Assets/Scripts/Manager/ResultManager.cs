@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class ResultManager : MonoBehaviour
 {
-
+    //タッチを受け取っていいか
     private bool m_TouchFlag;
+    //タッチを取得し始めるまでの時間
     private float m_TouchCoolTime;
+
     string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
 
+    //リザルトで表示する兵士の数を記憶しておくためのもの
     public static int[] ResultSoldierNum = new int[8];
 
     GameObject sceneChangerObj;
@@ -17,8 +19,12 @@ public class ResultManager : MonoBehaviour
 
     GameObject buttonObj;
 
+    GameObject rematchObj;
+    GameObject soldierSelectObj;
+
     void Awake()
     {
+
         // ライト作成
         MyUtility.CreateDirectionalLight();
         // MAINカメラ作成
@@ -35,7 +41,7 @@ public class ResultManager : MonoBehaviour
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
         uiObj.AddComponent<ResultWarPotential>();
 
-
+        ////
         //戦力ゲージ作成
         GameObject slideroObj = MyUtility.CreateSlider(
             "BlueSlider",
@@ -55,6 +61,7 @@ public class ResultManager : MonoBehaviour
         );
         slideroObj.GetComponent<Slider>().direction = Slider.Direction.BottomToTop;
 
+        ////
         //スコア
         //スコアの計算
         float[] m_Score = new float[2];
@@ -173,10 +180,11 @@ public class ResultManager : MonoBehaviour
         Vector2 tmpPos = new Vector2(Screen.width - m_ResultObj[0].transform.position.x, Screen.height - m_ResultObj[0].transform.position.y);
         m_ResultObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y, 0.0f);
 
+        ////
         buttonObj = MyUtility.CreateEmpty("Button", canvas.transform);
 
         //再戦ボタン
-        GameObject rematchObj = MyUtility.CreateButton(
+        rematchObj = MyUtility.CreateButton(
             "Rematch",
             "Image/Karie/waku5",
             new Vector2(10 / 32.0f, 14 / 25.0f),
@@ -195,8 +203,8 @@ public class ResultManager : MonoBehaviour
         rematchObj.GetComponent<Button>().onClick.AddListener(RematchProces);
 
         //兵士選択へボタン
-        GameObject soldierSelectObj = MyUtility.CreateButton(
-            "Rematch",
+        soldierSelectObj = MyUtility.CreateButton(
+            "SoldierSelect",
             "Image/Karie/waku5",
             new Vector2(10 / 32.0f, 2 / 25.0f),
             new Vector2(22 / 32.0f, 11 / 25.0f),
@@ -212,6 +220,7 @@ public class ResultManager : MonoBehaviour
         soldierSelectObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
 
         buttonObj.SetActive(false);
+
     }
 
     public void RematchProces()
@@ -252,35 +261,16 @@ public class ResultManager : MonoBehaviour
         TouchInfo touch = TouchManager.GetTouchInfo(0);
         if (touch == TouchInfo.Began)
         {
+            //タッチしてよい && ボタンが表示されていない
             if (m_TouchFlag && !buttonObj.active)
             {
                 buttonObj.SetActive(true);
             }
-            else if(!IsPointerOverUGUIObject(0))
+            //タッチ場所がボタンの上でなければ
+            else if (!MyUtility.IsContainPoint(rematchObj.GetComponent<RectTransform>()) && !MyUtility.IsContainPoint(soldierSelectObj.GetComponent<RectTransform>()))
             {
                 buttonObj.SetActive(false);
             }
-            
         }
-    }
-
-    private bool IsPointerOverUGUIObject(int fingerId)
-    {
-        EventSystem eventSystem = EventSystem.current;
-        if (eventSystem != null)
-        {
-            // マウスでの判定
-            if (eventSystem.IsPointerOverGameObject())
-            {
-                return true;
-            }
-
-            // タッチでの判定
-            if (eventSystem.IsPointerOverGameObject(fingerId))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }
