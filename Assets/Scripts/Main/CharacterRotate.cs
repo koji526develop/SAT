@@ -38,13 +38,10 @@ public class CharacterRotate : State<Character>
 		if (m_rotateTime > 0.5f) 
 		{
 			// 回転が終わったら行を変更しその行に移動させる
-			if(m_instance.rotateDirection == Character.Direction.Down)
-				m_instance.ChangeColumn (Character.Direction.Down);
+			if (m_instance.rotateDirection == Character.Direction.Down)
+				m_instance.ChangeState (Character.CharacterState.SideMpveDown);
 			else
-				m_instance.ChangeColumn (Character.Direction.Up);
-
-			// 回転を元に戻すステートへ
-			m_instance.ChangeState(Character.CharacterState.BackRotate);
+				m_instance.ChangeState (Character.CharacterState.SideMpveUp);
 		}
 	}
 

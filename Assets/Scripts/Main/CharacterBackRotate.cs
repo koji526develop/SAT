@@ -10,28 +10,25 @@ public class CharacterBackRotate : State<Character>
 	public override void Enter() 
 	{
 		m_rotateTime = 0.0f;
+
+		// 回転
+		if(m_instance.rotateDirection == Character.Direction.Down)
+			iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+		// 回転
+		else if(m_instance.rotateDirection == Character.Direction.Up)
+			iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
+
+		// 回転方向の指定をなくす
+		m_instance.rotateDirection = Character.Direction.None;
+
 	}
 
 	public override void Update()
 	{
-		// 移動が終わったら
-		if (!m_instance.moveTo.isMove) 
+		m_rotateTime += Time.deltaTime;
+		if (m_rotateTime > 0.5f) 
 		{
-			// 回転
-			if(m_instance.rotateDirection == Character.Direction.Down)
-				iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (-1*GetCharacterRote()) / 4.0f, 0), 1.0f);
-			// 回転
-			else if(m_instance.rotateDirection == Character.Direction.Up)
-				iTween.RotateBy (m_instance.gameObject, new Vector3 (0, (1*GetCharacterRote()) / 4.0f, 0), 1.0f);
-
-			// 回転方向の指定をなくす
-			m_instance.rotateDirection = Character.Direction.None;
-
-			m_rotateTime += Time.deltaTime;
-			if (m_rotateTime > 0.5f) 
-			{
-				m_instance.ChangeState(Character.CharacterState.Move);
-			}
+			m_instance.ChangeState(Character.CharacterState.Move);
 		}
 	}
 

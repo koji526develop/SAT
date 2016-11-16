@@ -89,7 +89,9 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         Attack,
         Move,
         Rotate,
-        BackRotate
+        BackRotate,
+		SideMpveUp,
+		SideMpveDown
     }
 
     // キャラクターの種類
@@ -263,6 +265,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         stateList.Add(new CharacterMove(this));
         stateList.Add(new CharacterRotate(this));
         stateList.Add(new CharacterBackRotate(this));
+		stateList.Add(new CharacterSideMoveUp(this));
+		stateList.Add(new CharacterSideMoveDown(this));
 
         stateMachine = new StateMachine<Character>();
 
@@ -291,21 +295,5 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         {
             return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 8.0f - (2.0f * _Column));
         }
-    }
-
-    // 行の変更(変更した行に移動も兼ねる)
-    public void ChangeColumn(Direction _direction)
-    {
-        if (_direction == Direction.Up)
-        {
-            mapColumn -= 1;
-        }
-        else
-        {
-            mapColumn += 1;
-        }
-
-        // 変更した行に移動
-		moveTo.SetMoveTo(new Vector3(transform.position.x, transform.position.y, 8.0f - (2.0f * mapColumn)), MyUtility.SIDEMOVE_TIME);
     }
 }
