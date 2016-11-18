@@ -60,4 +60,16 @@ public class OperatingFlick : MonoBehaviour
         m_DisplaySpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         m_DisplaySpriteRenderer.sprite = m_OperatingSprite[m_DisplaySpriteNum];
     }
+
+    public void ButtonRight()
+    {
+        m_DisplaySpriteNum++;
+        ChangeSprite();
+    }
+
+    public void ButtonLeft()
+    {
+        m_DisplaySpriteNum--;
+        ChangeSprite();
+    }
 }

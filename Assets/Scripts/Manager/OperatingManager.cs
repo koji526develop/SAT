@@ -24,7 +24,7 @@ public class OperatingManager : MonoBehaviour
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
 
-        GameObject opObj= MyUtility.CreateEmpty("Operating", transform); ;
+        GameObject opObj = MyUtility.CreateEmpty("Operating", transform); ;
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
@@ -47,17 +47,26 @@ public class OperatingManager : MonoBehaviour
         m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 1.0f, -790.0f);
         m_OperatingSpriteObj.transform.localScale = new Vector3(1.4f, 1.4f, 0.0f);
 
-        //左右矢印の画像
-        for (int i = 0; i < 2; i++)
-        {
-            MyUtility.CreateImage(
-                "LeftOrRight",
-                "Image/operatingNoneChoice",
-                new Vector2((2.0f + (i * 26)) / 32.0f, 14.0f / 25.0f),
-                new Vector2((4.0f + (i * 26)) / 32.0f, 16.0f / 25.0f),
-                uiObj.transform
-                );
-        }
+        //左矢印ボタン
+        GameObject leftButton = MyUtility.CreateButton(
+            "LeftButton",
+            "Image/operatingNoneChoice",
+             new Vector2(2.0f / 32.0f, 14.0f / 25.0f),
+             new Vector2(4.0f / 32.0f, 16.0f / 25.0f),
+             uiObj.transform);
+
+        OperatingFlick operatingFlick = m_OperatingSpriteObj.AddComponent<OperatingFlick>();
+        leftButton.GetComponent<Button>().onClick.AddListener(operatingFlick.ButtonLeft);
+
+        //右矢印ボタン
+        GameObject rightButton = MyUtility.CreateButton(
+            "RightButton",
+            "Image/operatingNoneChoice",
+             new Vector2(28.0f / 32.0f, 14.0f / 25.0f),
+             new Vector2(30.0f / 32.0f, 16.0f / 25.0f),
+             uiObj.transform);
+        rightButton.GetComponent<Button>().onClick.AddListener(operatingFlick.ButtonRight);
+
         // 戻るボタン作成
         GameObject backObj = MyUtility.CreateButton(
             "Back",
