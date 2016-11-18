@@ -32,8 +32,9 @@ public class ButtonSpawner : MonoBehaviour
     //兵士出現処理
     public void Spawner()
     {
+		
         //兵士が残っていれば生成
-        if(SoldierNumCheck(m_PlayerID,m_type))
+		if(SoldierNumCheck(m_PlayerID,m_type))// && CheckFrontArea(m_PlayerID,m_type))
         {
             Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
             character.mapColumn = m_ButtonID;
@@ -69,9 +70,14 @@ public class ButtonSpawner : MonoBehaviour
                 break;
         }
 
-        Debug.Log("兵士チェッククリア");
         return true;
     }
+
+	//兵士を出してもよいか前方をチェック
+	bool CheckFrontArea(int _playerID,Character.CharacterType _type)
+	{
+		return false;
+	}
 
     void OnGUI()
     {

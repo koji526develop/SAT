@@ -26,10 +26,7 @@ public class CharacterNone : State<Character>
 		{
 			m_instance.ChangeState (Character.CharacterState.Move);
 		}
-		if (m_suppoteObjCharacter.IsEqualState (Character.CharacterState.Attack)) 
-		{
-			m_instance.ChangeState (Character.CharacterState.None);
-		}
+
 	
 
 	}

@@ -11,6 +11,7 @@ public class StageCreate : MonoBehaviour {
 		//FloorFile.transform.Rotate(new Vector3(1,0,0),-90);
 
 
+
 		for (int i = 0; i < 9; i++) 
 		{
 			for (int j = 0; j < 6; j++) 
@@ -30,6 +31,7 @@ public class StageCreate : MonoBehaviour {
 
                 obj.tag = "Column" + (7-(j+1));
                 obj.AddComponent<BoxCollider>().isTrigger = true;
+		
             }
 
 		}

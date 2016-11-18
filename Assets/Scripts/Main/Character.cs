@@ -68,6 +68,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     }
 
 
+
     public int m_mapColumn;
     public int mapColumn
     {
@@ -148,6 +149,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         characterObj.transform.SetParent(_parent);
         characterObj.transform.position = _position;
         characterObj.tag = "Character";
+
 
 		if (_playerID == 1)
 			characterObj.transform.eulerAngles = new Vector3 (0, 90, 0);
