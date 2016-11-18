@@ -50,20 +50,22 @@ public class GameUIManager : MonoBehaviour {
         MyUtility.CreateText(
             "60",
 			canvasTransForm,
-            64,
-            Vector3.zero,
+            45,
+            new Vector3(0,0,-90),
             new Vector2(1 / 32.0f, 1.5f / 25.0f),
-            new Vector2(3.75f / 32.0f, 5 / 25.0f)
+            new Vector2(4 / 32.0f, 5 / 25.0f)
             );
 
-        MyUtility.CreateText(
+        Text timeText = MyUtility.CreateText(
            "60",
 			canvasTransForm,
-            64,
-            new Vector3(180, 0, 0),
-           	new Vector2(27.0f / 32.0f, 1.5f / 25.0f),
-            new Vector2((31f - 1.25f) / 32.0f, 5f / 25.0f)
+            45,
+            new Vector3(0, 0, 90),
+           	new Vector2(28.0f / 32.0f, 1.5f / 25.0f),
+            new Vector2(31 / 32.0f, 5f / 25.0f)
             );
+
+        timeText.gameObject.name = "Text2";
 
         //ここまで
 
