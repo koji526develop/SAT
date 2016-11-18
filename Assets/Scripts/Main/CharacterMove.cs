@@ -56,39 +56,54 @@ public class CharacterMove :  State<Character>
 		}
 	}
 
+	Character.Direction GetMyDirectionFromObject(GameObject _enemyObj)
+	{
+		if (m_instance.gameObject.transform.position.x < _enemyObj.transform.position.x)
+			return Character.Direction.Left;
+		else if (m_instance.gameObject.transform.position.x > _enemyObj.transform.position.x)
+			return Character.Direction.Right;
+		else
+			return Character.Direction.None;
+	}
+
 	bool IsNearEnemy(Character.Direction _dir)
 	{
 		GameObject[] charaObj = GameObject.FindGameObjectsWithTag ("Character");
+		int playerID = m_instance.GetComponent<Character> ().status.PlayerID;
+		Character myCharacter = m_instance.GetComponent<Character> ();
 
 		for (int i = 0; i < charaObj.Length; i++)
 		{
+			Character enemyCharacter = charaObj [i].GetComponent<Character> ();
+
 			if (m_instance.gameObject == charaObj [i]) continue;
 
+			// 味方だったら抜ける
 			if (m_instance.gameObject.GetComponent<Character> ().status.PlayerID == charaObj [i].GetComponent<Character> ().status.PlayerID)
 				continue;
 
 			if (_dir == Character.Direction.Up) {
-				if (m_instance.GetComponent<Character> ().status.PlayerID == 1 &&
-					m_instance.gameObject.transform.position.x < charaObj [i].transform.position.x &&
-					m_instance.GetComponent<Character> ().mapColumn - charaObj [i].GetComponent<Character> ().mapColumn == 1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) - 0.3f < 60.0f * MyUtility.SIDEMOVE_TIME * m_instance.GetComponent<Character> ().status.moveSpeed) {
+				if (playerID == 1 && // プレイヤー１だったら
+					GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Left && // 自分が敵のキャラクターより左にいたら
+					myCharacter.mapColumn - enemyCharacter.mapColumn == 1 &&
+					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
 					return true;
-				} else if (m_instance.GetComponent<Character> ().status.PlayerID == 2 &&
-					m_instance.gameObject.transform.position.x > charaObj [i].transform.position.x &&
-					m_instance.GetComponent<Character> ().mapColumn - charaObj [i].GetComponent<Character> ().mapColumn == 1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) - 0.3f < 60.0f * MyUtility.SIDEMOVE_TIME * m_instance.GetComponent<Character> ().status.moveSpeed) {
+				} else if (playerID == 2 && // プレイヤー２だったら
+					GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Right && // 自分が敵のキャラクターより右にいたら
+					myCharacter.mapColumn - enemyCharacter.mapColumn == 1 &&
+					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
 					return true;
 				}
 			} else {
-				if (m_instance.GetComponent<Character> ().status.PlayerID == 1 &&
-					m_instance.gameObject.transform.position.x < charaObj [i].transform.position.x &&
-					m_instance.GetComponent<Character> ().mapColumn - charaObj [i].GetComponent<Character> ().mapColumn == -1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) - 0.3f < 60.0f * MyUtility.SIDEMOVE_TIME * m_instance.GetComponent<Character> ().status.moveSpeed) {
+				if (playerID == 1 && // プレイヤー１だったら
+					GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Left && // 自分が敵のキャラクターより左にいたら
+					myCharacter.mapColumn - enemyCharacter.mapColumn == -1 &&
+					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
 					return true;
-				} else if (m_instance.GetComponent<Character> ().status.PlayerID == 2 &&
-					m_instance.gameObject.transform.position.x > charaObj [i].transform.position.x &&
-					m_instance.GetComponent<Character> ().mapColumn - charaObj [i].GetComponent<Character> ().mapColumn == -1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) - 0.3f < 60.0f * MyUtility.SIDEMOVE_TIME * m_instance.GetComponent<Character> ().status.moveSpeed) {
+				} else if (playerID == 2 && // プレイヤー２だったら
+					GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Right && // 自分が敵のキャラクターより右にいたら
+					myCharacter.mapColumn - enemyCharacter.mapColumn == -1 &&
+					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
 					return true;
 				}
 			}
