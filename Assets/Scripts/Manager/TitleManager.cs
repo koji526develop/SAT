@@ -13,14 +13,38 @@ public class TitleManager : MonoBehaviour
         Camera camera = MyUtility.CreateCamera("MainCamera");
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
+
+        Canvas canvas = MyUtility.CreateCanvas();
+        //イベントシステム作成
+        MyUtility.CreateEventSystem(transform);
+
+        StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
+
+        GameObject m_TitleImageObj = MyUtility.CreateEmpty("TitleObject", canvas.transform);
+
+        MyUtility.CreateImage(
+            "Title",
+            "Image/title",
+            new Vector2(3 / 32.0f, 15 / 25.0f),
+            new Vector2(29 / 32.0f, 23 / 25.0f),
+           m_TitleImageObj.transform);
+
+        MyUtility.CreateImage(
+            "Touch",
+            "Image/titleTouch",
+            new Vector2(6 / 32.0f, 3 / 25.0f),
+            new Vector2(26 / 32.0f, 7 / 25.0f),
+            m_TitleImageObj.transform);
+
+
     }
 
-	void Start ()
+    void Start()
     {
 
-	}
-	
-	void Update ()
+    }
+
+    void Update()
     {
         TouchInfo touch = TouchManager.GetTouchInfo(0);
         if (touch == TouchInfo.Began)
