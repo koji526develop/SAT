@@ -13,7 +13,7 @@ TagManager:
   - Player1
   - Player2
   - BattleManager
-  - ResultButton
+  - Column1
   - Column2
   - Column3
   - Column4
