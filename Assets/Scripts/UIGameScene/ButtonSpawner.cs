@@ -13,6 +13,10 @@ public class ButtonSpawner : MonoBehaviour
     public int m_ButtonID;
     public Character.CharacterType m_type;
 
+    private int m_nowTouchNumber;
+    private bool m_startFlag = false;
+    private bool m_spawnerFlag=false;
+
     void Awake()
     {
 
@@ -23,10 +27,74 @@ public class ButtonSpawner : MonoBehaviour
 
         //スライドで出現処理を行えるようにする処理を行う。
         EventTrigger dragEndtrigger = gameObject.AddComponent<EventTrigger>();
+
+        //スライドで出現処理を行えるようにする処理を行う。
         EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.EndDrag;
-        entry.callback.AddListener((data) => { Spawner(); });
+        entry.eventID = EventTriggerType.PointerExit;
+        entry.callback.AddListener((data) => { ExitFlag(); });
         dragEndtrigger.triggers.Add(entry);
+
+        EventTrigger.Entry entry2 = new EventTrigger.Entry();
+        entry2.eventID = EventTriggerType.EndDrag;
+        entry2.callback.AddListener((data) => { Spawner(); });
+        dragEndtrigger.triggers.Add(entry2);
+
+        //スライドで出現処理を行えるようにする処理を行う。
+        EventTrigger.Entry entry3 = new EventTrigger.Entry();
+        entry3.eventID = EventTriggerType.PointerDown;
+        entry3.callback.AddListener((data) => { StartFlag(); });
+        dragEndtrigger.triggers.Add(entry3);
+
+
+    }
+
+    void ResetFlag()
+    {
+        m_nowTouchNumber = 99;
+        m_startFlag = false;
+        m_spawnerFlag = false;
+    }
+
+    public void StartFlag()
+    {
+        for(int i=0; i <= Input.touchCount; i++)
+        {
+            if (TouchManager.GetTouchInfo(i) == TouchInfo.Began)
+            {
+                m_nowTouchNumber = i;
+                Debug.Log("タッチしましたー＞"+i);
+                m_startFlag = true;
+                return;
+            }
+        }
+    }
+
+    public void ExitFlag()
+    {
+
+        if (m_startFlag)
+        {
+
+            if (m_PlayerID == 1)
+            {
+                if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
+                {
+                    m_spawnerFlag = true;
+                    return;
+                }
+            }
+            else
+            {
+                if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) < 0)
+                {
+                    m_spawnerFlag = true;
+                    return;
+                }
+            }
+        }
+
+        ResetFlag();
+
     }
 
     //兵士出現処理
@@ -34,13 +102,15 @@ public class ButtonSpawner : MonoBehaviour
     {
 		
         //兵士が残っていれば生成
-		if(SoldierNumCheck(m_PlayerID,m_type))// && CheckFrontArea(m_PlayerID,m_type))
+		if(SoldierNumCheck(m_PlayerID,m_type) && m_spawnerFlag)// && CheckFrontArea(m_PlayerID,m_type))
         {
             Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
+            
         }
+        ResetFlag();
     }
 
     //兵士が残っているかチェック
