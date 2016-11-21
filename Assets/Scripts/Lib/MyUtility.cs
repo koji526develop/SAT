@@ -45,6 +45,8 @@ public class MyUtility : MonoBehaviour
     // ディレクショナルライト作成
     public static readonly int MAX_WARPOTENTIAL = 500;
 
+    public static float GAME_TIME = 120.0f;
+
     public static void CreateDirectionalLight()
     {
         GameObject lightObj = new GameObject("DirectionalLight");

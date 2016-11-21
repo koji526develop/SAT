@@ -41,8 +41,6 @@ public class SelectUIManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log(PlayerID);
-
         for (int i = 0; i < 4; i++)
             m_soldierNumList.Add(0);
 
