@@ -14,7 +14,7 @@ public class DebugListManager : MonoBehaviour
 	{
 		Close,
 		SoldierMax,
-		SceneManager,
+		Test3,
 		Test4,
 		Test5,
 		Test6,
@@ -68,7 +68,6 @@ public class DebugListManager : MonoBehaviour
 		{
 			case Item.Close: return Close;
 		case Item.SoldierMax:return SoldierMax;
-		case Item.SceneManager:return SceneManager;
 
 			default: return A;
 		}
@@ -87,11 +86,6 @@ public class DebugListManager : MonoBehaviour
 	void A()
 	{
 		
-	}
-	void SceneManager()
-	{
-		SceneChanger sChange = new SceneChanger();
-		sChange.ChangeToResult();
 	}
 	void Close()
 	{
