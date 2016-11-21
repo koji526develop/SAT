@@ -7,14 +7,16 @@ public class GameTimeControl : MonoBehaviour
 
     public float m_TimeRemaining = 60;
 
-    private Text[] text = new Text[2];
+    private Text text;
 
+    void Awake()
+    {
+        text = gameObject.GetComponent<Text>();
+    }
 
     void Start()
     {
-
-        text[0] = GameObject.Find("Canvas/Text").GetComponent<Text>();
-        text[1] = GameObject.Find("Canvas/Text2").GetComponent<Text>();
+        
     }
 
     void Update()
@@ -28,11 +30,7 @@ public class GameTimeControl : MonoBehaviour
         }
 
         int m_IntTimeRemaing = (int)m_TimeRemaining;
-        for (int i = 0; i < 2; i++)
-        {
-            text[i].text = m_IntTimeRemaing.ToString();
-        }
 
-
+        text.text = m_IntTimeRemaing.ToString();
     }
 }
