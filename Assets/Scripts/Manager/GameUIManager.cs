@@ -48,7 +48,7 @@ public class GameUIManager : MonoBehaviour {
 			canvasTransForm);
 
         Text timeText1P = MyUtility.CreateText(
-            "60",
+            MyUtility.GAME_TIME.ToString(),
 			canvasTransForm,
             45,
             new Vector3(0,0,-90),
@@ -59,7 +59,7 @@ public class GameUIManager : MonoBehaviour {
         timeText1P.gameObject.AddComponent<GameTimeControl>();
 
          Text timeText2P = MyUtility.CreateText(
-           "60",
+           MyUtility.GAME_TIME.ToString(),
 			canvasTransForm,
             45,
             new Vector3(0, 0, 90),

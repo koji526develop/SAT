@@ -217,12 +217,13 @@ public class ResultManager : MonoBehaviour
             new Vector2(16 / 32.0f, 12.5f / 25.0f),
             new Vector2(16 / 32.0f, 12.5f / 25.0f)
             );
-        soldierSelectObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        soldierSelectObj.GetComponent<Button>().onClick.AddListener(SelectSoldierProces);
 
         buttonObj.SetActive(false);
 
     }
 
+    //再戦
     public void RematchProces()
     {
         //兵士の情報を設定
@@ -238,6 +239,24 @@ public class ResultManager : MonoBehaviour
         //特殊カード設定
 
         sceneChanger.ChangeToGame();
+    }
+
+    //兵士選択
+    public void SelectSoldierProces()
+    {
+        //兵士の情報を初期化
+        SelectUIManager.SWORD_NUM_1 = 0;
+        SelectUIManager.SPEAR_NUM_1 = 0;
+        SelectUIManager.AX_NUM_1 = 0;
+        SelectUIManager.SHIELD_NUM_1 = 0;
+        SelectUIManager.SWORD_NUM_2 = 0;
+        SelectUIManager.SPEAR_NUM_2 = 0;
+        SelectUIManager.AX_NUM_2 = 0;
+        SelectUIManager.SHIELD_NUM_2 = 0;
+
+        SelectUIManager.PlayerID = 1;
+
+        sceneChanger.ChangeToSelect();
     }
 
     void Start()

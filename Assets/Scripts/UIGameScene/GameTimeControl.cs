@@ -5,7 +5,7 @@ using System.Collections;
 public class GameTimeControl : MonoBehaviour
 {
 
-    public float m_TimeRemaining = 60;
+    public float m_TimeRemaining = MyUtility.GAME_TIME;
 
     private Text text;
 
@@ -27,6 +27,8 @@ public class GameTimeControl : MonoBehaviour
         if (m_TimeRemaining <= 0.0f)
         {
             m_TimeRemaining = 0.0f;
+            SceneChanger sChange = new SceneChanger();
+            sChange.ChangeToResult();
         }
 
         int m_IntTimeRemaing = (int)m_TimeRemaining;
