@@ -55,7 +55,8 @@ public class OperatingManager : MonoBehaviour
              new Vector2(4.0f / 32.0f, 16.0f / 25.0f),
              uiObj.transform);
 
-        OperatingFlick operatingFlick = m_OperatingSpriteObj.AddComponent<OperatingFlick>();
+        GameObject obj = GameObject.Find("OperatingSprite");
+        OperatingFlick operatingFlick = obj.GetComponent<OperatingFlick>();
         leftButton.GetComponent<Button>().onClick.AddListener(operatingFlick.ButtonLeft);
 
         //右矢印ボタン

@@ -47,7 +47,7 @@ public class GameUIManager : MonoBehaviour {
         	new Vector2(31 / 32.0f, 5 / 25.0f),
 			canvasTransForm);
 
-        MyUtility.CreateText(
+        Text timeText1P = MyUtility.CreateText(
             "60",
 			canvasTransForm,
             45,
@@ -56,7 +56,9 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(4 / 32.0f, 5 / 25.0f)
             );
 
-        Text timeText = MyUtility.CreateText(
+        timeText1P.gameObject.AddComponent<GameTimeControl>();
+
+         Text timeText2P = MyUtility.CreateText(
            "60",
 			canvasTransForm,
             45,
@@ -65,7 +67,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(31 / 32.0f, 5f / 25.0f)
             );
 
-        timeText.gameObject.name = "Text2";
+        timeText2P.gameObject.AddComponent<GameTimeControl>();
 
         //ここまで
 
@@ -127,8 +129,6 @@ public class GameUIManager : MonoBehaviour {
                 
             } 
         }
-
-        canvasTransForm.gameObject.AddComponent<GameTimeControl>();
     }
     // Use this for initialization
     void Start () {
