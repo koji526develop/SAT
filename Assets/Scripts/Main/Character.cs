@@ -115,16 +115,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
             m_status.characterType = value;
         }
     }
-
-    MoveTo m_moveTo;
-    public MoveTo moveTo
-    {
-        get
-        {
-            return m_moveTo;
-        }
-    }
-
     Camera m_mainCamera;
     public Camera MainCamera
     {
@@ -257,7 +247,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
     void Start()
     {
-        m_moveTo = gameObject.AddComponent<MoveTo>();
+      
 
         // ステートマシンの初期設定
 		m_characterNoneState=new CharacterNone(this);
