@@ -146,7 +146,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		else
 			characterObj.transform.eulerAngles = new Vector3 (0, -90, 0);
 			
-		characterObj.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+		characterObj.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
 
         SetCharacterType(character, _characterType, _playerID);
 
