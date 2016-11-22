@@ -133,7 +133,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		characterObj.AddComponent<MeshRenderer> ();
 
 		boxCollider.center = new Vector3 (0,2,0);
-		boxCollider.size = new Vector3 (1,3,1);
+		boxCollider.size = new Vector3 (2,3,2);
 
         characterObj.name = _characterType.ToString();
         characterObj.transform.SetParent(_parent);
