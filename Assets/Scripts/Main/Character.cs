@@ -130,10 +130,12 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		GameObject characterObj = Instantiate (Resources.Load (GetCharacterObjPath(_characterType, _playerID))as GameObject);
         Character character = characterObj.AddComponent<Character>();
 		BoxCollider boxCollider = characterObj.AddComponent<BoxCollider> ();
+		Animator animator = characterObj.GetComponent<Animator> ();
+		animator.runtimeAnimatorController = GetAnimController (_characterType);
 		characterObj.AddComponent<MeshRenderer> ();
 
 		boxCollider.center = new Vector3 (0,2,0);
-		boxCollider.size = new Vector3 (2,3,2);
+		boxCollider.size = new Vector3 (1,3,1);
 
         characterObj.name = _characterType.ToString();
         characterObj.transform.SetParent(_parent);
@@ -152,6 +154,17 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
         return characterObj;
     }
+	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType)
+	{
+		switch (_characterType)
+		{
+		case CharacterType.Sword:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Sword"));
+		case CharacterType.Shield:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Shield"));
+		case CharacterType.Ax:      return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Ax"));
+		case CharacterType.Spear:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Spear"));
+		}
+		return null;
+	}
 
 	private static string GetCharacterObjPath(CharacterType _characterType, int _playerID)
 	{

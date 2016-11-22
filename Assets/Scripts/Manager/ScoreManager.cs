@@ -68,6 +68,19 @@ public class ScoreManager : MonoBehaviour {
         return m_countAreaStage - 1;
     }
 
+    public void DirectGetPoint(int _playerID, int _point)
+    {
+        if (_playerID == 1)
+        {
+            m_Score += _point;
+        }
+        else
+        {
+            m_Score -= _point;
+        }
+
+    }
+
     public void GetPoint(int _playerID, int _Column)
     {
         int enemyPlayerID = 0;  //敵対プレイヤーID
