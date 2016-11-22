@@ -148,40 +148,43 @@ public class SelectUIManager : MonoBehaviour
 
     public void EnterProces()
     {
-        if (PlayerID == 1)
+        if (m_soldierTotalNum == 18)
         {
-            //最終的な兵士の値を保存
-            SWORD_NUM_1 = m_soldierNumList[0];
-            SPEAR_NUM_1 = m_soldierNumList[1];
-            AX_NUM_1 = m_soldierNumList[2];
-            SHIELD_NUM_1 = m_soldierNumList[3];
-            PlayerID = 2;
-
-            //リザルトように別で兵士の数を保存
-            for (int i = 0; i < 4; i++)
+            if (PlayerID == 1)
             {
-                ResultManager.ResultSoldierNum[i] = m_soldierNumList[i];
-            }
-        }
-        else
-        {
-            //最終的な兵士の値を保存
-            SWORD_NUM_2 = m_soldierNumList[0];
-            SPEAR_NUM_2 = m_soldierNumList[1];
-            AX_NUM_2 = m_soldierNumList[2];
-            SHIELD_NUM_2 = m_soldierNumList[3];
-            //3Pはいないが次に進めるために3を振る
-            PlayerID = 3;
+                //最終的な兵士の値を保存
+                SWORD_NUM_1 = m_soldierNumList[0];
+                SPEAR_NUM_1 = m_soldierNumList[1];
+                AX_NUM_1 = m_soldierNumList[2];
+                SHIELD_NUM_1 = m_soldierNumList[3];
+                PlayerID = 2;
 
-            //リザルトように別で兵士の数を保存
-            for (int i = 0; i < 4; i++)
+                //リザルトように別で兵士の数を保存
+                for (int i = 0; i < 4; i++)
+                {
+                    ResultManager.ResultSoldierNum[i] = m_soldierNumList[i];
+                }
+            }
+            else
             {
-                ResultManager.ResultSoldierNum[i+4] = m_soldierNumList[i];
-            }
-        }
+                //最終的な兵士の値を保存
+                SWORD_NUM_2 = m_soldierNumList[0];
+                SPEAR_NUM_2 = m_soldierNumList[1];
+                AX_NUM_2 = m_soldierNumList[2];
+                SHIELD_NUM_2 = m_soldierNumList[3];
+                //3Pはいないが次に進めるために3を振る
+                PlayerID = 3;
 
-        //シーン遷移
-        sceneChanger.ChangeToSelectSpecial();
+                //リザルトように別で兵士の数を保存
+                for (int i = 0; i < 4; i++)
+                {
+                    ResultManager.ResultSoldierNum[i + 4] = m_soldierNumList[i];
+                }
+            }
+
+            //シーン遷移
+            sceneChanger.ChangeToSelectSpecial();
+        }
     }
 
 

@@ -117,8 +117,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		// Text追加
 		MyUtility.AddText ("決定", enterObj.transform);
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
-        if(SelectUIManager.PlayerID == 2)enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
-        else enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToGame);
+        enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
     }
 
     public void BackProces()
@@ -129,6 +128,15 @@ public class SelectSpecialUIManager : MonoBehaviour
             SelectUIManager.PlayerID = 1;
         }
         sceneChanger.ChangeToSelect();
+    }
+
+    public void EnterProces()
+    {
+        if(m_selectedCount == 3)
+        {
+            if (SelectUIManager.PlayerID == 2) sceneChanger.ChangeToSelect();
+            else sceneChanger.ChangeToGame();
+        }
     }
 
 
