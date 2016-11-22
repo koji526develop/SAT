@@ -17,12 +17,6 @@ public class SelectManager : MonoBehaviour
 		GameObject uiObj = MyUtility.CreateEmpty ("UI", canvas.transform);
 		uiObj.AddComponent<SelectUIManager> ();
 
-		/*GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
-		plane.transform.position = new Vector3 (0, 0, 0);
-		plane.transform.rotation = Quaternion.Euler (270, 0, 0);
-		plane.transform.localScale = new Vector3 (2, 1, 2);
-		*/
-
 		StartCoroutine (MyUtility.SetCameraForCanvas(canvas,camera));
 
 		// イベントシステム作成
