@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9d7a150f2503d6745a0bc94f10bd3d3c
-timeCreated: 1479790342
+guid: d3e1a783af7cf7b4a84b1e41f5751950
+timeCreated: 1479798874
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -36,14 +36,12 @@ ModelImporter:
     100056: Bip001 R UpperArm
     100058: Bip001 Spine
     100060: Bip001 Spine1
-    100062: Cylinder001
-    100064: kata
-    100066: main
-    100068: Plane001
-    100070: Plane002
-    100072: //RootNode
-    100074: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
-    100076: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    100062: kata
+    100064: main
+    100066: Plane001
+    100068: //RootNode
+    100070: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    100072: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -75,33 +73,25 @@ ModelImporter:
     400056: Bip001 R UpperArm
     400058: Bip001 Spine
     400060: Bip001 Spine1
-    400062: Cylinder001
-    400064: kata
-    400066: main
-    400068: Plane001
-    400070: Plane002
-    400072: //RootNode
-    400074: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
-    400076: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
-    2300000: Cylinder001
-    2300002: kata
-    2300004: Plane001
-    2300006: Plane002
-    2300008: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
-    2300010: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
-    3300000: Cylinder001
-    3300002: kata
-    3300004: Plane001
-    3300006: Plane002
-    3300008: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
-    3300010: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    400062: kata
+    400064: main
+    400066: Plane001
+    400068: //RootNode
+    400070: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    400072: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    2300000: kata
+    2300002: Plane001
+    2300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    2300006: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    3300000: kata
+    3300002: Plane001
+    3300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    3300006: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
     4300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
     4300002: Plane001
     4300004: kata
     4300006: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
     4300008: main
-    4300010: Cylinder001
-    4300012: Plane002
     7400000: Take 001
     9500000: //RootNode
     13700000: main
@@ -247,11 +237,7 @@ ModelImporter:
         weight: 1
       - path: Bip001 Footsteps
         weight: 1
-      - path: Cylinder001
-        weight: 1
       - path: main
-        weight: 1
-      - path: Plane002
         weight: 1
       maskType: 0
       maskSource: {instanceID: 0}
