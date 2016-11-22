@@ -19,6 +19,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(27 / 32.0f, 5.0f / 25.0f),
 			canvasTransForm
             );
+        obj.GetComponentInChildren<Image>().raycastTarget=false;
 
         obj = MyUtility.CreateSlider(
             "RedSlider",
@@ -27,6 +28,8 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(27 / 32.0f, 5.0f / 25.0f),
 			canvasTransForm
         );
+
+        obj.GetComponentInChildren<Image>().raycastTarget = false;
 
         obj.GetComponent<Slider>().direction = Slider.Direction.RightToLeft;
 		canvasTransForm.gameObject.AddComponent<WarPotential>();
@@ -69,9 +72,8 @@ public class GameUIManager : MonoBehaviour {
 
         timeText2P.gameObject.AddComponent<GameTimeControl>();
 
+
         //ここまで
-
-
         obj = MyUtility.CreateButton(
             "SpecialCardButton",
             "Image/TimeWaku",
