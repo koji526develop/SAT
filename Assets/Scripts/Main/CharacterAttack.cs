@@ -30,6 +30,8 @@ public class CharacterAttack : State<Character>
 		m_enemyCharacter = m_enemyObj.GetComponent<Character> ();
 		m_attackTime = 0.0f;
 		m_changeStatus = m_enemyCharacter.status;
+
+		m_instance.animator.Play ("Attack");
 	}
 
 	public override void Update()
@@ -39,6 +41,7 @@ public class CharacterAttack : State<Character>
 		EnemyNonLife ();
 		if(m_attackTime>=1)
 		{
+			m_instance.animator.SetTime (0.0f);
 			Attak ();
 			Debug.Log ("攻撃なう");
 			m_attackTime = 0;

@@ -9,6 +9,8 @@ public class CharacterMove :  State<Character>
 
 	public override void Enter ()
 	{
+		m_instance.animator.Play ("Move");
+
 		m_isCharacterTouch = false;
 	}
 
@@ -54,6 +56,10 @@ public class CharacterMove :  State<Character>
 			// キャラクターが下にフリックされていたら回転させる
 			else if (IsDownFlick() && !IsNearCharacter(Character.Direction.Down)) RotateDown();
 		}
+
+		if (m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
+			m_instance.animator.SetTime (0.0f);
+
 	}
 
 	Character.Direction GetMyDirectionFromObject(GameObject _enemyObj)

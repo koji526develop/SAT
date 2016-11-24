@@ -124,18 +124,29 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         }
     }
 
+	Animator m_animator;
+	public Animator animator
+	{
+		set
+		{
+			m_animator = value;
+		}
+		get
+		{
+			return m_animator;
+		}
+	}
+
     // キャラクターのオブジェクト作成
     public static GameObject CreateObject(Transform _parent, CharacterType _characterType, Vector3 _position, int _playerID)
     {
 		GameObject characterObj = Instantiate (Resources.Load (GetCharacterObjPath(_characterType, _playerID))as GameObject);
         Character character = characterObj.AddComponent<Character>();
 		BoxCollider boxCollider = characterObj.AddComponent<BoxCollider> ();
-		Animator animator = characterObj.GetComponent<Animator> ();
-		animator.runtimeAnimatorController = GetAnimController (_characterType);
 		characterObj.AddComponent<MeshRenderer> ();
 
 		boxCollider.center = new Vector3 (0,2,0);
-		boxCollider.size = new Vector3 (1,3,1);
+		boxCollider.size = new Vector3 (2,3,2);
 
         characterObj.name = _characterType.ToString();
         characterObj.transform.SetParent(_parent);
@@ -154,14 +165,18 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
         return characterObj;
     }
-	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType)
+	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType, int _playerID)
 	{
+		string colorStr;
+		if(_playerID == 1) colorStr = "Red";
+		else 			   colorStr = "Blue";
+
 		switch (_characterType)
 		{
-		case CharacterType.Sword:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Sword"));
-		case CharacterType.Shield:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Shield"));
-		case CharacterType.Ax:      return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Ax"));
-		case CharacterType.Spear:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Spear"));
+		case CharacterType.Sword:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Sword_" + colorStr));
+		case CharacterType.Shield:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Shield_" + colorStr));
+		case CharacterType.Ax:      return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Ax_" + colorStr));
+		case CharacterType.Spear:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Spear_" + colorStr));
 		}
 		return null;
 	}
@@ -276,6 +291,9 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         stateMachine = new StateMachine<Character>();
 
         m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
+
+		m_animator = gameObject.GetComponent<Animator> ();
+		m_animator.runtimeAnimatorController = GetAnimController (characterType, status.PlayerID);
 
         ChangeState(CharacterState.Move);
     }
