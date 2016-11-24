@@ -5,7 +5,16 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public class GameUIManager : MonoBehaviour {
+    
+    Rect[] m_coulumnRect = new Rect[MyUtility.MAX_COLUMN];
 
+    void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _columnNumber)
+    {
+        m_coulumnRect[_columnNumber] = new Rect(_firstPoint.x / Screen.width,
+                                                _firstPoint.y / Screen.height,
+                                                _endPoint.x / Screen.width,
+                                                _endPoint.y / Screen.height);
+    }
 
     void Awake()
     {
