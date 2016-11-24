@@ -304,6 +304,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
     void Update()
     {
+		Debug.Log (stateMachine.CurrentState.ToString ());
         // ステートマシーン更新
         stateMachine.Update();
     }

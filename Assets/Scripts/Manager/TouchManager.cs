@@ -5,20 +5,22 @@ using System.Collections;
 
 public static class TouchManager
 {
-    private static Vector3 m_TouchPosition = Vector3.zero;
-    private static Vector3 m_PreviousPosition = Vector3.zero;
-    private static Vector2 m_FirstTouchPosition = Vector2.zero;
+	private static Vector3 [] m_TouchPosition = new Vector3[10];
+	private static Vector3 [] m_PreviousPosition = new Vector3[10];
+	private static Vector2 [] m_FirstTouchPosition = new Vector2[10];
+
+	static bool isRemote = true;
 
     // タッチ情報を取得(エディタと実機を考慮)
     // <returns>タッチ情報。タッチされていない場合は null</returns>
 
     public static TouchInfo GetTouchInfo(int touchCount)
     {
-        if (Application.isEditor)
+		if (Application.isEditor && !isRemote)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                m_FirstTouchPosition = Input.mousePosition;
+                m_FirstTouchPosition[0] = Input.mousePosition;
                 return TouchInfo.Began;
             }
             if (Input.GetMouseButton(0)) { return TouchInfo.Moved; }
@@ -26,12 +28,13 @@ public static class TouchManager
         }
         else
         {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                m_FirstTouchPosition = touch.position;
-                return (TouchInfo)((int)Input.GetTouch(touchCount).phase);
-            }
+			if (Input.touchCount > 0) 
+			{
+				Touch touch = Input.GetTouch (touchCount);
+				if((TouchInfo)((int)Input.GetTouch (touchCount).phase) == TouchInfo.Began)
+				m_FirstTouchPosition [touchCount] = touch.position;
+				return (TouchInfo)((int)Input.GetTouch (touchCount).phase); 
+			}
         }
         return TouchInfo.None;
     }
@@ -41,20 +44,19 @@ public static class TouchManager
 
     public static Vector3 GetTouchPosition(int touchCount)
     {
-        if (Application.isEditor)
+		if (Application.isEditor && !isRemote)
         {
-            TouchInfo touch = TouchManager.GetTouchInfo(touchCount);
+            TouchInfo touch = TouchManager.GetTouchInfo(0);
             if (touch != TouchInfo.None) { return Input.mousePosition; }
         }
         else
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                m_TouchPosition.x = touch.position.x;
-                m_TouchPosition.y = touch.position.y;
-                return m_TouchPosition;
-            }
+        { 
+			if (Input.touchCount > 0) 
+			{
+				m_TouchPosition [touchCount].x = Input.touches[touchCount].position.x;
+				m_TouchPosition [touchCount].y = Input.touches[touchCount].position.y;
+				return m_TouchPosition [touchCount];   
+			}
         }
         return Vector3.zero;
     }
@@ -63,26 +65,26 @@ public static class TouchManager
 
     public static Vector3 GetDeltaPosition(int touchCount)
     {
-        if (Application.isEditor)
+		if (Application.isEditor && !isRemote)
         {
-            TouchInfo info = TouchManager.GetTouchInfo(touchCount);
+            TouchInfo info = TouchManager.GetTouchInfo(0);
             if (info != TouchInfo.None)
             {
                 Vector3 currentPosition = Input.mousePosition;
-                Vector3 delta = currentPosition - m_PreviousPosition;
-                m_PreviousPosition = currentPosition;
+                Vector3 delta = currentPosition - m_PreviousPosition[0];
+                m_PreviousPosition[0] = currentPosition;
                 return delta;
             }
         }
         else
-        {
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                m_PreviousPosition.x = touch.deltaPosition.x;
-                m_PreviousPosition.y = touch.deltaPosition.y;
-                return m_PreviousPosition;
-            }
+		{
+			if (Input.touchCount > 0) {
+				Touch touch = Input.touches[touchCount];
+				m_PreviousPosition [touchCount].x = touch.deltaPosition.x;
+				m_PreviousPosition [touchCount].y = touch.deltaPosition.y;
+				return m_PreviousPosition [touchCount];
+			}
+            
         }
         return Vector3.zero;
     }
@@ -95,7 +97,7 @@ public static class TouchManager
         float touchPosX = GetTouchPosition(touchCount).x;
 
         //距離を算出
-        float distance = touchPosX - m_FirstTouchPosition.x;
+		float distance = touchPosX - m_FirstTouchPosition[touchCount].x;
 
         return distance;
     }
@@ -108,7 +110,7 @@ public static class TouchManager
         float touchPosY = GetTouchPosition(touchCount).y;
 
         //距離を算出
-        float distance = touchPosY - m_FirstTouchPosition.y;
+		float distance = touchPosY - m_FirstTouchPosition[touchCount].y;
 
         return distance;
     }
@@ -131,6 +133,7 @@ public static class TouchManager
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
+			Debug.Log (hit.collider.gameObject.ToString ());
             return hit.collider.gameObject;
         }
 
