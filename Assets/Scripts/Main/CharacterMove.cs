@@ -361,9 +361,15 @@ public class CharacterMove :  State<Character>
 				// PlayerIDが同じだったら
 				if (m_instance.gameObject.GetComponent<Character> ().status.PlayerID == charaObj [i].GetComponent<Character> ().status.PlayerID) 
 				{
-					m_instance.characterNoneState.suppoteObj = charaObj [i];
-					m_instance.ChangeState (Character.CharacterState.None); 
-					Debug.Log("仲間にアタック");
+					if (m_instance.status.PlayerID == 1 && m_instance.transform.position.x < charaObj [i].transform.position.x) {
+						m_instance.characterNoneState.suppoteObj = charaObj [i];
+						m_instance.ChangeState (Character.CharacterState.None); 
+						Debug.Log ("仲間にアタック");
+					} else if (m_instance.status.PlayerID == 2 && m_instance.transform.position.x > charaObj [i].transform.position.x) {
+						m_instance.characterNoneState.suppoteObj = charaObj [i];
+						m_instance.ChangeState (Character.CharacterState.None); 
+						Debug.Log ("仲間にアタック");
+					}
 				} 
 				else
 				{
@@ -372,7 +378,6 @@ public class CharacterMove :  State<Character>
 					m_instance.ChangeState (Character.CharacterState.Attack); 
 				}
 			}
-		
 		}
 	}
 
