@@ -38,7 +38,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         Up,
         Down,
         Right,
-        Left
+        Left,
+		RightUp,
+		RightDown,
+		LeftUp,
+		LeftDown
     }
 
     Direction m_rotateDirection;

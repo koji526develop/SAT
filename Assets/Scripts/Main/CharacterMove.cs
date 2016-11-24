@@ -62,50 +62,251 @@ public class CharacterMove :  State<Character>
 
 	}
 
-	Character.Direction GetMyDirectionFromObject(GameObject _enemyObj)
+	Character.Direction GetObjectDirectionFromMyChara(GameObject _otherObj)
 	{
-		if (m_instance.gameObject.transform.position.x < _enemyObj.transform.position.x)
-			return Character.Direction.Left;
-		else if (m_instance.gameObject.transform.position.x > _enemyObj.transform.position.x)
+		if (m_instance.gameObject.transform.position.x < _otherObj.transform.position.x)
 			return Character.Direction.Right;
+		else if (m_instance.gameObject.transform.position.x > _otherObj.transform.position.x)
+			return Character.Direction.Left;
 		else
 			return Character.Direction.None;
 	}
 
-	bool IsNearCharacter(Character.Direction _dir)
+	// 他の味方キャラが自分のキャラから見てどの方向にいるかを返す
+	Character.Direction GetAllyDirectionFromMyChara(Character _otherCharacter, Character.Direction _dir)
 	{
-		GameObject[] charaObj = GameObject.FindGameObjectsWithTag ("Character");
 		int playerID = m_instance.GetComponent<Character> ().status.PlayerID;
+		int otherCharacterId = _otherCharacter.GetComponent<Character> ().status.PlayerID;
 		Character myCharacter = m_instance.GetComponent<Character> ();
 
-		for (int i = 0; i < charaObj.Length; i++)
+		// 自分と相手のプレイヤーIDが同じだったら
+		if (playerID == otherCharacterId) {
+			Character allyCharacter = _otherCharacter;
+			GameObject allyGameObject = _otherCharacter.gameObject;
+			int allyCharacterId = otherCharacterId;
+
+			if (playerID == 1) {
+				// 味方のキャラが自分より左にいたら
+				if (GetObjectDirectionFromMyChara (allyGameObject) == Character.Direction.Left)
+				{
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 他のキャラが自分より１つ上の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == 1) {
+							return Character.Direction.LeftUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 他のキャラが自分より１つ下の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == -1)
+							return Character.Direction.LeftDown;
+					}
+				}
+				// 自分が他の味方のキャラより右にいたら
+				else if (GetObjectDirectionFromMyChara (allyGameObject) == Character.Direction.Right)
+				{
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 自分のキャラが他のキャラより１つ下の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == 1) {
+							return Character.Direction.RightUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 自分のキャラが他のキャラより１つ上の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == -1) {
+							return Character.Direction.RightDown;
+						}
+					}
+				}	
+			} else if (playerID == 2) {
+				if (GetObjectDirectionFromMyChara (allyGameObject) == Character.Direction.Right) {
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 他のキャラが自分より１つ上の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == 1) {
+							return Character.Direction.RightUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 他のキャラが自分より１つ下の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == -1) {
+							return Character.Direction.RightDown;
+						}
+					}
+				} else if (GetObjectDirectionFromMyChara (allyGameObject) == Character.Direction.Left) {
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 自分のキャラが他のキャラより１つ下の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == 1) {
+							return Character.Direction.LeftUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 自分のキャラが他のキャラより１つ上の行にいたら
+						if (myCharacter.mapColumn - allyCharacter.mapColumn == -1) {
+							return Character.Direction.LeftDown;
+						}
+					}
+				}
+			}
+		}
+		return Character.Direction.None;
+	}
+
+	// 他の敵キャラが自分のキャラから見てどの方向にいるかを返す
+	Character.Direction GetEnemyDirectionFromMyChara(Character _otherCharacter, Character.Direction _dir)
+	{
+		int playerID = m_instance.GetComponent<Character> ().status.PlayerID;
+		int otherCharacterId = _otherCharacter.GetComponent<Character> ().status.PlayerID;
+		Character myCharacter = m_instance.GetComponent<Character> ();
+
+		// 自分と相手のプレイヤーIDが同じだったら
+		if (playerID != otherCharacterId) {
+			Character enemyCharacter = _otherCharacter;
+			GameObject enemyGameObject = _otherCharacter.gameObject;
+			int enemyCharacterId = otherCharacterId;
+
+			if (playerID == 1) 
+			{
+				// 敵のキャラが自分より左にいたら
+				if (GetObjectDirectionFromMyChara (enemyGameObject) == Character.Direction.Left)
+				{
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 敵のキャラが自分より１つ上の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == 1) {
+							return Character.Direction.LeftUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 敵のキャラが自分より１つ下の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == -1)
+							return Character.Direction.LeftDown;
+					}
+				}
+				// 自分が他の敵のキャラより右にいたら
+				else if (GetObjectDirectionFromMyChara (enemyGameObject) == Character.Direction.Right) {
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 自分のキャラが敵のキャラより１つ下の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == 1) {
+							return Character.Direction.RightUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 自分のキャラが他のキャラより１つ上の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == -1) {
+							return Character.Direction.RightDown;
+						}
+					}
+
+				}
+			} else if (playerID == 2) {
+				if (GetObjectDirectionFromMyChara (enemyGameObject) == Character.Direction.Right) {
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 他のキャラが自分より１つ上の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == 1) {
+							return Character.Direction.RightUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 敵のキャラが自分より１つ下の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == -1) {
+							return Character.Direction.RightDown;
+						}
+					}
+				} else if (GetObjectDirectionFromMyChara (enemyGameObject) == Character.Direction.Left) {
+					// チェックする行が上の時
+					if (_dir == Character.Direction.Up) {
+						// 自分のキャラが敵のキャラより１つ下の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == 1) {
+							return Character.Direction.LeftUp;
+						}
+					}
+					// チェックする行が下の時
+					else if (_dir == Character.Direction.Down) {
+						// 自分のキャラが敵のキャラより１つ上の行にいたら
+						if (myCharacter.mapColumn - enemyCharacter.mapColumn == -1) {
+							return Character.Direction.LeftDown;
+						}
+					}
+				}
+			}
+		}
+		return Character.Direction.None;
+	}
+
+	float GetDirection(Vector3 _pos1, Vector3 _pos2)
+	{
+		return Mathf.Sqrt (Mathf.Pow(_pos2.x - _pos1.x, 2.0f) + Mathf.Pow(_pos2.y - _pos1.y, 2.0f));
+	}
+
+	bool IsNearCharacter(Character.Direction _dir)
+	{
+		GameObject[] otherCharaObj = GameObject.FindGameObjectsWithTag ("Character");
+		Character myChara = m_instance.GetComponent<Character> ();
+		Vector3 myCharaPos = m_instance.transform.position;
+
+		for (int i = 0; i < otherCharaObj.Length; i++)
 		{
-			Character enemyCharacter = charaObj [i].GetComponent<Character> ();
+			Character otherCharacter = otherCharaObj [i].GetComponent<Character> ();
+			Vector3 otherCharaPos = otherCharaObj [i].transform.position;
 
-			if (m_instance.gameObject == charaObj [i]) continue;
-		
-			if (_dir == Character.Direction.Up) {
-				if (GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Left && // 自分が敵のキャラクターより左にいたら
-					myCharacter.mapColumn - enemyCharacter.mapColumn == 1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
-					return true;
-				} else if (GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Right && // 自分が敵のキャラクターより右にいたら
-					myCharacter.mapColumn - enemyCharacter.mapColumn == 1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
-					return true;
-				}
-			} else {
-				if (GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Left && // 自分が敵のキャラクターより左にいたら
-					myCharacter.mapColumn - enemyCharacter.mapColumn == -1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
-					return true;
-				} else if (GetMyDirectionFromObject(charaObj [i]) == Character.Direction.Right && // 自分が敵のキャラクターより右にいたら
-					myCharacter.mapColumn - enemyCharacter.mapColumn == -1 &&
-					Mathf.Abs (m_instance.gameObject.transform.position.x) - Mathf.Abs (charaObj [i].transform.position.x) < 90.0f * m_instance.GetComponent<Character> ().status.moveSpeed) {
-					return true;
-				}
-//				
+			if (m_instance.gameObject == otherCharaObj [i]) continue;
 
+			if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightDown) 
+			{
+				Debug.Log ("味方が右下にいる");
+				if (myChara.status.PlayerID == 1)
+					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightUp)
+			{
+				Debug.Log ("味方が右上にいる");
+				if (myChara.status.PlayerID == 1)
+					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
+			
+			}
+			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftDown) 
+			{
+				Debug.Log ("味方が左下にいる");
+				if (myChara.status.PlayerID == 2)
+					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftUp) 
+			{
+				Debug.Log ("味方が左上にいる");
+				if (myChara.status.PlayerID == 2)
+					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightDown)
+			{
+				Debug.Log ("敵が右下にいる");
+				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightUp)
+			{
+				Debug.Log ("敵が右上にいる");
+				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftDown)
+			{
+				Debug.Log ("敵が左下にいる");
+				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
+			}
+			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftUp) 
+			{
+				Debug.Log ("敵が左上にいる");
+				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
 			}
 		}
 
