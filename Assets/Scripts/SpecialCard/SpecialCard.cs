@@ -6,6 +6,7 @@ public class SpecialCard : MonoBehaviour {
     public string m_howTo;
     public int m_UsedPlayerID;
 
+    //消去予定
     public Camera m_mainCamera;
     public Camera mainCamera
     {
@@ -15,11 +16,32 @@ public class SpecialCard : MonoBehaviour {
         }
     }
 
+    Transform m_battleManager;
+    public Transform battleManager
+    {
+        get
+        {
+            return m_battleManager;
+        }
+        set
+        {
+            m_battleManager = value;
+        }
+    }
+    public bool m_IsGameNow = false;
+
     public enum SpCardTag
     {
         SoliderChange,
         Archer,
         MobSpawner
+    }
+
+    public void GameReady(Transform _battleManager)
+    {
+        
+        m_battleManager = _battleManager;
+        m_IsGameNow = true;
 
     }
 

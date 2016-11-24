@@ -3,21 +3,34 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System;
 
 public class GameUIManager : MonoBehaviour {
     
-    Rect[] m_coulumnRect = new Rect[MyUtility.MAX_COLUMN];
+    Rect[,] m_coulumnRect = new Rect [2,MyUtility.MAX_COLUMN];
 
-    void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _columnNumber)
+
+
+    public void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _columnNumber)
     {
-        m_coulumnRect[_columnNumber] = new Rect(_firstPoint.x * Screen.width,
+        m_coulumnRect[0,_columnNumber] = new Rect(_firstPoint.x * Screen.width,
                                                 _firstPoint.y * Screen.height,
                                                 _endPoint.x * Screen.width,
                                                 _endPoint.y * Screen.height);
-        m_coulumnRect[_columnNumber] = new Rect(_firstPoint.x / Screen.width,
-                                                _firstPoint.y / Screen.height,
-                                                _endPoint.x / Screen.width,
-                                                _endPoint.y / Screen.height);
+
+        return;
+    }
+
+    public bool TargetRect(Vector3 _targetPoint, int _idx)
+    {
+        if (m_coulumnRect[0,_idx].x<_targetPoint.x &&
+            _targetPoint.x< m_coulumnRect[0,_idx].width&&
+            m_coulumnRect[0,_idx].y < _targetPoint.y&&
+            _targetPoint.y < m_coulumnRect[0,_idx].height
+            ) {
+            return true;
+        }
+        return false;
     }
 
     void Awake()
@@ -123,7 +136,7 @@ public class GameUIManager : MonoBehaviour {
                 btnCmp.m_PlayerID = j;
                 btnCmp.m_ButtonID = i;
             }
-            SetCoulumRect(new Vector2((8.0f / 32.0f), (20.0f / 25.0f)),
+            SetCoulumRect(new Vector2(6.0f / 32.0f,  15.0f / 25.0f),
                           new Vector2(26.0f / 32.0f, 25.0f / 25.0f),
                           i);
         }
