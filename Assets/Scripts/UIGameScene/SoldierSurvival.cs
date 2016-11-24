@@ -34,8 +34,8 @@ public class SoldierSurvival : MonoBehaviour
             m_SoldierImgObj[i] = MyUtility.CreateImage(
             "LongBar",
             "Image/karie/waku6",
-            new Vector2((1.0f /*+ (27.0f* i)*/)/ 32.0f, (13.0f  /*+ (13.0f* i)*/) / 25.0f),
-            new Vector2((4.0f /*+ (27.0f* i)*/)/ 32.0f, (25.0f/* + (13.0f* i)*/) / 25.0f),
+            new Vector2((0.0f /*+ (27.0f* i)*/)/ 32.0f, (13.0f  /*+ (13.0f* i)*/) / 25.0f),
+            new Vector2((3.0f /*+ (27.0f* i)*/)/ 32.0f, (25.0f/* + (13.0f* i)*/) / 25.0f),
             transform);
 
             for (int j = 0; j < 4; j++)
