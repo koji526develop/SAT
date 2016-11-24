@@ -151,26 +151,26 @@ public class ButtonSpawner : MonoBehaviour
 
     void OnGUI()
     {
-        RectTransform uiRectTransForm = gameObject.GetComponent<RectTransform>();
-        Vector2 uiPos = new Vector2(uiRectTransForm.localPosition.x + Screen.width / 2,
-                                      -uiRectTransForm.localPosition.y + Screen.height / 2);
-        Texture changeTexture = gameObject.GetComponent<Image>().mainTexture;
+       // RectTransform uiRectTransForm = gameObject.GetComponent<RectTransform>();
+       // Vector2 uiPos = new Vector2(uiRectTransForm.localPosition.x + Screen.width / 2,
+       //                               -uiRectTransForm.localPosition.y + Screen.height / 2);
+       // Texture changeTexture = gameObject.GetComponent<Image>().mainTexture;
 
-        // UIのテクスチャの向きを1Pと2P用に帰る処理
-        Matrix4x4 matrix = GUI.matrix;
-        {
-            if (m_PlayerID == 1)
-            {
-                GUIUtility.RotateAroundPivot(90, uiPos);
-                GUI.DrawTexture(new Rect(uiPos.x, uiPos.y - 64, 92.16f, 64), changeTexture);
-            }
-            else
-            {
-                GUIUtility.RotateAroundPivot(-90, uiPos);
-                GUI.DrawTexture(new Rect(uiPos.x - 92.16f, uiPos.y, 92.16f, 64), changeTexture);
-            }
-        }
-        GUI.matrix = matrix;
+       // UIのテクスチャの向きを1Pと2P用に帰る処理
+       //Matrix4x4 matrix = GUI.matrix;
+       // {
+       //     if (m_PlayerID == 1)
+       //     {
+       //         GUIUtility.RotateAroundPivot(90, uiPos);
+       //         GUI.DrawTexture(new Rect(uiPos.x, uiPos.y - 64, 92.16f, 64), changeTexture);
+       //     }
+       //     else
+       //     {
+       //         GUIUtility.RotateAroundPivot(-90, uiPos);
+       //         GUI.DrawTexture(new Rect(uiPos.x - 92.16f, uiPos.y, 92.16f, 64), changeTexture);
+       //     }
+       // }
+       // GUI.matrix = matrix;
     }
 
     //兵士の選択を変える処理に入る

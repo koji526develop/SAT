@@ -33,10 +33,21 @@ public class GameManager : MonoBehaviour
 
         // バトル用のカメラ作成
         Camera camera = MyUtility.CreateCamera ("BattleCamera", battleManager);
-		camera.transform.eulerAngles = new Vector3(90,0,0);
-		camera.transform.position = new Vector3(0,15f,0);
+        //camera.transform.eulerAngles = new Vector3(90,0,0);
+        camera.transform.rotation = Quaternion.Euler(50,90,90);
+        camera.transform.position = new Vector3(-11.8f, 7.15f, 0);
+        camera.rect= new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+        camera.clearFlags = CameraClearFlags.Depth;
+       
+        Camera cameraSub = MyUtility.CreateCamera("BattleCameraSub", battleManager);
+        //cameraSub.transform.eulerAngles = new Vector3(90, 0, 0);
+        cameraSub.transform.rotation = Quaternion.Euler(50, -90, -90);
+        cameraSub.transform.position = new Vector3(10.42f, 7.15f, 0);
+        cameraSub.rect= new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+        cameraSub.clearFlags = CameraClearFlags.Depth;
 
-		Camera uiCamera = MyUtility.CreateCamera ("UICamera");
+
+        Camera uiCamera = MyUtility.CreateCamera ("UICamera");
 		uiCamera.clearFlags = CameraClearFlags.Depth;
 		uiCamera.depth = 1;
 

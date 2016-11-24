@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 496e8f761d5e558428b5365012ca017d
-timeCreated: 1479965918
+guid: 45ca5377bfbab02478bfd0a809f95a69
+timeCreated: 1479971780
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: gage-ao_0
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -39,7 +38,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,20 +51,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: gage-ao_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 96
-        height: 320
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 9, y: 9, z: 9, w: 9}
-      outline: []
-      tessellationDetail: 0
+    sprites: []
     outline: []
   spritePackingTag: 
   userData: 
