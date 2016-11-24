@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour 
 {
 	Canvas m_canvas;
+
 	// ゲーム開始時
 	void Awake()
 	{
@@ -35,16 +36,18 @@ public class GameManager : MonoBehaviour
         Camera camera = MyUtility.CreateCamera ("BattleCamera", battleManager);
         //camera.transform.eulerAngles = new Vector3(90,0,0);
         camera.transform.rotation = Quaternion.Euler(50,90,90);
-        camera.transform.position = new Vector3(-11.8f, 7.15f, 0);
+        camera.transform.position = new Vector3(-9.1f, 7.15f, 0);
         camera.rect= new Rect(0.0f, 0.0f, 0.5f, 1.0f);
         camera.clearFlags = CameraClearFlags.Depth;
+		camera.orthographic = true;
        
         Camera cameraSub = MyUtility.CreateCamera("BattleCameraSub", battleManager);
         //cameraSub.transform.eulerAngles = new Vector3(90, 0, 0);
         cameraSub.transform.rotation = Quaternion.Euler(50, -90, -90);
-        cameraSub.transform.position = new Vector3(10.42f, 7.15f, 0);
+        cameraSub.transform.position = new Vector3(9.1f, 7.15f, 0);
         cameraSub.rect= new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraSub.clearFlags = CameraClearFlags.Depth;
+		cameraSub.orthographic = true;
 
 
         Camera uiCamera = MyUtility.CreateCamera ("UICamera");
