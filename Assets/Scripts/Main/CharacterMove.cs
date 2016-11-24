@@ -4,6 +4,7 @@ using System.Collections;
 public class CharacterMove :  State<Character>
 {
 	bool m_isCharacterTouch;
+	int m_touchId;
 
 	public CharacterMove (Character _instance) : base (_instance) {}
 
@@ -12,6 +13,8 @@ public class CharacterMove :  State<Character>
 		m_instance.animator.Play ("Move");
 
 		m_isCharacterTouch = false;
+
+		m_touchId = 99;
 	}
 
 	public override void Update ()
@@ -32,31 +35,41 @@ public class CharacterMove :  State<Character>
 		// 全てのキャラクター同士の衝突判定
 		CollisionCheck ();
 
-	
-
-		TouchInfo touchInfo = TouchManager.GetTouchInfo (0);
-		// タッチ開始時
-		if (touchInfo == TouchInfo.Began)
-		{
-			// キャラクターがタッチされているか判定
-			m_isCharacterTouch = IsCharacterTouch ();
+		for (int i = 0; i < Input.touchCount; i++) {
+			TouchInfo touchInfo = TouchManager.GetTouchInfo (i);
+			// タッチ開始時
+			if (touchInfo == TouchInfo.Began) {
+				// キャラクターがタッチされているか判定
+				m_isCharacterTouch = IsCharacterTouch (i);
+				if (m_isCharacterTouch) 
+				{
+					m_touchId = i;
+					break;
+				}
+			}
 		}
-		// タッチ移動中
-		else if (touchInfo == TouchInfo.Moved) 
-		{
-			// キャラクターがタッチされていなかったら何もしない
-			if (!m_isCharacterTouch) return;
+		
+			// タッチ移動中
+		if (m_touchId != 99 && TouchManager.GetTouchInfo (m_touchId) == TouchInfo.Moved) {
+			
 
-			// キャラクターが境界線を超えていたら何もしない
-			if (IsBeyondCenterLine()) return;
+				// キャラクターが境界線を超えていたら何もしない
+				if (IsBeyondCenterLine ())
+					return;
 
-			// キャラクターが上にフリックされていたら回転させる
-			if (IsUpFlick () && !IsNearCharacter(Character.Direction.Up)) RotateUp ();
+				// キャラクターが上にフリックされていたら回転させる
+				if (IsUpFlick (m_touchId) && !IsNearCharacter (Character.Direction.Up))
+					RotateUp ();
 
 			// キャラクターが下にフリックされていたら回転させる
-			else if (IsDownFlick() && !IsNearCharacter(Character.Direction.Down)) RotateDown();
-		}
+			else if (IsDownFlick (m_touchId) && !IsNearCharacter (Character.Direction.Down))
+					RotateDown ();
+			}
 
+		if (m_touchId != 99 && TouchManager.GetTouchInfo (m_touchId) == TouchInfo.Ended) {
+			m_touchId = 99;
+		}
+		
 		if (m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
 			m_instance.animator.SetTime (0.0f);
 
@@ -382,9 +395,9 @@ public class CharacterMove :  State<Character>
 	}
 
 	// キャラクターが上にフリックされたかどうかの判定
-	bool IsUpFlick()
+	bool IsUpFlick(int _touchCount)
 	{
-		if (!(TouchManager.GetTouchMoveDistanceY (0) > 50.0f)) return false;
+		if (!(TouchManager.GetTouchMoveDistanceY (_touchCount) > 50.0f)) return false;
 
 		if (m_instance.mapColumn <= MyUtility.MIX_COLUMN) return false;
 
@@ -392,9 +405,9 @@ public class CharacterMove :  State<Character>
 	}
 
 	// キャラクターが下にフリックされたかどうかの判定
-	bool IsDownFlick()
+	bool IsDownFlick(int _touchCount)
 	{
-		if (!(TouchManager.GetTouchMoveDistanceY (0) < -50.0f)) return false;
+		if (!(TouchManager.GetTouchMoveDistanceY (_touchCount) < -50.0f)) return false;
 
 		if (m_instance.mapColumn >= MyUtility.MAX_COLUMN) return false;
 
@@ -403,9 +416,9 @@ public class CharacterMove :  State<Character>
 	}
 
 	// キャラクターがタッチされたかどうかの判定
-	bool IsCharacterTouch()
+	bool IsCharacterTouch(int _touchCount)
 	{
-		GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, 0);
+		GameObject characterObj = TouchManager.GetRaycastHitObject (m_instance.MainCamera, _touchCount);
 		if (characterObj && characterObj == m_instance.gameObject) return true;
 		return false;
 	}

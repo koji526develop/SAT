@@ -43,7 +43,7 @@ public class GameUIManager : MonoBehaviour {
             "Image/gage-ao",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
-            canvasTransForm
+			canvasTransForm
             );
         obj.GetComponentInChildren<Image>().raycastTarget = false;
         obj.GetComponent<Slider>().direction = Slider.Direction.TopToBottom;
@@ -53,7 +53,7 @@ public class GameUIManager : MonoBehaviour {
             "Image/gage-akapng",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
-            canvasTransForm
+			canvasTransForm
         );
         obj.GetComponentInChildren<Image>().raycastTarget = false;
         obj.GetComponent<Slider>().direction = Slider.Direction.BottomToTop;

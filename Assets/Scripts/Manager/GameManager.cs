@@ -7,7 +7,8 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour 
 {
 	Canvas m_canvas;
-
+	Touch touchh;
+	bool flag = false;
 	// ゲーム開始時
 	void Awake()
 	{
@@ -86,6 +87,11 @@ public class GameManager : MonoBehaviour
             SceneChanger sChange = new SceneChanger();
             sChange.ChangeToResult();
         }
-    }
 
+		for (int i = 0; i < Input.touchCount; i++) 
+		{
+			Debug.Log (i.ToString () + "  " + TouchManager.GetTouchMoveDistanceY (i).ToString());
+		}
+
+    }
 }
