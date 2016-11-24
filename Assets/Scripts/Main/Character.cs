@@ -316,11 +316,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     {
         if (_playerID == 1)
         {
-            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_1P, 0.0f, 8.0f - (2.0f * _Column));
+            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_1P, 0.0f, 6.0f - (2.0f * _Column));
         }
         else
         {
-            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 8.0f - (2.0f * _Column));
+            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 6.0f - (2.0f * _Column));
         }
     }
 }

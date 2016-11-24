@@ -26,9 +26,6 @@ public class CharacterNone : State<Character>
 		{
 			m_instance.ChangeState (Character.CharacterState.Move);
 		}
-
-	
-
 	}
 	public override void Exit() 
 	{
