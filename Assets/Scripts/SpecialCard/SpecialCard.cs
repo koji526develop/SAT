@@ -28,6 +28,7 @@ public class SpecialCard : MonoBehaviour {
             m_battleManager = value;
         }
     }
+
     public bool m_IsGameNow = false;
 
     public enum SpCardTag
