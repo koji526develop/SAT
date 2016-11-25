@@ -214,7 +214,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
                     MyUtility.SWORD_LIFE,
                     MyUtility.SWORD_ATTACK,
                     MyUtility.SWORD_ATTACKDISTANCE,
-                    MyUtility.SWORD_MOCESPEED,
+				MyUtility.SWORD_MOVESPEED,
                     _playerID);
                 SoldierUse(_playerID,_characterType);
                 break;
@@ -223,7 +223,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
                     MyUtility.SHIELD_LIFE,
                     MyUtility.SHIELD_ATTACK,
                     MyUtility.SHIELD_ATTACKDISTANCE,
-                    MyUtility.SHIELD_MOCESPEED,
+				MyUtility.SHIELD_MOVESPEED,
                     _playerID);
                 SoldierUse(_playerID, _characterType);
                 break;
@@ -232,7 +232,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
                     MyUtility.AX_LIFE,
                     MyUtility.AX_ATTACK,
                     MyUtility.AX_ATTACKDISTANCE,
-                    MyUtility.AX_MOCESPEED,
+				MyUtility.AX_MOVESPEED,
                     _playerID);
                 SoldierUse(_playerID, _characterType);
                 break;
@@ -241,7 +241,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
                     MyUtility.SPEAR_LIFE,
                     MyUtility.SPEAR_ATTACK,
                     MyUtility.SPEAR_ATTACKDISTANCE,
-                    MyUtility.SPEAR_MOCESPEED,
+				MyUtility.SPEAR_MOVESPEED,
                     _playerID);
                 SoldierUse(_playerID, _characterType);
                 break;
