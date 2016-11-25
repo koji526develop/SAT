@@ -37,8 +37,7 @@ public class CharacterAttack : State<Character>
 	public override void Update()
 	{
 		m_attackTime += Time.deltaTime;
-		PlayerNonLife ();
-		EnemyNonLife ();
+	
 		if(m_attackTime>=1)
 		{
 			m_instance.animator.SetTime (0.0f);
@@ -46,6 +45,9 @@ public class CharacterAttack : State<Character>
 			Debug.Log ("攻撃なう");
 			m_attackTime = 0;
 		}
+
+		if(m_enemyCharacter == null)
+			m_instance.ChangeState (Character.CharacterState.Move);
 	}
 	void Attak()
 	{
@@ -53,23 +55,7 @@ public class CharacterAttack : State<Character>
 
 		m_enemyCharacter.status = m_changeStatus;
 	}
-	//自分のlifeがなくなったとき
-	void PlayerNonLife()
-	{
-		if(m_instance.status.life<=0)
-		{
-			Character.Destroy(m_instance.gameObject);
-			Debug.Log ("体力無し");
-		}
-	}
-	//敵のlifeがなくなったとき
-	void EnemyNonLife()
-	{
-		if(m_changeStatus.life <= 0)
-		{
-			m_instance.ChangeState (Character.CharacterState.Move); 
-		}	
-	}
+
 	public override void Exit() 
 	{
 		m_enemyObj = null;
