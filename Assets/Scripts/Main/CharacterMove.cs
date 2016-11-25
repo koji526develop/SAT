@@ -10,6 +10,7 @@ public class CharacterMove :  State<Character>
 	public override void Enter ()
 	{
 		m_isCharacterTouch = false;
+		 
 	}
 
 	public override void Update ()
