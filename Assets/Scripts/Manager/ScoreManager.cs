@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour {
     private int[] m_scoreArea = { 10, 20, 40, 70, 100 };    //フェーズごとの得点情報
     private int m_countAreaStage;
 
+    private float[] m_pointBouns=new float[2];
+    private float[] m_pointBounsTime = new float[2];
     void Awake()
     {
         //スコアの初期設定を行う。
@@ -31,7 +33,13 @@ public class ScoreManager : MonoBehaviour {
             }
         }
 
-        m_countAreaStage = m_countArea.Length;
+        for (int i = 0; i < m_totalPlayer; i++)
+        {
+            m_pointBouns[i] = 1.0f;
+            m_pointBounsTime[i] = 0.0f;
+        }
+            m_countAreaStage = m_countArea.Length;
+
     }
 
     public void SpawnerCount(int _playerID, int _Column)
@@ -72,13 +80,21 @@ public class ScoreManager : MonoBehaviour {
     {
         if (_playerID == 1)
         {
-            m_Score += _point;
+            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID]);
         }
         else
         {
-            m_Score -= _point;
+            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID]);
         }
 
+    }
+
+    public void CountReset(int _PlayerID, int _Column)
+    {
+        _PlayerID--;
+        _Column--;
+        
+        m_countSpawner[_PlayerID, _Column] = 0;
     }
 
     public void GetPoint(int _playerID, int _Column)
@@ -97,14 +113,36 @@ public class ScoreManager : MonoBehaviour {
 
         if (_playerID == 1)
         {
-            m_Score += m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
+            m_Score = m_Score +(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID]);
         }
         else
         {
-            m_Score -= m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)];
+            m_Score = m_Score -(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID]);
         }
 
-        m_countSpawner[enemyPlayerID, _Column - 1] = 0;
+        CountReset(enemyPlayerID+1,_Column);
     }
 
+    public void pointBouns(int _playerID,float _bouns,float _time)
+    {
+        _playerID--;
+        m_pointBouns[_playerID]     = _bouns;
+        m_pointBounsTime[_playerID] = _time;
+    }
+
+    public void Update()
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            if (m_pointBounsTime[i] > 0.0f)
+            {
+                m_pointBounsTime[i]-=Time.deltaTime;
+            }
+            else
+            {
+                m_pointBouns[i] = 1.0f;
+            }
+           
+        }
+    }
 }

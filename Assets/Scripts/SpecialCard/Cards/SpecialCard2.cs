@@ -48,7 +48,8 @@ public class SpecialCard2 : SpecialCard {
             {
                 //キャラクタータグであるならもしくは、同じ列であるなら
                 if (childObj.tag == "Character" &&
-                    m_checkColumn == childObj.GetComponent<Character>().m_mapColumn)
+                    (m_checkColumn == childObj.GetComponent<Character>().m_mapColumn ||
+                    m_checkColumn2 == childObj.GetComponent<Character>().m_mapColumn) )
                 {
                     if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
                     {
@@ -58,12 +59,17 @@ public class SpecialCard2 : SpecialCard {
                     }
                 }
             }
-           
+
+            int enemyPlayerID = 0;
             if (m_UsedPlayerID == 1)
             {
-
+                enemyPlayerID = 2;
             }
-           // gameManager.GetComponent<ScoreManager>().DirectGetPoint();
+            else
+            {
+                enemyPlayerID = 1;
+            }
+            gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID,100);
             Destroy(this);
         }
     }

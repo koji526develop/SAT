@@ -13,6 +13,9 @@ public class SpecialCard8 : SpecialCard {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        ScoreManager scoreManager = gameManager.GetComponent<ScoreManager>();
+
+        scoreManager.pointBouns(m_UsedPlayerID,2.0f ,10.0f);
+        Destroy(this);
+    }
 }
