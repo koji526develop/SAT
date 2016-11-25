@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpeedUp : SpecialCard {
 	private GameObject m_obj;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -11,7 +12,7 @@ public class SpeedUp : SpecialCard {
 	// Update is called once per frame
 	public override void Update()
 	{
-
+		float AxSpeedUp=MyUtility.AX_MOVESPEED;
 	
 				foreach (Transform childObj in battleManager)
 				{
@@ -20,8 +21,7 @@ public class SpeedUp : SpecialCard {
 					{
 						if (childObj.GetComponent<Character>().status.PlayerID == m_UsedPlayerID)
 						{
-						
-							
+					AxSpeedUp=AxSpeedUp*1.5f;							
 						}
 					}
 				}
