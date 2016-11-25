@@ -188,8 +188,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	private static string GetCharacterObjPath(CharacterType _characterType, int _playerID)
 	{
 		string colorStr;
-		if(_playerID == 1) colorStr = "red";
-		else 			   colorStr = "blue";
+		if(_playerID == 1) colorStr = "blue";
+		else 			   colorStr = "red";
 
 		switch (_characterType)
 		{
