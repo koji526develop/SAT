@@ -86,6 +86,19 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         }
     }
 
+	bool m_isBarrier = false;
+	public bool Barrier
+	{
+		get
+		{
+			return m_isBarrier;
+		}
+		set
+		{
+			m_isBarrier = value;
+		}
+	}
+
 
     // キャラクターのステート
     public enum CharacterState

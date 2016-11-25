@@ -12,7 +12,10 @@ public class SpecialCard6 : SpecialCard {
 	{
 		List<Character> allyCharactersList = GetAllyCharactersList ();
 
-		int a = 0;
+		foreach (Character allyCharacter in allyCharactersList) 
+		{
+			allyCharacter.ChangeState (Character.CharacterState.Barrier);
+		}
 
 	}
 
