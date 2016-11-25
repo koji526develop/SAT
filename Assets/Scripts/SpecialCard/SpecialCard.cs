@@ -28,6 +28,19 @@ public class SpecialCard : MonoBehaviour {
         }
     }
 
+    Transform m_gameManager;
+    public Transform gameManager
+    {
+        get
+        {
+            return m_gameManager;
+        }
+        set
+        {
+            m_gameManager = value;
+        }
+    }
+
     public bool m_IsGameNow = false;
 
     public enum SpCardTag
@@ -37,10 +50,12 @@ public class SpecialCard : MonoBehaviour {
         MobSpawner
     }
 
-    public void GameReady(Transform _battleManager)
+    public void GameReady(Transform _battleManager,Transform _gameManager)
     {
         
         m_battleManager = _battleManager;
+        m_gameManager = _gameManager;
+
         m_IsGameNow = true;
 
     }
