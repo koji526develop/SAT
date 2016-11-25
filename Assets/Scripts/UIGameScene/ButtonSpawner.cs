@@ -19,10 +19,19 @@ public class ButtonSpawner : MonoBehaviour
 
     public float m_intervalTime =0.0f;
 
+    //特殊カードのフラグ
+    public bool m_soliderStop = false;
+
+    public bool m_soliderDouble = false;
+    public bool m_soliderDoubleStart = false;
+    private Character.CharacterType m_beforeType;
+
     Color color = new Color(1f, 1f, 1f, 0f);
 
     void Awake()
     {
+
+        this.transform.tag = "SoliderButton";
 
         m_scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
 
@@ -75,7 +84,7 @@ public class ButtonSpawner : MonoBehaviour
 
     public void StartFlag()
     {
-        if (m_intervalTime <= 0.0f)
+        if (m_intervalTime <= 0.0f && !m_soliderStop)
         {
             for (int i = 0; i <= TouchManager.touchCount; i++)
             {
@@ -83,12 +92,14 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     m_nowTouchNumber = i;
                     Debug.Log("タッチしましたー＞" + i);
-                    m_startFlag = true;
+                    
                     Button btn = this.GetComponent<Button>();
                     ColorBlock colorBlocks = btn.colors;
                     colorBlocks.normalColor = new Color(1f, 1f, 1f, 1f);
                     colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 1f);
                     btn.colors = colorBlocks;
+
+                    m_startFlag = true;
                     return;
                 }
             }
@@ -177,6 +188,13 @@ public class ButtonSpawner : MonoBehaviour
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
+
+            if (m_soliderDouble)
+            {
+                m_beforeType = m_type;
+                m_soliderDouble = false;
+                m_soliderDoubleStart = true;
+            }
 
            //インターバル時間を追加
             m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
@@ -273,6 +291,36 @@ public class ButtonSpawner : MonoBehaviour
         else
         {
             m_intervalTime = 0.0f;
+
+            if (m_soliderDoubleStart)
+            {
+
+                Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
+                character.mapColumn = m_ButtonID;
+
+                switch (m_beforeType)
+                {
+                    case Character.CharacterType.Sword:
+                        if (m_PlayerID == 1) SelectUIManager.SWORD_NUM_1++;
+                        if (m_PlayerID == 2) SelectUIManager.SWORD_NUM_2++;
+                        break;
+                    case Character.CharacterType.Spear:
+                        if (m_PlayerID == 1) SelectUIManager.SPEAR_NUM_1++;
+                        if (m_PlayerID == 2) SelectUIManager.SPEAR_NUM_2++;
+                        break;
+                    case Character.CharacterType.Ax:
+                        if (m_PlayerID == 1) SelectUIManager.AX_NUM_1++;
+                        if (m_PlayerID == 2) SelectUIManager.AX_NUM_2++;
+
+                        break;
+                    case Character.CharacterType.Shield:
+                        if (m_PlayerID == 1) SelectUIManager.SHIELD_NUM_1++;
+                        if (m_PlayerID == 2) SelectUIManager.SHIELD_NUM_2++;
+
+                        break;
+                }
+                m_soliderDoubleStart = false;
+            }
         }
     }
 }
