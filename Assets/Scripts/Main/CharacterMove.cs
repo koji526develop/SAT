@@ -35,7 +35,7 @@ public class CharacterMove :  State<Character>
 		// 全てのキャラクター同士の衝突判定
 		CollisionCheck ();
 
-		for (int i = 0; i < Input.touchCount; i++) {
+		for (int i = 0; i < TouchManager.touchCount; i++) {
 			TouchInfo touchInfo = TouchManager.GetTouchInfo (i);
 			// タッチ開始時
 			if (touchInfo == TouchInfo.Began) {

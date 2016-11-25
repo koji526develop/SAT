@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+		TouchManager.Update ();
+
         //デバッグ用
         if (Input.GetKeyDown("return"))
         {
@@ -88,10 +90,7 @@ public class GameManager : MonoBehaviour
             sChange.ChangeToResult();
         }
 
-		for (int i = 0; i < Input.touchCount; i++) 
-		{
-			Debug.Log (i.ToString () + "  " + TouchManager.GetTouchMoveDistanceY (i).ToString());
-		}
+		Debug.Log (Input.touchCount);
 
     }
 }
