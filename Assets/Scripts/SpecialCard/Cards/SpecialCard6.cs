@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpecialCard6 : SpecialCard {
 
@@ -7,12 +8,30 @@ public class SpecialCard6 : SpecialCard {
 	public static string m_imagePath = "path";
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+		List<Character> allyCharactersList = GetAllyCharactersList ();
+
+		int a = 0;
+
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	List<Character> GetAllyCharactersList()
+	{
+		List<Character> allyCharactersList = new List<Character> ();
+
+		foreach(Transform child in battleManager)
+		{
+			if (child.tag == "Character")
+			{
+				Character character = child.gameObject.GetComponent<Character> ();
+
+				if (character.status.PlayerID == m_UsedPlayerID)
+				{
+					allyCharactersList.Add (character);
+				}
+			}
+		}
+		return allyCharactersList;
 	}
 }
