@@ -11,6 +11,20 @@ public static class TouchManager
 
 	static bool isRemote = false;
 
+	public static int touchCount = 0;
+
+	public static void Update()
+	{
+		if (Application.isEditor && !isRemote)
+		{
+			touchCount = 1;
+		}
+		else
+		{
+			touchCount = Input.touchCount;
+		}
+	}
+
     // タッチ情報を取得(エディタと実機を考慮)
     // <returns>タッチ情報。タッチされていない場合は null</returns>
 
@@ -24,7 +38,10 @@ public static class TouchManager
                 return TouchInfo.Began;
             }
             if (Input.GetMouseButton(0)) { return TouchInfo.Moved; }
-            if (Input.GetMouseButtonUp(0)) { return TouchInfo.Ended; }
+            if (Input.GetMouseButtonUp(0))
+			{
+				return TouchInfo.Ended; 
+			}
         }
         else
         {
