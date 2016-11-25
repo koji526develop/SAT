@@ -12,6 +12,7 @@ public class SpecialCardButton : MonoBehaviour {
     private SpecialCard m_usedSpCardState;
     private int m_UsedCard;
 
+    Transform m_GameManager;
     Transform m_battleManager;
 
 
@@ -21,7 +22,7 @@ public class SpecialCardButton : MonoBehaviour {
         switch (_getStartTag)
         {
             case SpecialCard.SpCardTag.SoliderChange:
-			this.gameObject.AddComponent<SpeedUp>().m_UsedPlayerID = m_playerID;
+                this.gameObject.AddComponent<SpecialCard1>().m_UsedPlayerID = m_playerID;
                 break;
 
             case SpecialCard.SpCardTag.Archer:
@@ -35,7 +36,7 @@ public class SpecialCardButton : MonoBehaviour {
         }
 
         m_usedSpCardState = this.GetComponent<SpecialCard>();
-        m_usedSpCardState.GameReady(m_battleManager);
+        m_usedSpCardState.GameReady(m_battleManager,m_GameManager);
     }
 
     void Awake()
@@ -73,8 +74,9 @@ public class SpecialCardButton : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-      
-        m_battleManager = gameObject.transform.Find("BattleManager");
+
+        m_GameManager = GameObject.Find("GameManager").transform;
+        m_battleManager = GameObject.Find("BattleManager").transform;
     }
 	
 	// Update is called once per frame

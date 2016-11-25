@@ -11,9 +11,12 @@ public class GameUIManager : MonoBehaviour {
 
 
 
-    public void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _columnNumber)
+    public void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _playerID, int _columnNumber)
     {
-        m_coulumnRect[0,_columnNumber] = new Rect(_firstPoint.x * Screen.width,
+        _playerID--;
+        _columnNumber--;
+
+        m_coulumnRect[_playerID,_columnNumber] = new Rect(_firstPoint.x * Screen.width,
                                                 _firstPoint.y * Screen.height,
                                                 _endPoint.x * Screen.width,
                                                 _endPoint.y * Screen.height);
@@ -21,13 +24,18 @@ public class GameUIManager : MonoBehaviour {
         return;
     }
 
-    public bool TargetRect(Vector3 _targetPoint, int _idx)
+    public bool TargetRect(Vector3 _targetPoint, int _playerID,int _idx)
     {
-        if (m_coulumnRect[0,_idx].x<_targetPoint.x &&
-            _targetPoint.x< m_coulumnRect[0,_idx].width&&
-            m_coulumnRect[0,_idx].y < _targetPoint.y&&
-            _targetPoint.y < m_coulumnRect[0,_idx].height
+
+        _playerID--;
+        _idx--;
+
+        if (m_coulumnRect[_playerID, _idx].x<_targetPoint.x &&
+            _targetPoint.x< m_coulumnRect[_playerID, _idx].width&&
+            m_coulumnRect[_playerID, _idx].y < _targetPoint.y&&
+            _targetPoint.y < m_coulumnRect[_playerID, _idx].height
             ) {
+            Debug.Log("PlayerID"+_playerID+"Cloumn"+_idx+"押されましあ");
             return true;
         }
         return false;
@@ -181,10 +189,10 @@ public class GameUIManager : MonoBehaviour {
                 ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
                 btnCmp.m_PlayerID = j;
                 btnCmp.m_ButtonID = i;
+                
+                SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
+                              new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
             }
-            SetCoulumRect(new Vector2(6.0f / 32.0f, 15.0f / 25.0f),
-                          new Vector2(26.0f / 32.0f, 25.0f / 25.0f),
-                          i);
         }
 
     }
