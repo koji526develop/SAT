@@ -10,7 +10,7 @@ public class StartCountDown : MonoBehaviour
     bool m_startFlag = false;
     float m_countTime = 3.0f;
 
-    bool StartFlag
+    public bool StartFlag
     {
         get
         {
@@ -35,6 +35,10 @@ public class StartCountDown : MonoBehaviour
         if(m_countTime <= 0.0f)
         {
             m_startFlag = true;
+        }
+        else if(m_startFlag)
+        {
+            Destroy(this.gameObject);
         }
 	}
 }
