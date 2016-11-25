@@ -38,7 +38,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         Up,
         Down,
         Right,
-        Left
+        Left,
+		RightUp,
+		RightDown,
+		LeftUp,
+		LeftDown
     }
 
     Direction m_rotateDirection;
@@ -124,18 +128,29 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         }
     }
 
+	Animator m_animator;
+	public Animator animator
+	{
+		set
+		{
+			m_animator = value;
+		}
+		get
+		{
+			return m_animator;
+		}
+	}
+
     // キャラクターのオブジェクト作成
     public static GameObject CreateObject(Transform _parent, CharacterType _characterType, Vector3 _position, int _playerID)
     {
 		GameObject characterObj = Instantiate (Resources.Load (GetCharacterObjPath(_characterType, _playerID))as GameObject);
         Character character = characterObj.AddComponent<Character>();
 		BoxCollider boxCollider = characterObj.AddComponent<BoxCollider> ();
-		Animator animator = characterObj.GetComponent<Animator> ();
-		animator.runtimeAnimatorController = GetAnimController (_characterType);
 		characterObj.AddComponent<MeshRenderer> ();
 
 		boxCollider.center = new Vector3 (0,2,0);
-		boxCollider.size = new Vector3 (1,3,1);
+		boxCollider.size = new Vector3 (2,3,2);
 
         characterObj.name = _characterType.ToString();
         characterObj.transform.SetParent(_parent);
@@ -154,14 +169,18 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
         return characterObj;
     }
-	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType)
+	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType, int _playerID)
 	{
+		string colorStr;
+		if(_playerID == 1) colorStr = "Red";
+		else 			   colorStr = "Blue";
+
 		switch (_characterType)
 		{
-		case CharacterType.Sword:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Sword"));
-		case CharacterType.Shield:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Shield"));
-		case CharacterType.Ax:      return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Ax"));
-		case CharacterType.Spear:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Spear"));
+		case CharacterType.Sword:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Sword_" + colorStr));
+		case CharacterType.Shield:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Shield_" + colorStr));
+		case CharacterType.Ax:      return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Ax_" + colorStr));
+		case CharacterType.Spear:  return (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(Resources.Load("Animator/Spear_" + colorStr));
 		}
 		return null;
 	}
@@ -277,11 +296,15 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
         m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
 
+		m_animator = gameObject.GetComponent<Animator> ();
+		m_animator.runtimeAnimatorController = GetAnimController (characterType, status.PlayerID);
+
         ChangeState(CharacterState.Move);
     }
 
     void Update()
     {
+		Debug.Log (stateMachine.CurrentState.ToString ());
         // ステートマシーン更新
         stateMachine.Update();
     }
@@ -294,11 +317,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     {
         if (_playerID == 1)
         {
-            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_1P, 0.0f, 8.0f - (2.0f * _Column));
+            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_1P, 0.0f, 6.0f - (2.0f * _Column));
         }
         else
         {
-            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 8.0f - (2.0f * _Column));
+            return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 6.0f - (2.0f * _Column));
         }
     }
 }

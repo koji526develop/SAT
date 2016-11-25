@@ -19,6 +19,7 @@ TagManager:
   - Column4
   - Column5
   - Column6
+  - BattleCameraSub
   layers:
   - Default
   - TransparentFX

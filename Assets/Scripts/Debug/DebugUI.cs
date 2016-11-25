@@ -28,7 +28,7 @@ public class DebugUI : MonoBehaviour
 	bool IsDebugAction()
 	{
 		bool result = false;
-        for (int i = 0; i < 2; i++)
+		for (int i = 0; i < Input.touchCount; i++)
         {
             TouchInfo touchInfo = TouchManager.GetTouchInfo(i);
             if (touchInfo == TouchInfo.Began)

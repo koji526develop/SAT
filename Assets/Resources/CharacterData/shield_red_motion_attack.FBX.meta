@@ -1,0 +1,207 @@
+fileFormatVersion: 2
+guid: 6b6edc651c1bf48adbc745185219dde6
+timeCreated: 1479957264
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip001
+    100002: Bip001 Footsteps
+    100004: Bip001 Head
+    100006: Bip001 HeadNub
+    100008: Bip001 L Calf
+    100010: Bip001 L Clavicle
+    100012: Bip001 L Finger0
+    100014: Bip001 L Finger0Nub
+    100016: Bip001 L Foot
+    100018: Bip001 L Forearm
+    100020: Bip001 L Hand
+    100022: Bip001 L Thigh
+    100024: Bip001 L Toe0
+    100026: Bip001 L Toe0Nub
+    100028: Bip001 L UpperArm
+    100030: Bip001 Neck
+    100032: Bip001 Neck1
+    100034: Bip001 Pelvis
+    100036: Bip001 R Calf
+    100038: Bip001 R Clavicle
+    100040: Bip001 R Finger0
+    100042: Bip001 R Finger0Nub
+    100044: Bip001 R Foot
+    100046: Bip001 R Forearm
+    100048: Bip001 R Hand
+    100050: Bip001 R Thigh
+    100052: Bip001 R Toe0
+    100054: Bip001 R Toe0Nub
+    100056: Bip001 R UpperArm
+    100058: Bip001 Spine
+    100060: Bip001 Spine1
+    100062: Box001
+    100064: Box002
+    100066: Capsule002
+    100068: Cone001
+    100070: Line001
+    100072: //RootNode
+    100074: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
+    100076: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8004"
+    100078: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8005"
+    100080: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    100082: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    100084: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8008"
+    100086: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8009"
+    100088: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8010"
+    100090: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8011"
+    400000: Bip001
+    400002: Bip001 Footsteps
+    400004: Bip001 Head
+    400006: Bip001 HeadNub
+    400008: Bip001 L Calf
+    400010: Bip001 L Clavicle
+    400012: Bip001 L Finger0
+    400014: Bip001 L Finger0Nub
+    400016: Bip001 L Foot
+    400018: Bip001 L Forearm
+    400020: Bip001 L Hand
+    400022: Bip001 L Thigh
+    400024: Bip001 L Toe0
+    400026: Bip001 L Toe0Nub
+    400028: Bip001 L UpperArm
+    400030: Bip001 Neck
+    400032: Bip001 Neck1
+    400034: Bip001 Pelvis
+    400036: Bip001 R Calf
+    400038: Bip001 R Clavicle
+    400040: Bip001 R Finger0
+    400042: Bip001 R Finger0Nub
+    400044: Bip001 R Foot
+    400046: Bip001 R Forearm
+    400048: Bip001 R Hand
+    400050: Bip001 R Thigh
+    400052: Bip001 R Toe0
+    400054: Bip001 R Toe0Nub
+    400056: Bip001 R UpperArm
+    400058: Bip001 Spine
+    400060: Bip001 Spine1
+    400062: Box001
+    400064: Box002
+    400066: Capsule002
+    400068: Cone001
+    400070: Line001
+    400072: //RootNode
+    400074: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
+    400076: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8004"
+    400078: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8005"
+    400080: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    400082: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    400084: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8008"
+    400086: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8009"
+    400088: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8010"
+    400090: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8011"
+    2300000: Box001
+    2300002: Box002
+    2300004: Capsule002
+    2300006: Cone001
+    2300008: Line001
+    2300010: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
+    2300012: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8004"
+    2300014: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8005"
+    2300016: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    2300018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    2300020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8008"
+    2300022: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8009"
+    2300024: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8010"
+    2300026: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8011"
+    3300000: Box001
+    3300002: Box002
+    3300004: Capsule002
+    3300006: Cone001
+    3300008: Line001
+    3300010: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
+    3300012: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8004"
+    3300014: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8005"
+    3300016: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    3300018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    3300020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8008"
+    3300022: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8009"
+    3300024: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8010"
+    3300026: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8011"
+    4300000: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8003"
+    4300002: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8011"
+    4300004: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8010"
+    4300006: Capsule002
+    4300008: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8006"
+    4300010: Cone001
+    4300012: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8009"
+    4300014: Box002
+    4300016: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8007"
+    4300018: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8008"
+    4300020: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8005"
+    4300022: "\u30AA\u30D6\u30B8\u30A7\u30AF\u30C8004"
+    4300024: Box001
+    4300026: Line001
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
