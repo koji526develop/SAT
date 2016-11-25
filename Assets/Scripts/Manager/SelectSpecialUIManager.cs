@@ -9,6 +9,8 @@ public class SelectSpecialUIManager : MonoBehaviour
 	int m_selectedCount = 0;
 	GameObject [] m_selectedObj = new GameObject[3];
 
+	Text[] m_howToText = new Text[8];
+
 	GameObject m_touchCardObject;
 
 	GameObject m_cardParent;
@@ -42,28 +44,100 @@ public class SelectSpecialUIManager : MonoBehaviour
 		// 特殊カード８枚作成
 		***********************************************/
 		m_cardParent = new GameObject("CardParent");
+		int num = 0;
 		for (int i = 0; i < 4; i++) 
 		{
 			for (int j = 0; j < 2; j++)
 			{
-				GameObject cardObj = MyUtility.CreateSprite (m_cardParent.transform, "Card", "Image/karie/kard");
-				cardObj.tag = "Card";
+				GameObject cardObj = SpecialCardSprite.CreateSprite (m_cardParent.transform, "Card", "Image/karie/kard");
 				cardObj.transform.position = new Vector2 (-5.4f + 2.08f * i, 3.3f - j * 2.9f);
-				cardObj.transform.localScale = new Vector3 (1.3f, 1.24f, 1);
-				cardObj.AddComponent<BoxCollider2D> ();
+				cardObj.AddComponent<SpecialCardSprite> ().cardNum = num;
+				num++;
 			}
 		}
 			
 		/***********************************************
 		// 特殊カード説明枠作成
 		***********************************************/
-		MyUtility.CreateImage (
+		/*MyUtility.CreateImage (
 			"CardEffect",						 // オブジェクト名
 			"Image/karie/kardeffect",			 // 画像Path
 			new Vector2 (3 / 32.0f, 5 / 25.0f),  // アンカーの最小値
 			new Vector2 (22 / 32.0f, 9 / 25.0f), // アンカーの最大値
 			transform							 // 親のTransform
+		);*/
+
+		m_howToText[0] = MyUtility.CreateText (SpecialCard1.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
 		);
+		m_howToText [0].gameObject.SetActive (false);
+
+		m_howToText[1] = MyUtility.CreateText (SpecialCard2.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [1].gameObject.SetActive (false);
+
+		m_howToText[2] = MyUtility.CreateText (SpecialCard3.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [2].gameObject.SetActive (false);
+
+		m_howToText[3] = MyUtility.CreateText (SpecialCard4.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [3].gameObject.SetActive (false);
+
+		m_howToText[4] = MyUtility.CreateText (SpecialCard5.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [4].gameObject.SetActive (false);
+
+		m_howToText[5] = MyUtility.CreateText (SpecialCard6.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [5].gameObject.SetActive (false);
+
+		m_howToText[6] = MyUtility.CreateText (SpecialCard7.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [6].gameObject.SetActive (false);
+
+		m_howToText[7] = MyUtility.CreateText (SpecialCard8.m_howTo,
+			transform,
+			35,
+			Vector3.zero,
+			new Vector2(3 / 32.0f, 5 / 25.0f),
+			new Vector2 (22 / 32.0f, 9 / 25.0f)
+		);
+		m_howToText [7].gameObject.SetActive (false);
 
 		/***********************************************
 		// 選択された特殊カードの枠作成
@@ -194,6 +268,12 @@ public class SelectSpecialUIManager : MonoBehaviour
 			// タッチした特殊カードを半透明にする
 			m_touchCardObject.GetComponent<SpriteRenderer> ().color = new Color (1.0f, 1.0f, 1.0f, 0.5f);
 
+			for(int i = 0; i < 8;i++)
+				m_howToText [i].gameObject.SetActive (false);
+
+			int num = m_touchCardObject.GetComponent<SpecialCardSprite> ().cardNum;
+			m_howToText [num].gameObject.SetActive (true);
+
 			// タッチした特殊カードと同じSpriteを作る
 			m_moveObject = CreateTouchMoveCard ();
 
@@ -241,6 +321,10 @@ public class SelectSpecialUIManager : MonoBehaviour
 	void Reset()
 	{
 		m_selectedCount = 0;
+
+		for(int i = 0; i < 8;i++)
+			m_howToText [i].gameObject.SetActive (false);
+
 		for (int i = 0; i < 3; i++) 
 		{
 			m_selectedObj [i].SetActive (false);
