@@ -22,7 +22,7 @@ public class SpecialCardButton : MonoBehaviour {
         switch (_getStartTag)
         {
             case SpecialCard.SpCardTag.SoliderChange:
-                this.gameObject.AddComponent<SpecialCard1>().m_UsedPlayerID = m_playerID;
+			this.gameObject.AddComponent<SpeedUp>().m_UsedPlayerID = m_playerID;
                 break;
 
             case SpecialCard.SpCardTag.Archer:

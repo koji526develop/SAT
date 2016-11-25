@@ -6,7 +6,7 @@ public class SpeedUp : SpecialCard {
 	float AxSpeedUp;
 	// Use this for initialization
 	void Start () {
-		AxSpeedUp=MyUtility.AX_MOVESPEED*1.5f;	
+		
 	}
 	
 	// Update is called once per frame
@@ -17,14 +17,14 @@ public class SpeedUp : SpecialCard {
 					//キャラクタータグであるならもしくは、同じ列であるなら
 					if (childObj.tag == "Character")
 					{
-				GameObject obj = childObj.gameObject;
-				Character charaCmp = obj.GetComponent<Character> ();
-				Character.Status m_changeStatus = charaCmp.status; 
+				GameObject characterObj = childObj.gameObject;
+				Character charaCmp = characterObj.GetComponent<Character> ();
+				Character.Status changeStatus = charaCmp.status; 
 				if (charaCmp.status.PlayerID == m_UsedPlayerID)
 						{
 
-					m_changeStatus.moveSpeed = charaCmp.status.moveSpeed * 1.5f;
-					charaCmp.status = m_changeStatus;
+					changeStatus.moveSpeed = charaCmp.status.moveSpeed * 1.5f;
+					charaCmp.status = changeStatus;
 						}
 					}
 				}
