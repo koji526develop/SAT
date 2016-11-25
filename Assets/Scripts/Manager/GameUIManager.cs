@@ -121,25 +121,41 @@ public class GameUIManager : MonoBehaviour {
         obj.AddComponent<SpecialCardButton>().m_playerID = 2;
 
         //ソルジャーボタンを作成
-        for (int i = 1; i <= 5; i++)
+        Transform soldierbutton = new GameObject("SoliderButton").transform;
+        for(int i = 1; i <= 2; i++)
         {
-            for (int j = 1; j <= 2; j++)
+            for(int j = 1; j <= 5; j++)
             {
-                obj = MyUtility.CreateButton(
-                    "SoldierButton",
-                    "Image/sword_I",
-                    new Vector2((4.0f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
-                    new Vector2((6.0f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
-                    canvasTransForm);
+                    obj = MyUtility.CreateSprite(
+                     soldierbutton,
+                     "SoldierButton",
+                     "Image/sword_I");
+                
+                obj.transform.position = new Vector3((-4.65f+(9.2f*(i-1))), 0.0f, (4.0f-(2.0f* (j-1))));
+                obj.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
+                obj.transform.localScale = new Vector3(1.75f, 3.5f, 0.75f);
 
-                ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
-                btnCmp.m_PlayerID = j;
-                btnCmp.m_ButtonID = i;
             }
-            SetCoulumRect(new Vector2(6.0f / 32.0f,  15.0f / 25.0f),
-                          new Vector2(26.0f / 32.0f, 25.0f / 25.0f),
-                          i);
         }
+        //for (int i = 1; i <= 5; i++)
+        //{
+        //    for (int j = 1; j <= 2; j++)
+        //    {
+        //        obj = MyUtility.CreateButton(
+        //            "SoldierButton",
+        //            "Image/sword_I",
+        //            new Vector2((4.0f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
+        //            new Vector2((6.0f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
+        //            canvasTransForm);
+
+        //        ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
+        //        btnCmp.m_PlayerID = j;
+        //        btnCmp.m_ButtonID = i;
+        //    }
+        //    SetCoulumRect(new Vector2(6.0f / 32.0f, 15.0f / 25.0f),
+        //                  new Vector2(26.0f / 32.0f, 25.0f / 25.0f),
+        //                  i);
+        //}
         //ここまで
 
         for (int i = 1; i <= 5; i++)
