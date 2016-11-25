@@ -34,6 +34,9 @@ public class MyUtility : MonoBehaviour
     public static int SHIELD_ATTACKDISTANCE = 1;
     public static float SHIELD_MOCESPEED = 0.025f/2;
 
+    //兵士のインターバル時間を設定
+    public static float SPAWNER_INTERVAL_TIME = 1.0f;
+
     // ゲーム画面の中心のX軸
     public static readonly float CENTER_LINE_X = 0.0f;
 

@@ -34,8 +34,8 @@ public class SoldierSurvival : MonoBehaviour
             m_SoldierImgObj[i] = MyUtility.CreateImage(
             "LongBar",
             "Image/karie/waku6",
-            new Vector2(1 / 32.0f, 12 / 25.0f),
-            new Vector2(4 / 32.0f, 23 / 25.0f),
+            new Vector2((0.0f /*+ (27.0f* i)*/)/ 32.0f, (13.0f  /*+ (13.0f* i)*/) / 25.0f),
+            new Vector2((3.0f /*+ (27.0f* i)*/)/ 32.0f, (25.0f/* + (13.0f* i)*/) / 25.0f),
             transform);
 
             for (int j = 0; j < 4; j++)
@@ -65,7 +65,7 @@ public class SoldierSurvival : MonoBehaviour
 
         m_SoldierImgObj[1].transform.Rotate(new Vector3(0, 0, 1), 180);
         Vector2 tmpPos = new Vector2(Screen.width - m_SoldierImgObj[0].transform.position.x, Screen.height - m_SoldierImgObj[0].transform.position.y);
-        m_SoldierImgObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y + 92.0f, 0.0f);
+        m_SoldierImgObj[1].transform.position = new Vector3(tmpPos.x, tmpPos.y, 0.0f);
 
     }
 

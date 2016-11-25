@@ -17,6 +17,8 @@ public class ButtonSpawner : MonoBehaviour
     private bool m_startFlag = false;
     private bool m_spawnerFlag=false;
 
+    public float m_intervalTime =0.0f;
+
     void Awake()
     {
 
@@ -57,14 +59,17 @@ public class ButtonSpawner : MonoBehaviour
 
     public void StartFlag()
     {
-        for(int i=0; i <= Input.touchCount; i++)
+        if (m_intervalTime <= 0.0f)
         {
-            if (TouchManager.GetTouchInfo(i) == TouchInfo.Began)
+            for (int i = 0; i <= Input.touchCount; i++)
             {
-                m_nowTouchNumber = i;
-                Debug.Log("タッチしましたー＞"+i);
-                m_startFlag = true;
-                return;
+                if (TouchManager.GetTouchInfo(i) == TouchInfo.Began)
+                {
+                    m_nowTouchNumber = i;
+                    Debug.Log("タッチしましたー＞" + i);
+                    m_startFlag = true;
+                    return;
+                }
             }
         }
     }
@@ -108,7 +113,9 @@ public class ButtonSpawner : MonoBehaviour
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
-            
+
+           //インターバル時間を追加
+            m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
         }
         ResetFlag();
     }
@@ -151,26 +158,26 @@ public class ButtonSpawner : MonoBehaviour
 
     void OnGUI()
     {
-        RectTransform uiRectTransForm = gameObject.GetComponent<RectTransform>();
-        Vector2 uiPos = new Vector2(uiRectTransForm.localPosition.x + Screen.width / 2,
-                                      -uiRectTransForm.localPosition.y + Screen.height / 2);
-        Texture changeTexture = gameObject.GetComponent<Image>().mainTexture;
+       // RectTransform uiRectTransForm = gameObject.GetComponent<RectTransform>();
+       // Vector2 uiPos = new Vector2(uiRectTransForm.localPosition.x + Screen.width / 2,
+       //                               -uiRectTransForm.localPosition.y + Screen.height / 2);
+       // Texture changeTexture = gameObject.GetComponent<Image>().mainTexture;
 
-        // UIのテクスチャの向きを1Pと2P用に帰る処理
-        Matrix4x4 matrix = GUI.matrix;
-        {
-            if (m_PlayerID == 1)
-            {
-                GUIUtility.RotateAroundPivot(90, uiPos);
-                GUI.DrawTexture(new Rect(uiPos.x, uiPos.y - 64, 92.16f, 64), changeTexture);
-            }
-            else
-            {
-                GUIUtility.RotateAroundPivot(-90, uiPos);
-                GUI.DrawTexture(new Rect(uiPos.x - 92.16f, uiPos.y, 92.16f, 64), changeTexture);
-            }
-        }
-        GUI.matrix = matrix;
+       // UIのテクスチャの向きを1Pと2P用に帰る処理
+       //Matrix4x4 matrix = GUI.matrix;
+       // {
+       //     if (m_PlayerID == 1)
+       //     {
+       //         GUIUtility.RotateAroundPivot(90, uiPos);
+       //         GUI.DrawTexture(new Rect(uiPos.x, uiPos.y - 64, 92.16f, 64), changeTexture);
+       //     }
+       //     else
+       //     {
+       //         GUIUtility.RotateAroundPivot(-90, uiPos);
+       //         GUI.DrawTexture(new Rect(uiPos.x - 92.16f, uiPos.y, 92.16f, 64), changeTexture);
+       //     }
+       // }
+       // GUI.matrix = matrix;
     }
 
     //兵士の選択を変える処理に入る
@@ -214,5 +221,17 @@ public class ButtonSpawner : MonoBehaviour
         //初期設定を行う。
         m_battleManager = GameObject.FindWithTag("BattleManager").transform;
         m_type = Character.CharacterType.Sword;
+    }
+
+    void Update()
+    {
+        if (m_intervalTime > 0.0f)
+        {
+            m_intervalTime -= Time.deltaTime;
+        }
+        else
+        {
+            m_intervalTime = 0.0f;
+        }
     }
 }
