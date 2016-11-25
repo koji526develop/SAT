@@ -22,6 +22,6 @@ public class SelectSpecialManager : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	
+		TouchManager.Update ();
 	}
 }
