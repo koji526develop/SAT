@@ -96,7 +96,9 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         Rotate,
         BackRotate,
 		SideMpveUp,
-		SideMpveDown
+		SideMpveDown,
+		Dead,
+		Barrier
     }
 
     // キャラクターの種類
@@ -291,6 +293,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         stateList.Add(new CharacterBackRotate(this));
 		stateList.Add(new CharacterSideMoveUp(this));
 		stateList.Add(new CharacterSideMoveDown(this));
+		stateList.Add(new CharacterDead(this));
+		stateList.Add(new CharacterBarrier(this));
 
         stateMachine = new StateMachine<Character>();
 
@@ -304,9 +308,13 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
     void Update()
     {
-		Debug.Log (stateMachine.CurrentState.ToString ());
         // ステートマシーン更新
         stateMachine.Update();
+
+		if(status.life <= 0)
+		{
+			ChangeState (CharacterState.Dead);
+		}
     }
     public void Destroy()
     {
