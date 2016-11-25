@@ -3,7 +3,6 @@ using System.Collections;
 
 public class SpecialCard : MonoBehaviour {
 
-    public string m_howTo;
     public int m_UsedPlayerID;
 
     //消去予定
