@@ -23,6 +23,13 @@ public class TitleManager : MonoBehaviour
         GameObject m_TitleImageObj = MyUtility.CreateEmpty("TitleObject", canvas.transform);
 
         MyUtility.CreateImage(
+            "TitleBackGround",
+            "UI/Title/title_back",
+            new Vector2(0 / 32.0f, 0 / 25.0f),
+            new Vector2(32 / 32.0f, 25 / 25.0f),
+            m_TitleImageObj.transform);
+
+        MyUtility.CreateImage(
             "Title",
             "Image/title",
             new Vector2(3 / 32.0f, 15 / 25.0f),

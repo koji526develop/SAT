@@ -25,8 +25,8 @@ public class OperatingChoice : MonoBehaviour
         m_FlickObj = GameObject.Find("OperatingSprite");
         m_flick = m_FlickObj.GetComponent<OperatingFlick>();
         m_PrevNum = 0;
-        m_OperatingChoiceSprite[0] = Resources.Load<Sprite>("Image/operatingNoneChoice");
-        m_OperatingChoiceSprite[1] = Resources.Load<Sprite>("Image/operatingChoice");
+        m_OperatingChoiceSprite[0] = Resources.Load<Sprite>("UI/Operating/fcircle");
+        m_OperatingChoiceSprite[1] = Resources.Load<Sprite>("UI/Operating/bcircle");
         if(m_SpriteNum == 0)
         {
             m_DisplayChoiceSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
