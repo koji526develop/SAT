@@ -34,10 +34,11 @@ public class OperatingManager : MonoBehaviour
         //何番目を表示しているかの画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
         {
-            m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "Image/operatingNoneChoice");
+            m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "UI/Operating/fcircle");
 
             m_OperatingSprNumObj[i].AddComponent<OperatingChoice>();
             m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -3.3f, -790.0f);
+            m_OperatingSprNumObj[i].transform.localScale = new Vector3(0.3f,0.3f,0.0f);
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
@@ -50,10 +51,11 @@ public class OperatingManager : MonoBehaviour
         //左矢印ボタン
         GameObject leftButton = MyUtility.CreateButton(
             "LeftButton",
-            "Image/operatingNoneChoice",
+            "UI/Operating/triangle",
              new Vector2(2.0f / 32.0f, 14.0f / 25.0f),
              new Vector2(4.0f / 32.0f, 16.0f / 25.0f),
              uiObj.transform);
+        leftButton.transform.localScale = new Vector3(1.5f,1.5f,0.0f);
 
         GameObject obj = GameObject.Find("OperatingSprite");
         OperatingFlick operatingFlick = obj.GetComponent<OperatingFlick>();
@@ -62,21 +64,23 @@ public class OperatingManager : MonoBehaviour
         //右矢印ボタン
         GameObject rightButton = MyUtility.CreateButton(
             "RightButton",
-            "Image/operatingNoneChoice",
-             new Vector2(28.0f / 32.0f, 14.0f / 25.0f),
-             new Vector2(30.0f / 32.0f, 16.0f / 25.0f),
+            "UI/Operating/triangle",
+             new Vector2(30.0f / 32.0f, 11.0f / 25.0f),
+             new Vector2(32.0f / 32.0f, 13.0f / 25.0f),
              uiObj.transform);
+        rightButton.transform.Rotate(new Vector3(0, 0, 1), 180.0f);
+        rightButton.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
         rightButton.GetComponent<Button>().onClick.AddListener(operatingFlick.ButtonRight);
 
         // 戻るボタン作成
         GameObject backObj = MyUtility.CreateButton(
             "Back",
-            "Image/karie/waku5",
+            "UI/Operating/return",
             new Vector2(3 / 32.0f, 1 / 25.0f),
             new Vector2(9 / 32.0f, 4 / 25.0f),
             uiObj.transform
         );
-        MyUtility.AddText("戻る", backObj.transform);
+
         GameObject sceneChangerObj = new GameObject();
         SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
@@ -84,12 +88,11 @@ public class OperatingManager : MonoBehaviour
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
             "Enter",
-            "Image/karie/waku5",
+            "UI/Operating/decision",
             new Vector2(23 / 32.0f, 1 / 25.0f),
             new Vector2(29 / 32.0f, 4 / 25.0f),
             uiObj.transform
         );
-        MyUtility.AddText("決定", enterObj.transform);
         enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
 
         //兵士の情報を初期化
