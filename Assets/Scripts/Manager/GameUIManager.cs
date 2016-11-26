@@ -152,16 +152,27 @@ public class GameUIManager : MonoBehaviour {
         Transform soldierbutton = new GameObject("SoliderButton").transform;
         for (int i = 1; i <= 2; i++)
         {
+            string imgName;
+
+            if (i == 1)
+            {
+                imgName = "UI/Game/flick";
+            }
+            else
+            {
+                imgName = "UI/Game/flick2";
+            }
             for (int j = 1; j <= 5; j++)
             {
+                
                 obj = MyUtility.CreateSprite(
                  soldierbutton,
                  "SoldierButton",
-                 "Image/sword_I");
+                 imgName);
 
                 obj.transform.position = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
                 obj.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-                obj.transform.localScale = new Vector3(1.75f, 3.5f, 0.75f);
+                obj.transform.localScale = new Vector3(0.1f, 0.08f, 0.1f);
 
             }
         }
@@ -172,11 +183,11 @@ public class GameUIManager : MonoBehaviour {
                 string imageName;
                 if (j==1)
                 {
-                    imageName = "Image/soliderButton";
+                    imageName = "UI/Game/center_active";
                 }
                 else
                 {
-                    imageName = "Image/soliderButton2";
+                    imageName = "UI/Game/center_active2";
                 }
 
                 obj = MyUtility.CreateButton(

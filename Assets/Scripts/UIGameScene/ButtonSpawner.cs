@@ -58,7 +58,11 @@ public class ButtonSpawner : MonoBehaviour
         entry3.callback.AddListener((data) => { StartFlag(); });
         dragEndtrigger.triggers.Add(entry3);
 
-
+        //スライドで出現処理を行えるようにする処理を行う。
+        EventTrigger.Entry entry4 = new EventTrigger.Entry();
+        entry4.eventID = EventTriggerType.PointerEnter;
+        entry4.callback.AddListener((data) => { EnterFlag(); });
+        dragEndtrigger.triggers.Add(entry4);
         //スライドで出現処理を行えるようにする処理を行う。
         //EventTrigger.Entry entry4 = new EventTrigger.Entry();
         //entry4.eventID = EventTriggerType.PointerClick;
@@ -80,6 +84,15 @@ public class ButtonSpawner : MonoBehaviour
         colorBlocks.disabledColor = new Color(1f, 1f, 1f, 1f);
 
         btn.colors = colorBlocks;
+
+        Image image = this.GetComponent<Image>();
+        if (m_PlayerID==1) {
+            image.sprite = Resources.Load("UI/Game/flick", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            image.sprite = Resources.Load("UI/Game/flick2", typeof(Sprite)) as Sprite;
+        }
     }
 
     public void StartFlag()
@@ -99,10 +112,35 @@ public class ButtonSpawner : MonoBehaviour
                     colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 1f);
                     btn.colors = colorBlocks;
 
+                    Image image = this.GetComponent<Image>();
+                    if (m_PlayerID == 1)
+                    {
+                        image.sprite = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
+                    }
+                    else
+                    {
+                        image.sprite = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
+                    }
+
                     m_startFlag = true;
                     return;
                 }
             }
+        }
+    }
+
+    public void EnterFlag()
+    {
+        m_spawnerFlag = false;
+
+        Image image = this.GetComponent<Image>();
+        if (m_PlayerID == 1)
+        {
+            image.sprite = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            image.sprite = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
         }
     }
 
@@ -240,36 +278,65 @@ public class ButtonSpawner : MonoBehaviour
 	}
 
     //兵士の選択を変える処理に入る
-    public void SolderChange()
+    public void SolderImageChange()
     {
-        switch (m_type)
+        Image image = this.GetComponent<Image>();
+
+
+        if (m_PlayerID == 1)
         {
+            if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
+            {
 
-            //剣から槍へ
-            case Character.CharacterType.Sword:
+                if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
+                {
+                    image.sprite = Resources.Load("UI/Game/ax_active", typeof(Sprite)) as Sprite;
+                }
+                else
+                {
+                    image.sprite = Resources.Load("UI/Game/spear_active", typeof(Sprite)) as Sprite;
+                }
+            }
+            else
+            {
+                if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
+                {
+                    image.sprite = Resources.Load("UI/Game/sword_active", typeof(Sprite)) as Sprite;
+                }
+                else
+                {
+                    image.sprite = Resources.Load("UI/Game/shield_active", typeof(Sprite)) as Sprite;
+                }
+            }
+        }
+        else {
+            if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
+            {
 
-                m_type = Character.CharacterType.Spear;
-                 break;
-
-            //槍から斧へ
-            case Character.CharacterType.Spear:
-
-                m_type = Character.CharacterType.Ax;
-                 break;
-
-            //斧から盾へ
-            case Character.CharacterType.Ax:
-
-                m_type = Character.CharacterType.Shield;
-                   break;
-
-            //盾から剣へ
-            case Character.CharacterType.Shield:
-
-                m_type = Character.CharacterType.Sword;
-                          break;
+                if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
+                {
+                    image.sprite = Resources.Load("UI/Game/spear_active2", typeof(Sprite)) as Sprite;
+                }
+                else
+                {
+                    image.sprite = Resources.Load("UI/Game/ax_active2", typeof(Sprite)) as Sprite;
+                }
+            }
+            else
+            {
+                if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
+                {
+                    image.sprite = Resources.Load("UI/Game/shield_active2", typeof(Sprite)) as Sprite;
+                }
+                else
+                {
+                    image.sprite = Resources.Load("UI/Game/sword_active2", typeof(Sprite)) as Sprite;
+                }
+            }
         }
     }
+
+
 
     void Start()
     {
@@ -321,6 +388,11 @@ public class ButtonSpawner : MonoBehaviour
                 }
                 m_soliderDoubleStart = false;
             }
+        }
+
+        if ( m_spawnerFlag)
+        {
+            SolderImageChange();
         }
     }
 }
