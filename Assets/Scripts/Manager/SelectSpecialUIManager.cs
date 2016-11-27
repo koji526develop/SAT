@@ -154,7 +154,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		***********************************************/
 		GameObject backObj = MyUtility.CreateButton (
 			"Back",                             // オブジェクト名
-			"Image/karie/waku5",                // 画像Path
+			"UI/Select/return",                // 画像Path
 			new Vector2 (3 / 32.0f, 1 / 25.0f), // アンカーの最小値
 			new Vector2 (9 / 32.0f, 4 / 25.0f), // アンカーの最大値
 			transform                           // 親のTransform
@@ -170,7 +170,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		***********************************************/
 		GameObject resetObj = MyUtility.CreateButton (
 			"Reset",
-			"Image/karie/waku5",
+			"UI/SpecialSelect/reset",
 			new Vector2 (13 / 32.0f, 1 / 25.0f),
 			new Vector2 (19 / 32.0f, 4 / 25.0f), 
 			transform
@@ -183,7 +183,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		***********************************************/
         GameObject enterObj = MyUtility.CreateButton (
 			"Enter",							 // オブジェクト名
-			"Image/karie/waku5",				 // 画像Path
+			"UI/Select/decision",				 // 画像Path
 			new Vector2 (23 / 32.0f, 1 / 25.0f), // アンカーの最小値
 			new Vector2 (29 / 32.0f, 4 / 25.0f), // アンカーの最大値
 			transform							 // 親のTransform

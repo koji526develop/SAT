@@ -84,8 +84,8 @@ public class SelectUIManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             GameObject buttonObj = MyUtility.CreateButton(
-                "PlusButton",
-                "Image/karie/plus",
+				"Plus",
+				"UI/Select/plus",
                 new Vector2(27 / 32.0f, (21 - i * 4) / 25.0f),
                 new Vector2(30 / 32.0f, (24 - i * 4) / 25.0f),
                 transform
@@ -97,8 +97,8 @@ public class SelectUIManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             GameObject buttonObj = MyUtility.CreateButton(
-                "MinusButton",
-                "Image/karie/minus",
+				"Minus",
+				"UI/Select/minus",
                 new Vector2(23 / 32.0f, (21 - i * 4) / 25.0f),
                 new Vector2(26 / 32.0f, (24 - i * 4) / 25.0f),
                 transform
@@ -122,8 +122,8 @@ public class SelectUIManager : MonoBehaviour
 
         // 戻るボタン作成
         GameObject backObj = MyUtility.CreateButton(
-            "Back",
-            "Image/karie/waku5",
+			"Back",
+			"UI/Select/return",
             new Vector2(3 / 32.0f, 1 / 25.0f),
             new Vector2(9 / 32.0f, 4 / 25.0f),
             transform
@@ -135,8 +135,8 @@ public class SelectUIManager : MonoBehaviour
 
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
-            "Enter",
-            "Image/karie/waku5",
+			"Decision",
+			"UI/Select/decision",
             new Vector2(23 / 32.0f, 1 / 25.0f),
             new Vector2(29 / 32.0f, 4 / 25.0f),
             transform
