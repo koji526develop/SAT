@@ -150,7 +150,6 @@ public static class TouchManager
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-			Debug.Log (hit.collider.gameObject.ToString ());
             return hit.collider.gameObject;
         }
 
