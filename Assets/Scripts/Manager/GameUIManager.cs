@@ -165,20 +165,20 @@ public class GameUIManager : MonoBehaviour {
 
             for (int j = 1; j <= 5; j++)
             {
-                
-                obj = MyUtility.CreateSprite(
-                 soldierbutton,
-                 "SoldierButton",
-                 imgName);
 
-                obj.transform.position      = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
-                obj.transform.eulerAngles   = new Vector3(90.0f, 0.0f, 0.0f);
-                obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
+                //obj = MyUtility.CreateSprite(
+                // soldierbutton,
+                // "SoldierButton",
+                // imgName);
 
-                obj= MyUtility.CreateImage("SoliderImage", 
+                //obj.transform.position      = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
+                //obj.transform.eulerAngles   = new Vector3(90.0f, 0.0f, 0.0f);
+                //obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
+
+                obj = MyUtility.CreateImage("SoliderImage",
                                "Image/TimeWaku",
                                 new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
-                                 new Vector2((7.5f + 22.0f * (i - 1)) / 32.0f, (25.0f - 5.0f * (j - 1)) / 25.0f), 
+                                 new Vector2((7.5f + 22.0f * (i - 1)) / 32.0f, (25.0f - 5.0f * (j - 1)) / 25.0f),
                                  canvasTransForm);
 
                 GameObject buttonObj;

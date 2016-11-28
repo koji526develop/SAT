@@ -15,7 +15,7 @@ public class SpecialCardButton : MonoBehaviour {
     Transform m_GameManager;
     Transform m_battleManager;
 
-
+    ColorBlock colorBlocks;
     void StartSpCard(int _specialCardNumber)
     {
 
@@ -96,7 +96,8 @@ public class SpecialCardButton : MonoBehaviour {
         }
 
         StartSpCard(m_keepSpCard[m_UsedCard]);
-        
+       
+
         m_UsedCard++;
     }
 
@@ -106,10 +107,27 @@ public class SpecialCardButton : MonoBehaviour {
 
         m_GameManager = GameObject.Find("GameManager").transform;
         m_battleManager = GameObject.Find("BattleManager").transform;
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+        colorBlocks = this.GetComponent<Button>().colors;
+        if (null == m_usedSpCardState)
+        {
+            colorBlocks.normalColor = new Color(1f, 1f, 1f, 1f);
+            colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 1f);
+            colorBlocks.pressedColor = new Color(1f, 1f, 1f, 1f);
+            colorBlocks.disabledColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+        }
+        else
+        {
+            colorBlocks.normalColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+            colorBlocks.highlightedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+            colorBlocks.pressedColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+            colorBlocks.disabledColor = new Color(0.5f, 0.5f, 0.5f, 1f);
+        }
+        this.GetComponent<Button>().colors = colorBlocks;
+    }
 }
