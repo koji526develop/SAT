@@ -325,7 +325,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         // ステートマシーン更新
         stateMachine.Update();
 
-		this.GetComponent<Text> ().text =status.life.ToString();
+		//this.GetComponent<Text> ().text =status.life.ToString();
 
 		if(status.life <= 0)
 		{
