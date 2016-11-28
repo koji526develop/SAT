@@ -59,6 +59,23 @@ public class CharacterAttack : State<Character>
 			m_enemyCharacter.Barrier = false;
 			return;
 		} else {
+
+			switch (m_instance.status.characterType) 
+			{
+			case Character.CharacterType.Sword:
+				AudioManager.m_instance.PlaySE ("sowrd_SE");
+				break;
+			case Character.CharacterType.Spear:
+				AudioManager.m_instance.PlaySE ("spear_SE");
+				break;
+			case Character.CharacterType.Shield:
+				AudioManager.m_instance.PlaySE ("shield_SE");
+				break;
+			case Character.CharacterType.Ax:
+				AudioManager.m_instance.PlaySE ("sowrd_SE");
+				break;
+			}
+
 			m_changeStatus.life -= m_instance.status.attack;
 
 			m_enemyCharacter.status = m_changeStatus;

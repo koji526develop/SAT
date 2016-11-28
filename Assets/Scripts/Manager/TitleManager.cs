@@ -46,7 +46,7 @@ public class TitleManager : MonoBehaviour
 
     void Start()
     {
-
+		AudioManager.m_instance.PlayBGM ("title_BGM");
     }
 
     void Update()

@@ -10,6 +10,7 @@ public class CharacterDead : State<Character>
 	{
 		//m_instance.animator.Play ("Attack");
 		Debug.Log("死んだ");
+		AudioManager.m_instance.PlaySE ("Vanish_SE");
 		m_instance.Destroy ();
 	}
 

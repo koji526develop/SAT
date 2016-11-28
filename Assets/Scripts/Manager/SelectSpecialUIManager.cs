@@ -200,6 +200,8 @@ public class SelectSpecialUIManager : MonoBehaviour
 
     public void BackProces()
     {
+		AudioManager.m_instance.PlaySE ("button_SE");
+
         //1Pが特殊選択画面から戻ったとき
         if(SelectUIManager.PlayerID == 2)
         {
@@ -210,6 +212,8 @@ public class SelectSpecialUIManager : MonoBehaviour
 
     public void EnterProces()
     {
+		AudioManager.m_instance.PlaySE ("button_SE");
+
         if(m_selectedCount == 3)
         {
             if (SelectUIManager.PlayerID == 2) sceneChanger.ChangeToSelect();
