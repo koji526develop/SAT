@@ -38,9 +38,19 @@ public class SelectUIManager : MonoBehaviour
     }
 
     string[] WEAPON_NAME = { "剣", "槍", "斧", "盾" };
+    string[] IconPath = { "UI/Select/sword_icon", "UI/Select/spear_icon", "UI/Select/ax_icon", "UI/Select/shield_icon" };
 
     void Awake()
     {
+
+        //背景
+        MyUtility.CreateImage(
+            "SelectBackGround",
+            "UI/Select/select_back",
+            new Vector2(0 / 32.0f, 0 / 25.0f),
+            new Vector2(32 / 32.0f, 25 / 25.0f),
+            transform);
+
         for (int i = 0; i < 4; i++)
             m_soldierNumList.Add(0);
 
@@ -49,12 +59,12 @@ public class SelectUIManager : MonoBehaviour
         {
             GameObject obj = MyUtility.CreateImage(
                 WEAPON_NAME[i],
-                "Image/karie/maru",
+                IconPath[i],
                 new Vector2(3 / 32.0f, (21 - i * 4) / 25.0f),
                 new Vector2(6 / 32.0f, (24 - i * 4) / 25.0f),
                 transform
             );
-            MyUtility.AddText(WEAPON_NAME[i], obj.transform);
+            //MyUtility.AddText(WEAPON_NAME[i], obj.transform);
         }
 
         float[,] value = {
@@ -128,7 +138,6 @@ public class SelectUIManager : MonoBehaviour
             new Vector2(9 / 32.0f, 4 / 25.0f),
             transform
         );
-        MyUtility.AddText("戻る", backObj.transform);
         sceneChangerObj = new GameObject();
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
@@ -141,7 +150,6 @@ public class SelectUIManager : MonoBehaviour
             new Vector2(29 / 32.0f, 4 / 25.0f),
             transform
         );
-        MyUtility.AddText("決定", enterObj.transform);
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
     }

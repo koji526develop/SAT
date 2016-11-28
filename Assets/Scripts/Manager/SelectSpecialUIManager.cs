@@ -24,10 +24,10 @@ public class SelectSpecialUIManager : MonoBehaviour
 	{
 		m_uiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
 
-		/***********************************************
+        /***********************************************
 		// 選択された特殊カードの表示枠にあらかじめ３枚作っておき、非表示にしておく
 		***********************************************/
-		for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
 		{
 			GameObject obj = MyUtility.CreateImage (
 				"SpecialCard",						 // オブジェクト名
