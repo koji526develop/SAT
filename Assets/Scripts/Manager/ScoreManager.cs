@@ -113,11 +113,12 @@ public class ScoreManager : MonoBehaviour {
 
         if (_playerID == 1)
         {
-            m_Score = m_Score +(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID]);
+            m_Score = m_Score +(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID-1]);
         }
         else
         {
-            m_Score = m_Score -(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID]);
+            int score = GetPointLevel(enemyPlayerID + 1, _Column);
+            m_Score = m_Score -(int)( m_scoreArea[score] * m_pointBouns[_playerID-1]);
         }
 
         CountReset(enemyPlayerID+1,_Column);

@@ -148,7 +148,7 @@ public class GameUIManager : MonoBehaviour {
             }
         }
 
-        //ソルジャーボタンを作成
+        //疑似のソルジャーボタンを作成
         Transform soldierbutton = new GameObject("SoliderButton").transform;
         for (int i = 1; i <= 2; i++)
         {
@@ -162,6 +162,7 @@ public class GameUIManager : MonoBehaviour {
             {
                 imgName = "UI/Game/flick2";
             }
+
             for (int j = 1; j <= 5; j++)
             {
                 
@@ -170,41 +171,63 @@ public class GameUIManager : MonoBehaviour {
                  "SoldierButton",
                  imgName);
 
-                obj.transform.position = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
-                obj.transform.eulerAngles = new Vector3(90.0f, 0.0f, 0.0f);
-                obj.transform.localScale = new Vector3(0.1f, 0.08f, 0.1f);
+                obj.transform.position      = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
+                obj.transform.eulerAngles   = new Vector3(90.0f, 0.0f, 0.0f);
+                obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
 
-            }
-        }
-        for (int i = 1; i <= 5; i++)
-        {
-            for (int j = 1; j <= 2; j++)
-            {
-                string imageName;
-                if (j==1)
-                {
-                    imageName = "UI/Game/center_active";
-                }
-                else
-                {
-                    imageName = "UI/Game/center_active2";
-                }
+                obj= MyUtility.CreateImage("SoliderImage", 
+                               "Image/TimeWaku",
+                                new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
+                                 new Vector2((7.5f + 22.0f * (i - 1)) / 32.0f, (25.0f - 5.0f * (j - 1)) / 25.0f), 
+                                 canvasTransForm);
 
-                obj = MyUtility.CreateButton(
+                GameObject buttonObj;
+                buttonObj = MyUtility.CreateButton(
                     "SoldierButton",
-                    imageName,
-                    new Vector2((2.5f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
-                    new Vector2((7.5f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
+                    "Image/TimeWaku",
+                    new Vector2((4.0f + 22.0f * (i - 1)) / 32.0f, (21.5f - 5.0f * (j - 1)) / 25.0f),
+                    new Vector2((6.0f + 22.0f * (i - 1)) / 32.0f, (23.5f - 5.0f * (j - 1)) / 25.0f),
                     canvasTransForm);
 
-                ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
-                btnCmp.m_PlayerID = j;
-                btnCmp.m_ButtonID = i;
-                
-                SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
-                              new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
+                ButtonSpawner btnCmp = buttonObj.AddComponent<ButtonSpawner>();
+                btnCmp.m_PlayerID = i;
+                btnCmp.m_ButtonID = j;
+                btnCmp.m_changeSprite = obj.GetComponent<Image>();
+
             }
         }
+
+        ////正規のソルジャーボタンを追加
+        //for (int i = 1; i <= 5; i++)
+        //{
+        //    for (int j = 1; j <= 2; j++)
+        //    {
+        //        string imageName;
+        //        if (j==1)
+        //        {
+        //            imageName = "UI/Game/center_active";
+        //        }
+        //        else
+        //        {
+        //            imageName = "UI/Game/center_active2";
+        //        }
+
+        //        obj = MyUtility.CreateButton(
+        //            "SoldierButton",
+        //            imageName,
+        //            new Vector2((2.5f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
+        //            new Vector2((7.5f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
+        //            canvasTransForm);
+
+        //        ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
+        //        btnCmp.m_PlayerID = j;
+        //        btnCmp.m_ButtonID = i;
+                
+        //        SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
+        //                      new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
+        //    }
+        //}
+
 
     }
     // Use this for initialization

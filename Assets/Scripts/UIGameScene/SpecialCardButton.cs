@@ -82,7 +82,8 @@ public class SpecialCardButton : MonoBehaviour {
 
     void UseSpecialCard()
     {
-        if (m_UsedCard > 2)
+        bool isStart = m_GameManager.GetComponent<GameManager>().m_startFlag;
+        if (m_UsedCard > 2 || !isStart)
         {
             return;
         }

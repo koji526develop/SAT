@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class ButtonSpawner : MonoBehaviour
 {
     Transform m_battleManager;
+    GameManager m_gameManager;
     ScoreManager m_scoreManager;
 
     public int m_PlayerID;
@@ -26,14 +27,17 @@ public class ButtonSpawner : MonoBehaviour
     public bool m_soliderDoubleStart = false;
     private Character.CharacterType m_beforeType;
 
-    Color color = new Color(1f, 1f, 1f, 0f);
-
+    public Image m_changeSprite;
+    Sprite[] m_sprite = new Sprite[6];
     void Awake()
     {
 
         this.transform.tag = "SoliderButton";
 
-        m_scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        Transform gameManagerTrans=GameObject.Find("GameManager").transform;
+
+        m_gameManager = gameManagerTrans.GetComponent<GameManager>();
+        m_scoreManager = gameManagerTrans.GetComponent<ScoreManager>();
 
         //ボタン押すことで兵種を切り替える処理を行う。  
         this.GetComponent<Button>().onClick.AddListener(ResetFlag);
@@ -63,11 +67,8 @@ public class ButtonSpawner : MonoBehaviour
         entry4.eventID = EventTriggerType.PointerEnter;
         entry4.callback.AddListener((data) => { EnterFlag(); });
         dragEndtrigger.triggers.Add(entry4);
-        //スライドで出現処理を行えるようにする処理を行う。
-        //EventTrigger.Entry entry4 = new EventTrigger.Entry();
-        //entry4.eventID = EventTriggerType.PointerClick;
-        //entry4.callback.AddListener((data) => { ResetFlag(); });
-        //dragEndtrigger.triggers.Add(entry4);
+
+
     }
 
     void ResetFlag()
@@ -76,28 +77,16 @@ public class ButtonSpawner : MonoBehaviour
         m_startFlag = false;
         m_spawnerFlag = false;
 
-        Button btn = this.GetComponent<Button>();
-        ColorBlock colorBlocks = btn.colors;
-        colorBlocks.normalColor = new Color(1f, 1f, 1f, 0f);
-        colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 0f);
-        colorBlocks.pressedColor = new Color(1f, 1f, 1f, 1f);
-        colorBlocks.disabledColor = new Color(1f, 1f, 1f, 1f);
-
-        btn.colors = colorBlocks;
-
+       
         Image image = this.GetComponent<Image>();
-        if (m_PlayerID==1) {
-            image.sprite = Resources.Load("UI/Game/flick", typeof(Sprite)) as Sprite;
-        }
-        else
-        {
-            image.sprite = Resources.Load("UI/Game/flick2", typeof(Sprite)) as Sprite;
-        }
+
+        m_changeSprite.sprite = m_sprite[0];
+
     }
 
     public void StartFlag()
     {
-        if (m_intervalTime <= 0.0f && !m_soliderStop)
+        if (m_intervalTime <= 0.0f && !m_soliderStop && m_gameManager.m_startFlag)
         {
             for (int i = 0; i <= TouchManager.touchCount; i++)
             {
@@ -106,21 +95,10 @@ public class ButtonSpawner : MonoBehaviour
                     m_nowTouchNumber = i;
                     Debug.Log("タッチしましたー＞" + i);
                     
-                    Button btn = this.GetComponent<Button>();
-                    ColorBlock colorBlocks = btn.colors;
-                    colorBlocks.normalColor = new Color(1f, 1f, 1f, 1f);
-                    colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 1f);
-                    btn.colors = colorBlocks;
 
                     Image image = this.GetComponent<Image>();
-                    if (m_PlayerID == 1)
-                    {
-                        image.sprite = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
-                    }
-                    else
-                    {
-                        image.sprite = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
-                    }
+
+                    m_changeSprite.sprite = m_sprite[1];
 
                     m_startFlag = true;
                     return;
@@ -133,15 +111,10 @@ public class ButtonSpawner : MonoBehaviour
     {
         m_spawnerFlag = false;
 
+        if (!m_startFlag) { return; }
         Image image = this.GetComponent<Image>();
-        if (m_PlayerID == 1)
-        {
-            image.sprite = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
-        }
-        else
-        {
-            image.sprite = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
-        }
+
+        m_changeSprite.sprite = m_sprite[1];
     }
 
     public void ExitFlag()
@@ -290,22 +263,22 @@ public class ButtonSpawner : MonoBehaviour
 
                 if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                 {
-                    image.sprite = Resources.Load("UI/Game/ax_active", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[2];
                 }
                 else
                 {
-                    image.sprite = Resources.Load("UI/Game/spear_active", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[3];
                 }
             }
             else
             {
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
-                    image.sprite = Resources.Load("UI/Game/sword_active", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[4];
                 }
                 else
                 {
-                    image.sprite = Resources.Load("UI/Game/shield_active", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[5];
                 }
             }
         }
@@ -315,22 +288,22 @@ public class ButtonSpawner : MonoBehaviour
 
                 if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                 {
-                    image.sprite = Resources.Load("UI/Game/spear_active2", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[2];
                 }
                 else
                 {
-                    image.sprite = Resources.Load("UI/Game/ax_active2", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[3];
                 }
             }
             else
             {
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
-                    image.sprite = Resources.Load("UI/Game/shield_active2", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[4];
                 }
                 else
                 {
-                    image.sprite = Resources.Load("UI/Game/sword_active2", typeof(Sprite)) as Sprite;
+                    m_changeSprite.sprite = m_sprite[5];
                 }
             }
         }
@@ -344,8 +317,38 @@ public class ButtonSpawner : MonoBehaviour
         m_battleManager = GameObject.FindWithTag("BattleManager").transform;
         m_type = Character.CharacterType.Sword;
 
-        
+        Button btn = this.GetComponent<Button>();
+
+        ColorBlock colorBlocks = btn.colors;
+        colorBlocks.normalColor = new Color(1f, 1f, 1f, 0f);
+        colorBlocks.highlightedColor = new Color(1f, 1f, 1f, 0f);
+        colorBlocks.pressedColor = new Color(1f, 1f, 1f, 0f);
+        colorBlocks.disabledColor = new Color(1f, 1f, 1f, 0f);
+
+        btn.colors = colorBlocks;
+
+        if (m_PlayerID == 1)
+        {
+            m_sprite[0] = Resources.Load("UI/Game/flick", typeof(Sprite)) as Sprite;
+            m_sprite[1] = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
+            m_sprite[2] = Resources.Load("UI/Game/ax_active", typeof(Sprite)) as Sprite;
+            m_sprite[3] = Resources.Load("UI/Game/spear_active", typeof(Sprite)) as Sprite;
+            m_sprite[4] = Resources.Load("UI/Game/sword_active", typeof(Sprite)) as Sprite;
+            m_sprite[5] = Resources.Load("UI/Game/shield_active", typeof(Sprite)) as Sprite;
+        }
+        else
+        {
+            m_sprite[0] = Resources.Load("UI/Game/flick2", typeof(Sprite)) as Sprite;
+            m_sprite[1] = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
+            m_sprite[2] = Resources.Load("UI/Game/spear_active2", typeof(Sprite)) as Sprite;
+            m_sprite[3] = Resources.Load("UI/Game/ax_active2", typeof(Sprite)) as Sprite;
+            m_sprite[4] = Resources.Load("UI/Game/shield_active2", typeof(Sprite)) as Sprite;
+            m_sprite[5] = Resources.Load("UI/Game/sword_active2", typeof(Sprite)) as Sprite;
+        }
+
         ResetFlag();
+
+
     }
 
     void Update()
