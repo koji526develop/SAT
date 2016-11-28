@@ -151,14 +151,14 @@ public class SelectUIManager : MonoBehaviour
         );
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
+        sceneChangerObj = new GameObject();
+        sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+
     }
 
 	void Back()
 	{
 		AudioManager.m_instance.PlaySE ("button_SE");
-
-		sceneChangerObj = new GameObject();
-		sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 		sceneChanger.ChangeToOperating ();
 	}
 
