@@ -51,20 +51,23 @@ public class CharacterAttack : State<Character>
 	}
 	void Attak()
 	{
-		if (m_instance.Barrier) 
-		{
-			foreach (Transform child in m_instance.transform) 
-			{
-				if (child.name == "Barrier")
+		if (m_instance.Barrier) {
+			foreach (Transform child in m_instance.transform) {
+				if (child.name == "Barrier") {
 					Character.Destroy (child.gameObject);
+					m_instance.Barrier = false;
+				}
 			}
-			m_instance.Barrier = false;
-			return;
+
+			//return;
+		} 
+		else 
+		{
+			m_changeStatus.life -= m_instance.status.attack;
+			m_enemyCharacter.status = m_changeStatus;
 		}
 
-		m_changeStatus.life -= m_instance.status.attack;
-
-		m_enemyCharacter.status = m_changeStatus;
+	
 	}
 
 	public override void Exit() 
