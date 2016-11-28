@@ -194,6 +194,9 @@ public class GameUIManager : MonoBehaviour {
                 btnCmp.m_ButtonID = j;
                 btnCmp.m_changeSprite = obj.GetComponent<Image>();
 
+                        SetCoulumRect(new Vector2((6.0f+(11.0f*(i-1))) / 32.0f, (20.0f-(5.0f*(j-1))) / 25.0f),
+                                      new Vector2((15.0f+(11.0f*(i-1))) / 32.0f, (25.0f-(5.0f*(j-1))) / 25.0f), i, j);
+
             }
         }
 

@@ -80,11 +80,11 @@ public class ScoreManager : MonoBehaviour {
     {
         if (_playerID == 1)
         {
-            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID]);
+            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID-1]);
         }
         else
         {
-            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID]);
+            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID-1]);
         }
 
     }

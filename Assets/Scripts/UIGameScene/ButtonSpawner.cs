@@ -347,8 +347,6 @@ public class ButtonSpawner : MonoBehaviour
         }
 
         ResetFlag();
-
-
     }
 
     void Update()
