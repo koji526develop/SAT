@@ -43,12 +43,6 @@ public class SpecialCard : MonoBehaviour {
 
     public bool m_IsGameNow = false;
 
-    public enum SpCardTag
-    {
-        SoliderChange,
-        Archer,
-        MobSpawner
-    }
 
     public void GameReady(Transform _battleManager,Transform _gameManager)
     {
