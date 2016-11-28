@@ -20,8 +20,11 @@ public class TitleManager : MonoBehaviour
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
+ 
+
         GameObject m_TitleImageObj = MyUtility.CreateEmpty("TitleObject", canvas.transform);
 
+        //背景
         MyUtility.CreateImage(
             "TitleBackGround",
             "UI/Title/title_back",
@@ -42,7 +45,6 @@ public class TitleManager : MonoBehaviour
             new Vector2(6 / 32.0f, 3 / 25.0f),
             new Vector2(26 / 32.0f, 7 / 25.0f),
             m_TitleImageObj.transform);
-
 
     }
 

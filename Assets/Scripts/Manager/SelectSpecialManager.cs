@@ -18,6 +18,14 @@ public class SelectSpecialManager : MonoBehaviour
 
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
+
+        //背景
+        GameObject obj = MyUtility.CreateSprite(
+            transform,
+            "SpecialSelectBack",
+            "UI/SpecialSelect/specialselect_back");
+
+        obj.transform.localScale = new Vector3(1.5f,1.5f,0);
     }
 	
 	// Update is called once per frame
