@@ -21,40 +21,41 @@ public class SpecialCardButton : MonoBehaviour {
 
         switch (_specialCardNumber)
         {
+            case 0:
+
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard1>();
+                break;
+
             case 1:
-			this.gameObject.AddComponent<SpecialCard1>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard2>();
                 break;
 
             case 2:
-                this.gameObject.AddComponent<SpecialCard2>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard3>();
                 break;
 
             case 3:
-                this.gameObject.AddComponent<SpecialCard3>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard4>();
                 break;
 
             case 4:
-                this.gameObject.AddComponent<SpecialCard4>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard5>();
                 break;
 
             case 5:
-                this.gameObject.AddComponent<SpecialCard5>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard6>();
                 break;
 
             case 6:
-                this.gameObject.AddComponent<SpecialCard6>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard7>();
                 break;
 
             case 7:
-                this.gameObject.AddComponent<SpecialCard7>().m_UsedPlayerID = m_playerID;
-                break;
-
-            case 8:
-                this.gameObject.AddComponent<SpecialCard8>().m_UsedPlayerID = m_playerID;
+                m_usedSpCardState = this.gameObject.AddComponent<SpecialCard8>();
                 break;
         }
 
-        m_usedSpCardState = this.GetComponent<SpecialCard>();
+        m_usedSpCardState.m_UsedPlayerID = m_playerID;
         m_usedSpCardState.GameReady(m_battleManager,m_GameManager);
     }
 
@@ -64,9 +65,18 @@ public class SpecialCardButton : MonoBehaviour {
         this.GetComponent<Button>().onClick.AddListener(UseSpecialCard);
         m_UsedCard = 0;
 
-        m_keepSpCard[0] = 1;
-        m_keepSpCard[1] = 2;
-        m_keepSpCard[2] = 3;
+       for(int i = 0; i < 3; i++)
+        {
+
+            if (m_playerID == 1)
+            {
+                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i];
+            }
+            else
+            {
+                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i];
+            }
+        }
         
     }
 

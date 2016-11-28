@@ -13,8 +13,17 @@ public class SpecialCard5 : SpecialCard {
 	
 	// Update is called once per frame
 	void Update () {
-        ScoreManager scoreManager = gameManager.GetComponent<ScoreManager>();
+        ScoreManager scoreManager;
+        try
+        {
+            scoreManager = gameManager.GetComponent<ScoreManager>();
+        }
+        catch
+        {
 
+            gameManager = GameObject.Find("GameManager").transform;
+            scoreManager = gameManager.GetComponent<ScoreManager>();
+        }
         for (int i = 1; i <=MyUtility.MAX_COLUMN; i++)
         {
             scoreManager.CountReset(m_UsedPlayerID, i);

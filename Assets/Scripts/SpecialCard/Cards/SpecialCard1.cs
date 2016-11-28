@@ -17,7 +17,15 @@ public class SpecialCard1 : SpecialCard
 
     void Start()
     {
-        m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        try {
+            m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        }
+        catch {
+
+            gameManager = GameObject.Find("GameManager").transform;
+            m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        }
+
         m_ArrowObj = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
         m_ArrowObj.name = "IceArrow";
         m_ArrowObj.transform.position = new Vector3(30000, -30000, 30000);

@@ -12,7 +12,16 @@ public class SpecialCard4 : SpecialCard {
 
     // Use this for initialization
     void Start () {
-        m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        try
+        {
+            m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        }
+        catch
+        {
+
+            gameManager = GameObject.Find("GameManager").transform;
+            m_gameUIManager = gameManager.GetComponent<GameUIManager>();
+        }
     }
 	
 	// Update is called once per frame

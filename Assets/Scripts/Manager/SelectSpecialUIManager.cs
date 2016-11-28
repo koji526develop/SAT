@@ -20,6 +20,9 @@ public class SelectSpecialUIManager : MonoBehaviour
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
 
+    public static int[] SPECIALCARD_NUMBER_1 = new int[3];
+    public static int[] SPECIALCARD_NUMBER_2 = new int[3];
+ 
     void Start () 
 	{
 		m_uiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
@@ -299,7 +302,16 @@ public class SelectSpecialUIManager : MonoBehaviour
 			{
 				if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3) 
 				{
-					m_selectedObj [m_selectedCount].SetActive (true);
+                    
+                    if (SelectUIManager.PlayerID==1) {
+                        SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
+                    }
+                    else
+                    {
+                        SPECIALCARD_NUMBER_2[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
+
+                    }
+                    m_selectedObj [m_selectedCount].SetActive (true);
 					m_selectedCount++;
 					Destroy (m_moveObject);
 					m_touchCardObject.GetComponent<SpriteRenderer> ().color = new Color (1.0f, 1.0f, 1.0f, 0.5f);

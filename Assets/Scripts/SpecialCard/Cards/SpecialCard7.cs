@@ -8,7 +8,11 @@ public class SpecialCard7 : SpecialCard {
 
 	// Use this for initialization
 	void Start () {
-	
+
+        if (battleManager == null)
+        {
+            gameManager = GameObject.Find("GameManager").transform;
+        }
 	}
 	
 	// Update is called once per frame
