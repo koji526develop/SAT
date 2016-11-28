@@ -30,29 +30,29 @@ public class SelectSpecialUIManager : MonoBehaviour
         /***********************************************
 		// 選択された特殊カードの表示枠にあらかじめ３枚作っておき、非表示にしておく
 		***********************************************/
+
+		m_cardParent = new GameObject("CardParent");
+
         for (int i = 0; i < 3; i++)
 		{
-			GameObject obj = MyUtility.CreateImage (
-				"SpecialCard",						 // オブジェクト名
-				"Image/karie/kard",			 // 画像Path
-				new Vector2 (25 / 32.0f, (18 - i * 5 - i * 1) / 25.0f), // アンカーの最小値
-				new Vector2 (28 / 32.0f, (23 - i * 5 - i * 1) / 25.0f), // アンカーの最大値
-				transform					 // 親のTransform
-			);
-			obj.SetActive (false);
-			m_selectedObj[i] = obj;
+
+			GameObject cardObj =  MyUtility.CreateSprite (m_cardParent.transform, "CardFrame", "Image/karie/kard");
+
+			cardObj.transform.position = new Vector3 (3.75f,3.0f + i * -2.25f,0.0f);
+
+			cardObj.SetActive (false);
+			m_selectedObj[i] = cardObj;
 		}
 
 		/***********************************************
 		// 特殊カード８枚作成
 		***********************************************/
-		m_cardParent = new GameObject("CardParent");
 		int num = 0;
 		for (int i = 0; i < 4; i++) 
 		{
 			for (int j = 0; j < 2; j++)
 			{
-				GameObject cardObj = SpecialCardSprite.CreateSprite (m_cardParent.transform, "Card", "Image/karie/kard");
+				GameObject cardObj = SpecialCardSprite.CreateSprite (m_cardParent.transform, "Card", "Image/karie/SpecialCard"+(num+1).ToString());
 				cardObj.transform.position = new Vector2 (-5.4f + 2.08f * i, 3.3f - j * 2.9f);
 				cardObj.AddComponent<SpecialCardSprite> ().cardNum = num;
 				num++;
@@ -232,6 +232,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 	GameObject CreateTouchMoveCard()
 	{
 		GameObject touchMoveCardObject = MyUtility.CreateSprite (m_cardParent.transform, "MoveCard", "Image/karie/kard");
+		touchMoveCardObject.GetComponent<SpriteRenderer> ().sprite = m_touchCardObject.GetComponent<SpriteRenderer> ().sprite;
 		touchMoveCardObject.tag = "Card";
 		Vector3 touchPos = TouchManager.GetTouchWorldPosition (m_uiCamera, 0);
 		touchPos.z = 0;
@@ -302,7 +303,6 @@ public class SelectSpecialUIManager : MonoBehaviour
 			{
 				if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3) 
 				{
-                    
                     if (SelectUIManager.PlayerID==1) {
                         SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
                     }
@@ -311,6 +311,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                         SPECIALCARD_NUMBER_2[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
 
                     }
+					m_selectedObj [m_selectedCount].GetComponent<SpriteRenderer> ().sprite = m_touchCardObject.GetComponent<SpriteRenderer> ().sprite;
                     m_selectedObj [m_selectedCount].SetActive (true);
 					m_selectedCount++;
 					Destroy (m_moveObject);
