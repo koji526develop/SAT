@@ -40,6 +40,12 @@ public class ResultManager : MonoBehaviour
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
         uiObj.AddComponent<ResultWarPotential>();
+        MyUtility.CreateImage(
+             "ResultBackGround",
+             "UI/Result/result_back",
+             new Vector2(0 / 32.0f, 0 / 25.0f),
+             new Vector2(32 / 32.0f, 25 / 25.0f),
+             uiObj.transform);
 
         ////
         //戦力ゲージ作成
