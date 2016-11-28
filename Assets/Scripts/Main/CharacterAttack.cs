@@ -38,7 +38,7 @@ public class CharacterAttack : State<Character>
 	{
 		m_attackTime += Time.deltaTime;
 	
-		if(m_attackTime>=1)
+		if(m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
 		{
 			m_instance.animator.SetTime (0.0f);
 			Attak ();
