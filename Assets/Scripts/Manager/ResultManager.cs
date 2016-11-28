@@ -9,7 +9,7 @@ public class ResultManager : MonoBehaviour
     //タッチを取得し始めるまでの時間
     private float m_TouchCoolTime;
 
-    string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
+    string[] m_IconImagePath = { "UI/Result/sword_icon", "UI/Result/spear_icon", "UI/Result/ax_icon", "UI/Result/shield_icon" };
 
     //リザルトで表示する兵士の数を記憶しておくためのもの
     public static int[] ResultSoldierNum = new int[8];
@@ -40,6 +40,8 @@ public class ResultManager : MonoBehaviour
 
         GameObject uiObj = MyUtility.CreateEmpty("UI", canvas.transform);
         uiObj.AddComponent<ResultWarPotential>();
+
+        //背景
         MyUtility.CreateImage(
              "ResultBackGround",
              "UI/Result/result_back",
@@ -131,8 +133,8 @@ public class ResultManager : MonoBehaviour
                 GameObject imgobj = MyUtility.CreateImage(
                 "SoldierIcon",
                 m_IconImagePath[j],
-                new Vector2((30.5f - (j * 7.5f)) / 32.0f, 18.5f / 25.0f),
-                new Vector2((36.5f - (j * 7.5f)) / 32.0f, 24.5f / 25.0f),
+                new Vector2((30.5f - (j * 7.5f)) / 32.0f, 16.5f / 25.0f),
+                new Vector2((36.5f - (j * 7.5f)) / 32.0f, 22.5f / 25.0f),
                 obj.transform);
 
                 imgobj.transform.Rotate(new Vector3(0, 0, 1), -90);
@@ -146,8 +148,8 @@ public class ResultManager : MonoBehaviour
                  obj.transform,
                  35,
                  new Vector3(0.0f, 0.0f, -90.0f),
-                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 14.0f / 25.0f),
-                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 14.0f / 25.0f)
+                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 12.0f / 25.0f),
+                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 12.0f / 25.0f)
                  );
             }
 
