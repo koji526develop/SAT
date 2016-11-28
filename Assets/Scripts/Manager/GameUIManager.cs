@@ -109,7 +109,7 @@ public class GameUIManager : MonoBehaviour {
 
         //      //ここまで
         obj = MyUtility.CreateButton(
-            "SpecialCardButton",
+            "SpecialCardButton1",
             "Image/TimeWaku",
             new Vector2(0.0f / 32.0f,  4.0f / 25.0f),
             new Vector2(3.0f / 32.0f, 13.0f / 25.0f),
@@ -120,7 +120,7 @@ public class GameUIManager : MonoBehaviour {
 
 
         obj = MyUtility.CreateButton(
-            "SpecialCardButton",
+            "SpecialCardButton2",
             "Image/TimeWaku",
             new Vector2(29.0f / 32.0f, 12.0f / 25.0f),
             new Vector2(32.0f / 32.0f, 21.0f / 25.0f),
