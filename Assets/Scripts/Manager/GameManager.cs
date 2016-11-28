@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     GameObject[] m_countDownObj = new GameObject[8];
     StartCountDown[] countDown = new StartCountDown[8];
     int m_nowCount = 0;
-    bool m_startFlag = false;
+    public bool m_startFlag = false;
     bool m_countStart = false;
 
     // ゲーム開始時
