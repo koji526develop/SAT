@@ -9,6 +9,7 @@ public class DebugListManager : MonoBehaviour
 	RectTransform prefab = null;
 	const int MAX_ITEM_NUM = 50;
 	const int MAX_COLUMN_NUM = 3;
+	GameObject m_battleManager;
 
 	enum Item
 	{
@@ -16,7 +17,7 @@ public class DebugListManager : MonoBehaviour
 		SoldierMax,
 		SceneManager,
 		Title,
-		Test5,
+		Barrier,
 		Test6,
 		Test7,
 		Test8,
@@ -36,7 +37,10 @@ public class DebugListManager : MonoBehaviour
 		Test22,
 		MaxItemNum
 	}
-
+	void Start()
+	{
+		m_battleManager=GameObject.Find("BattleManager");
+	}
 	void Awake ()
 	{
 		GetComponent<RectTransform> ().sizeDelta = new Vector2 (Screen.width, Screen.height);
@@ -58,6 +62,7 @@ public class DebugListManager : MonoBehaviour
 
 			Button button = item.GetComponent<Button> ();
 			button.onClick.AddListener (GetOnClickFunc ((Item)i));
+		
 
 		}
 	}
@@ -70,6 +75,7 @@ public class DebugListManager : MonoBehaviour
 		case Item.SoldierMax:return SoldierMax;
 		case Item.SceneManager:return SceneManager;
 		case Item.Title:return Title;
+		case Item.Barrier:return Barrier;
 			default: return A;
 		}
 	}
@@ -93,6 +99,19 @@ public class DebugListManager : MonoBehaviour
 		SceneChanger sChange = new SceneChanger();
 		sChange.ChangeToResult();
 
+	}
+	void Barrier()
+	{
+		foreach (Transform child in m_battleManager.transform) 
+		{
+			if (child.tag=="Character") 
+			{
+				Character character = child.gameObject.GetComponent<Character> ();
+				character.ChangeState (Character.CharacterState.Barrier);
+
+
+			}
+		}
 	}
 	void Title()
 	{
