@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ArrowMove : MonoBehaviour
 {
+    readonly float speed = 0.5f;
+
     int m_PlayerID;
     public int PlayerID
     {
@@ -21,7 +23,7 @@ public class ArrowMove : MonoBehaviour
     {
         if (m_PlayerID == 1)
         {
-            transform.position += new Vector3(0.3f, 0, 0);
+            transform.position += new Vector3(speed, 0, 0);
             if (transform.position.x >= MyUtility.SOLDIER_CREATE_LINE_X_2P)
             {
                 Destroy(this.gameObject);
@@ -30,7 +32,7 @@ public class ArrowMove : MonoBehaviour
         }
         else if (m_PlayerID == 2)
         {
-            transform.position += new Vector3(-0.3f, 0, 0);
+            transform.position += new Vector3(-speed, 0, 0);
             if (transform.position.x <= MyUtility.SOLDIER_CREATE_LINE_X_1P)
             {
                 Destroy(this.gameObject);
