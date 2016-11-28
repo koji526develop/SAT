@@ -18,14 +18,14 @@ public class DebugListManager : MonoBehaviour
 		SceneManager,
 		Title,
 		Barrier,
-		Test6,
-		Test7,
-		Test8,
-		Test9,
-		Test10,
-		Test11,
-		Test12,
-		Test13,
+		SpecialCard1,
+		SpecialCard2,
+		SpecialCard3,
+		SpecialCard4,
+		SpecialCard5,
+		SpecialCard6,
+		SpecialCard7,
+		SpecialCard8,
 		Test14,
 		Test15,
 		Test16,
@@ -76,6 +76,14 @@ public class DebugListManager : MonoBehaviour
 		case Item.SceneManager:return SceneManager;
 		case Item.Title:return Title;
 		case Item.Barrier:return Barrier;
+		case Item.SpecialCard1:return SpecialCard1;
+		case Item.SpecialCard2:return SpecialCard2;
+		case Item.SpecialCard3:return SpecialCard3;
+		case Item.SpecialCard4:return SpecialCard4;
+		case Item.SpecialCard5:return SpecialCard5;
+		case Item.SpecialCard6:return SpecialCard6;
+		case Item.SpecialCard7:return SpecialCard7;
+		case Item.SpecialCard8:return SpecialCard8;
 			default: return A;
 		}
 	}
@@ -121,4 +129,78 @@ public class DebugListManager : MonoBehaviour
 	{
 		gameObject.SetActive (false);
 	}
+
+	void SpecialCard1()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard1>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+
+	}
+
+	void SpecialCard2()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard2>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard3()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard3>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard4()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard4>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard5()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard5>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard6()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard6>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard7()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard7>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
+	void SpecialCard8()
+	{
+		GameObject SpecialCardButtonObj = GameObject.Find ("Canvas/SpecialCardButton1");
+		SpecialCardButtonObj.AddComponent<SpecialCard8>().m_UsedPlayerID = 1;
+
+		SpecialCard m_usedSpCardState = SpecialCardButtonObj.GetComponent<SpecialCard>();
+		m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform,GameObject.Find("GameManager").transform);
+	}
+
 }
