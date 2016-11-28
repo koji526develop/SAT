@@ -139,6 +139,10 @@ public class GameManager : MonoBehaviour
                 //fightが消えたらゲーム開始
                 if (m_nowCount == 3 && !countDown[m_nowCount].FadeFlag)
                 {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Destroy(m_countDownObj[i]);
+                    }
                     m_startFlag = true;
                 }
                 else

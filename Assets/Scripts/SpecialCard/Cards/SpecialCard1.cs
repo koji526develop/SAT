@@ -55,32 +55,34 @@ public class SpecialCard1 : SpecialCard
                     {
                         m_checkColumn = j;
                         arrowMove.PlayerID = m_UsedPlayerID;
-                        m_ArrowObj.transform.position = new Vector3(m_arrowPosX, 0, m_arrowPosZ[m_checkColumn - 1]);
+                        arrowMove.Column = m_checkColumn;
+                        m_ArrowObj.transform.position = new Vector3(m_arrowPosX, 1, m_arrowPosZ[m_checkColumn - 1]);
+                        Destroy(this);
                         break;
                     }
-
                 }
             }
         }
 
-        if (m_checkColumn != 0)
-        {
-
-            foreach (Transform childObj in battleManager)
-            {
-                //キャラクタータグであるならもしくは、同じ列であるなら
-                if (childObj.tag == "Character" &&
-                    m_checkColumn == childObj.GetComponent<Character>().m_mapColumn)
-                {
-                    if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
-                    {
-                        //対象を削除
-                        Destroy(childObj.gameObject);
-
-                    }
-                }
-            }
-            Destroy(this);
-        }
+        //if (m_checkColumn != 0)
+        //{
+        //    foreach (Transform childObj in battleManager)
+        //    {
+        //        //キャラクタータグであるならもしくは、同じ列であるなら
+        //        if (childObj.tag == "Character" &&
+        //            m_checkColumn == childObj.GetComponent<Character>().m_mapColumn)
+        //        {
+        //            if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
+        //            {
+        //                if()
+        //                {
+        //                    //対象を削除
+        //                    Destroy(childObj.gameObject);
+        //                }
+        //            }
+        //        }
+        //    }
+        //    Destroy(this);
+        //}
     }
 }
