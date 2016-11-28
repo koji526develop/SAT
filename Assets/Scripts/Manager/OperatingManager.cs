@@ -30,6 +30,12 @@ public class OperatingManager : MonoBehaviour
 
         GameObject m_OperatingSpriteObj;
 
+        MyUtility.CreateImage(
+            "OperatingBackGround",
+            "UI/Operating/operating_back",
+            new Vector2(0 / 32.0f, 0 / 25.0f),
+            new Vector2(32 / 32.0f, 25 / 25.0f),
+            uiObj.transform);
 
         //何番目を表示しているかの画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
