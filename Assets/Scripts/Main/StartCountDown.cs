@@ -7,38 +7,61 @@ using UnityEngine.UI;
 
 public class StartCountDown : MonoBehaviour
 {
-    bool m_startFlag = false;
-    float m_countTime = 3.0f;
+    private float m_alfa;
+    private float m_nowTime;         //現在の時間
+    private float m_fadeTime = 1.0f;        //フェードインにかける時間
+    private bool m_isFade = false;          //フェードインをするか
+    private Color m_color;
 
-    public bool StartFlag
+    public bool FadeFlag
     {
+        set
+        {
+            m_isFade = value;
+        }
         get
         {
-            return m_startFlag;
+            return m_isFade;
         }
     }
+
 
     void Awake()
     {
-
+        
     }
 
-	void Start ()
+    void Start()
     {
-	
-	}
-	
-	void Update ()
-    {
-        m_countTime -= Time.deltaTime;
+        m_color = GetComponent<Image>().color;
+        m_alfa = 0.0f;
+        m_nowTime = 0.0f;
+    }
 
-        if(m_countTime <= 0.0f)
+    void Update()
+    {
+        if(m_isFade)
         {
-            m_startFlag = true;
+            FadeIn();
         }
-        else if(m_startFlag)
+    }
+
+    //画像に透過処理をする
+    void FadeIn()
+    {
+        if (m_nowTime <= m_fadeTime)
         {
-            Destroy(this.gameObject);
+            m_alfa = Mathf.Lerp(1.0f, 0.0f, m_nowTime / m_fadeTime);
+            m_color.a = m_alfa;
+
+            m_nowTime += Time.deltaTime;
+
+            GetComponent<Image>().color = m_color;
         }
-	}
+        else
+        {
+            Debug.Log("透過終了");
+            m_isFade = false;
+        }
+    }
 }

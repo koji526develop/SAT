@@ -4,7 +4,6 @@ using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
-
     void Awake()
     {
         // ライト作成
@@ -19,8 +18,6 @@ public class TitleManager : MonoBehaviour
         MyUtility.CreateEventSystem(transform);
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
-
- 
 
         GameObject m_TitleImageObj = MyUtility.CreateEmpty("TitleObject", canvas.transform);
 
@@ -45,7 +42,6 @@ public class TitleManager : MonoBehaviour
             new Vector2(6 / 32.0f, 3 / 25.0f),
             new Vector2(26 / 32.0f, 7 / 25.0f),
             m_TitleImageObj.transform);
-
     }
 
     void Start()
