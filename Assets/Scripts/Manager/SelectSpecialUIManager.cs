@@ -159,8 +159,6 @@ public class SelectSpecialUIManager : MonoBehaviour
 			new Vector2 (9 / 32.0f, 4 / 25.0f), // アンカーの最大値
 			transform                           // 親のTransform
 		);
-		// Text追加
-		MyUtility.AddText ("戻る", backObj.transform);
 		sceneChangerObj = new GameObject();
 		sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 		backObj.GetComponent<Button>().onClick.AddListener(BackProces);
@@ -175,7 +173,6 @@ public class SelectSpecialUIManager : MonoBehaviour
 			new Vector2 (19 / 32.0f, 4 / 25.0f), 
 			transform
 		);
-		MyUtility.AddText ("リセット", resetObj.transform);
 		resetObj.GetComponent<Button>().onClick.AddListener(Reset);
 
         /***********************************************
@@ -188,8 +185,6 @@ public class SelectSpecialUIManager : MonoBehaviour
 			new Vector2 (29 / 32.0f, 4 / 25.0f), // アンカーの最大値
 			transform							 // 親のTransform
 		);
-		// Text追加
-		MyUtility.AddText ("決定", enterObj.transform);
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
     }
