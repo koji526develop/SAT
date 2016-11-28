@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpecialCard2 : SpecialCard {
 
-	public static string m_howTo = "ラインを二か所選択し、そのライン上の兵士を消滅";
+	public static string m_howTo = "ラインを二か所選択し、そのライン上の\n兵士を消滅";
 	public static string m_imagePath = "path";
 
     private int m_checkColumn = 0;

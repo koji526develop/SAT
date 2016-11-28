@@ -72,7 +72,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [0].gameObject.SetActive (false);
 
@@ -81,7 +81,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [1].gameObject.SetActive (false);
 
@@ -90,7 +90,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [2].gameObject.SetActive (false);
 
@@ -99,7 +99,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [3].gameObject.SetActive (false);
 
@@ -108,7 +108,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [4].gameObject.SetActive (false);
 
@@ -117,7 +117,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [5].gameObject.SetActive (false);
 
@@ -126,7 +126,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [6].gameObject.SetActive (false);
 
@@ -135,9 +135,15 @@ public class SelectSpecialUIManager : MonoBehaviour
 			35,
 			Vector3.zero,
 			new Vector2(3 / 32.0f, 5 / 25.0f),
-			new Vector2 (22 / 32.0f, 9 / 25.0f)
+			new Vector2 (21.5f / 32.0f, 8.5f / 25.0f)
 		);
 		m_howToText [7].gameObject.SetActive (false);
+
+		for (int i = 0; i < 8; i++) 
+		{
+			m_howToText [i].lineSpacing = 45;
+			m_howToText [i].alignment = TextAnchor.UpperLeft;
+		}
 
 		/***********************************************
 		// 選択された特殊カードの枠作成
