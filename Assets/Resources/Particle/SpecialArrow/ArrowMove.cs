@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArrowMove : SpecialCard
+public class ArrowMove : MonoBehaviour
 {
     readonly float speed = 0.5f;
 
@@ -51,24 +51,13 @@ public class ArrowMove : SpecialCard
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.gameObject.name);
         if (m_Column != 0)
         {
             //キャラクタータグであるなら
             if (col.gameObject.tag == "Character")
             {
-                foreach (Transform childObj in battleManager)
-                {
-                    //同じ列であるなら
-                    if (m_Column == childObj.GetComponent<Character>().m_mapColumn)
-                    {
-                        if (childObj.GetComponent<Character>().status.PlayerID != m_PlayerID)
-                        {
-                            //対象を削除
-                            Destroy(childObj.gameObject);
-                        }
-                    }
-                }
+                //対象を削除
+                Destroy(col.gameObject);
             }
 
         }
