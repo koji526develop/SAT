@@ -138,9 +138,8 @@ public class SelectUIManager : MonoBehaviour
             new Vector2(9 / 32.0f, 4 / 25.0f),
             transform
         );
-        sceneChangerObj = new GameObject();
-        sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
+        
+		backObj.GetComponent<Button>().onClick.AddListener(Back);
 
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
@@ -154,8 +153,19 @@ public class SelectUIManager : MonoBehaviour
 
     }
 
+	void Back()
+	{
+		AudioManager.m_instance.PlaySE ("button_SE");
+
+		sceneChangerObj = new GameObject();
+		sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+		sceneChanger.ChangeToOperating ();
+	}
+
     public void EnterProces()
     {
+		AudioManager.m_instance.PlaySE ("button_SE");
+
         if (m_soldierTotalNum == 18)
         {
             if (PlayerID == 1)
@@ -232,6 +242,8 @@ public class SelectUIManager : MonoBehaviour
 
     void Plus(int num)
     {
+		AudioManager.m_instance.PlaySE ("button_SE");
+
         // 兵士の合計数が兵士最大数より多かったら抜ける
         if (m_soldierTotalNum >= 18)
             return;
@@ -256,6 +268,8 @@ public class SelectUIManager : MonoBehaviour
 
     void Minus(int num)
     {
+		AudioManager.m_instance.PlaySE ("button_SE");
+
         // 兵士の合計数が０以下または各兵士の数が０以下だったら抜ける
         if (m_soldierTotalNum <= 0 || m_soldierNumList[num] <= 0)
             return;
