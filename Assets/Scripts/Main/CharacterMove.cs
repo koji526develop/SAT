@@ -458,7 +458,7 @@ public class CharacterMove :  State<Character>
 	bool IsHit (GameObject obj1, GameObject obj2)
 	{
 		// 衝突判定を行う距離
-		float distance = obj1.GetComponent<Character> ().status.attackDistance;
+		float distance = obj1.GetComponent<Character> ().status.attackDistance * 1.5f;
 
 		Character character1 = obj1.GetComponent<Character>();
 		Character character2 = obj2.GetComponent<Character>();
