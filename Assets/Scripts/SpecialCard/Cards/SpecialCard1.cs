@@ -17,10 +17,12 @@ public class SpecialCard1 : SpecialCard
 
     void Start()
     {
-        try {
+        try
+        {
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
         }
-        catch {
+        catch
+        {
 
             gameManager = GameObject.Find("GameManager").transform;
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
@@ -32,7 +34,7 @@ public class SpecialCard1 : SpecialCard
         m_ArrowObj.AddComponent<ArrowMove>();
         arrowMove = m_ArrowObj.GetComponent<ArrowMove>();
 
-        if (m_UsedPlayerID == 1) m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P;
+        if (m_UsedPlayerID == 1) m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P - 8.0f;
         else m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
         for (int i = 0; i < 6; i++)
         {
