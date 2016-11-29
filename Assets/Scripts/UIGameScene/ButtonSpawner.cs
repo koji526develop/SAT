@@ -9,6 +9,7 @@ public class ButtonSpawner : MonoBehaviour
     Transform m_battleManager;
     GameManager m_gameManager;
     ScoreManager m_scoreManager;
+	Canvas m_canvas;
 
     public int m_PlayerID;
     public int m_ButtonID;
@@ -35,6 +36,7 @@ public class ButtonSpawner : MonoBehaviour
         this.transform.tag = "SoliderButton";
 
         Transform gameManagerTrans=GameObject.Find("GameManager").transform;
+
 
         this.GetComponent<Button>().onClick.AddListener(ResetFlag);
 
@@ -338,7 +340,7 @@ public class ButtonSpawner : MonoBehaviour
     void Start()
     {
         //初期設定を行う。
-        m_battleManager = GameObject.FindWithTag("BattleManager").transform;
+		m_battleManager = GameObject.Find("BattttleCanvas").transform;
         m_type = Character.CharacterType.Sword;
 
         Button btn = this.GetComponent<Button>();
