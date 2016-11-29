@@ -33,9 +33,9 @@ public class SceneChanger : MonoBehaviour
     //ゲームに行く
     public void ChangeToGame()
     {
-        //MySceneManager.m_instance.LoadLevel("Game", 1.0f);
+        MySceneManager.m_instance.LoadLevel("Game", fadeOutTime);
         //MySceneManager.m_instance.LoadLevel("GameAndUI", 1.0f);
-        MySceneManager.m_instance.LoadLevel("GameAndUI_nozawa", fadeOutTime);
+        //MySceneManager.m_instance.LoadLevel("GameAndUI_nozawa", fadeOutTime);
     }
 
     //リザルトに行く
