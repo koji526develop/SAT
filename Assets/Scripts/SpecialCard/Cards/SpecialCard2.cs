@@ -63,7 +63,11 @@ public class SpecialCard2 : SpecialCard {
                     if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
                     {
                         //対象を削除
-                        Destroy(childObj.gameObject);
+                        Character.Status status = childObj.GetComponent<Character>().status;
+
+                        status.life = 0;
+
+                        childObj.GetComponent<Character>().status = status;
 
                     }
                 }

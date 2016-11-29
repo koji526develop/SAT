@@ -36,11 +36,10 @@ public class ButtonSpawner : MonoBehaviour
 
         Transform gameManagerTrans=GameObject.Find("GameManager").transform;
 
+        this.GetComponent<Button>().onClick.AddListener(ResetFlag);
+
         m_gameManager = gameManagerTrans.GetComponent<GameManager>();
         m_scoreManager = gameManagerTrans.GetComponent<ScoreManager>();
-
-        //ボタン押すことで兵種を切り替える処理を行う。  
-        this.GetComponent<Button>().onClick.AddListener(ResetFlag);
 
         //スライドで出現処理を行えるようにする処理を行う。
         EventTrigger dragEndtrigger = gameObject.AddComponent<EventTrigger>();
@@ -122,20 +121,13 @@ public class ButtonSpawner : MonoBehaviour
 
         if (m_startFlag)
         {
+            m_spawnerFlag = true;
 
-            if (m_PlayerID == 1)
-            {
-                    m_spawnerFlag = true;
-                    return;
-
-            }
-            else
-            {
-                    m_spawnerFlag = true;
-                    return;
-            }
         }
-        ResetFlag();
+        else
+        {
+            ResetFlag();
+        }
     }
 
     //兵士出現処理
@@ -347,8 +339,6 @@ public class ButtonSpawner : MonoBehaviour
         }
 
         ResetFlag();
-
-
     }
 
     void Update()

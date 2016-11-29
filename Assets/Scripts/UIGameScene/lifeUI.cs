@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
-public class Life : MonoBehaviour {
-
+public class lifeUI : MonoBehaviour {
+	public Character m_chara;
 	// Use this for initialization
 	void Start () {
-	
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		this.GetComponent<Text> ().text="点数";
+		
 	}
 }

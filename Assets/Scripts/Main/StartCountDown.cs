@@ -60,7 +60,6 @@ public class StartCountDown : MonoBehaviour
         }
         else
         {
-            Debug.Log("透過終了");
             m_isFade = false;
         }
     }

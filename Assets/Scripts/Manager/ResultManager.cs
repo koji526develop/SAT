@@ -10,9 +10,12 @@ public class ResultManager : MonoBehaviour
     private float m_TouchCoolTime;
 
     string[] m_IconImagePath = { "UI/Result/sword_icon", "UI/Result/spear_icon", "UI/Result/ax_icon", "UI/Result/shield_icon" };
+    string[] m_SpecialImagePath = { "", "", "", "", "", "" };
 
     //リザルトで表示する兵士の数を記憶しておくためのもの
     public static int[] ResultSoldierNum = new int[8];
+    //リザルトで表示する特殊カードの情報を記憶しておくためのもの
+    public static int[] ResultSpecialInfo = new int[6];
 
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
@@ -98,7 +101,7 @@ public class ResultManager : MonoBehaviour
                 );
         }
 
-        ////
+        //// プレイヤーの戦闘で使用した兵、カード
         //使用した兵士、特殊カード
         GameObject[] m_ResultObj = new GameObject[2];
 
@@ -113,6 +116,15 @@ public class ResultManager : MonoBehaviour
             "×   " + ResultSoldierNum[6].ToString(),
             "×   " + ResultSoldierNum[7].ToString()
         };
+
+        //特殊カードの画像パス
+        for (int i = 0; i < 6; i++)
+        {
+            //デバッグ用
+            ResultSpecialInfo[i] = i;
+
+            m_SpecialImagePath[i] = "Image/Karie/SpecialCard" + ResultSpecialInfo[i].ToString();
+        }
 
         for (int i = 0; i < 2; i++)
         {
@@ -158,7 +170,7 @@ public class ResultManager : MonoBehaviour
             //画像
             obj = MyUtility.CreateImage(
                 "OpponentSpecialCard",
-                "Image/Karie/waku6",
+                "Image/Karie/waku4",
                 new Vector2(2.0f / 32.0f, 2.0f / 25.0f),
                 new Vector2(10.0f / 32.0f, 15.0f / 25.0f),
                 m_ResultObj[i].transform);
@@ -168,19 +180,10 @@ public class ResultManager : MonoBehaviour
                 //個別画像
                 m_SpecialObj[j] = MyUtility.CreateImage(
                     "SpecialCardImg",
-                    "Image/resultSpecial",
+                    m_SpecialImagePath[j + (i * 3)],
                     new Vector2(3.0f / 32.0f, (2.0f + (j * 7.5f)) / 25.0f),
                     new Vector2(29.0f / 32.0f, (8.0f + (j * 7.5f)) / 25.0f),
                     obj.transform);
-                //文字
-                MyUtility.CreateText(
-                    "特殊カード",
-                    m_SpecialObj[j].transform,
-                    35,
-                    new Vector3(0.0f, 0.0f, 0.0f),
-                    new Vector2(16.0f / 32.0f, 12.5f / 25.0f),
-                    new Vector2(16.0f / 32.0f, 12.5f / 25.0f)
-                    );
             }
         }
         //作ったもの一つを対になるように配置
@@ -194,18 +197,11 @@ public class ResultManager : MonoBehaviour
         //再戦ボタン
         rematchObj = MyUtility.CreateButton(
             "Rematch",
-            "Image/Karie/waku5",
+            "UI/Result/restart",
             new Vector2(10 / 32.0f, 14 / 25.0f),
             new Vector2(22 / 32.0f, 23 / 25.0f),
             buttonObj.transform);
-        MyUtility.CreateText(
-            "再戦",
-            rematchObj.transform,
-            35,
-            new Vector3(0, 0, -90),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f)
-            );
+
         sceneChangerObj = new GameObject();
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         rematchObj.GetComponent<Button>().onClick.AddListener(RematchProces);
@@ -213,18 +209,11 @@ public class ResultManager : MonoBehaviour
         //兵士選択へボタン
         soldierSelectObj = MyUtility.CreateButton(
             "SoldierSelect",
-            "Image/Karie/waku5",
+            "UI/Result/reselect",
             new Vector2(10 / 32.0f, 2 / 25.0f),
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
-        MyUtility.CreateText(
-            "兵士選択へ",
-            soldierSelectObj.transform,
-            35,
-            new Vector3(0, 0, -90),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f)
-            );
+
         soldierSelectObj.GetComponent<Button>().onClick.AddListener(SelectSoldierProces);
 
         buttonObj.SetActive(false);
@@ -245,6 +234,12 @@ public class ResultManager : MonoBehaviour
         SelectUIManager.SHIELD_NUM_2 = ResultManager.ResultSoldierNum[7];
 
         //特殊カード設定
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = ResultSpecialInfo[i];
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = ResultSpecialInfo[i + 3];
+        }
+
 
         sceneChanger.ChangeToGame();
     }
@@ -263,6 +258,13 @@ public class ResultManager : MonoBehaviour
         SelectUIManager.SHIELD_NUM_2 = 0;
 
         SelectUIManager.PlayerID = 1;
+
+        //特殊カードの情報を初期化
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 0;
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 0;
+        }
 
         sceneChanger.ChangeToSelect();
     }

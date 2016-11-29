@@ -11,7 +11,7 @@ public class SoldierSurvival : MonoBehaviour
     GameObject[] m_SoldierImgObj = new GameObject[2];
 
     string[] m_SoldierNumberText = { "", "", "", "", "", "", "", "" };
-    string[] m_IconImagePath = { "Image/sword_I", "Image/spear_I", "Image/ax_I", "Image/shield_I" };
+    string[] m_IconImagePath = { "UI/Game/sword_icon", "UI/Game/spear_icon", "UI/Game/ax_icon", "UI/Game/shield_icon" };
     Text[] m_SoldierText = new Text[8];
 
 
