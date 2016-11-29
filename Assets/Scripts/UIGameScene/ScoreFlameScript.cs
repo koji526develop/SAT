@@ -37,23 +37,23 @@ public class ScoreFlameScript : MonoBehaviour {
             {
 
                 case 0:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue1", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop1", typeof(Sprite)) as Sprite;
                     break;
 
                 case 1:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue2", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 2:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue3", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop3", typeof(Sprite)) as Sprite;
                     break;
 
                 case 3:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue4", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop4", typeof(Sprite)) as Sprite;
                     break;
 
                 case 4:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/blue/ScoreflameBlue5", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop5", typeof(Sprite)) as Sprite;
                     break;
 
             }
@@ -64,23 +64,23 @@ public class ScoreFlameScript : MonoBehaviour {
             {
 
                 case 0:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed1", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop1", typeof(Sprite)) as Sprite;
                     break;
 
                 case 1:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed2", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 2:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed3", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop3", typeof(Sprite)) as Sprite;
                     break;
 
                 case 3:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed4", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop4", typeof(Sprite)) as Sprite;
                     break;
 
                 case 4:
-                    this.GetComponent<Image>().sprite = Resources.Load("Image/ScoreFlame/red/ScoreflameRed5", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop5", typeof(Sprite)) as Sprite;
                     break;
 
             }
