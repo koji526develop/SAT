@@ -29,7 +29,7 @@ public class SpecialCard1 : SpecialCard
         }
 
         m_ArrowObj = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
-        m_ArrowObj.name = "IceArrow";
+        m_ArrowObj.name = "FireArrow";
         m_ArrowObj.transform.position = new Vector3(30000, -30000, 30000);
         m_ArrowObj.AddComponent<ArrowMove>();
         arrowMove = m_ArrowObj.GetComponent<ArrowMove>();
@@ -63,26 +63,5 @@ public class SpecialCard1 : SpecialCard
                 }
             }
         }
-
-        //if (m_checkColumn != 0)
-        //{
-        //    foreach (Transform childObj in battleManager)
-        //    {
-        //        //キャラクタータグであるならもしくは、同じ列であるなら
-        //        if (childObj.tag == "Character" &&
-        //            m_checkColumn == childObj.GetComponent<Character>().m_mapColumn)
-        //        {
-        //            if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
-        //            {
-        //                if()
-        //                {
-        //                    //対象を削除
-        //                    Destroy(childObj.gameObject);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    Destroy(this);
-        //}
     }
 }
