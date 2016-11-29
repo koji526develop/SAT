@@ -28,20 +28,27 @@ public class TitleManager : MonoBehaviour
             new Vector2(0 / 32.0f, 0 / 25.0f),
             new Vector2(32 / 32.0f, 25 / 25.0f),
             m_TitleImageObj.transform);
-
+        //タイトル文字
         MyUtility.CreateImage(
             "Title",
-            "Image/title",
-            new Vector2(3 / 32.0f, 15 / 25.0f),
-            new Vector2(29 / 32.0f, 23 / 25.0f),
-           m_TitleImageObj.transform);
-
-        MyUtility.CreateImage(
-            "Touch",
-            "Image/titleTouch",
-            new Vector2(6 / 32.0f, 3 / 25.0f),
-            new Vector2(26 / 32.0f, 7 / 25.0f),
+            "UI/Title/title",
+            new Vector2(0 / 32.0f, 0 / 25.0f),
+            new Vector2(32/ 32.0f, 25 / 25.0f),
             m_TitleImageObj.transform);
+
+        //MyUtility.CreateImage(
+        //    "Title",
+        //    "UI/Title/title",
+        //    new Vector2(3 / 32.0f, 15 / 25.0f),
+        //    new Vector2(29 / 32.0f, 23 / 25.0f),
+        //   m_TitleImageObj.transform);
+
+        //MyUtility.CreateImage(
+        //    "Touch",
+        //    "Image/titleTouch",
+        //    new Vector2(6 / 32.0f, 3 / 25.0f),
+        //    new Vector2(26 / 32.0f, 7 / 25.0f),
+        //    m_TitleImageObj.transform);
     }
 
     void Start()

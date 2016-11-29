@@ -48,7 +48,7 @@ public class GameUIManager : MonoBehaviour {
        //戦力ゲージ作成スクリプト
         GameObject obj = MyUtility.CreateSlider(
             "BlueSlider",
-            "Image/gage-ao",
+            "UI/Game/gauge_blue",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
 			canvasTransForm
@@ -58,7 +58,7 @@ public class GameUIManager : MonoBehaviour {
 
         obj = MyUtility.CreateSlider(
             "RedSlider",
-            "Image/gage-akapng",
+            "UI/Game/gauge_red",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
 			canvasTransForm
@@ -93,7 +93,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(2.0f / 32.0f, 3.0f / 25.0f)
             );
 
-        //timeText1P.gameObject.AddComponent<GameTimeControl>();
+        timeText1P.gameObject.AddComponent<GameTimeControl>();
 
         Text timeText2P = MyUtility.CreateText(
           MyUtility.GAME_TIME.ToString(),
@@ -104,7 +104,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(32.0f / 32.0f, 25.0f / 25.0f)
            );
 
-        //timeText2P.gameObject.AddComponent<GameTimeControl>();
+        timeText2P.gameObject.AddComponent<GameTimeControl>();
 
 
         //      //ここまで
