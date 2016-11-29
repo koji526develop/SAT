@@ -56,22 +56,23 @@ public class ResultManager : MonoBehaviour
         //戦力ゲージ作成
         GameObject slideroObj = MyUtility.CreateSlider(
             "BlueSlider",
-            "Image/gage-ao",
+            "UI/Game/gauge_blue",
             new Vector2(13.0f / 32.0f, 2 / 25.0f),
             new Vector2(19.0f / 32.0f, 23.0f / 25.0f),
             uiObj.transform
             );
         slideroObj.GetComponent<Slider>().direction = Slider.Direction.TopToBottom;
+        slideroObj.GetComponentInChildren<Image>().raycastTarget = false;
 
         slideroObj = MyUtility.CreateSlider(
             "RedSlider",
-            "Image/gage-akapng",
+            "UI/Game/gauge_red",
             new Vector2(13.0f / 32.0f, 2 / 25.0f),
             new Vector2(19.0f / 32.0f, 23.0f / 25.0f),
             uiObj.transform
         );
         slideroObj.GetComponent<Slider>().direction = Slider.Direction.BottomToTop;
-
+        slideroObj.GetComponentInChildren<Image>().raycastTarget = false;
         ////
         //スコア
         //スコアの計算
