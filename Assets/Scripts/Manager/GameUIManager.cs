@@ -93,7 +93,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(2.0f / 32.0f, 3.0f / 25.0f)
             );
 
-        //timeText1P.gameObject.AddComponent<GameTimeControl>();
+        timeText1P.gameObject.AddComponent<GameTimeControl>();
 
         Text timeText2P = MyUtility.CreateText(
           MyUtility.GAME_TIME.ToString(),
@@ -104,7 +104,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(32.0f / 32.0f, 25.0f / 25.0f)
            );
 
-        //timeText2P.gameObject.AddComponent<GameTimeControl>();
+        timeText2P.gameObject.AddComponent<GameTimeControl>();
 
 
         //      //ここまで
