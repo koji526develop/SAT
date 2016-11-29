@@ -72,14 +72,14 @@ public class GameUIManager : MonoBehaviour {
         //      //タイムUIを作成
             obj = MyUtility.CreateImage(
                 "TimeImage",
-                "UI/Game/frame",
+			"UI/Game/frame",
                 new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
                 new Vector2(3.0f / 32.0f, 4.0f / 25.0f),
           canvasTransForm);
 
             obj = MyUtility.CreateImage(
                    "TimeImage2",
-                "UI/Game/frame",
+			"UI/Game/frame",
                 new Vector2(29.0f / 32.0f, 21.0f / 25.0f),
                 new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
           canvasTransForm);
@@ -110,7 +110,7 @@ public class GameUIManager : MonoBehaviour {
         //      //ここまで
         obj = MyUtility.CreateButton(
             "SpecialCardButton1",
-            "UI/Game/frame",
+			"UI/Game/frame",
             new Vector2(0.0f / 32.0f,  4.0f / 25.0f),
             new Vector2(3.0f / 32.0f, 13.0f / 25.0f),
             canvasTransForm
@@ -121,7 +121,7 @@ public class GameUIManager : MonoBehaviour {
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
-            "UI/Game/frame",
+			"UI/Game/frame",
             new Vector2(29.0f / 32.0f, 12.0f / 25.0f),
             new Vector2(32.0f / 32.0f, 21.0f / 25.0f),
             canvasTransForm
@@ -176,7 +176,7 @@ public class GameUIManager : MonoBehaviour {
                 //obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
 
                 obj = MyUtility.CreateImage("SoliderImage",
-                               "UI/Game/frame",
+                               "Image/TimeWaku",
                                 new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
                                  new Vector2((7.5f + 22.0f * (i - 1)) / 32.0f, (25.0f - 5.0f * (j - 1)) / 25.0f),
                                  canvasTransForm);
@@ -184,7 +184,7 @@ public class GameUIManager : MonoBehaviour {
                 GameObject buttonObj;
                 buttonObj = MyUtility.CreateButton(
                     "SoldierButton",
-                    "UI/Game/frame",
+                    "Image/TimeWaku",
                     new Vector2((4.0f + 22.0f * (i - 1)) / 32.0f, (21.5f - 5.0f * (j - 1)) / 25.0f),
                     new Vector2((6.0f + 22.0f * (i - 1)) / 32.0f, (23.5f - 5.0f * (j - 1)) / 25.0f),
                     canvasTransForm);
