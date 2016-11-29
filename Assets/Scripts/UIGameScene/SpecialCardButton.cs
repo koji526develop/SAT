@@ -90,15 +90,14 @@ public class SpecialCardButton : MonoBehaviour {
 
         if (m_usedSpCardState != null)
         {
-            Destroy(m_usedSpCardState);
-            m_UsedCard--;
-            return;
+            //Destroy(m_usedSpCardState);
+            //m_UsedCard--;
+            //return;
         }
-
-        StartSpCard(m_keepSpCard[m_UsedCard]);
-       
-
-        m_UsedCard++;
+        else {
+            StartSpCard(m_keepSpCard[m_UsedCard]);
+            m_UsedCard++;
+        }
     }
 
 
