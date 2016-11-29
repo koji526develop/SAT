@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // キャラクタークラス
 
@@ -57,7 +58,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
             m_rotateDirection = value;
         }
     }
-
     Status m_status;
     public Status status
     {
@@ -187,8 +187,8 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	private static RuntimeAnimatorController GetAnimController(CharacterType _characterType, int _playerID)
 	{
 		string colorStr;
-		if(_playerID == 1) colorStr = "Red";
-		else 			   colorStr = "Blue";
+		if(_playerID == 1) colorStr = "Blue";
+		else 			   colorStr = "Red";
 
 		switch (_characterType)
 		{
@@ -317,12 +317,15 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		m_animator.runtimeAnimatorController = GetAnimController (characterType, status.PlayerID);
 
         ChangeState(CharacterState.Move);
+
     }
 
     void Update()
     {
         // ステートマシーン更新
         stateMachine.Update();
+
+		//this.GetComponent<Text> ().text =status.life.ToString();
 
 		if(status.life <= 0)
 		{

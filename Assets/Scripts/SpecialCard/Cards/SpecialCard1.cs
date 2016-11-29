@@ -53,6 +53,7 @@ public class SpecialCard1 : SpecialCard
                 {
                     if (m_gameUIManager.TargetRect(TouchManager.GetTouchPosition(i), m_UsedPlayerID, j))
                     {
+                        Debug.Log("特殊１セット");
                         m_checkColumn = j;
                         arrowMove.PlayerID = m_UsedPlayerID;
                         arrowMove.Column = m_checkColumn;

@@ -194,18 +194,11 @@ public class ResultManager : MonoBehaviour
         //再戦ボタン
         rematchObj = MyUtility.CreateButton(
             "Rematch",
-            "Image/Karie/waku5",
+            "UI/Result/restart",
             new Vector2(10 / 32.0f, 14 / 25.0f),
             new Vector2(22 / 32.0f, 23 / 25.0f),
             buttonObj.transform);
-        MyUtility.CreateText(
-            "再戦",
-            rematchObj.transform,
-            35,
-            new Vector3(0, 0, -90),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f)
-            );
+
         sceneChangerObj = new GameObject();
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         rematchObj.GetComponent<Button>().onClick.AddListener(RematchProces);
@@ -213,18 +206,11 @@ public class ResultManager : MonoBehaviour
         //兵士選択へボタン
         soldierSelectObj = MyUtility.CreateButton(
             "SoldierSelect",
-            "Image/Karie/waku5",
+            "UI/Result/reselect",
             new Vector2(10 / 32.0f, 2 / 25.0f),
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
-        MyUtility.CreateText(
-            "兵士選択へ",
-            soldierSelectObj.transform,
-            35,
-            new Vector3(0, 0, -90),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f),
-            new Vector2(16 / 32.0f, 12.5f / 25.0f)
-            );
+
         soldierSelectObj.GetComponent<Button>().onClick.AddListener(SelectSoldierProces);
 
         buttonObj.SetActive(false);

@@ -40,6 +40,15 @@ public class GameManager : MonoBehaviour
         // BattleManager作成
         Transform battleManager = new GameObject("BattleManager").transform;
         battleManager.tag = "BattleManager";
+		// BattleCanvas作成
+		GameObject canvasObj = new GameObject("BattttleCanvas");
+		canvasObj.transform.SetParent(battleManager);
+		Canvas canvas = canvasObj.AddComponent<Canvas>();
+		canvas.renderMode = RenderMode.ScreenSpaceCamera;
+
+		CanvasScaler canvasScaler = canvasObj.AddComponent<CanvasScaler>();
+		canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ConstantPixelSize;
+		canvasObj.AddComponent<GraphicRaycaster>();
 
         // バトル用のカメラ作成
         Camera camera = MyUtility.CreateCamera("BattleCamera", battleManager);
