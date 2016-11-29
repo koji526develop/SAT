@@ -139,9 +139,10 @@ public class ButtonSpawner : MonoBehaviour
         {
             if (m_PlayerID == 1)
             {
-                if( Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber))> Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber))){
+                if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
+                {
 
-                    if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)>0)
+                    if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                     {
                         m_type = Character.CharacterType.Ax;
                     }
@@ -154,35 +155,38 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                     {
+                        m_type = Character.CharacterType.Sword;
+                    }
+                    else
+                    {
+                        m_type = Character.CharacterType.Shield;
+                    }
+                }
+            }
+            else
+            {
+                if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
+                {
+
+                    if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
+                    {
+                        m_type = Character.CharacterType.Spear;
+                    }
+                    else
+                    {
+                        m_type = Character.CharacterType.Ax;
+                    }
+                }
+                else
+                {
+                    if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
+                    {
                         m_type = Character.CharacterType.Shield;
                     }
                     else
                     {
                         m_type = Character.CharacterType.Sword;
                     }
-                }
-            }
-            if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
-            {
-
-                if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
-                {
-                    m_type = Character.CharacterType.Spear;
-                }
-                else
-                {
-                    m_type = Character.CharacterType.Ax;
-                }
-            }
-            else
-            {
-                if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
-                {
-                    m_type = Character.CharacterType.Shield;
-                }
-                else
-                {
-                    m_type = Character.CharacterType.Sword;
                 }
             }
 
@@ -256,10 +260,26 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[2];
+                    if (m_PlayerID == 1)
+                    {
+                        m_type = Character.CharacterType.Ax;
+                    }
+                    else
+                    {
+                        m_type = Character.CharacterType.Spear;
+                    }
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[3];
+                    if (m_PlayerID == 1)
+                    {
+                        m_type = Character.CharacterType.Spear;
+                    }
+                    else
+                    {
+                        m_type = Character.CharacterType.Ax;
+                    }
                 }
             }
             else
@@ -267,10 +287,18 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[4];
+                    if(m_PlayerID==1)
+                    m_type = Character.CharacterType.Sword;
+                    else
+                        m_type = Character.CharacterType.Shield;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
+                    if(m_PlayerID==1)
+                    m_type = Character.CharacterType.Shield;
+                    else
+                        m_type = Character.CharacterType.Sword;
                 }
             }
         }
@@ -281,10 +309,12 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[2];
+                    m_type = Character.CharacterType.Spear;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[3];
+                    m_type = Character.CharacterType.Ax;
                 }
             }
             else
@@ -292,10 +322,12 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[4];
+                    m_type = Character.CharacterType.Shield;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
+                    m_type = Character.CharacterType.Sword;
                 }
             }
         }
