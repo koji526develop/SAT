@@ -340,7 +340,7 @@ public class ButtonSpawner : MonoBehaviour
     void Start()
     {
         //初期設定を行う。
-		m_battleManager = GameObject.Find("BattttleCanvas").transform;
+		m_battleManager = GameObject.FindWithTag("BattleManager").transform;
         m_type = Character.CharacterType.Sword;
 
         Button btn = this.GetComponent<Button>();
