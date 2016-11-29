@@ -60,16 +60,13 @@ public class SpecialCard2 : SpecialCard {
                     (m_checkColumn == childObj.GetComponent<Character>().m_mapColumn ||
                     m_checkColumn2 == childObj.GetComponent<Character>().m_mapColumn) )
                 {
-                    if (childObj.GetComponent<Character>().status.PlayerID != m_UsedPlayerID)
-                    {
+
                         //対象を削除
                         Character.Status status = childObj.GetComponent<Character>().status;
 
                         status.life = 0;
 
                         childObj.GetComponent<Character>().status = status;
-
-                    }
                 }
             }
 

@@ -48,7 +48,7 @@ public class GameUIManager : MonoBehaviour {
        //戦力ゲージ作成スクリプト
         GameObject obj = MyUtility.CreateSlider(
             "BlueSlider",
-            "Image/gage-ao",
+            "UI/Game/gauge_blue",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
 			canvasTransForm
@@ -58,7 +58,7 @@ public class GameUIManager : MonoBehaviour {
 
         obj = MyUtility.CreateSlider(
             "RedSlider",
-            "Image/gage-akapng",
+            "UI/Game/gauge_red",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
 			canvasTransForm
@@ -72,14 +72,14 @@ public class GameUIManager : MonoBehaviour {
         //      //タイムUIを作成
             obj = MyUtility.CreateImage(
                 "TimeImage",
-                "Image/TimeWaku",
+			"UI/Game/frame",
                 new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
                 new Vector2(3.0f / 32.0f, 4.0f / 25.0f),
           canvasTransForm);
 
             obj = MyUtility.CreateImage(
                    "TimeImage2",
-                "Image/TimeWaku",
+			"UI/Game/frame",
                 new Vector2(29.0f / 32.0f, 21.0f / 25.0f),
                 new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
           canvasTransForm);
@@ -93,7 +93,7 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(2.0f / 32.0f, 3.0f / 25.0f)
             );
 
-        //timeText1P.gameObject.AddComponent<GameTimeControl>();
+        timeText1P.gameObject.AddComponent<GameTimeControl>();
 
         Text timeText2P = MyUtility.CreateText(
           MyUtility.GAME_TIME.ToString(),
@@ -104,13 +104,13 @@ public class GameUIManager : MonoBehaviour {
             new Vector2(32.0f / 32.0f, 25.0f / 25.0f)
            );
 
-        //timeText2P.gameObject.AddComponent<GameTimeControl>();
+        timeText2P.gameObject.AddComponent<GameTimeControl>();
 
 
         //      //ここまで
         obj = MyUtility.CreateButton(
             "SpecialCardButton1",
-            "Image/TimeWaku",
+			"UI/Game/frame",
             new Vector2(0.0f / 32.0f,  4.0f / 25.0f),
             new Vector2(3.0f / 32.0f, 13.0f / 25.0f),
             canvasTransForm
@@ -121,7 +121,7 @@ public class GameUIManager : MonoBehaviour {
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
-            "Image/TimeWaku",
+			"UI/Game/frame",
             new Vector2(29.0f / 32.0f, 12.0f / 25.0f),
             new Vector2(32.0f / 32.0f, 21.0f / 25.0f),
             canvasTransForm

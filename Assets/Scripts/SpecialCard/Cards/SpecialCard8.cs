@@ -25,7 +25,7 @@ public class SpecialCard8 : SpecialCard {
             scoreManager = gameManager.GetComponent<ScoreManager>();
         }
 
-        scoreManager.pointBouns(m_UsedPlayerID,2.0f ,10.0f);
+        scoreManager.pointBouns(m_UsedPlayerID,10.0f ,10.0f);
         Destroy(this);
     }
 }
