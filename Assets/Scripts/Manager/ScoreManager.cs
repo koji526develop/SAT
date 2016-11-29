@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour {
 
         for (int i = 0; i < m_totalPlayer; i++)
         {
-            m_pointBouns[i] = 1.0f;
+            m_pointBouns[i] = 0.0f;
             m_pointBounsTime[i] = 0.0f;
         }
             m_countAreaStage = m_countArea.Length;
@@ -80,11 +80,11 @@ public class ScoreManager : MonoBehaviour {
     {
         if (_playerID == 1)
         {
-            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID-1]);
+            m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID-1]);
         }
         else
         {
-            m_Score = m_Score + (int)((float)_point * m_pointBouns[_playerID-1]);
+            m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID-1]);
         }
 
     }
@@ -113,12 +113,12 @@ public class ScoreManager : MonoBehaviour {
 
         if (_playerID == 1)
         {
-            m_Score = m_Score +(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] *m_pointBouns[_playerID-1]);
+            m_Score = m_Score +(int)( m_scoreArea[GetPointLevel(enemyPlayerID+1,_Column)] +m_pointBouns[_playerID-1]);
         }
         else
         {
             int score = GetPointLevel(enemyPlayerID + 1, _Column);
-            m_Score = m_Score -(int)( m_scoreArea[score] * m_pointBouns[_playerID-1]);
+            m_Score = m_Score -(int)( m_scoreArea[score] + m_pointBouns[_playerID-1]);
         }
 
         CountReset(enemyPlayerID+1,_Column);
@@ -141,7 +141,7 @@ public class ScoreManager : MonoBehaviour {
             }
             else
             {
-                m_pointBouns[i] = 1.0f;
+                m_pointBouns[i] = 0.0f;
             }
            
         }
