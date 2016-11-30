@@ -14,7 +14,7 @@ public class CharacterBarrier : State<Character>
 		barrierObj.transform.SetParent (m_instance.transform);
 
 		Vector3 tmp = m_instance.transform.position;
-		tmp.y = 1.5f;
+		tmp.y = 1.05f;
 		barrierObj.transform.position = tmp;
 
 		m_instance.Barrier = true;

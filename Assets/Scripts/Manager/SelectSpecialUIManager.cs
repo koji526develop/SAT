@@ -38,7 +38,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
             GameObject cardObj = MyUtility.CreateSprite(m_cardParent.transform, "CardFrame", "Image/karie/kard");
 
-            cardObj.transform.position = new Vector3(3.75f, 3.0f + i * -2.25f, 0.0f);
+            cardObj.transform.position = new Vector3(3.5f, 3.0f + i * -2.25f, 0.0f);
 
             cardObj.SetActive(false);
             m_selectedObj[i] = cardObj;
@@ -62,13 +62,13 @@ public class SelectSpecialUIManager : MonoBehaviour
         /***********************************************
 		// 特殊カード説明枠作成
 		***********************************************/
-        /*MyUtility.CreateImage (
+        MyUtility.CreateImage (
 			"CardEffect",						 // オブジェクト名
-			"Image/karie/kardeffect",			 // 画像Path
+			"UI/SpecialSelect/card_info",			 // 画像Path
 			new Vector2 (3 / 32.0f, 5 / 25.0f),  // アンカーの最小値
 			new Vector2 (22 / 32.0f, 9 / 25.0f), // アンカーの最大値
 			transform							 // 親のTransform
-		);*/
+		);
 
         m_howToText[0] = MyUtility.CreateText(SpecialCard1.m_howTo,
             transform,
@@ -151,10 +151,10 @@ public class SelectSpecialUIManager : MonoBehaviour
         /***********************************************
 		// 選択された特殊カードの枠作成
 		***********************************************/
-        GameObject cardFrameObj = MyUtility.CreateSprite(m_cardParent.transform, "CardFrame", "Image/karie/kardframe");
+		GameObject cardFrameObj = MyUtility.CreateSprite(m_cardParent.transform, "CardFrame", "UI/SpecialSelect/select_card_place");
         cardFrameObj.tag = "CardFrame";
-        cardFrameObj.transform.position = new Vector2(4.38f, 0.75f);
-        cardFrameObj.transform.localScale = new Vector3(3.0f, 1.67f, 1);
+        cardFrameObj.transform.position = new Vector2(4.2f, 0.75f);
+        cardFrameObj.transform.localScale = new Vector3(1.5f, 1.23f, 1);
         cardFrameObj.AddComponent<BoxCollider2D>();
         cardFrameObj.tag = "CardFrame";
 
