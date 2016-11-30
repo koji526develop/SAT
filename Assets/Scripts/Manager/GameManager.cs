@@ -134,6 +134,8 @@ public class GameManager : MonoBehaviour
     {
         TouchManager.Update();
 
+		Debug.Log (TouchManager.touchCount);
+
         //ゲームスタートのカウントダウン
         if (!m_startFlag && m_countStart)
         {
