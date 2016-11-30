@@ -5,18 +5,19 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
 
-public class GameUIManager : MonoBehaviour {
-    
-    Rect[,] m_coulumnRect = new Rect [2,MyUtility.MAX_COLUMN];
+public class GameUIManager : MonoBehaviour
+{
+
+    Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
 
 
 
-    public void SetCoulumRect(Vector2 _firstPoint ,Vector2 _endPoint, int _playerID, int _columnNumber)
+    public void SetCoulumRect(Vector2 _firstPoint, Vector2 _endPoint, int _playerID, int _columnNumber)
     {
         _playerID--;
         _columnNumber--;
 
-        m_coulumnRect[_playerID,_columnNumber] = new Rect(_firstPoint.x * Screen.width,
+        m_coulumnRect[_playerID, _columnNumber] = new Rect(_firstPoint.x * Screen.width,
                                                 _firstPoint.y * Screen.height,
                                                 _endPoint.x * Screen.width,
                                                 _endPoint.y * Screen.height);
@@ -24,18 +25,19 @@ public class GameUIManager : MonoBehaviour {
         return;
     }
 
-    public bool TargetRect(Vector3 _targetPoint, int _playerID,int _idx)
+    public bool TargetRect(Vector3 _targetPoint, int _playerID, int _idx)
     {
 
         _playerID--;
         _idx--;
 
-        if (m_coulumnRect[_playerID, _idx].x<_targetPoint.x &&
-            _targetPoint.x< m_coulumnRect[_playerID, _idx].width&&
-            m_coulumnRect[_playerID, _idx].y < _targetPoint.y&&
+        if (m_coulumnRect[_playerID, _idx].x < _targetPoint.x &&
+            _targetPoint.x < m_coulumnRect[_playerID, _idx].width &&
+            m_coulumnRect[_playerID, _idx].y < _targetPoint.y &&
             _targetPoint.y < m_coulumnRect[_playerID, _idx].height
-            ) {
-            Debug.Log("PlayerID"+_playerID+"Cloumn"+_idx+"押されましあ");
+            )
+        {
+            Debug.Log("PlayerID" + _playerID + "Cloumn" + _idx + "押されましあ");
             return true;
         }
         return false;
@@ -43,15 +45,15 @@ public class GameUIManager : MonoBehaviour {
 
     void Awake()
     {
-		Transform canvasTransForm = GameObject.Find ("Canvas").transform;
+        Transform canvasTransForm = GameObject.Find("Canvas").transform;
 
-       //戦力ゲージ作成スクリプト
+        //戦力ゲージ作成スクリプト
         GameObject obj = MyUtility.CreateSlider(
             "BlueSlider",
             "UI/Game/gauge_blue",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
+            canvasTransForm
             );
         obj.GetComponentInChildren<Image>().raycastTarget = false;
         obj.GetComponent<Slider>().direction = Slider.Direction.TopToBottom;
@@ -61,7 +63,7 @@ public class GameUIManager : MonoBehaviour {
             "UI/Game/gauge_red",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
             new Vector2(17.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
+            canvasTransForm
         );
         obj.GetComponentInChildren<Image>().raycastTarget = false;
         obj.GetComponent<Slider>().direction = Slider.Direction.BottomToTop;
@@ -70,19 +72,26 @@ public class GameUIManager : MonoBehaviour {
         //      //戦力ゲージ作成スクリプトここまで
 
         //      //タイムUIを作成
-            obj = MyUtility.CreateImage(
-                "TimeImage",
-			"UI/Game/frame",
-                new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
-                new Vector2(3.0f / 32.0f, 4.0f / 25.0f),
-          canvasTransForm);
+        obj = MyUtility.CreateImage(
+            "TimeImage",
+        "UI/Game/frame",
+            new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
+            new Vector2(3.0f / 32.0f, 4.0f / 25.0f),
+      canvasTransForm);
+        Color color = obj.GetComponent<Image>().color;
+        color.a = 0;
+        obj.GetComponent<Image>().color = color;
 
-            obj = MyUtility.CreateImage(
-                   "TimeImage2",
-			"UI/Game/frame",
-                new Vector2(29.0f / 32.0f, 21.0f / 25.0f),
-                new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
-          canvasTransForm);
+
+        obj = MyUtility.CreateImage(
+               "TimeImage2",
+        "UI/Game/frame",
+            new Vector2(29.0f / 32.0f, 21.0f / 25.0f),
+            new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
+      canvasTransForm);
+        color = obj.GetComponent<Image>().color;
+        color.a = 0;
+        obj.GetComponent<Image>().color = color;
 
         Text timeText1P = MyUtility.CreateText(
             MyUtility.GAME_TIME.ToString(),
@@ -110,8 +119,8 @@ public class GameUIManager : MonoBehaviour {
         //      //ここまで
         obj = MyUtility.CreateButton(
             "SpecialCardButton1",
-			"UI/Game/frame",
-            new Vector2(0.0f / 32.0f,  4.0f / 25.0f),
+            "UI/Game/information_card",
+            new Vector2(0.0f / 32.0f, 4.0f / 25.0f),
             new Vector2(3.0f / 32.0f, 13.0f / 25.0f),
             canvasTransForm
             );
@@ -121,7 +130,7 @@ public class GameUIManager : MonoBehaviour {
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
-			"UI/Game/frame",
+            "UI/Game/information_card",
             new Vector2(29.0f / 32.0f, 12.0f / 25.0f),
             new Vector2(32.0f / 32.0f, 21.0f / 25.0f),
             canvasTransForm
@@ -194,8 +203,8 @@ public class GameUIManager : MonoBehaviour {
                 btnCmp.m_ButtonID = j;
                 btnCmp.m_changeSprite = obj.GetComponent<Image>();
 
-                        SetCoulumRect(new Vector2((6.0f+(11.0f*(i-1))) / 32.0f, (20.0f-(5.0f*(j-1))) / 25.0f),
-                                      new Vector2((15.0f+(11.0f*(i-1))) / 32.0f, (25.0f-(5.0f*(j-1))) / 25.0f), i, j);
+                SetCoulumRect(new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
+                              new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
 
             }
         }
@@ -225,7 +234,7 @@ public class GameUIManager : MonoBehaviour {
         //        ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
         //        btnCmp.m_PlayerID = j;
         //        btnCmp.m_ButtonID = i;
-                
+
         //        SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
         //                      new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
         //    }
@@ -234,13 +243,15 @@ public class GameUIManager : MonoBehaviour {
 
     }
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
