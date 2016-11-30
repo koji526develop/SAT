@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpecialCard8 : SpecialCard {
 
@@ -12,7 +13,8 @@ public class SpecialCard8 : SpecialCard {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
         ScoreManager scoreManager;
         try
         {
@@ -25,7 +27,42 @@ public class SpecialCard8 : SpecialCard {
             scoreManager = gameManager.GetComponent<ScoreManager>();
         }
 
+
+		List<Character> allyCharactersList = GetAllyCharactersList ();
+
+		foreach (Character allyCharacter in allyCharactersList) 
+		{
+			GameObject barrierObj = GameObject.Instantiate(Resources.Load("Particle/SpecailShield/shield_pink")) as GameObject;
+			barrierObj.name = "Barrier";
+
+			barrierObj.transform.SetParent (allyCharacter.transform);
+
+			Vector3 tmp = allyCharacter.transform.position;
+			tmp.y = 1.05f;
+			barrierObj.transform.position = tmp;
+		}
+			
         scoreManager.pointBouns(m_UsedPlayerID,10.0f ,10.0f);
         Destroy(this);
     }
+		
+	List<Character> GetAllyCharactersList()
+	{
+		List<Character> allyCharactersList = new List<Character> ();
+
+		foreach(Transform child in battleManager)
+		{
+			if (child.tag == "Character")
+			{
+				Character character = child.gameObject.GetComponent<Character> ();
+
+				if (character.status.PlayerID == m_UsedPlayerID)
+				{
+					allyCharactersList.Add (character);
+				}
+			}
+		}
+		return allyCharactersList;
+	}
+
 }

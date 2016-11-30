@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpecialCard7 : SpecialCard {
 
@@ -33,8 +34,43 @@ public class SpecialCard7 : SpecialCard {
 				}
 			}
 		}
+
+		List<Character> allyCharactersList = GetAllyCharactersList ();
+
+		foreach (Character allyCharacter in allyCharactersList) 
+		{
+			GameObject barrierObj = GameObject.Instantiate(Resources.Load("Particle/SpecailShield/shield_blue")) as GameObject;
+			barrierObj.name = "Barrier";
+
+			barrierObj.transform.SetParent (allyCharacter.transform);
+
+			Vector3 tmp = allyCharacter.transform.position;
+			tmp.y = 1.05f;
+			barrierObj.transform.position = tmp;
+		}
+
 		Destroy(this);
 		return;
 	}
 
+	List<Character> GetAllyCharactersList()
+	{	
+		List<Character> allyCharactersList = new List<Character> ();
+
+		foreach(Transform child in battleManager)
+		{
+			if (child.tag == "Character")
+			{
+				Character character = child.gameObject.GetComponent<Character> ();
+
+				if (character.status.PlayerID == m_UsedPlayerID)
+				{
+					allyCharactersList.Add (character);
+				}
+			}
+		}
+		return allyCharactersList;
+	}
+
 }
+	
