@@ -21,7 +21,7 @@ public class ScoreManager : MonoBehaviour
     private float[] m_pointBouns = new float[2];
     private float[] m_pointBounsTime = new float[2];
 
-    private const float DECREASE_TIME = 0.2f;   //スコアが減っていく時間間隔
+    private const float DECREASE_TIME = 0.1f;   //スコアが減っていく時間間隔
     private float m_DecreaseTime = DECREASE_TIME;
     void Awake()
     {
@@ -120,8 +120,6 @@ public class ScoreManager : MonoBehaviour
                 if (m_countSpawner[_PlayerID, _Column] > 0) m_countSpawner[_PlayerID, _Column] -= 2;
                 else m_countSpawner[_PlayerID, _Column] = 0;
             }
-
-            Debug.Log(GetPointLevel(_PlayerID+1, _Column+1));
         }
     }
 

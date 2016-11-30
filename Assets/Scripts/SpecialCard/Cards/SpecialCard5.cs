@@ -10,12 +10,21 @@ public class SpecialCard5 : SpecialCard
     private bool[] m_reset = new bool[5];
     private int m_nowCount;
 
+    GameObject m_starObj;
+    float m_starPosX;
+
     void Start()
     {
         for (int i = 0; i < 5; i++)
         {
             m_reset[i] = false;
         }
+
+        if (m_UsedPlayerID == 1) m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P;
+        else m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
+
+        m_starObj = Instantiate(Resources.Load("Particle/SpeciaRecoveryScore/star")) as GameObject;
+        m_starObj.transform.position = new Vector3(m_starPosX, 1, 0);
     }
 
     void Update()
@@ -36,7 +45,7 @@ public class SpecialCard5 : SpecialCard
             scoreManager.CountReset(m_UsedPlayerID, i, true);
             if (scoreManager.GetPointLevel(m_UsedPlayerID, i) == 0)
             {
-                if(i < 6)m_reset[i - 1] = true;
+                if (i < 6) m_reset[i - 1] = true;
             }
         }
 
@@ -51,6 +60,7 @@ public class SpecialCard5 : SpecialCard
             //スコアが全て回復していたら
             else if (i == 4)
             {
+                Destroy(m_starObj);
                 Destroy(this);
             }
 
