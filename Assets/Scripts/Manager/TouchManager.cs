@@ -11,11 +11,13 @@ public static class TouchManager
 
 	static bool isRemote = false;
 
+	static bool isExe = true;
+
 	public static int touchCount = 0;
 
 	public static void Update()
 	{
-		if (Application.isEditor && !isRemote)
+		if ((Application.isEditor && !isRemote) || isExe)
 		{
 			touchCount = 1;
 		}
@@ -30,7 +32,7 @@ public static class TouchManager
 
     public static TouchInfo GetTouchInfo(int touchCount)
     {
-		if (Application.isEditor && !isRemote)
+		if ((Application.isEditor && !isRemote) || isExe)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -61,7 +63,7 @@ public static class TouchManager
 
     public static Vector3 GetTouchPosition(int touchCount)
     {
-		if (Application.isEditor && !isRemote)
+		if ((Application.isEditor && !isRemote) || isExe)
         {
             TouchInfo touch = TouchManager.GetTouchInfo(0);
             if (touch != TouchInfo.None) { return Input.mousePosition; }
@@ -82,7 +84,7 @@ public static class TouchManager
 
     public static Vector3 GetDeltaPosition(int touchCount)
     {
-		if (Application.isEditor && !isRemote)
+		if ((Application.isEditor && !isRemote) || isExe)
         {
             TouchInfo info = TouchManager.GetTouchInfo(0);
             if (info != TouchInfo.None)
