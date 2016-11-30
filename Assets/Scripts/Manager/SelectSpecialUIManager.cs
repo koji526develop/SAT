@@ -326,6 +326,7 @@ public class SelectSpecialUIManager : MonoBehaviour
             {
                 if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3)
                 {
+                    AudioManager.m_instance.PlaySE("cardSetting_SE");
                     if (SelectUIManager.PlayerID == 1)
                     {
                         SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
