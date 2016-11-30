@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
 
         //キャンバスを作成
         m_canvas = MyUtility.CreateCanvas();
-        GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
 
         StartCoroutine(MyUtility.SetCameraForCanvas(m_canvas, uiCamera));
 

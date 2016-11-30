@@ -47,8 +47,26 @@ public class GameUIManager : MonoBehaviour
     {
         Transform canvasTransForm = GameObject.Find("Canvas").transform;
 
+		GameObject obj = MyUtility.CreateButton(
+			"back",
+			"UI/Game/information_back",
+			new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
+			new Vector2(3.0f / 32.0f, 25.0f / 25.0f),
+			canvasTransForm
+		);
+
+		obj = MyUtility.CreateButton(
+			"back",
+			"UI/Game/information_back",
+			new Vector2(29.0f / 32.0f, 0.0f / 25.0f),
+			new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
+			canvasTransForm
+		);
+
+		GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+
         //戦力ゲージ作成スクリプト
-        GameObject obj = MyUtility.CreateSlider(
+        obj = MyUtility.CreateSlider(
             "BlueSlider",
             "UI/Game/gauge_blue",
             new Vector2(15.0f / 32.0f, 0.0f / 25.0f),
@@ -115,7 +133,6 @@ public class GameUIManager : MonoBehaviour
 
         timeText2P.gameObject.AddComponent<GameTimeControl>();
 
-
         //      //ここまで
         obj = MyUtility.CreateButton(
             "SpecialCardButton1",
@@ -136,7 +153,7 @@ public class GameUIManager : MonoBehaviour
             canvasTransForm
             );
         obj.AddComponent<SpecialCardButton>().m_playerID = 2;
-
+			
         //ここまで
         for (int i = 1; i <= 5; i++)
         {
