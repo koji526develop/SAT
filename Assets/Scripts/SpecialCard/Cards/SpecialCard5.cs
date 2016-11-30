@@ -4,15 +4,21 @@ using System.Collections;
 public class SpecialCard5 : SpecialCard
 {
 
-	public static string m_howTo = "自分のラインのポイントを全て初期値に\n戻す";
-	public static string m_imagePath = "path";
+    public static string m_howTo = "自分のラインのポイントを全て初期値に\n戻す";
+    public static string m_imagePath = "path";
 
-	void Start ()
+    private bool[] m_reset = new bool[5];
+    private int m_nowCount;
+
+    void Start()
     {
-	
-	}
-	
-	void Update ()
+        for (int i = 0; i < 5; i++)
+        {
+            m_reset[i] = false;
+        }
+    }
+
+    void Update()
     {
         ScoreManager scoreManager;
         try
@@ -25,10 +31,31 @@ public class SpecialCard5 : SpecialCard
             gameManager = GameObject.Find("GameManager").transform;
             scoreManager = gameManager.GetComponent<ScoreManager>();
         }
-        for (int i = 1; i <=MyUtility.MAX_COLUMN; i++)
+        for (int i = 1; i <= MyUtility.MAX_COLUMN; i++)
         {
-            scoreManager.CountReset(m_UsedPlayerID, i);
+            scoreManager.CountReset(m_UsedPlayerID, i, true);
+            if (scoreManager.GetPointLevel(m_UsedPlayerID, i) == 0)
+            {
+                if(i < 6)m_reset[i - 1] = true;
+            }
         }
-        Destroy(this);
-	}
+
+        //全てのスコアが回復したか確認
+        for (int i = 0; i < 5; i++)
+        {
+            //まだ回復していないスコアがあったら
+            if (!m_reset[i])
+            {
+                break;
+            }
+            //スコアが全て回復していたら
+            else if (i == 4)
+            {
+                Destroy(this);
+            }
+
+        }
+
+
+    }
 }
