@@ -52,7 +52,7 @@ public class SelectSpecialUIManager : MonoBehaviour
         {
             for (int j = 0; j < 2; j++)
             {
-                GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "Image/karie/SpecialCard" + (num + 1).ToString());
+                GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "UI/SpecialSelect/card" + (num + 1).ToString());
                 cardObj.transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
                 cardObj.AddComponent<SpecialCardSprite>().cardNum = num;
                 num++;

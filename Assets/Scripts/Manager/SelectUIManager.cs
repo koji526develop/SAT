@@ -122,7 +122,7 @@ public class SelectUIManager : MonoBehaviour
             GameObject obj = MyUtility.CreateImage
                 (
                     "Gauge",
-                    "Image/karie/waku2",
+                    "UI/Select/select_gauge0",
                     new Vector2((6 + i * 2) / 32.0f, 5 / 25.0f),
                     new Vector2((8 + i * 2) / 32.0f, 8 / 25.0f),
                     transform
@@ -213,9 +213,9 @@ public class SelectUIManager : MonoBehaviour
             switch (m_soldierTotalNum % 2)
             {
                 case 0:
-                    return Resources.Load("Image/karie/waku3", typeof(Sprite)) as Sprite;
+                    return Resources.Load("UI/Select/select_gauge1", typeof(Sprite)) as Sprite;
                 case 1:
-                    return Resources.Load("Image/karie/waku4", typeof(Sprite)) as Sprite;
+                    return Resources.Load("UI/Select/select_gauge2", typeof(Sprite)) as Sprite;
             }
         }
         else
@@ -223,9 +223,9 @@ public class SelectUIManager : MonoBehaviour
             switch (m_soldierTotalNum % 2)
             {
                 case 0:
-                    return Resources.Load("Image/karie/waku3", typeof(Sprite)) as Sprite;
+                    return Resources.Load("UI/Select/select_gauge1", typeof(Sprite)) as Sprite;
                 case 1:
-                    return Resources.Load("Image/karie/waku2", typeof(Sprite)) as Sprite;
+                    return Resources.Load("UI/Select/select_gauge0", typeof(Sprite)) as Sprite;
             }
         }
         return null;
