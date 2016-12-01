@@ -4,7 +4,7 @@ using System.Collections;
 public class SpecialCard2 : SpecialCard
 {
 
-    public static string m_howTo = "ラインを二か所選択し、そのライン上の\n兵士を消滅";
+    public static string m_howTo = "ラインを二つ選択する。\nその後選択したラインの兵士を全て消滅させる。\nただし相手に100ポイント加算される。";
     public static string m_imagePath = "path";
 
     private int[] m_checkColumn = new int[2];
@@ -80,8 +80,8 @@ public class SpecialCard2 : SpecialCard
                                 m_ArrowObj[num].transform.position = new Vector3(m_arrowPosX, 1, m_arrowPosZ[m_checkColumn[num] - 1]);
                             }
                             int enemyPlayerID = 0;
-                            if (m_UsedPlayerID == 1) enemyPlayerID = 2;
-                            else enemyPlayerID = 1;
+                            if (m_UsedPlayerID == 1) { enemyPlayerID = 2; }
+                            else { enemyPlayerID = 1; }
                             gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID, 100);
                             Destroy(this);
                             break;

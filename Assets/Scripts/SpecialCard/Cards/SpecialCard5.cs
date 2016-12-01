@@ -4,7 +4,7 @@ using System.Collections;
 public class SpecialCard5 : SpecialCard
 {
 
-    public static string m_howTo = "自分のラインのポイントを全て初期値に\n戻す";
+    public static string m_howTo = "このカードを発動した後\n自分の全てのラインのスコアを初期値に戻す。";
     public static string m_imagePath = "path";
 
     private bool[] m_reset = new bool[5];

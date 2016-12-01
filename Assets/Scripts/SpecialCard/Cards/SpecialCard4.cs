@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpecialCard4 : SpecialCard {
 
-	public static string m_howTo = "ラインを二か所を選択しそのライン上に\nお互いに兵士を出撃させることは\nできない";
+	public static string m_howTo = "ラインを二つ選択する。\nその後選択したライン上のボタンは使用出来ない。\nただし兵士の移動は可能。";
 	public static string m_imagePath = "path";
 
     private int m_checkColumn = 0;

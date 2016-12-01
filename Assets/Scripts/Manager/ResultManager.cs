@@ -87,19 +87,20 @@ public class ResultManager : MonoBehaviour
             //画像
             GameObject scoreObj = MyUtility.CreateImage(
                 "Score",
-                "Image/Karie/waku6",
+                "UI/Result/information_back",
                 new Vector2((11.0f + (i * 8)) / 32.0f, 9.0f / 25.0f),
                 new Vector2((13.0f + (i * 8)) / 32.0f, 17.0f / 25.0f),
                 uiObj.transform);
             //文字
-            MyUtility.CreateText(
+            Text text = MyUtility.CreateText(
                 m_ScoreText[i],
                 scoreObj.transform,
                 35,
                 new Vector3(0.0f, 0.0f, (i == 0) ? -90.0f : 90.0f),
-                new Vector2((9 + (i * 11)) / 32.0f, 12 / 25.0f),
-                new Vector2((11 + (i * 11)) / 32.0f, 14 / 25.0f)
+                new Vector2((11 + (i * 11)) / 32.0f, 12 / 25.0f),
+                new Vector2((13 + (i * 11)) / 32.0f, 14 / 25.0f)
                 );
+            text.transform.position += (i == 0) ? new Vector3(10,0,0) : new Vector3(-10,0,0);
         }
 
         //// プレイヤーの戦闘で使用した兵、カード
@@ -121,10 +122,7 @@ public class ResultManager : MonoBehaviour
         //特殊カードの画像パス
         for (int i = 0; i < 6; i++)
         {
-            //デバッグ用
-            ResultSpecialInfo[i] = i;
-
-            m_SpecialImagePath[i] = "Image/Karie/SpecialCard" + ResultSpecialInfo[i].ToString();
+            m_SpecialImagePath[i] = "UI/Result/card" + ResultSpecialInfo[i].ToString();
         }
 
         for (int i = 0; i < 2; i++)
@@ -135,7 +133,7 @@ public class ResultManager : MonoBehaviour
             //画像
             GameObject obj = MyUtility.CreateImage(
                 "OpponentSoldier",
-                "Image/Karie/waku6",
+                "UI/Result/information_back",
                 new Vector2(2.0f / 32.0f, 16.0f / 25.0f),
                 new Vector2(10.0f / 32.0f, 23.0f / 25.0f),
                 m_ResultObj[i].transform);
@@ -161,8 +159,8 @@ public class ResultManager : MonoBehaviour
                  obj.transform,
                  35,
                  new Vector3(0.0f, 0.0f, -90.0f),
-                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 12.0f / 25.0f),
-                 new Vector2((26.0f - (7.5f * j)) / 32.0f, 12.0f / 25.0f)
+                 new Vector2((27.5f - (7.5f * j)) / 32.0f, 12.0f / 25.0f),
+                 new Vector2((27.5f - (7.5f * j)) / 32.0f, 12.0f / 25.0f)
                  );
             }
 
@@ -171,7 +169,7 @@ public class ResultManager : MonoBehaviour
             //画像
             obj = MyUtility.CreateImage(
                 "OpponentSpecialCard",
-                "Image/Karie/waku4",
+                "UI/Result/information_back",
                 new Vector2(2.0f / 32.0f, 2.0f / 25.0f),
                 new Vector2(10.0f / 32.0f, 15.0f / 25.0f),
                 m_ResultObj[i].transform);

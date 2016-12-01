@@ -4,7 +4,7 @@ using System.Collections;
 public class SpecialCard1 : SpecialCard
 {
 
-    public static string m_howTo = "選択したライン上の兵士を消滅";
+    public static string m_howTo = "ラインを1つ選択する。\nその後選択したライン上の兵士を全て消滅させる。\nこのときポイントは加算されない。";
     public static string m_imagePath = "path";
 
     private int m_checkColumn = 0;

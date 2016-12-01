@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SpecialCard6 : SpecialCard {
 
-	public static string m_howTo = "フィールドに出ている味方兵士に攻撃を\n一度だけ防ぐシールドを付ける";
+	public static string m_howTo = "このカードを発動した時にフィールドに出ている\n自分の兵士に兵士からの攻撃を\n一度だけ防ぐシールドをつける。";
 	public static string m_imagePath = "path";
 
 	// Use this for initialization
