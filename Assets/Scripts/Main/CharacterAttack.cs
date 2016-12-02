@@ -44,6 +44,7 @@ public class CharacterAttack : State<Character>
 			Attak ();
 			Debug.Log ("攻撃なう");
 			m_attackTime = 0;
+
 		}
 
 		if(m_enemyCharacter == null)

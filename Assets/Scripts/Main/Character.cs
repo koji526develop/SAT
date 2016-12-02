@@ -172,6 +172,14 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         characterObj.transform.position = _position;
         characterObj.tag = "Character";
 
+//		Transform charactername = GameObject.FindWithTag ("Character").transform;
+//		GameObject hp = MyUtility.CreateSprite (charactername, "Sprite", "Image/hp");
+//	    hp.transform.position=new Vector3(-6.0f,3.0f,3.0f);
+//		hp.transform.Rotate(0.0f, 0.0f, 90.0f);
+//		GameObject hp_flame = MyUtility.CreateSprite (charactername, "Sprite", "Image/hp_flame");
+//		hp_flame.transform.position=new Vector3(-6.0f,3.0f,3.0f);
+//		hp_flame.transform.Rotate (0.0f, 0.0f, 90.0f);
+
 
 		if (_playerID == 1)
 			characterObj.transform.eulerAngles = new Vector3 (0, 90, 0);
