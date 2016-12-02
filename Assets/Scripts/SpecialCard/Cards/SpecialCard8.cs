@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SpecialCard8 : SpecialCard {
 
-	public static string m_howTo = "一定時間自分の獲得出来るポイント数\nが増える";
+	public static string m_howTo = "10秒間自分の獲得時のポイントが＋10する。";
 	public static string m_imagePath = "path";
 
 	// Use this for initialization

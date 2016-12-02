@@ -99,6 +99,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		}
 	}
 
+	GameObject m_notSideMoveImageObj;
 
     // キャラクターのステート
     public enum CharacterState
@@ -302,8 +303,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
     void Start()
     {
-      
-
         // ステートマシンの初期設定
 		m_characterNoneState=new CharacterNone(this);
 		stateList.Add(m_characterNoneState);
@@ -319,6 +318,12 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
         stateMachine = new StateMachine<Character>();
 
+		m_notSideMoveImageObj = MyUtility.CreateSprite (transform, "batsu", "Image/batsu");
+		m_notSideMoveImageObj.transform.localPosition = new Vector3 (0, 2, 0);
+		m_notSideMoveImageObj.transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, 0));
+		m_notSideMoveImageObj.transform.localScale = new Vector3 (1f, 1f, 1f);
+		m_notSideMoveImageObj.SetActive (false);
+
         m_mainCamera = GameObject.FindWithTag("BattleCamera").GetComponent<Camera>();
 
 		m_animator = gameObject.GetComponent<Animator> ();
@@ -327,6 +332,28 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
         ChangeState(CharacterState.Move);
 
     }
+
+	public void SetOnSideMoveDownImg(Character.Direction _direction)
+	{
+		m_notSideMoveImageObj.SetActive (true);
+
+		if (status.PlayerID == 1) {
+			if (_direction == Character.Direction.Down)
+				m_notSideMoveImageObj.transform.localPosition = new Vector3 (1.5f, 2, 0);
+			else
+				m_notSideMoveImageObj.transform.localPosition = new Vector3 (-1.5f, 2, 0);
+		} else {
+			if (_direction == Character.Direction.Down)
+				m_notSideMoveImageObj.transform.localPosition = new Vector3 (-1.5f, 2, 0);
+			else
+				m_notSideMoveImageObj.transform.localPosition = new Vector3 (1.5f, 2, 0);
+		}
+	}
+
+	public void SetOffSideMoveDownImg()
+	{
+		m_notSideMoveImageObj.SetActive (false);
+	}
 
     void Update()
     {

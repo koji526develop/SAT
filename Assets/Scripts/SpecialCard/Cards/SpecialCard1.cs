@@ -4,7 +4,7 @@ using System.Collections;
 public class SpecialCard1 : SpecialCard
 {
 
-    public static string m_howTo = "選択したライン上の兵士を消滅";
+    public static string m_howTo = "ラインを1つ選択する。\nその後選択したライン上の兵士を全て消滅させる。\nこのときポイントは加算されない。";
     public static string m_imagePath = "path";
 
     private int m_checkColumn = 0;
@@ -35,7 +35,7 @@ public class SpecialCard1 : SpecialCard
         arrowMove = m_ArrowObj.GetComponent<ArrowMove>();
 
         if (m_UsedPlayerID == 1) m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P - 8.0f;
-        else m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
+        else m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P + 8.0f;
         for (int i = 0; i < 6; i++)
         {
             m_arrowPosZ[i] = 4 - (i * 2);

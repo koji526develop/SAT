@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SpecialCard7 : SpecialCard {
 
-	public static string m_howTo = "フィールドに出ている味方兵士の移動\n速度を1.5倍する";
+	public static string m_howTo = "フィールド上の自分の兵士の移動速度を\n5秒の間1.5倍にする。";
 	public static string m_imagePath = "path";
 
 	// Use this for initialization

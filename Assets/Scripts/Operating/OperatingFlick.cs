@@ -63,12 +63,14 @@ public class OperatingFlick : MonoBehaviour
 
     public void ButtonRight()
     {
+        AudioManager.m_instance.PlaySE("button_SE");
         m_DisplaySpriteNum++;
         ChangeSprite();
     }
 
     public void ButtonLeft()
     {
+        AudioManager.m_instance.PlaySE("button_SE");
         m_DisplaySpriteNum--;
         ChangeSprite();
     }

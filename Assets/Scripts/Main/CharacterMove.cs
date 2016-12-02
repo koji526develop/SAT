@@ -54,19 +54,26 @@ public class CharacterMove :  State<Character>
 			
 
 				// キャラクターが境界線を超えていたら何もしない
-				if (IsBeyondCenterLine ())
-					return;
+			if (IsBeyondCenterLine ())
+				return;
+
+			if(IsNearCharacter(Character.Direction.Up))
+				m_instance.SetOnSideMoveDownImg (Character.Direction.Up);
+
+			else if(IsNearCharacter(Character.Direction.Down))
+				m_instance.SetOnSideMoveDownImg (Character.Direction.Down);
 
 				// キャラクターが上にフリックされていたら回転させる
-				if (IsUpFlick (m_touchId) && !IsNearCharacter (Character.Direction.Up))
-					RotateUp ();
-
+			if (IsUpFlick (m_touchId) && !IsNearCharacter (Character.Direction.Up))
+				RotateUp ();
+			
 			// キャラクターが下にフリックされていたら回転させる
 			else if (IsDownFlick (m_touchId) && !IsNearCharacter (Character.Direction.Down))
 					RotateDown ();
 			}
 
 		if (m_touchId != 99 && TouchManager.GetTouchInfo (m_touchId) == TouchInfo.Ended) {
+			m_instance.SetOffSideMoveDownImg ();
 			m_touchId = 99;
 		}
 		

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpecialCard3 : SpecialCard {
 
-	public static string m_howTo = "タッチした列と同じ種類の兵を二体出す";
+	public static string m_howTo = "このカードを発動した後に一度だけ、\n兵士を出す際に同じ種類の兵士を二体出す。";
 	public static string m_imagePath = "path";
 
 	// Use this for initialization

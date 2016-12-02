@@ -23,6 +23,9 @@ public class SelectSpecialUIManager : MonoBehaviour
     public static int[] SPECIALCARD_NUMBER_1 = new int[3];
     public static int[] SPECIALCARD_NUMBER_2 = new int[3];
 
+    //特殊カード説明文のフォントサイズ
+    private readonly int m_fontOperateSize = 25;
+
     void Start()
     {
         m_uiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
@@ -52,7 +55,7 @@ public class SelectSpecialUIManager : MonoBehaviour
         {
             for (int j = 0; j < 2; j++)
             {
-                GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "Image/karie/SpecialCard" + (num + 1).ToString());
+                GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "UI/SpecialSelect/card" + (num + 1).ToString());
                 cardObj.transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
                 cardObj.AddComponent<SpecialCardSprite>().cardNum = num;
                 num++;
@@ -72,79 +75,79 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         m_howToText[0] = MyUtility.CreateText(SpecialCard1.m_howTo,
             transform,
-            35,
+            m_fontOperateSize,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 5.1f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.6f / 25.0f)
         );
         m_howToText[0].gameObject.SetActive(false);
 
         m_howToText[1] = MyUtility.CreateText(SpecialCard2.m_howTo,
             transform,
-            35,
+            m_fontOperateSize,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 5.1f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.6f / 25.0f)
         );
         m_howToText[1].gameObject.SetActive(false);
 
         m_howToText[2] = MyUtility.CreateText(SpecialCard3.m_howTo,
             transform,
-            35,
+            m_fontOperateSize+3,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 4.8f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
         );
         m_howToText[2].gameObject.SetActive(false);
 
         m_howToText[3] = MyUtility.CreateText(SpecialCard4.m_howTo,
             transform,
-            35,
+            m_fontOperateSize,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 5.1f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.6f / 25.0f)
         );
         m_howToText[3].gameObject.SetActive(false);
 
         m_howToText[4] = MyUtility.CreateText(SpecialCard5.m_howTo,
             transform,
-            35,
+            m_fontOperateSize+3,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 4.8f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
         );
         m_howToText[4].gameObject.SetActive(false);
 
         m_howToText[5] = MyUtility.CreateText(SpecialCard6.m_howTo,
             transform,
-            35,
+            m_fontOperateSize,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 5.1f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.6f / 25.0f)
         );
         m_howToText[5].gameObject.SetActive(false);
 
         m_howToText[6] = MyUtility.CreateText(SpecialCard7.m_howTo,
             transform,
-            35,
+            m_fontOperateSize+3,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 4.8f / 25.0f),
+            new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
         );
         m_howToText[6].gameObject.SetActive(false);
 
         m_howToText[7] = MyUtility.CreateText(SpecialCard8.m_howTo,
             transform,
-            35,
+            m_fontOperateSize+3,
             Vector3.zero,
-            new Vector2(3 / 32.0f, 5 / 25.0f),
-            new Vector2(21.5f / 32.0f, 8.5f / 25.0f)
+            new Vector2(4 / 32.0f, 4.3f / 25.0f),
+            new Vector2(21.5f / 32.0f, 7.8f / 25.0f)
         );
         m_howToText[7].gameObject.SetActive(false);
 
         for (int i = 0; i < 8; i++)
         {
-            m_howToText[i].lineSpacing = 45;
+            m_howToText[i].lineSpacing = 1.2f;
             m_howToText[i].alignment = TextAnchor.UpperLeft;
         }
 
@@ -326,6 +329,7 @@ public class SelectSpecialUIManager : MonoBehaviour
             {
                 if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3)
                 {
+                    AudioManager.m_instance.PlaySE("cardSetting_SE");
                     if (SelectUIManager.PlayerID == 1)
                     {
                         SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;

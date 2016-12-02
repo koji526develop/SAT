@@ -197,14 +197,15 @@ public class MyUtility : MonoBehaviour
         rectTransform.anchorMin = _anchorMin;
         rectTransform.anchorMax = _anchorMax;
 
-        text.font = Font.CreateDynamicFontFromOSFont("Arial", 0);
+        //text.font = Font.CreateDynamicFontFromOSFont("Arial", 0);
+        text.font = (Font)Resources.Load("Fonts/font2");
         text.text = _text;
         text.fontSize = _fontSize * Screen.width / 1024;
         text.lineSpacing = 1;
         text.alignment = TextAnchor.MiddleCenter;
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
         text.verticalOverflow = VerticalWrapMode.Overflow;
-        text.color = new Color(0, 0, 0);
+        text.color = new Color(1, 1, 1);
         text.transform.rotation = Quaternion.Euler(_rotation);
 
         return text;
