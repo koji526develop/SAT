@@ -30,7 +30,7 @@ public class SpecialCard1 : SpecialCard
 
         m_gameUIManager.RectRender(m_UsedPlayerID,true);
 
-        m_ArrowObj = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
+        m_ArrowObj = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecialArrow/SpecialArrow")) as GameObject;
         m_ArrowObj.name = "FireArrow";
         m_ArrowObj.transform.position = new Vector3(30000, -30000, 30000);
         m_ArrowObj.AddComponent<ArrowMove>();

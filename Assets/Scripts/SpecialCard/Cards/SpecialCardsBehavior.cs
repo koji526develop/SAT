@@ -14,6 +14,7 @@ public class SpecialCardsBehavior : MonoBehaviour
         }
     }
 
+    //特殊カードの情報
     SpecialCardButton spButton;
     public SpecialCardButton SpecialButton
     {
@@ -23,6 +24,9 @@ public class SpecialCardsBehavior : MonoBehaviour
         }
     }
 
+    private int m_specialUseNum = 0;            //何回特殊カードが使用されたか
+    private bool m_usedSpecial = false;         //特殊カードが使用されたか
+
 
     void Awake()
     {
@@ -30,6 +34,7 @@ public class SpecialCardsBehavior : MonoBehaviour
     }
     void Start()
     {
+        //使用されるカード以外をちょっと小さく
         if (m_useOrder != 1)
         {
             transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
@@ -38,24 +43,31 @@ public class SpecialCardsBehavior : MonoBehaviour
 
     void Update()
     {
-        //使用されたら
+        //自分が使用されたら削除
         if(spButton.UsedCard == m_useOrder)
         {
             Destroy(this.gameObject);
         }
 
-        //次に使用なら
-        if(spButton.UsedCard == m_useOrder-1)
+        //カードが使われた
+        if(m_specialUseNum < spButton.UsedCard)
         {
-            ScaleTo scaleTo = gameObject.AddComponent<ScaleTo>();
-            scaleTo.SetScaleTo(new Vector3(1.0f, 1.0f, 1.0f), 0.5f, 0);
-            //MoveTo moveTo = gameObject.AddComponent<MoveTo>();
-            //moveTo.SetMoveTo()
+            m_specialUseNum++;
+            m_usedSpecial = true;
         }
-        //まだ
-        else
-        {
 
+        if(m_usedSpecial)
+        {
+            MoveTo moveTo = gameObject.AddComponent<MoveTo>();
+            moveTo.SetMoveTo(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 12.5f, gameObject.transform.position.z), 0.3f, 0);
+            m_usedSpecial = false;
+
+            //次に使用なら大きさも戻す
+            if (spButton.UsedCard == m_useOrder - 1)
+            {
+                ScaleTo scaleTo = gameObject.AddComponent<ScaleTo>();
+                scaleTo.SetScaleTo(new Vector3(1.0f, 1.0f, 1.0f), 0.3f, 0);
+            }
         }
     }
 }

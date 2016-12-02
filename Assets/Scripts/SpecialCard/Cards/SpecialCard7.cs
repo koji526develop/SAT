@@ -39,7 +39,7 @@ public class SpecialCard7 : SpecialCard {
 
 		foreach (Character allyCharacter in allyCharactersList) 
 		{
-			GameObject barrierObj = GameObject.Instantiate(Resources.Load("Particle/SpecailShield/shield_blue")) as GameObject;
+			GameObject barrierObj = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecailShield/shield_blue")) as GameObject;
 			barrierObj.name = "Barrier";
 
 			barrierObj.transform.SetParent (allyCharacter.transform);

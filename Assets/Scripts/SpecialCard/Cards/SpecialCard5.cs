@@ -23,7 +23,7 @@ public class SpecialCard5 : SpecialCard
         if (m_UsedPlayerID == 1) m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P;
         else m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
 
-        m_starObj = Instantiate(Resources.Load("Particle/SpeciaRecoveryScore/star")) as GameObject;
+        m_starObj = Instantiate(Resources.Load("SpecialWeapon/SpeciaRecoveryScore/star")) as GameObject;
         m_starObj.transform.position = new Vector3(m_starPosX, 1, 0);
     }
 
