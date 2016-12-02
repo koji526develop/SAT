@@ -31,6 +31,8 @@ public class SpecialCard2 : SpecialCard
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
         }
 
+        m_gameUIManager.RectRender(m_UsedPlayerID, true);
+
         for (int i = 0; i < 2; i++)
         {
             m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
@@ -83,6 +85,8 @@ public class SpecialCard2 : SpecialCard
                             if (m_UsedPlayerID == 1) { enemyPlayerID = 2; }
                             else { enemyPlayerID = 1; }
                             gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID, 100);
+                            m_gameUIManager.RectRender(m_UsedPlayerID, false);
+
                             Destroy(this);
                             break;
                         }
