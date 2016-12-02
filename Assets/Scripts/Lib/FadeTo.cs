@@ -58,10 +58,16 @@ public class FadeTo : MonoBehaviour
         m_duration = _duration;
 
 
-        if (_isUI) m_image = GetComponent<Image>();
-        else m_renderer = GetComponent<Renderer>();
-
-        m_startAlpha = m_renderer.material.color.a;
+        if (_isUI)
+        {
+            m_image = GetComponent<Image>();
+            m_startAlpha = m_image.color.a;
+        }
+        else
+        {
+            m_renderer = GetComponent<Renderer>();
+            m_startAlpha = m_renderer.material.color.a;
+        }
     }
 
     public void SetFadeTo(float _endAlpha, float _duration, bool _isUI, float _delay = 0.0f)
