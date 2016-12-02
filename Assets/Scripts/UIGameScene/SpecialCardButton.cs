@@ -10,7 +10,14 @@ public class SpecialCardButton : MonoBehaviour {
     
     public int[] m_keepSpCard = new int[3];
     private SpecialCard m_usedSpCardState;
-    private int m_UsedCard;
+    int m_UsedCard;
+    public int UsedCard
+    {
+        get
+        {
+            return m_UsedCard;
+        }
+    }
 
     Transform m_GameManager;
     Transform m_battleManager;
@@ -90,9 +97,9 @@ public class SpecialCardButton : MonoBehaviour {
 
         if (m_usedSpCardState != null)
         {
-            //Destroy(m_usedSpCardState);
-            //m_UsedCard--;
-            //return;
+            Destroy(m_usedSpCardState);
+            m_UsedCard--;
+            return;
         }
         else {
             StartSpCard(m_keepSpCard[m_UsedCard]);

@@ -47,23 +47,23 @@ public class GameUIManager : MonoBehaviour
     {
         Transform canvasTransForm = GameObject.Find("Canvas").transform;
 
-		GameObject obj = MyUtility.CreateButton(
-			"back",
-			"UI/Game/information_back",
-			new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
-			new Vector2(3.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
-		);
+        GameObject obj = MyUtility.CreateButton(
+            "back",
+            "UI/Game/information_back",
+            new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
+            new Vector2(3.0f / 32.0f, 25.0f / 25.0f),
+            canvasTransForm
+        );
 
-		obj = MyUtility.CreateButton(
-			"back",
-			"UI/Game/information_back",
-			new Vector2(29.0f / 32.0f, 0.0f / 25.0f),
-			new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
-		);
+        obj = MyUtility.CreateButton(
+            "back",
+            "UI/Game/information_back",
+            new Vector2(29.0f / 32.0f, 0.0f / 25.0f),
+            new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
+            canvasTransForm
+        );
 
-		GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+        GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
 
         //戦力ゲージ作成スクリプト
         obj = MyUtility.CreateSlider(
@@ -116,8 +116,8 @@ public class GameUIManager : MonoBehaviour
       canvasTransForm,
             45,
             new Vector3(0, 0, -90),
-            new Vector2(0.0f / 32.0f, 2.0f / 25.0f),
-            new Vector2(2.0f / 32.0f, 3.0f / 25.0f)
+            new Vector2(0.5f / 32.0f, 2.0f / 25.0f),
+            new Vector2(2.5f / 32.0f, 3.0f / 25.0f)
             );
 
         timeText1P.gameObject.AddComponent<GameTimeControl>();
@@ -127,8 +127,8 @@ public class GameUIManager : MonoBehaviour
      canvasTransForm,
            45,
            new Vector3(0, 0, 90),
-            new Vector2(30.0f / 32.0f, 22.0f / 25.0f),
-            new Vector2(32.0f / 32.0f, 25.0f / 25.0f)
+            new Vector2(29.5f / 32.0f, 22.0f / 25.0f),
+            new Vector2(31.5f / 32.0f, 25.0f / 25.0f)
            );
 
         timeText2P.gameObject.AddComponent<GameTimeControl>();
@@ -144,6 +144,13 @@ public class GameUIManager : MonoBehaviour
 
         obj.AddComponent<SpecialCardButton>().m_playerID = 1;
 
+        MyUtility.CreateImage(
+            "SetSpecial",
+            "UI/Game/frame",
+            new Vector2(0.2f / 32.0f, 10.0f / 25.0f),
+            new Vector2(2.8f / 32.0f, 12.5f / 25.0f),
+            canvasTransForm
+            );
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
@@ -153,7 +160,15 @@ public class GameUIManager : MonoBehaviour
             canvasTransForm
             );
         obj.AddComponent<SpecialCardButton>().m_playerID = 2;
-			
+
+        MyUtility.CreateImage(
+            "SetSpecial",
+            "UI/Game/frame",
+            new Vector2(29.2f / 32.0f, 12.5f / 25.0f),
+            new Vector2(31.8f / 32.0f, 15.0f / 25.0f),
+            canvasTransForm
+            );
+
         //ここまで
         for (int i = 1; i <= 5; i++)
         {
