@@ -50,6 +50,13 @@ public class MyUtility : MonoBehaviour
 
     public static float GAME_TIME = 120.0f;
 
+    public static float ForCount(float _base,float _up,int _count)
+    {
+        float output=_base+(_up* (float)(_count));
+
+        return output;
+    }
+
     public static void CreateDirectionalLight()
     {
         GameObject lightObj = new GameObject("DirectionalLight");
