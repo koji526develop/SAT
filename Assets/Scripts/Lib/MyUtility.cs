@@ -8,7 +8,7 @@ public class MyUtility : MonoBehaviour
     // 兵士が移動する行の最小値
     public static readonly int MIX_COLUMN = 1;
     // 兵士が移動する行の最大値
-    public static readonly int MAX_COLUMN = 6;
+    public static readonly int MAX_COLUMN = 5;
 
     // 剣士のパラメータ
     public static int SWORD_LIFE = 2;
@@ -49,6 +49,13 @@ public class MyUtility : MonoBehaviour
     public static readonly int MAX_WARPOTENTIAL = 500;
 
     public static float GAME_TIME = 120.0f;
+
+    public static float ForCount(float _base,float _up,int _count)
+    {
+        float output=_base+(_up* (float)(_count));
+
+        return output;
+    }
 
     public static void CreateDirectionalLight()
     {

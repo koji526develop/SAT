@@ -22,6 +22,7 @@ public class SpecialCard4 : SpecialCard {
             gameManager = GameObject.Find("GameManager").transform;
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
         }
+        m_gameUIManager.RectRender(m_UsedPlayerID, true);
     }
 	
 	// Update is called once per frame
@@ -62,12 +63,22 @@ public class SpecialCard4 : SpecialCard {
                     if(btnCmp.m_ButtonID == m_checkColumn ||
                        btnCmp.m_ButtonID == m_checkColumn2)
                     {
+                        GameObject stone = (GameObject)Resources.Load("Prefabs/Stone");
+                        if (btnCmp.m_PlayerID == 1)
+                        {
+                            Instantiate(stone, new Vector3(-3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
+                        }
+                        else
+                        {
+                            Instantiate(stone, new Vector3(3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
+                        }
                         btnCmp.m_soliderStop = true;
                     }
 
                 }
             }
 
+            m_gameUIManager.RectRender(m_UsedPlayerID, false);
             Destroy(this);
         }
     }

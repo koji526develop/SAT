@@ -31,9 +31,11 @@ public class SpecialCard2 : SpecialCard
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
         }
 
+        m_gameUIManager.RectRender(m_UsedPlayerID, true);
+
         for (int i = 0; i < 2; i++)
         {
-            m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
+            m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecialArrow/SpecialArrow")) as GameObject;
             m_ArrowObj[i].name = "FireArrow";
             m_ArrowObj[i].transform.position = new Vector3(0 + (i * 1000), -30000, 0);
             m_ArrowObj[i].AddComponent<ArrowMove>();
@@ -83,6 +85,8 @@ public class SpecialCard2 : SpecialCard
                             if (m_UsedPlayerID == 1) { enemyPlayerID = 2; }
                             else { enemyPlayerID = 1; }
                             gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID, 100);
+                            m_gameUIManager.RectRender(m_UsedPlayerID, false);
+
                             Destroy(this);
                             break;
                         }

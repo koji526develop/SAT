@@ -33,9 +33,9 @@ public class SoldierSurvival : MonoBehaviour
             //兵士残存数の背景画像
             m_SoldierImgObj[i] = MyUtility.CreateImage(
                 "LongBar",
-				"UI/Game/frame",
-                new Vector2((0.0f /*+ (27.0f* i)*/)/ 32.0f, (13.0f  /*+ (13.0f* i)*/) / 25.0f),
-                new Vector2((3.0f /*+ (27.0f* i)*/)/ 32.0f, (25.0f/* + (13.0f* i)*/) / 25.0f),
+                "UI/Game/frame",
+                new Vector2((0.0f /*+ (27.0f* i)*/) / 32.0f, (13.0f  /*+ (13.0f* i)*/) / 25.0f),
+                new Vector2((3.0f /*+ (27.0f* i)*/) / 32.0f, (25.0f/* + (13.0f* i)*/) / 25.0f),
                 transform);
             Color color = m_SoldierImgObj[i].GetComponent<Image>().color;
             color.a = 0;
@@ -60,8 +60,8 @@ public class SoldierSurvival : MonoBehaviour
                    m_SoldierImgObj[i].transform,
                    30,
                    new Vector3(0.0f, 0.0f, -90.0f),
-                   new Vector2(13 / 32.0f, (20.0f - (j * 6)) / 25.0f),
-                   new Vector2(13 / 32.0f, (22.0f - (j * 6)) / 25.0f)
+                   new Vector2(16 / 32.0f, (20.0f - (j * 6)) / 25.0f),
+                   new Vector2(16 / 32.0f, (22.0f - (j * 6)) / 25.0f)
                    );
             }
         }

@@ -9,8 +9,18 @@ public class GameUIManager : MonoBehaviour
 {
 
     Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
+    RectSet[,] m_rectset = new RectSet[2, MyUtility.MAX_COLUMN];
 
+    public void RectRender(int _playerID, bool _isSwitch)
+    {
+        _playerID--;
+        for (int i = 0; i < MyUtility.MAX_COLUMN; i++)
+        {
+            m_rectset[_playerID, i].transform.gameObject.SetActive(_isSwitch);
+            m_rectset[_playerID, i].m_isSelected = false;
+        }
 
+    }
 
     public void SetCoulumRect(Vector2 _firstPoint, Vector2 _endPoint, int _playerID, int _columnNumber)
     {
@@ -38,6 +48,7 @@ public class GameUIManager : MonoBehaviour
             )
         {
             Debug.Log("PlayerID" + _playerID + "Cloumn" + _idx + "押されましあ");
+            m_rectset[_playerID, _idx].m_isSelected = true;
             return true;
         }
         return false;
@@ -47,23 +58,23 @@ public class GameUIManager : MonoBehaviour
     {
         Transform canvasTransForm = GameObject.Find("Canvas").transform;
 
-		GameObject obj = MyUtility.CreateButton(
-			"back",
-			"UI/Game/information_back",
-			new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
-			new Vector2(3.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
-		);
+        GameObject obj = MyUtility.CreateButton(
+            "back",
+            "UI/Game/information_back",
+            new Vector2(0.0f / 32.0f, 0.0f / 25.0f),
+            new Vector2(3.0f / 32.0f, 25.0f / 25.0f),
+            canvasTransForm
+        );
 
-		obj = MyUtility.CreateButton(
-			"back",
-			"UI/Game/information_back",
-			new Vector2(29.0f / 32.0f, 0.0f / 25.0f),
-			new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
-			canvasTransForm
-		);
+        obj = MyUtility.CreateButton(
+            "back",
+            "UI/Game/information_back",
+            new Vector2(29.0f / 32.0f, 0.0f / 25.0f),
+            new Vector2(32.0f / 32.0f, 25.0f / 25.0f),
+            canvasTransForm
+        );
 
-		GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+        GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
 
         //戦力ゲージ作成スクリプト
         obj = MyUtility.CreateSlider(
@@ -88,7 +99,6 @@ public class GameUIManager : MonoBehaviour
         canvasTransForm.gameObject.AddComponent<WarPotential>();
 
         //      //戦力ゲージ作成スクリプトここまで
-
         //      //タイムUIを作成
         obj = MyUtility.CreateImage(
             "TimeImage",
@@ -116,8 +126,8 @@ public class GameUIManager : MonoBehaviour
       canvasTransForm,
             45,
             new Vector3(0, 0, -90),
-            new Vector2(0.0f / 32.0f, 2.0f / 25.0f),
-            new Vector2(2.0f / 32.0f, 3.0f / 25.0f)
+            new Vector2(0.5f / 32.0f, 2.0f / 25.0f),
+            new Vector2(2.5f / 32.0f, 3.0f / 25.0f)
             );
 
         timeText1P.gameObject.AddComponent<GameTimeControl>();
@@ -127,8 +137,8 @@ public class GameUIManager : MonoBehaviour
      canvasTransForm,
            45,
            new Vector3(0, 0, 90),
-            new Vector2(30.0f / 32.0f, 22.0f / 25.0f),
-            new Vector2(32.0f / 32.0f, 25.0f / 25.0f)
+            new Vector2(29.5f / 32.0f, 22.0f / 25.0f),
+            new Vector2(31.5f / 32.0f, 25.0f / 25.0f)
            );
 
         timeText2P.gameObject.AddComponent<GameTimeControl>();
@@ -144,6 +154,29 @@ public class GameUIManager : MonoBehaviour
 
         obj.AddComponent<SpecialCardButton>().m_playerID = 1;
 
+        MyUtility.CreateImage(
+            "SetSpecial",
+            "UI/Game/frame",
+            new Vector2(0.3f / 32.0f, 10.0f / 25.0f),
+            new Vector2(2.9f / 32.0f, 12.5f / 25.0f),
+            canvasTransForm
+            );
+
+        //表示される特殊カード
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 1;
+            GameObject specialObj = MyUtility.CreateImage(
+                "SpecialCards",
+                "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
+                new Vector2(0.4f / 32.0f, (10.4f - (i * 2.7f)) / 25.0f),
+                new Vector2(2.8f / 32.0f, (12.1f - (i * 2.7f)) / 25.0f),
+                canvasTransForm);
+            SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
+            spCardbehavior.UseOrder = 1 + i;
+            spCardbehavior.SpecialButton = obj.GetComponent<SpecialCardButton>();
+            spCardbehavior.PlayerID = 1;
+        }
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
@@ -153,7 +186,31 @@ public class GameUIManager : MonoBehaviour
             canvasTransForm
             );
         obj.AddComponent<SpecialCardButton>().m_playerID = 2;
-			
+
+        MyUtility.CreateImage(
+            "SetSpecial",
+            "UI/Game/frame",
+            new Vector2(29.2f / 32.0f, 12.5f / 25.0f),
+            new Vector2(31.8f / 32.0f, 15.0f / 25.0f),
+            canvasTransForm
+            );
+
+        //表示される特殊カード
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 1;
+            GameObject specialObj = MyUtility.CreateImage(
+                "SpecialCards",
+                "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
+                new Vector2(29.3f / 32.0f, (12.9f + (i * 2.7f)) / 25.0f),
+                new Vector2(31.7f / 32.0f, (14.6f + (i * 2.7f)) / 25.0f),
+                canvasTransForm);
+            SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
+            spCardbehavior.UseOrder = 1 + i;
+            spCardbehavior.SpecialButton = obj.GetComponent<SpecialCardButton>();
+            spCardbehavior.PlayerID = 2;
+        }
+
         //ここまで
         for (int i = 1; i <= 5; i++)
         {
@@ -192,15 +249,6 @@ public class GameUIManager : MonoBehaviour
             for (int j = 1; j <= 5; j++)
             {
 
-                //obj = MyUtility.CreateSprite(
-                // soldierbutton,
-                // "SoldierButton",
-                // imgName);
-
-                //obj.transform.position      = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
-                //obj.transform.eulerAngles   = new Vector3(90.0f, 0.0f, 0.0f);
-                //obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
-
                 obj = MyUtility.CreateImage("SoliderImage",
                                "Image/TimeWaku",
                                 new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
@@ -223,40 +271,18 @@ public class GameUIManager : MonoBehaviour
                 SetCoulumRect(new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
                               new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
 
+                obj = MyUtility.CreateImage("ColumnImage",
+                                            "UI/Game/select_line",
+                                            new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
+                                            new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
+                                            canvasTransForm);
+                RectSet local_rectset;
+                local_rectset = obj.AddComponent<RectSet>();
+                local_rectset.SetState(i - 1, j - 1);
+                m_rectset[i - 1, j - 1] = local_rectset;
+
             }
         }
-
-        ////正規のソルジャーボタンを追加
-        //for (int i = 1; i <= 5; i++)
-        //{
-        //    for (int j = 1; j <= 2; j++)
-        //    {
-        //        string imageName;
-        //        if (j==1)
-        //        {
-        //            imageName = "UI/Game/center_active";
-        //        }
-        //        else
-        //        {
-        //            imageName = "UI/Game/center_active2";
-        //        }
-
-        //        obj = MyUtility.CreateButton(
-        //            "SoldierButton",
-        //            imageName,
-        //            new Vector2((2.5f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
-        //            new Vector2((7.5f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
-        //            canvasTransForm);
-
-        //        ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
-        //        btnCmp.m_PlayerID = j;
-        //        btnCmp.m_ButtonID = i;
-
-        //        SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
-        //                      new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
-        //    }
-        //}
-
 
     }
     // Use this for initialization

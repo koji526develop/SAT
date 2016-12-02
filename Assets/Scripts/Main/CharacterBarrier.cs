@@ -8,7 +8,7 @@ public class CharacterBarrier : State<Character>
 	public override void Enter() 
 	{
 		//m_instance.animator.Play ("Attack");
-		GameObject barrierObj = GameObject.Instantiate(Resources.Load("Particle/SpecailShield/shield")) as GameObject;
+		GameObject barrierObj = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecailShield/shield")) as GameObject;
 		barrierObj.name = "Barrier";
 
 		barrierObj.transform.SetParent (m_instance.transform);
