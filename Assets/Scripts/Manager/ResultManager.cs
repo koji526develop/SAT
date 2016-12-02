@@ -100,7 +100,7 @@ public class ResultManager : MonoBehaviour
                 new Vector2((11 + (i * 11)) / 32.0f, 12 / 25.0f),
                 new Vector2((13 + (i * 11)) / 32.0f, 14 / 25.0f)
                 );
-            text.transform.position += (i == 0) ? new Vector3(10,0,0) : new Vector3(-10,0,0);
+            text.transform.position += (i == 0) ? new Vector3(10, 0, 0) : new Vector3(-10, 0, 0);
         }
 
         //// プレイヤーの戦闘で使用した兵、カード
@@ -122,6 +122,8 @@ public class ResultManager : MonoBehaviour
         //特殊カードの画像パス
         for (int i = 0; i < 6; i++)
         {
+            //デバッグ用ですべて１
+            ResultSpecialInfo[i] = 1 + i;
             m_SpecialImagePath[i] = "UI/Result/card" + ResultSpecialInfo[i].ToString();
         }
 
@@ -131,13 +133,13 @@ public class ResultManager : MonoBehaviour
 
             //相手兵士詳細
             //画像
+
             GameObject obj = MyUtility.CreateImage(
                 "OpponentSoldier",
                 "UI/Result/information_back",
                 new Vector2(2.0f / 32.0f, 16.0f / 25.0f),
                 new Vector2(10.0f / 32.0f, 23.0f / 25.0f),
                 m_ResultObj[i].transform);
-
 
             for (int j = 0; j < 4; j++)
             {
