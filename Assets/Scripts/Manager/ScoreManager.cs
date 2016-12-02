@@ -94,7 +94,7 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID - 1]);
+            m_Score = m_Score - (int)((float)_point + m_pointBouns[_playerID - 1]);
         }
 
     }

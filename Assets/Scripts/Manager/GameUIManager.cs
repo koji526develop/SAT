@@ -9,8 +9,18 @@ public class GameUIManager : MonoBehaviour
 {
 
     Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
+    RectSet[,] m_rectset= new RectSet[2, MyUtility.MAX_COLUMN];
 
-
+    public void RectRender(int _playerID,bool _isSwitch)
+    {
+        _playerID--;
+        for (int i = 0; i < MyUtility.MAX_COLUMN; i++)
+        {
+            m_rectset[_playerID, i].transform.gameObject.SetActive(_isSwitch);
+            m_rectset[_playerID, i].m_isSelected = false;
+        }
+        
+    }
 
     public void SetCoulumRect(Vector2 _firstPoint, Vector2 _endPoint, int _playerID, int _columnNumber)
     {
@@ -38,6 +48,7 @@ public class GameUIManager : MonoBehaviour
             )
         {
             Debug.Log("PlayerID" + _playerID + "Cloumn" + _idx + "押されましあ");
+            m_rectset[_playerID, _idx].m_isSelected = true;
             return true;
         }
         return false;
@@ -88,7 +99,6 @@ public class GameUIManager : MonoBehaviour
         canvasTransForm.gameObject.AddComponent<WarPotential>();
 
         //      //戦力ゲージ作成スクリプトここまで
-
         //      //タイムUIを作成
         obj = MyUtility.CreateImage(
             "TimeImage",
@@ -192,15 +202,6 @@ public class GameUIManager : MonoBehaviour
             for (int j = 1; j <= 5; j++)
             {
 
-                //obj = MyUtility.CreateSprite(
-                // soldierbutton,
-                // "SoldierButton",
-                // imgName);
-
-                //obj.transform.position      = new Vector3((-4.65f + (9.2f * (i - 1))), 0.0f, (4.0f - (2.0f * (j - 1))));
-                //obj.transform.eulerAngles   = new Vector3(90.0f, 0.0f, 0.0f);
-                //obj.transform.localScale    = new Vector3(0.1f, 0.08f, 0.1f);
-
                 obj = MyUtility.CreateImage("SoliderImage",
                                "Image/TimeWaku",
                                 new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
@@ -223,40 +224,18 @@ public class GameUIManager : MonoBehaviour
                 SetCoulumRect(new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
                               new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
 
+                obj = MyUtility.CreateImage("ColumnImage",
+                                            "UI/Game/select_line",
+                                            new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
+                                            new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
+                                            canvasTransForm);
+                RectSet local_rectset;
+                local_rectset=obj.AddComponent<RectSet>();
+                local_rectset.SetState(i-1, j-1);
+                m_rectset[i-1, j-1] = local_rectset;
+                
             }
         }
-
-        ////正規のソルジャーボタンを追加
-        //for (int i = 1; i <= 5; i++)
-        //{
-        //    for (int j = 1; j <= 2; j++)
-        //    {
-        //        string imageName;
-        //        if (j==1)
-        //        {
-        //            imageName = "UI/Game/center_active";
-        //        }
-        //        else
-        //        {
-        //            imageName = "UI/Game/center_active2";
-        //        }
-
-        //        obj = MyUtility.CreateButton(
-        //            "SoldierButton",
-        //            imageName,
-        //            new Vector2((2.5f + 22.0f * (j - 1)) / 32.0f, (20.0f - 5.0f * (i - 1)) / 25.0f),
-        //            new Vector2((7.5f + 22.0f * (j - 1)) / 32.0f, (25.0f - 5.0f * (i - 1)) / 25.0f),
-        //            canvasTransForm);
-
-        //        ButtonSpawner btnCmp = obj.AddComponent<ButtonSpawner>();
-        //        btnCmp.m_PlayerID = j;
-        //        btnCmp.m_ButtonID = i;
-
-        //        SetCoulumRect(new Vector2((6.0f+(11.0f*(j-1))) / 32.0f, (20.0f-(5.0f*(i-1))) / 25.0f),
-        //                      new Vector2((15.0f+(11.0f*(j-1))) / 32.0f, (25.0f-(5.0f*(i-1))) / 25.0f), j, i);
-        //    }
-        //}
-
 
     }
     // Use this for initialization

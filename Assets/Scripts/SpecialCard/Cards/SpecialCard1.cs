@@ -28,6 +28,8 @@ public class SpecialCard1 : SpecialCard
             m_gameUIManager = gameManager.GetComponent<GameUIManager>();
         }
 
+        m_gameUIManager.RectRender(m_UsedPlayerID,true);
+
         m_ArrowObj = GameObject.Instantiate(Resources.Load("Particle/SpecialArrow/SpecialArrow")) as GameObject;
         m_ArrowObj.name = "FireArrow";
         m_ArrowObj.transform.position = new Vector3(30000, -30000, 30000);
@@ -57,6 +59,7 @@ public class SpecialCard1 : SpecialCard
                         arrowMove.PlayerID = m_UsedPlayerID;
                         arrowMove.Column = m_checkColumn;
                         m_ArrowObj.transform.position = new Vector3(m_arrowPosX, 1, m_arrowPosZ[m_checkColumn - 1]);
+                        m_gameUIManager.RectRender(m_UsedPlayerID, false);
                         Destroy(this);
                         break;
                     }

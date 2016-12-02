@@ -37,8 +37,6 @@ public class ButtonSpawner : MonoBehaviour
         this.transform.tag = "SoliderButton";
 
         Transform gameManagerTrans=GameObject.Find("GameManager").transform;
-	
-
 
         this.GetComponent<Button>().onClick.AddListener(ResetFlag);
 
