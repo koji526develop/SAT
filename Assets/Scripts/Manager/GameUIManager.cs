@@ -147,10 +147,25 @@ public class GameUIManager : MonoBehaviour
         MyUtility.CreateImage(
             "SetSpecial",
             "UI/Game/frame",
-            new Vector2(0.2f / 32.0f, 10.0f / 25.0f),
-            new Vector2(2.8f / 32.0f, 12.5f / 25.0f),
+            new Vector2(0.3f / 32.0f, 10.0f / 25.0f),
+            new Vector2(2.9f / 32.0f, 12.5f / 25.0f),
             canvasTransForm
             );
+
+        //表示される特殊カード
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = i + 1;
+            GameObject specialObj = MyUtility.CreateImage(
+                "SpecialCards",
+                "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
+                new Vector2(0.4f / 32.0f, (10.4f - (i * 2.7f)) / 25.0f),
+                new Vector2(2.8f / 32.0f, (12.1f - (i * 2.7f)) / 25.0f),
+                canvasTransForm);
+            SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
+            spCardbehavior.UseOrder = i + 1;
+            spCardbehavior.SpecialButton = obj.GetComponent<SpecialCardButton>();
+        }
 
         obj = MyUtility.CreateButton(
             "SpecialCardButton2",
