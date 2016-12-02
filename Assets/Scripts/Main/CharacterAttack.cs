@@ -17,6 +17,9 @@ public class CharacterAttack : State<Character>
 	//　敵の情報格納用
 	Character.Status m_changeStatus; 
 
+	int MAX_HP;
+	float MAX_SCALE_Y;
+
 	public GameObject enemyObj
 	{
 		set
@@ -32,6 +35,24 @@ public class CharacterAttack : State<Character>
 		m_changeStatus = m_enemyCharacter.status;
 
 		m_instance.animator.Play ("Attack");
+
+
+		switch (m_instance.status.characterType) {
+		case Character.CharacterType.Sword:
+			MAX_HP = MyUtility.SWORD_LIFE;
+			break;
+		case Character.CharacterType.Spear:
+			MAX_HP = MyUtility.SPEAR_LIFE;
+			break;
+		case Character.CharacterType.Ax:
+			MAX_HP = MyUtility.AX_LIFE;
+			break;
+		case Character.CharacterType.Shield:
+			MAX_HP = MyUtility.SHIELD_LIFE;
+			break;
+		}
+
+		MAX_SCALE_Y = ButtonSpawner.hp.transform.localScale.y;
 	}
 
 	public override void Update()
@@ -80,6 +101,12 @@ public class CharacterAttack : State<Character>
 			m_changeStatus.life -= m_instance.status.attack;
 
 			m_enemyCharacter.status = m_changeStatus;
+
+			float changeY = MAX_SCALE_Y / (MAX_HP / m_instance.status.life);
+
+			ButtonSpawner.hp.transform.localScale = new Vector3 (ButtonSpawner.hp.transform.localScale.x,changeY,ButtonSpawner.hp.transform.localScale.z);
+
+
 		}
 	}
 
