@@ -74,9 +74,9 @@ public class GameUIManager : MonoBehaviour
             canvasTransForm
         );
 
-        GameObject.Find("Canvas").AddComponent<SoldierSurvival>();
+        canvasTransForm.gameObject.AddComponent<SoldierSurvival>();
 
-        //戦力ゲージ作成スクリプト
+        //*************戦力ゲージ作成スクリプト**************
         obj = MyUtility.CreateSlider(
             "BlueSlider",
             "UI/Game/gauge_blue",
@@ -98,8 +98,7 @@ public class GameUIManager : MonoBehaviour
         obj.GetComponent<Slider>().direction = Slider.Direction.BottomToTop;
         canvasTransForm.gameObject.AddComponent<WarPotential>();
 
-        //      //戦力ゲージ作成スクリプトここまで
-        //      //タイムUIを作成
+        //*************制限時間UI作成**************
         obj = MyUtility.CreateImage(
             "TimeImage",
         "UI/Game/frame",
@@ -143,7 +142,7 @@ public class GameUIManager : MonoBehaviour
 
         timeText2P.gameObject.AddComponent<GameTimeControl>();
 
-        //      //ここまで
+        //*************特殊カードUI処理**************
         obj = MyUtility.CreateButton(
             "SpecialCardButton1",
             "UI/Game/information_card",
@@ -194,7 +193,7 @@ public class GameUIManager : MonoBehaviour
             canvasTransForm
             );
 
-        //ここまで
+        //*************ソルジャーだしたときの段階UIスクリプト**************
         for (int i = 1; i <= 5; i++)
         {
             for (int j = 1; j <= 2; j++)
@@ -202,8 +201,8 @@ public class GameUIManager : MonoBehaviour
                 obj = MyUtility.CreateImage(
                     "ScoreFlame",
                     "Image/ScoreFlame/Scoreflame",
-                    new Vector2((3 + 25.0f * (j - 1)) / 32.0f, (20.0f - (5.0f * (i - 1))) / 25.0f),
-                     new Vector2((4 + 25.0f * (j - 1)) / 32.0f, (25.0f - (5.0f * (i - 1))) / 25.0f),
+                    new Vector2( MyUtility.ForCount(3.0f,25.0f,j-1) / 32.0f, MyUtility.ForCount(20.0f, -5.0f, i - 1) / 25.0f),
+                     new Vector2(MyUtility.ForCount(4.0f,25.0f,j-1) / 32.0f, MyUtility.ForCount(25.0f, -5.0f, i - 1) / 25.0f),
                      canvasTransForm
                     );
 
@@ -234,10 +233,10 @@ public class GameUIManager : MonoBehaviour
 
                 obj = MyUtility.CreateImage("SoliderImage",
                                "Image/TimeWaku",
-                                new Vector2((2.5f + 22.0f * (i - 1)) / 32.0f, (20.0f - 5.0f * (j - 1)) / 25.0f),
-                                 new Vector2((7.5f + 22.0f * (i - 1)) / 32.0f, (25.0f - 5.0f * (j - 1)) / 25.0f),
+                                 new Vector2( MyUtility.ForCount(2.5f, 22.0f, i - 1) / 32.0f, MyUtility.ForCount(20.0f, -5.0f, j - 1) / 25.0f),
+                                 new Vector2( MyUtility.ForCount(7.5f, 22.0f, i - 1) / 32.0f, MyUtility.ForCount(25.0f, -5.0f, j - 1) / 25.0f),
                                  canvasTransForm);
-
+       
                 GameObject buttonObj;
                 buttonObj = MyUtility.CreateButton(
                     "SoldierButton",
@@ -250,20 +249,27 @@ public class GameUIManager : MonoBehaviour
                 btnCmp.m_PlayerID = i;
                 btnCmp.m_ButtonID = j;
                 btnCmp.m_changeSprite = obj.GetComponent<Image>();
+                
+            }
+        }
 
+        for(int i = 1; i <= 2; i++)
+        {
+            for(int j = 1; j <= 5; j++)
+            {
                 SetCoulumRect(new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
-                              new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
+                            new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
 
                 obj = MyUtility.CreateImage("ColumnImage",
                                             "UI/Game/select_line",
                                             new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
                                             new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
                                             canvasTransForm);
+
                 RectSet local_rectset;
-                local_rectset=obj.AddComponent<RectSet>();
-                local_rectset.SetState(i-1, j-1);
-                m_rectset[i-1, j-1] = local_rectset;
-                
+                local_rectset = obj.AddComponent<RectSet>();
+                local_rectset.SetState(i - 1, j - 1);
+                m_rectset[i - 1, j - 1] = local_rectset;
             }
         }
 
