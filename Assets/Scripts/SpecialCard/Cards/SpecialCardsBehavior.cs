@@ -24,8 +24,19 @@ public class SpecialCardsBehavior : MonoBehaviour
         }
     }
 
+    int m_playerID;
+    public int PlayerID
+    {
+        set
+        {
+            m_playerID = value;
+        }
+    }
+
     private int m_specialUseNum = 0;            //何回特殊カードが使用されたか
     private bool m_usedSpecial = false;         //特殊カードが使用されたか
+
+    private float m_moveY;                      //移動向き
 
 
     void Awake()
@@ -39,6 +50,9 @@ public class SpecialCardsBehavior : MonoBehaviour
         {
             transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
         }
+
+        if (m_playerID == 1) m_moveY = 12.5f;
+        else m_moveY = -12.5f;
     }
 
     void Update()
@@ -59,7 +73,7 @@ public class SpecialCardsBehavior : MonoBehaviour
         if(m_usedSpecial)
         {
             MoveTo moveTo = gameObject.AddComponent<MoveTo>();
-            moveTo.SetMoveTo(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 12.5f, gameObject.transform.position.z), 0.3f, 0);
+            moveTo.SetMoveTo(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + m_moveY, gameObject.transform.position.z), 0.3f, 0);
             m_usedSpecial = false;
 
             //次に使用なら大きさも戻す

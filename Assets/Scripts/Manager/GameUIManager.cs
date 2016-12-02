@@ -9,9 +9,9 @@ public class GameUIManager : MonoBehaviour
 {
 
     Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
-    RectSet[,] m_rectset= new RectSet[2, MyUtility.MAX_COLUMN];
+    RectSet[,] m_rectset = new RectSet[2, MyUtility.MAX_COLUMN];
 
-    public void RectRender(int _playerID,bool _isSwitch)
+    public void RectRender(int _playerID, bool _isSwitch)
     {
         _playerID--;
         for (int i = 0; i < MyUtility.MAX_COLUMN; i++)
@@ -19,7 +19,7 @@ public class GameUIManager : MonoBehaviour
             m_rectset[_playerID, i].transform.gameObject.SetActive(_isSwitch);
             m_rectset[_playerID, i].m_isSelected = false;
         }
-        
+
     }
 
     public void SetCoulumRect(Vector2 _firstPoint, Vector2 _endPoint, int _playerID, int _columnNumber)
@@ -165,7 +165,7 @@ public class GameUIManager : MonoBehaviour
         //表示される特殊カード
         for (int i = 0; i < 3; i++)
         {
-            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = i + 1;
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 1;
             GameObject specialObj = MyUtility.CreateImage(
                 "SpecialCards",
                 "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
@@ -173,8 +173,9 @@ public class GameUIManager : MonoBehaviour
                 new Vector2(2.8f / 32.0f, (12.1f - (i * 2.7f)) / 25.0f),
                 canvasTransForm);
             SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
-            spCardbehavior.UseOrder = i + 1;
+            spCardbehavior.UseOrder = 1 + i;
             spCardbehavior.SpecialButton = obj.GetComponent<SpecialCardButton>();
+            spCardbehavior.PlayerID = 1;
         }
 
         obj = MyUtility.CreateButton(
@@ -193,6 +194,22 @@ public class GameUIManager : MonoBehaviour
             new Vector2(31.8f / 32.0f, 15.0f / 25.0f),
             canvasTransForm
             );
+
+        //表示される特殊カード
+        for (int i = 0; i < 3; i++)
+        {
+            SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 1;
+            GameObject specialObj = MyUtility.CreateImage(
+                "SpecialCards",
+                "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
+                new Vector2(29.3f / 32.0f, (12.9f + (i * 2.7f)) / 25.0f),
+                new Vector2(31.7f / 32.0f, (14.6f + (i * 2.7f)) / 25.0f),
+                canvasTransForm);
+            SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
+            spCardbehavior.UseOrder = 1 + i;
+            spCardbehavior.SpecialButton = obj.GetComponent<SpecialCardButton>();
+            spCardbehavior.PlayerID = 2;
+        }
 
         //ここまで
         for (int i = 1; i <= 5; i++)
@@ -260,10 +277,10 @@ public class GameUIManager : MonoBehaviour
                                             new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
                                             canvasTransForm);
                 RectSet local_rectset;
-                local_rectset=obj.AddComponent<RectSet>();
-                local_rectset.SetState(i-1, j-1);
-                m_rectset[i-1, j-1] = local_rectset;
-                
+                local_rectset = obj.AddComponent<RectSet>();
+                local_rectset.SetState(i - 1, j - 1);
+                m_rectset[i - 1, j - 1] = local_rectset;
+
             }
         }
 
