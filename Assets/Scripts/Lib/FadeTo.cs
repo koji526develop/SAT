@@ -2,148 +2,192 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class FadeTo : MonoBehaviour 
+public class FadeTo : MonoBehaviour
 {
-	// フェード中かどうかのフラグ
-	bool m_isFade;
-	public bool isFade
-	{
-		get
-		{
-			return m_isFade;
-		}
-	}
-	// レンダラー	
-	Renderer m_renderer;
+    // フェード中かどうかのフラグ
+    bool m_isFade;
+    public bool isFade
+    {
+        get
+        {
+            return m_isFade;
+        }
+    }
+    // レンダラー	
+    Renderer m_renderer;
 
-	// フェード時間
-	float m_duration;
+    Image m_image;
 
-	// 経過時間
-	float m_elapsedTime;
+    bool m_isUI;
 
-	// 遅らせる時間
-	float m_delay;
+    // フェード時間
+    float m_duration;
 
-	// 開始透明度
-	float m_startAlpha;
+    // 経過時間
+    float m_elapsedTime;
 
-	// 終了透明度
-	float m_endAlpha;
+    // 遅らせる時間
+    float m_delay;
 
-	bool m_isForever;
-	bool m_isReverse;
+    // 開始透明度
+    float m_startAlpha;
 
-	void Awake()
-	{
-		enabled = false;
-		//SetBlinkFadeForever (1.0f);
-	}
+    // 終了透明度
+    float m_endAlpha;
 
-	public void SetBlinkFadeForever(float _duration)
-	{
-		m_isForever = true;
-		m_isReverse = false;
-		m_isFade = true;
-		enabled = true;
+    bool m_isForever;
+    bool m_isReverse;
 
-		m_startAlpha = 1.0f;
-		m_endAlpha = 0.0f;
+    void Awake()
+    {
+        enabled = false;
+        //SetBlinkFadeForever (1.0f);
+    }
 
-		m_duration = _duration;
+    public void SetBlinkFadeForever(float _duration, bool _isUI)
+    {
+        m_isForever = true;
+        m_isReverse = false;
+        m_isFade = true;
+        enabled = true;
+        m_isUI = _isUI;
 
+        m_startAlpha = 1.0f;
+        m_endAlpha = 0.0f;
 
-		m_renderer = GetComponent<Renderer> ();
-		m_startAlpha = m_renderer.material.color.a;
-	}
-
-	public void SetFadeTo(float _endAlpha,float _duration, float _delay = 0.0f)
-	{
-		m_isForever = false;
-		m_isFade = true;
-		enabled = true;
-		m_elapsedTime = 0.0f;
+        m_duration = _duration;
 
 
-		m_renderer = GetComponent<Renderer> ();
-		m_startAlpha = m_renderer.material.color.a;
-			
-		m_endAlpha = _endAlpha;
-		m_duration = _duration;
-		m_delay = _delay;
+        if (_isUI) m_image = GetComponent<Image>();
+        else m_renderer = GetComponent<Renderer>();
 
-		if (m_duration <= 0) 
-		{
-			FinishFade ();
-		}
-	}
+        m_startAlpha = m_renderer.material.color.a;
+    }
 
-	void FinishFade()
-	{
+    public void SetFadeTo(float _endAlpha, float _duration, bool _isUI, float _delay = 0.0f)
+    {
+        m_isForever = false;
+        m_isFade = true;
+        enabled = true;
+        m_elapsedTime = 0.0f;
+        m_isUI = _isUI;
 
-		m_renderer.material.color = new Color(
-			m_renderer.material.color.r,
-			m_renderer.material.color.g,
-			m_renderer.material.color.b,
-			m_endAlpha);
-		
-		enabled = false;
-	}
 
-	void SetAlphaLerp(float _rate)
-	{
-		if(m_isForever)
-		{
-			if (!m_isReverse) {
-				m_startAlpha = 1.0f;
-				m_endAlpha = 0.0f;
-			} else {
-				m_startAlpha = 0.0f;
-				m_endAlpha = 1.0f;
-			}
-		}
+        if (_isUI)
+        {
+            m_image = GetComponent<Image>();
+            m_startAlpha = m_image.color.a;
+        }
+        else
+        {
+            m_renderer = GetComponent<Renderer>();
+            m_startAlpha = m_renderer.material.color.a;
+        }
 
-		m_renderer.material.color = new Color (
-			m_renderer.material.color.r,
-			m_renderer.material.color.g,
-			m_renderer.material.color.b,
-			Mathf.Lerp (m_startAlpha, m_endAlpha, _rate));
-	}
 
-	void Update ()
-	{
-		if (!m_isForever) {
-			m_elapsedTime += Time.deltaTime;
 
-			if (m_elapsedTime - m_delay < 0)
-				return;
+        m_endAlpha = _endAlpha;
+        m_duration = _duration;
+        m_delay = _delay;
 
-			// 経過時間が移動時間を超えたら
-			if (m_elapsedTime - m_delay > m_duration) {
-				m_isFade = false;
-				FinishFade ();
-			}
+        if (m_duration <= 0)
+        {
+            FinishFade(_isUI);
+        }
+    }
 
-			// 割合
-			float rate = m_elapsedTime / m_duration;
+    void FinishFade(bool _isUI)
+    {
+        if (_isUI)
+        {
+            m_image.color = new Color(
+                m_image.color.r,
+                m_image.color.g,
+                m_image.color.b,
+                m_endAlpha);
+        }
+        else
+        {
+            m_renderer.material.color = new Color(
+                      m_renderer.material.color.r,
+                      m_renderer.material.color.g,
+                      m_renderer.material.color.b,
+                      m_endAlpha);
+        }
 
-			// 割合から出した２点間の座標を入れる
-			SetAlphaLerp(rate);
-		} 
-		else
-		{
-			m_elapsedTime += Time.deltaTime;
-			// 経過時間が移動時間を超えたら
-			if (m_elapsedTime > m_duration) {
-				m_isReverse = !m_isReverse;
-				m_elapsedTime = 0.0f;
-			}
+        enabled = false;
+    }
 
-			// 割合
-			float rate = m_elapsedTime / m_duration;
+    void SetAlphaLerp(float _rate)
+    {
+        if (m_isForever)
+        {
+            if (!m_isReverse)
+            {
+                m_startAlpha = 1.0f;
+                m_endAlpha = 0.0f;
+            }
+            else
+            {
+                m_startAlpha = 0.0f;
+                m_endAlpha = 1.0f;
+            }
+        }
+        if (m_isUI)
+        {
+            m_image.color = new Color(
+                m_image.color.r,
+                m_image.color.g,
+                m_image.color.b,
+                Mathf.Lerp(m_startAlpha, m_endAlpha, _rate));
+        }
+        else
+        {
+            m_renderer.material.color = new Color(
+                      m_renderer.material.color.r,
+                      m_renderer.material.color.g,
+                      m_renderer.material.color.b,
+                      Mathf.Lerp(m_startAlpha, m_endAlpha, _rate));
+        }
+    }
 
-			// 割合から出した色を入れる
-			SetAlphaLerp(rate);
-		}
-	}
+    void Update()
+    {
+        if (!m_isForever)
+        {
+            m_elapsedTime += Time.deltaTime;
+
+            if (m_elapsedTime - m_delay < 0)
+                return;
+
+            // 経過時間が移動時間を超えたら
+            if (m_elapsedTime - m_delay > m_duration)
+            {
+                m_isFade = false;
+                FinishFade(m_isUI);
+            }
+
+            // 割合
+            float rate = m_elapsedTime / m_duration;
+
+            // 割合から出した２点間の座標を入れる
+            SetAlphaLerp(rate);
+        }
+        else
+        {
+            m_elapsedTime += Time.deltaTime;
+            // 経過時間が移動時間を超えたら
+            if (m_elapsedTime > m_duration)
+            {
+                m_isReverse = !m_isReverse;
+                m_elapsedTime = 0.0f;
+            }
+
+            // 割合
+            float rate = m_elapsedTime / m_duration;
+
+            // 割合から出した色を入れる
+            SetAlphaLerp(rate);
+        }
+    }
 }
