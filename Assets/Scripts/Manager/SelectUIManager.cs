@@ -110,10 +110,10 @@ public class SelectUIManager : MonoBehaviour
         m_characterSpeed[1] = 1;
 
         float[,] value = {
-            { MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, m_characterSpeed[0],0 },
-            { MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, m_characterSpeed[1],0 },
-            { MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, m_characterSpeed[1],0 },
-            { MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, m_characterSpeed[1],0 }
+            { MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, m_characterSpeed[0], MyUtility.SWORD_ATTACKDISTANCE,0 },
+            { MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, m_characterSpeed[1], MyUtility.SPEAR_ATTACKDISTANCE,0 },
+            { MyUtility.AX_LIFE, MyUtility.AX_ATTACK, m_characterSpeed[1],  MyUtility.AX_ATTACKDISTANCE,0 },
+            { MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, m_characterSpeed[1], MyUtility.SHIELD_ATTACKDISTANCE,0 }
         };
         for (int i = 0; i < 5; i++)
         {
