@@ -45,9 +45,9 @@ public class CharacterAttack : State<Character>
 		{
 			Debug.Log ("2p"+m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime.ToString());
 		}
-		
+
 		m_attackTime += Time.deltaTime;
-	
+
 		if(m_instance.IsFinishAnimation())
 		{
 			m_instance.NowAnimationRePlay ();
@@ -78,7 +78,7 @@ public class CharacterAttack : State<Character>
 			switch (m_instance.status.characterType) 
 			{
 			case Character.CharacterType.Sword:
-			AudioManager.m_instance.PlaySE ("sowrd_SE");
+				AudioManager.m_instance.PlaySE ("sowrd_SE");
 				break;
 			case Character.CharacterType.Spear:
 				AudioManager.m_instance.PlaySE ("spear_SE");

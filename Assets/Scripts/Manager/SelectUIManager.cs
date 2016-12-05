@@ -31,6 +31,8 @@ public class SelectUIManager : MonoBehaviour
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
 
+    private int[] m_characterSpeed = new int[2];
+
     enum PlusOrMinus
     {
         Plus,
@@ -39,6 +41,8 @@ public class SelectUIManager : MonoBehaviour
 
     string[] WEAPON_NAME = { "剣", "槍", "斧", "盾" };
     string[] IconPath = { "UI/Select/sword_icon", "UI/Select/spear_icon", "UI/Select/ax_icon", "UI/Select/shield_icon" };
+    string[] PlayerIconPath = { "", "UI/Select/1p", "UI/Select/2p" };
+    string[] StatusText = { "体力", "攻撃", "移動速度", "射程距離", "兵士数" };
 
     void Awake()
     {
@@ -49,6 +53,13 @@ public class SelectUIManager : MonoBehaviour
             "UI/Select/select_back",
             new Vector2(0 / 32.0f, 0 / 25.0f),
             new Vector2(32 / 32.0f, 25 / 25.0f),
+            transform);
+
+        MyUtility.CreateImage(
+            "Player",
+            PlayerIconPath[PlayerID],
+            new Vector2(0 / 32.0f, 21 / 25.0f),
+            new Vector2(3 / 32.0f, 24 / 25.0f),
             transform);
 
         for (int i = 0; i < 4; i++)
@@ -67,11 +78,42 @@ public class SelectUIManager : MonoBehaviour
             //MyUtility.AddText(WEAPON_NAME[i], obj.transform);
         }
 
+        for (int i = 0; i < 4; i++)
+        {
+            MyUtility.CreateImage(
+                "valueImage",
+                "UI/Select/status",
+                new Vector2(7 / 32.0f, (21 - (i * 4)) / 25.0f),
+                new Vector2(23 / 32.0f, (24 - (i * 4)) / 25.0f),
+                transform);
+        }
+        MyUtility.CreateImage(
+            "valueName",
+            "UI/Select/status_header",
+            new Vector2(7 / 32.0f, 24 / 25.0f),
+            new Vector2(23 / 32.0f, 25 / 25.0f),
+            transform);
+
+        for (int i = 0; i < 5; i++)
+        {
+            Text text = MyUtility.CreateText(
+                StatusText[i],
+                transform,
+                18,
+                Vector3.zero,
+                new Vector2((7 + (i * 3)) / 32.0f, 24.3f / 25.0f),
+                new Vector2((10 + (i * 3)) / 32.0f, 25.3f / 25.0f));
+            text.color = new Color(0, 0, 0);
+        }
+
+        m_characterSpeed[0] = 2;
+        m_characterSpeed[1] = 1;
+
         float[,] value = {
-			{ MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, MyUtility.SWORD_MOVESPEED,0 },
-			{ MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, MyUtility.SPEAR_MOVESPEED,0 },
-			{ MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, MyUtility.SHIELD_MOVESPEED,0 },
-			{ MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, MyUtility.AX_MOVESPEED,0 }
+            { MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, MyUtility.SWORD_ATTACKDISTANCE, m_characterSpeed[0],0 },
+            { MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, MyUtility.SPEAR_ATTACKDISTANCE, m_characterSpeed[1],0 },
+            { MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, MyUtility.SHIELD_ATTACKDISTANCE, m_characterSpeed[1],0 },
+            { MyUtility.AX_LIFE, MyUtility.AX_ATTACK, MyUtility.AX_ATTACKDISTANCE, m_characterSpeed[1],0 }
         };
         for (int i = 0; i < 5; i++)
         {
@@ -82,9 +124,10 @@ public class SelectUIManager : MonoBehaviour
                     transform,
                     35,
                     Vector3.zero,
-                    new Vector2((6 + i * 3) / 32.0f, (21 - j * 4) / 25.0f),
-                    new Vector2((9 + i * 3) / 32.0f, (24 - j * 4) / 25.0f));
+                    new Vector2((7 + i * 3) / 32.0f, (20.5f - j * 4.1f) / 25.0f),
+                    new Vector2((10 + i * 3) / 32.0f, (25.5f - j * 4.1f) / 25.0f));
                 text.text = value[j, i].ToString();
+                text.color = new Color(0, 0, 0);
                 if (i == 4)
                     m_soldierText[j] = text;
             }
@@ -94,10 +137,10 @@ public class SelectUIManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             GameObject buttonObj = MyUtility.CreateButton(
-				"Plus",
-				"UI/Select/plus",
-                new Vector2(27 / 32.0f, (21 - i * 4) / 25.0f),
-                new Vector2(30 / 32.0f, (24 - i * 4) / 25.0f),
+                "Plus",
+                "UI/Select/plus",
+                new Vector2(28 / 32.0f, (21 - i * 4) / 25.0f),
+                new Vector2(31 / 32.0f, (24 - i * 4) / 25.0f),
                 transform
             );
             AddButtonEvent(buttonObj.GetComponent<Button>(), i, PlusOrMinus.Plus);
@@ -107,10 +150,10 @@ public class SelectUIManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             GameObject buttonObj = MyUtility.CreateButton(
-				"Minus",
-				"UI/Select/minus",
-                new Vector2(23 / 32.0f, (21 - i * 4) / 25.0f),
-                new Vector2(26 / 32.0f, (24 - i * 4) / 25.0f),
+                "Minus",
+                "UI/Select/minus",
+                new Vector2(24 / 32.0f, (21 - i * 4) / 25.0f),
+                new Vector2(27 / 32.0f, (24 - i * 4) / 25.0f),
                 transform
             );
             AddButtonEvent(buttonObj.GetComponent<Button>(), i, PlusOrMinus.Minus);
@@ -132,19 +175,19 @@ public class SelectUIManager : MonoBehaviour
 
         // 戻るボタン作成
         GameObject backObj = MyUtility.CreateButton(
-			"Back",
-			"UI/Select/return",
+            "Back",
+            "UI/Select/return",
             new Vector2(3 / 32.0f, 1 / 25.0f),
             new Vector2(9 / 32.0f, 4 / 25.0f),
             transform
         );
-        
-		backObj.GetComponent<Button>().onClick.AddListener(Back);
+
+        backObj.GetComponent<Button>().onClick.AddListener(Back);
 
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
-			"Decision",
-			"UI/Select/decision",
+            "Decision",
+            "UI/Select/decision",
             new Vector2(23 / 32.0f, 1 / 25.0f),
             new Vector2(29 / 32.0f, 4 / 25.0f),
             transform
@@ -156,15 +199,15 @@ public class SelectUIManager : MonoBehaviour
 
     }
 
-	void Back()
-	{
-		AudioManager.m_instance.PlaySE ("button_SE");
-		sceneChanger.ChangeToOperating ();
-	}
+    void Back()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        sceneChanger.ChangeToOperating();
+    }
 
     public void EnterProces()
     {
-		AudioManager.m_instance.PlaySE ("button_SE");
+        AudioManager.m_instance.PlaySE("button_SE");
 
         if (m_soldierTotalNum == 18)
         {
@@ -242,7 +285,7 @@ public class SelectUIManager : MonoBehaviour
 
     void Plus(int num)
     {
-		AudioManager.m_instance.PlaySE ("button_SE");
+        AudioManager.m_instance.PlaySE("button_SE");
 
         // 兵士の合計数が兵士最大数より多かったら抜ける
         if (m_soldierTotalNum >= 18)
@@ -268,7 +311,7 @@ public class SelectUIManager : MonoBehaviour
 
     void Minus(int num)
     {
-		AudioManager.m_instance.PlaySE ("button_SE");
+        AudioManager.m_instance.PlaySE("button_SE");
 
         // 兵士の合計数が０以下または各兵士の数が０以下だったら抜ける
         if (m_soldierTotalNum <= 0 || m_soldierNumList[num] <= 0)
