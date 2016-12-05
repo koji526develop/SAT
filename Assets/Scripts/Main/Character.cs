@@ -33,6 +33,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
             return m_characterAttackState;
         }
     }
+	enum HpBarZOrder
+	{
+		HpBarFrame = 0,
+		HpBar
+	}
     public enum Direction
     {
         None,
@@ -156,6 +161,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			return m_animator;
 		}
 	}
+
+	GameObject m_hpBarObj;
+
+	float MAX_SCALE_Y;
 
     // キャラクターのオブジェクト作成
     public static GameObject CreateObject(Transform _parent, CharacterType _characterType, Vector3 _position, int _playerID)
@@ -320,6 +329,17 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		m_animator = gameObject.GetComponent<Animator> ();
 		m_animator.runtimeAnimatorController = GetAnimController (characterType, status.PlayerID);
 
+		m_hpBarObj = MyUtility.CreateSprite (transform, "HP", "Image/hp");
+		m_hpBarObj.transform.position = GetHpPosition ();
+		m_hpBarObj.transform.Rotate (0.0f, 90.0f, 90.0f);
+		m_hpBarObj.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBar;
+		GameObject hp_flame = MyUtility.CreateSprite (transform, "HP_flame", "Image/hp_flame");
+		hp_flame.transform.position = GetHpPosition ();
+		hp_flame.transform.Rotate (0.0f, 90.0f, 90.0f);
+		hp_flame.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBarFrame;
+
+		MAX_SCALE_Y = m_hpBarObj.transform.localScale.y;
+
         ChangeState(CharacterState.Move);
 
     }
@@ -357,6 +377,20 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		{
 			ChangeState (CharacterState.Dead);
 		}
+			
+		float MAX_HP;
+		switch(characterType)
+		{
+		case CharacterType.Sword: MAX_HP = MyUtility.SWORD_LIFE; break;
+		case CharacterType.Spear: MAX_HP = MyUtility.SPEAR_LIFE; break;
+		case CharacterType.Shield: MAX_HP = MyUtility.SHIELD_LIFE; break;
+		case CharacterType.Ax: MAX_HP = MyUtility.AX_LIFE; break;
+		default : MAX_HP = 0; break;
+		}
+
+		float changeY = MAX_SCALE_Y * ((float)status.life/(float)MAX_HP);
+		m_hpBarObj.transform.localScale = new Vector3 (m_hpBarObj.transform.localScale.x,changeY,m_hpBarObj.transform.localScale.z);
+
     }
     public void Destroy()
     {
@@ -374,4 +408,26 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
             return new Vector3(MyUtility.SOLDIER_CREATE_LINE_X_2P, 0.0f, 6.0f - (2.0f * _Column));
         }
     }
+
+	public Vector3 GetHpPosition()
+	{
+		Vector3 hpPos = Vector3.zero;
+
+		if (status.PlayerID == 1) 
+			hpPos.x = -5.5f;
+		else
+			hpPos.x=5.5f;
+
+		switch(m_mapColumn) {
+		case 1: hpPos.z = 4.6f; break;
+		case 2: hpPos.z = 2.6f; break;
+		case 3: hpPos.z =0.6f; break;
+		case 4: hpPos.z = -1.5f; break;
+		case 5: hpPos.z = -3.4f; break;
+		}
+
+		hpPos.y = 2.4f;
+
+		return hpPos;
+	}
 }

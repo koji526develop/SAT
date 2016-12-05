@@ -32,10 +32,6 @@ public class ButtonSpawner : MonoBehaviour
     public Image m_changeSprite;
     Sprite[] m_sprite = new Sprite[6];
 
-	public static GameObject hp;
-
-	float HpPositionX;
-	float HpPositionZ;
     void Awake()
     {
 
@@ -202,50 +198,6 @@ public class ButtonSpawner : MonoBehaviour
 
 
             Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
-
-			if (m_PlayerID == 1) 
-			{
-				HpPositionX=-5.5f;
-			    //HpPositionZ=5.0f;
-			}
-			else
-			{
-				HpPositionX=5.5f;
-				//HpPositionZ=5.0f;
-			}
-			switch (m_ButtonID) {
-			case 1:
-				HpPositionZ = 4.6f;
-				break;
-			
-			case 2:
-				HpPositionZ = 2.6f;
-				break;
-		
-			case 3:
-				HpPositionZ =0.6f;
-				break;
-	
-			case 4:
-				HpPositionZ = -1.5f;
-				break;
-
-			case 5:
-				HpPositionZ = -3.4f;
-				break;
-
-			
-			}
-			Transform charactername = character.transform;
-			hp = MyUtility.CreateSprite (charactername, "HP", "Image/hp");
-			hp.transform.position = new Vector3(HpPositionX,2.4f,HpPositionZ);
-			hp.transform.Rotate (0.0f, 90.0f, 90.0f);
-			GameObject hp_flame = MyUtility.CreateSprite (charactername, "HP_flame", "Image/hp_flame");
-			hp_flame.transform.position = new Vector3(HpPositionX,2.4f,HpPositionZ);
-			hp_flame.transform.Rotate (0.0f, 90.0f, 90.0f);
-
-
-				
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
