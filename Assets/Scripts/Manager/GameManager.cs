@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
 
-		AudioManager.m_instance.PlaySE ("Countdown_SE");
+		//AudioManager.m_instance.PlaySE ("Countdown_SE");
 
         //カウントダウン処理用
         string[] m_countPath = { "UI/Game/3", "UI/Game/2", "UI/Game/1", "UI/Game/fight" };
