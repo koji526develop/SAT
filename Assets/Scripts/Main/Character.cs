@@ -163,7 +163,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	}
 
 	GameObject m_hpBarObj;
-
+	GameObject hp_flame;
 	float MAX_SCALE_Y;
 
     // キャラクターのオブジェクト作成
@@ -330,12 +330,26 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 		m_animator.runtimeAnimatorController = GetAnimController (characterType, status.PlayerID);
 
 		m_hpBarObj = MyUtility.CreateSprite (transform, "HP", "Image/hp");
+		hp_flame = MyUtility.CreateSprite (transform, "HP_flame", "Image/hp_flame");
+		if (status.PlayerID == 1) 
+		{
+
+			m_hpBarObj.transform.Rotate (90.0f, 90.0f, 90.0f);
+			hp_flame.transform.Rotate (90.0f, 90.0f, 90.0f);
+		}
+		else
+		{
+			
+			m_hpBarObj.transform.Rotate (90.0f, 90.0f, -90.0f);
+			hp_flame.transform.Rotate (90.0f, 90.0f, -90.0f);
+		}
 		m_hpBarObj.transform.position = GetHpPosition ();
-		m_hpBarObj.transform.Rotate (90.0f, 90.0f, 90.0f);
+
 		m_hpBarObj.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBar;
-		GameObject hp_flame = MyUtility.CreateSprite (transform, "HP_flame", "Image/hp_flame");
+
+
 		hp_flame.transform.position = GetHpPosition ();
-		hp_flame.transform.Rotate (90.0f, 90.0f, 90.0f);
+	
 		hp_flame.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBarFrame;
 
 		MAX_SCALE_Y = m_hpBarObj.transform.localScale.y;
@@ -417,13 +431,27 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			hpPos.x = -5.5f;
 		else
 			hpPos.x=5.5f;
-
-		switch(m_mapColumn) {
-		case 1: hpPos.z = 4.6f; break;
-		case 2: hpPos.z = 2.6f; break;
-		case 3: hpPos.z =0.6f; break;
-		case 4: hpPos.z = -1.5f; break;
-		case 5: hpPos.z = -3.4f; break;
+		if (status.PlayerID == 1)
+		{
+			switch (m_mapColumn) 
+			{
+			case 1:hpPos.z = 4.6f;break;
+			case 2:hpPos.z = 2.6f;break;
+			case 3:hpPos.z = 0.6f;break;
+			case 4:hpPos.z = -1.5f;break;
+			case 5:hpPos.z = -3.4f;break;
+			}
+		} 
+		else 
+		{
+			switch (m_mapColumn)
+			{
+			case 1:hpPos.z = 3.4f;break;
+			case 2:hpPos.z = 1.4f;break;
+			case 3:hpPos.z = -0.6f;break;
+			case 4:hpPos.z = -2.6f;break;
+			case 5:hpPos.z = -4.6f;break;
+			}
 		}
 
 		hpPos.y = 2.4f;
