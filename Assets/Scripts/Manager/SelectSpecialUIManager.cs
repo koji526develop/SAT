@@ -330,14 +330,13 @@ public class SelectSpecialUIManager : MonoBehaviour
                 if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3)
                 {
                     AudioManager.m_instance.PlaySE("cardSetting_SE");
-                    if (SelectUIManager.PlayerID == 1)
+                    if (SelectUIManager.PlayerID == 2)
                     {
                         SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
                     }
-                    else
+                    else if(SelectUIManager.PlayerID == 3)
                     {
                         SPECIALCARD_NUMBER_2[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
-
                     }
                     m_selectedObj[m_selectedCount].GetComponent<SpriteRenderer>().sprite = m_touchCardObject.GetComponent<SpriteRenderer>().sprite;
                     m_selectedObj[m_selectedCount].SetActive(true);

@@ -122,8 +122,6 @@ public class ResultManager : MonoBehaviour
         //特殊カードの画像パス
         for (int i = 0; i < 6; i++)
         {
-            //デバッグ用ですべて１
-            ResultSpecialInfo[i] = 1 + i;
             m_SpecialImagePath[i] = "UI/Result/card" + ResultSpecialInfo[i].ToString();
         }
 
