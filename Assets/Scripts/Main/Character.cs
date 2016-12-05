@@ -331,11 +331,11 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		m_hpBarObj = MyUtility.CreateSprite (transform, "HP", "Image/hp");
 		m_hpBarObj.transform.position = GetHpPosition ();
-		m_hpBarObj.transform.Rotate (0.0f, 90.0f, 90.0f);
+		m_hpBarObj.transform.Rotate (90.0f, 90.0f, 90.0f);
 		m_hpBarObj.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBar;
 		GameObject hp_flame = MyUtility.CreateSprite (transform, "HP_flame", "Image/hp_flame");
 		hp_flame.transform.position = GetHpPosition ();
-		hp_flame.transform.Rotate (0.0f, 90.0f, 90.0f);
+		hp_flame.transform.Rotate (90.0f, 90.0f, 90.0f);
 		hp_flame.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBarFrame;
 
 		MAX_SCALE_Y = m_hpBarObj.transform.localScale.y;
@@ -430,18 +430,15 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		return hpPos;
 	}
-
 	public bool IsFinishAnimation()
 	{
 		if (animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
 			return true;
 		return false;
 	}
-
 	public void NowAnimationRePlay()
 	{
-		AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
-		animator.Play(info.nameHash, 0, 0.0f);
+		AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo (0);
+		animator.Play (info.nameHash, 0, 0.0f);
 	}
-
 }
