@@ -163,6 +163,7 @@ public class GameUIManager : MonoBehaviour
             );
 
         //表示される特殊カード
+        //Player1
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 1;
@@ -196,12 +197,13 @@ public class GameUIManager : MonoBehaviour
             );
 
         //表示される特殊カード
+        //Player2
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 1;
             GameObject specialObj = MyUtility.CreateImage(
                 "SpecialCards",
-                "UI/Result/card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
+                "UI/Result/2card" + SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i].ToString(),
                 new Vector2(29.3f / 32.0f, (12.9f + (i * 2.7f)) / 25.0f),
                 new Vector2(31.7f / 32.0f, (14.6f + (i * 2.7f)) / 25.0f),
                 canvasTransForm);
