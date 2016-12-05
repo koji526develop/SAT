@@ -144,6 +144,9 @@ public class ButtonSpawner : MonoBehaviour
         //兵士が残っていれば生成
 		if(SoldierNumCheck(m_PlayerID,m_type) && m_spawnerFlag)
         {
+
+            m_changeSprite.transform.gameObject.AddComponent<Anten>();
+
             if (m_PlayerID == 1)
             {
                 if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))

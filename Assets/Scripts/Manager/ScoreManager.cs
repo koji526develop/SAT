@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
         _playerID--;
         _Column--;
 
-        if (m_countSpawner[_playerID, _Column] <= 0) m_countSpawner[_playerID, _Column] = 0;
+        //if (m_countSpawner[_playerID, _Column] <= 0) m_countSpawner[_playerID, _Column] = 0;
         int checkCount = m_countSpawner[_playerID, _Column];
         int allCountStage = m_countAreaStage - 1;
 

@@ -64,15 +64,17 @@ public class SpecialCard4 : SpecialCard {
                        btnCmp.m_ButtonID == m_checkColumn2)
                     {
                         GameObject stone = (GameObject)Resources.Load("Prefabs/Stone");
+                        GameObject createObj;
                         if (btnCmp.m_PlayerID == 1)
                         {
-                            Instantiate(stone, new Vector3(-3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
+                            createObj= (GameObject)Instantiate(stone, new Vector3(-3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
                         }
                         else
                         {
-                            Instantiate(stone, new Vector3(3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
+                            createObj= (GameObject)Instantiate(stone, new Vector3(3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
                         }
-                        btnCmp.m_soliderStop = true;
+                        createObj.AddComponent<TimeDestory>();
+                        childObj.gameObject.AddComponent<NotSpawner>();
                     }
 
                 }

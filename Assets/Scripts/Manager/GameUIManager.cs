@@ -268,19 +268,25 @@ public class GameUIManager : MonoBehaviour
                 btnCmp.m_ButtonID = j;
                 btnCmp.m_changeSprite = obj.GetComponent<Image>();
 
-                SetCoulumRect(new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
-                              new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
+            }
+        }
+
+        for (int i = 1; i <= 2; i++)
+        {
+            for (int j = 1; j <= 5; j++)
+            {
+                SetCoulumRect(new Vector2((4.0f + (13.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
+                              new Vector2((15.0f + (13.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f), i, j);
 
                 obj = MyUtility.CreateImage("ColumnImage",
                                             "UI/Game/select_line",
-                                            new Vector2((6.0f + (11.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
-                                            new Vector2((15.0f + (11.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
+                                            new Vector2((4.0f + (13.0f * (i - 1))) / 32.0f, (20.0f - (5.0f * (j - 1))) / 25.0f),
+                                            new Vector2((15.0f + (13.0f * (i - 1))) / 32.0f, (25.0f - (5.0f * (j - 1))) / 25.0f),
                                             canvasTransForm);
                 RectSet local_rectset;
                 local_rectset = obj.AddComponent<RectSet>();
                 local_rectset.SetState(i - 1, j - 1);
                 m_rectset[i - 1, j - 1] = local_rectset;
-
             }
         }
 
