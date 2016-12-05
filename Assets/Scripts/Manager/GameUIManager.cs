@@ -163,6 +163,7 @@ public class GameUIManager : MonoBehaviour
             );
 
         //表示される特殊カード
+        //Player1
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 1;
@@ -196,6 +197,7 @@ public class GameUIManager : MonoBehaviour
             );
 
         //表示される特殊カード
+        //Player2
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 1;

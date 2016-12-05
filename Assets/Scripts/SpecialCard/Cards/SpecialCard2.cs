@@ -35,15 +35,22 @@ public class SpecialCard2 : SpecialCard
 
         for (int i = 0; i < 2; i++)
         {
-            m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecialArrow/SpecialArrow")) as GameObject;
+            if (m_UsedPlayerID == 1)
+            {
+                m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecialArrow/SpecialArrow1")) as GameObject;
+                m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P - 8.0f;
+            }
+            else
+            {
+                m_ArrowObj[i] = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecialArrow/SpecialArrow2")) as GameObject;
+                m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P + 8.0f;
+            }
             m_ArrowObj[i].name = "FireArrow";
             m_ArrowObj[i].transform.position = new Vector3(0 + (i * 1000), -30000, 0);
             m_ArrowObj[i].AddComponent<ArrowMove>();
             arrowMove[i] = m_ArrowObj[i].GetComponent<ArrowMove>();
         }
 
-        if (m_UsedPlayerID == 1) m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P - 8.0f;
-        else m_arrowPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
         for (int i = 0; i < 6; i++)
         {
             m_arrowPosZ[i] = 4 - (i * 2);
