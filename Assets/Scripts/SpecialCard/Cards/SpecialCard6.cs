@@ -17,6 +17,8 @@ public class SpecialCard6 : SpecialCard {
 			allyCharacter.ChangeState (Character.CharacterState.Barrier);
 		}
 
+        Destroy(this);
+
 	}
 
 	List<Character> GetAllyCharactersList()
