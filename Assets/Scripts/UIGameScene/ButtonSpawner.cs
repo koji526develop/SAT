@@ -393,7 +393,7 @@ public class ButtonSpawner : MonoBehaviour
 
             if (m_soliderDoubleStart)
             {
-
+                Debug.Log("兵士増強");
                 Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
                 character.mapColumn = m_ButtonID;
 
@@ -417,7 +417,7 @@ public class ButtonSpawner : MonoBehaviour
                         if (m_PlayerID == 2) SelectUIManager.SHIELD_NUM_2++;
 
                         break;
-//                }
+                }
 
                 m_soliderDoubleStart = false;
             }
@@ -430,5 +430,4 @@ public class ButtonSpawner : MonoBehaviour
             SolderImageChange();
         }
     }
-}
 }
