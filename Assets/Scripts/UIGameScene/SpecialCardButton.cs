@@ -71,21 +71,10 @@ public class SpecialCardButton : MonoBehaviour {
         //ボタン押すことで兵種を切り替える処理を行う。  
         this.GetComponent<Button>().onClick.AddListener(UseSpecialCard);
         m_UsedCard = 0;
-
-       for(int i = 0; i < 3; i++)
-        {
-
-            if (m_playerID == 1)
-            {
-                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i];
-            }
-            else
-            {
-                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i];
-            }
-        }
         
     }
+
+
 
     void UseSpecialCard()
     {
@@ -113,6 +102,20 @@ public class SpecialCardButton : MonoBehaviour {
 
         m_GameManager = GameObject.Find("GameManager").transform;
         m_battleManager = GameObject.Find("BattleManager").transform;
+
+        for (int i = 0; i < 3; i++)
+        {
+            Debug.Log("プレイヤーID");
+            Debug.Log(m_playerID);
+            if (m_playerID == 1)
+            {
+                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i];
+            }
+            else
+            {
+                m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i];
+            }
+        }
 
     }
 	
