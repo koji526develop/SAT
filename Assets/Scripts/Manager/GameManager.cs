@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
 
         //キャンバスを作成
         m_canvas = MyUtility.CreateCanvas();
+ 
 
         StartCoroutine(MyUtility.SetCameraForCanvas(m_canvas, uiCamera));
 
@@ -133,21 +134,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TouchManager.Update();
-
-        //////////////////////
-        //デバッグ用
-        //特殊カード5
-        if(Input.GetMouseButtonDown(1))
-        {
-            SpecialCard m_usedSpCardState;
-
-            GameObject SpecialCardButtonObj = GameObject.Find("Canvas/SpecialCardButton1");
-            m_usedSpCardState = SpecialCardButtonObj.AddComponent<SpecialCard5>();
-
-            m_usedSpCardState.m_UsedPlayerID = 1;
-            m_usedSpCardState.GameReady(GameObject.Find("BattleManager").transform, GameObject.Find("GameManager").transform);
-        }
-        ///////////////////////
 
         //ゲームスタートのカウントダウン
         if (!m_startFlag && m_countStart)
