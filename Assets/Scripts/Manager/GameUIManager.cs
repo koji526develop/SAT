@@ -7,7 +7,6 @@ using System;
 
 public class GameUIManager : MonoBehaviour
 {
-
     Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
     RectSet[,] m_rectset = new RectSet[2, MyUtility.MAX_COLUMN];
 

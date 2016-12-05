@@ -430,4 +430,18 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 		return hpPos;
 	}
+
+	public bool IsFinishAnimation()
+	{
+		if (animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
+			return true;
+		return false;
+	}
+
+	public void NowAnimationRePlay()
+	{
+		AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(0);
+		animator.Play(info.nameHash, 0, 0.0f);
+	}
+
 }

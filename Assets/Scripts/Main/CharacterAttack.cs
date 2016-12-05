@@ -36,13 +36,27 @@ public class CharacterAttack : State<Character>
 
 	public override void Update()
 	{
+		if (m_instance.status.PlayerID == 1)
+		{
+			Debug.Log ("1p"+m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime.ToString());
+			;
+		}
+		else
+		{
+			Debug.Log ("2p"+m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime.ToString());
+		}
+		
 		m_attackTime += Time.deltaTime;
 	
-		if(m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
+		if(m_instance.IsFinishAnimation())
 		{
-			m_instance.animator.SetTime (0.0f);
+			m_instance.NowAnimationRePlay ();
+
 			Attak ();
-			Debug.Log ("攻撃なう");
+			if(m_instance.status.PlayerID == 1)
+				Debug.Log ("1p攻撃なう");
+			else
+				Debug.Log ("2p攻撃なう");
 			m_attackTime = 0;
 
 		}

@@ -77,8 +77,8 @@ public class CharacterMove :  State<Character>
 			m_touchId = 99;
 		}
 		
-		if (m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime >= 1.0f)
-			m_instance.animator.SetTime (0.0f);
+		if (m_instance.IsFinishAnimation())
+			m_instance.NowAnimationRePlay ();
 
 	}
 
