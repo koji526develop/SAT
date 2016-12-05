@@ -85,7 +85,7 @@ public class CharacterAttack : State<Character>
 			switch (m_instance.status.characterType) 
 			{
 			case Character.CharacterType.Sword:
-				AudioManager.m_instance.PlaySE ("sowrd_SE");
+			AudioManager.m_instance.PlaySE ("sowrd_SE");
 				break;
 			case Character.CharacterType.Spear:
 				AudioManager.m_instance.PlaySE ("spear_SE");
@@ -102,7 +102,7 @@ public class CharacterAttack : State<Character>
 
 			m_enemyCharacter.status = m_changeStatus;
 
-			float changeY = MAX_SCALE_Y / (MAX_HP / m_instance.status.life);
+			float changeY = MAX_SCALE_Y * ((float)m_instance.status.life/(float)MAX_HP);
 
 			ButtonSpawner.hp.transform.localScale = new Vector3 (ButtonSpawner.hp.transform.localScale.x,changeY,ButtonSpawner.hp.transform.localScale.z);
 
