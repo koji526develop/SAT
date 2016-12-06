@@ -210,6 +210,10 @@ public class SelectSpecialUIManager : MonoBehaviour
         {
             SelectUIManager.PlayerID = 1;
         }
+        else if(SelectUIManager.PlayerID == 3)
+        {
+            SelectUIManager.PlayerID = 2;
+        }
         sceneChanger.ChangeToSelect();
     }
 
