@@ -17,12 +17,13 @@ public class TapEffect : MonoBehaviour
 
     void Update()
     {
-        TouchInfo touch = TouchManager.GetTouchInfo(0);
-        if (touch == TouchInfo.Began)
-        {
-            var touchPos = m_camera.ScreenToWorldPoint(TouchManager.GetTouchPosition(0) + m_camera.transform.forward * 10);
-            m_tapEffect.transform.position = touchPos;
-            m_tapEffect.Emit(1);
-        }
+		for (int i = 0; i < TouchManager.touchCount; i++) {
+			TouchInfo touch = TouchManager.GetTouchInfo (i);
+			if (touch == TouchInfo.Began) {
+				var touchPos = m_camera.ScreenToWorldPoint (TouchManager.GetTouchPosition (i) + m_camera.transform.forward * 10);
+				m_tapEffect.transform.position = touchPos;
+				m_tapEffect.Emit (1);
+			}
+		}
     }
 }
