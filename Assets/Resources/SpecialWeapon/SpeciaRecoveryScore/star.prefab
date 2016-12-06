@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000010489240990}
   - 198: {fileID: 198000012076181560}
   - 199: {fileID: 199000012340846148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - 4: {fileID: 4000013812672850}
   - 198: {fileID: 198000011337741572}
   - 199: {fileID: 199000012797524018}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - 4: {fileID: 4000010238941124}
   - 198: {fileID: 198000012326380768}
   - 199: {fileID: 199000011437901366}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
