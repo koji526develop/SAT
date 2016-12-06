@@ -9,7 +9,7 @@ public static class TouchManager
 	private static Vector3 [] m_PreviousPosition = new Vector3[10];
 	private static Vector2 [] m_FirstTouchPosition = new Vector2[10];
 
-	static bool isRemote = true;
+	static bool isRemote = false;
 
 	static bool isExe = false;
 
