@@ -58,8 +58,8 @@ public class SelectUIManager : MonoBehaviour
         MyUtility.CreateImage(
             "Player",
             PlayerIconPath[PlayerID],
-            new Vector2(0 / 32.0f, 21 / 25.0f),
-            new Vector2(3 / 32.0f, 24 / 25.0f),
+            new Vector2(2.0f / 32.0f, 21 / 25.0f),
+            new Vector2(5.0f / 32.0f, 24 / 25.0f),
             transform);
 
         for (int i = 0; i < 4; i++)
@@ -71,8 +71,8 @@ public class SelectUIManager : MonoBehaviour
             GameObject obj = MyUtility.CreateImage(
                 WEAPON_NAME[i],
                 IconPath[i],
-                new Vector2(3 / 32.0f, (21 - i * 4) / 25.0f),
-                new Vector2(6 / 32.0f, (24 - i * 4) / 25.0f),
+                new Vector2(3 / 32.0f, (17.5f - i * 3.5f) / 25.0f),
+                new Vector2(6 / 32.0f, (20.5f - i * 3.5f) / 25.0f),
                 transform
             );
             //MyUtility.AddText(WEAPON_NAME[i], obj.transform);
@@ -83,15 +83,16 @@ public class SelectUIManager : MonoBehaviour
             MyUtility.CreateImage(
                 "valueImage",
                 "UI/Select/status",
-                new Vector2(7 / 32.0f, (21 - (i * 4)) / 25.0f),
-                new Vector2(23 / 32.0f, (24 - (i * 4)) / 25.0f),
+                new Vector2(7 / 32.0f, (17.5f - (i * 3.5f)) / 25.0f),
+                new Vector2(23 / 32.0f, (20.5f - (i * 3.5f)) / 25.0f),
                 transform);
         }
+
         MyUtility.CreateImage(
             "valueName",
             "UI/Select/status_header",
-            new Vector2(7 / 32.0f, 24 / 25.0f),
-            new Vector2(23 / 32.0f, 25 / 25.0f),
+            new Vector2(7 / 32.0f, 21.0f / 25.0f),
+            new Vector2(23 / 32.0f, 23.5f / 25.0f),
             transform);
 
         for (int i = 0; i < 5; i++)
@@ -99,10 +100,10 @@ public class SelectUIManager : MonoBehaviour
             Text text = MyUtility.CreateText(
                 StatusText[i],
                 transform,
-                18,
+                20,
                 Vector3.zero,
-                new Vector2((7 + (i * 3)) / 32.0f, 24.3f / 25.0f),
-                new Vector2((10 + (i * 3)) / 32.0f, 25.3f / 25.0f));
+                new Vector2((7 + (i * 3)) / 32.0f, 21.0f / 25.0f),
+                new Vector2((10 + (i * 3)) / 32.0f, 24.0f / 25.0f));
             text.color = new Color(0, 0, 0);
         }
 
@@ -124,8 +125,8 @@ public class SelectUIManager : MonoBehaviour
                     transform,
                     35,
                     Vector3.zero,
-                    new Vector2((7 + i * 3) / 32.0f, (20.5f - j * 4.1f) / 25.0f),
-                    new Vector2((10 + i * 3) / 32.0f, (25.5f - j * 4.1f) / 25.0f));
+                    new Vector2((7 + i * 3) / 32.0f, (16.9f - j * 3.4f) / 25.0f),
+                    new Vector2((10 + i * 3) / 32.0f, (21.9f - j * 3.4f) / 25.0f));
                 text.text = value[j, i].ToString();
                 text.color = new Color(0, 0, 0);
                 if (i == 4)
@@ -139,8 +140,8 @@ public class SelectUIManager : MonoBehaviour
             GameObject buttonObj = MyUtility.CreateButton(
                 "Plus",
                 "UI/Select/plus",
-                new Vector2(28 / 32.0f, (21 - i * 4) / 25.0f),
-                new Vector2(31 / 32.0f, (24 - i * 4) / 25.0f),
+                new Vector2(28 / 32.0f, (17.5f - i * 3.5f) / 25.0f),
+                new Vector2(31 / 32.0f, (20.5f - i * 3.5f) / 25.0f),
                 transform
             );
             AddButtonEvent(buttonObj.GetComponent<Button>(), i, PlusOrMinus.Plus);
@@ -152,8 +153,8 @@ public class SelectUIManager : MonoBehaviour
             GameObject buttonObj = MyUtility.CreateButton(
                 "Minus",
                 "UI/Select/minus",
-                new Vector2(24 / 32.0f, (21 - i * 4) / 25.0f),
-                new Vector2(27 / 32.0f, (24 - i * 4) / 25.0f),
+                new Vector2(24 / 32.0f, (17.5f - i * 3.5f) / 25.0f),
+                new Vector2(27 / 32.0f, (20.5f - i * 3.5f) / 25.0f),
                 transform
             );
             AddButtonEvent(buttonObj.GetComponent<Button>(), i, PlusOrMinus.Minus);
@@ -166,8 +167,8 @@ public class SelectUIManager : MonoBehaviour
                 (
                     "Gauge",
                     "UI/Select/select_gauge0",
-                    new Vector2((6 + i * 2) / 32.0f, 5 / 25.0f),
-                    new Vector2((8 + i * 2) / 32.0f, 8 / 25.0f),
+                    new Vector2((6 + i * 2) / 32.0f, 4.5f / 25.0f),
+                    new Vector2((8 + i * 2) / 32.0f, 6.5f / 25.0f),
                     transform
                 );
             gaugeList.Add(obj);
