@@ -46,8 +46,8 @@ public class TitleManager : MonoBehaviour
         GameObject obj = MyUtility.CreateImage(
             "Touch",
             "UI/Title/touch",
-            new Vector2(6 / 32.0f, 3 / 25.0f),
-            new Vector2(26 / 32.0f, 7 / 25.0f),
+            new Vector2(12 / 32.0f, 3 / 25.0f),
+            new Vector2(20 / 32.0f, 7 / 25.0f),
             m_TitleImageObj.transform);
 
         FadeTo fadeTo = obj.AddComponent<FadeTo>();
