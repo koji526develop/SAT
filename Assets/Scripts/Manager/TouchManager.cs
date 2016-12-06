@@ -11,7 +11,7 @@ public static class TouchManager
 
 	static bool isRemote = false;
 
-	static bool isExe = true;
+	static bool isExe = false;
 
 	public static int touchCount = 0;
 
