@@ -63,9 +63,22 @@ public class GameManager : MonoBehaviour
         uiCamera.clearFlags = CameraClearFlags.Depth;
         uiCamera.depth = 1;
 
+        Camera specialCamera = MyUtility.CreateCamera("SpecialCamera");
+        specialCamera.transform.rotation = Quaternion.Euler(90, 0, 0);
+        specialCamera.transform.position = new Vector3(0, 10, 0);
+        specialCamera.clearFlags = CameraClearFlags.Depth;
+        specialCamera.depth = 2;
+        specialCamera.orthographic = true;
+        for (int i = 0; i < 10; i++)
+        {
+            specialCamera.cullingMask &= ~(1 << i);
+        }
+        int intLayer = LayerMask.NameToLayer("SpecialEffect");
+        specialCamera.cullingMask |= (1 << intLayer);
+
         //キャンバスを作成
         m_canvas = MyUtility.CreateCanvas();
- 
+
 
         StartCoroutine(MyUtility.SetCameraForCanvas(m_canvas, uiCamera));
 
@@ -76,7 +89,7 @@ public class GameManager : MonoBehaviour
         //タップエフェクト
         MyUtility.CreateTapEffect(transform);
 
-		//AudioManager.m_instance.PlaySE ("Countdown_SE");
+        //AudioManager.m_instance.PlaySE ("Countdown_SE");
 
         //カウントダウン処理用
         string[] m_countPath = { "UI/Game/3", "UI/Game/2", "UI/Game/1", "UI/Game/fight" };
@@ -120,7 +133,7 @@ public class GameManager : MonoBehaviour
 
         Invoke("DelayMethod", 0.5f);
 
-		AudioManager.m_instance.PlayBGM ("battle_BGM");
+        AudioManager.m_instance.PlayBGM("battle_BGM");
 
     }
 

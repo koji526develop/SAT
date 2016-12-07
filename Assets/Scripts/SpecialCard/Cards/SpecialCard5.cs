@@ -20,8 +20,8 @@ public class SpecialCard5 : SpecialCard
             m_reset[i] = false;
         }
 
-        if (m_UsedPlayerID == 1) m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P;
-        else m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P;
+        if (m_UsedPlayerID == 1) m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_1P + 0.8f;
+        else m_starPosX = MyUtility.SOLDIER_CREATE_LINE_X_2P - 0.8f;
 
         m_starObj = Instantiate(Resources.Load("SpecialWeapon/SpeciaRecoveryScore/star")) as GameObject;
         m_starObj.transform.position = new Vector3(m_starPosX, 1, 0);
@@ -60,7 +60,7 @@ public class SpecialCard5 : SpecialCard
             //スコアが全て回復していたら
             else if (i == 4)
             {
-                Destroy(m_starObj);
+                Destroy(m_starObj, 1.5f);
                 Destroy(this);
             }
 
