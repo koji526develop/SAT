@@ -292,7 +292,17 @@ public class MyUtility : MonoBehaviour
 
         return spriteObj;
     }
+    // スプライト作成
+    public static GameObject CreateSprite(Transform _parent, string _name, Sprite _resources)
+    {
+        GameObject spriteObj = new GameObject(_name);
+        spriteObj.AddComponent<SpriteRenderer>();
+        SpriteRenderer m_SpriteRenderer = spriteObj.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sprite = _resources;
+        spriteObj.transform.SetParent(_parent);
 
+        return spriteObj;
+    }
     public static int GetFontSizeFromWidth(GUIStyle style, GUIContent contents, float width)
     {
         int size = 0;

@@ -44,34 +44,6 @@ public class PointViewScript : MonoBehaviour {
         }
         parentobj.transform.parent = this.transform;
         parentobj.transform.position = new Vector3(2, 0, 0);
-
-        //if (_number >= 10)
-        //{
-        //    int outputNumber;
-        //    outputNumber = _number / 10;
-        //    obj = MyUtility.CreateSprite(
-        //        parentobj.transform,
-        //        "TestNumber",
-        //        m_number[outputNumber]
-        //        );
-        //    obj.transform.localScale = new Vector3(2, 2, 2);
-        //    obj.transform.eulerAngles = new Vector3(90, 0, 0);
-        //    obj.transform.position = new Vector3(-0.3f, 0, 0);
-        //}
-
-        //_number = _number / 10;
-        //obj = MyUtility.CreateSprite(
-        //        parentobj.transform,
-        //        "TestNumber",
-        //        m_number[_number]
-        //        );
-
-        //    obj.transform.localScale = new Vector3(2, 2, 2);
-        //    obj.transform.eulerAngles = new Vector3(90, 0, 0);
-        //    obj.transform.position = new Vector3(0.3f, 0, 0);
-
-        //parentobj.transform.parent = this.transform;
-        //parentobj.transform.position = new Vector3(2, 0, 0);
     }
 
     void Awake()
