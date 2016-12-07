@@ -9,17 +9,14 @@ public class PointViewScript : MonoBehaviour {
     public Sprite[] m_number;
 
     //数字スプライトの表示
-    public void number(int _number,int _playerID)
+    public void number(int _number,int _playerID,Vector3 _vector,float _timeDestroy)
     {
-        ////100以上なら
-        //if (_number > 99)
-        //{
-        //    _number = 99;
-        //}
+
 
         //親オブジェクトを作成
         GameObject parentobj;
         parentobj = new GameObject();
+        Destroy(parentobj, _timeDestroy);
 
         GameObject numberObj;
 
@@ -44,6 +41,14 @@ public class PointViewScript : MonoBehaviour {
         }
         parentobj.transform.parent = this.transform;
         parentobj.transform.position = new Vector3(2, 0, 0);
+        if (_playerID == 1)
+        {
+            parentobj.transform.eulerAngles = new Vector3(0, 90, 0);
+        }
+        else
+        {
+            parentobj.transform.eulerAngles = new Vector3(0, -90, 0);
+        }
     }
 
     void Awake()
@@ -52,7 +57,7 @@ public class PointViewScript : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        number(30,1);
+        number(26,1,new Vector3(2f,0f,0f),2f);
 	}
 	
 	// Update is called once per frame
