@@ -12,6 +12,12 @@ public class SceneChanger : MonoBehaviour
         MySceneManager.m_instance.LoadLevel("Title", fadeOutTime);
     }
 
+    //中継シーンに行く
+    public void ChangeToRelay()
+    {
+        MySceneManager.m_instance.LoadLevel("Relay", fadeOutTime);
+    }
+
     //操作説明に行く
     public void ChangeToOperating()
     {

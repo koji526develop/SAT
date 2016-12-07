@@ -52,6 +52,16 @@ public class TitleManager : MonoBehaviour
 
         FadeTo fadeTo = obj.AddComponent<FadeTo>();
         fadeTo.SetBlinkFadeForever(0.7f,true);
+
+        //兵士の情報を初期化
+        SelectUIManager.SWORD_NUM_1 = 0;
+        SelectUIManager.SPEAR_NUM_1 = 0;
+        SelectUIManager.AX_NUM_1 = 0;
+        SelectUIManager.SHIELD_NUM_1 = 0;
+        SelectUIManager.SWORD_NUM_2 = 0;
+        SelectUIManager.SPEAR_NUM_2 = 0;
+        SelectUIManager.AX_NUM_2 = 0;
+        SelectUIManager.SHIELD_NUM_2 = 0;
     }
 
     void Start()
@@ -65,7 +75,7 @@ public class TitleManager : MonoBehaviour
         if (touch == TouchInfo.Began)
         {
             SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToOperating();
+            sChange.ChangeToRelay();
         }
     }
 }
