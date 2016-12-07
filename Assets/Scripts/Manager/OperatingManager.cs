@@ -87,9 +87,7 @@ public class OperatingManager : MonoBehaviour
             uiObj.transform
         );
 
-        GameObject sceneChangerObj = new GameObject();
-        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
+        backObj.GetComponent<Button>().onClick.AddListener(BackProces);
 
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
@@ -99,20 +97,15 @@ public class OperatingManager : MonoBehaviour
             new Vector2(29 / 32.0f, 4 / 25.0f),
             uiObj.transform
         );
-        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        //enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+    }
 
-        //兵士の情報を初期化
-        SelectUIManager.SWORD_NUM_1 = 0;
-        SelectUIManager.SPEAR_NUM_1 = 0;
-        SelectUIManager.AX_NUM_1 = 0;
-        SelectUIManager.SHIELD_NUM_1 = 0;
-        SelectUIManager.SWORD_NUM_2 = 0;
-        SelectUIManager.SPEAR_NUM_2 = 0;
-        SelectUIManager.AX_NUM_2 = 0;
-        SelectUIManager.SHIELD_NUM_2 = 0;
-
-        SelectUIManager.PlayerID = 1;
-
+    void BackProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        GameObject sceneChangerObj = new GameObject();
+        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+        sceneChanger.ChangeToRelay();
     }
 
     void Start()

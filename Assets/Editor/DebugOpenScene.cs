@@ -33,7 +33,13 @@ public class DebugOpenScene : EditorWindow{
 		OpenScene("Result");
 	}
 
-	private static void OpenScene(string scene){
+    [MenuItem("OpenScene/OpenScene_Relay &#%2")]
+    public static void OpenScene_Relay()
+    {
+        OpenScene("Relay");
+    }
+
+    private static void OpenScene(string scene){
 		EditorApplication.OpenScene(string.Format("Assets/Scenes/{0}.unity",scene));
 	}
 }
