@@ -153,13 +153,14 @@ public class GameUIManager : MonoBehaviour
 
 		obj.AddComponent<SpecialCardButton>().m_playerID = 1;
 
-		MyUtility.CreateImage(
+		GameObject setSpecialObj = MyUtility.CreateImage(
 			"SetSpecial",
 			"UI/Game/frame",
 			new Vector2(0.3f / 32.0f, 10.0f / 25.0f),
 			new Vector2(2.9f / 32.0f, 12.5f / 25.0f),
 			canvasTransForm
 		);
+		setSpecialObj.GetComponent<Image> ().raycastTarget = false;
 
 		//表示される特殊カード
 		//Player1
@@ -171,6 +172,7 @@ public class GameUIManager : MonoBehaviour
 				new Vector2(0.4f / 32.0f, (10.4f - (i * 2.7f)) / 25.0f),
 				new Vector2(2.8f / 32.0f, (12.1f - (i * 2.7f)) / 25.0f),
 				canvasTransForm);
+			specialObj.GetComponent<Image> ().raycastTarget = false;
 			specialObj.GetComponent<RectTransform>().pivot = new Vector2(0, 0);
 			SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
 			spCardbehavior.UseOrder = 1 + i;
@@ -187,13 +189,14 @@ public class GameUIManager : MonoBehaviour
 		);
 		obj.AddComponent<SpecialCardButton>().m_playerID = 2;
 
-		MyUtility.CreateImage(
+		setSpecialObj = MyUtility.CreateImage(
 			"SetSpecial",
 			"UI/Game/frame",
 			new Vector2(29.2f / 32.0f, 12.5f / 25.0f),
 			new Vector2(31.8f / 32.0f, 15.0f / 25.0f),
 			canvasTransForm
 		);
+		setSpecialObj.GetComponent<Image> ().raycastTarget = false;
 
 		//表示される特殊カード
 		//Player2
@@ -205,6 +208,7 @@ public class GameUIManager : MonoBehaviour
 				new Vector2(29.3f / 32.0f, (12.9f + (i * 2.7f)) / 25.0f),
 				new Vector2(31.7f / 32.0f, (14.6f + (i * 2.7f)) / 25.0f),
 				canvasTransForm);
+			specialObj.GetComponent<Image> ().raycastTarget = false;
 			specialObj.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
 			SpecialCardsBehavior spCardbehavior = specialObj.AddComponent<SpecialCardsBehavior>();
 			spCardbehavior.UseOrder = 1 + i;
