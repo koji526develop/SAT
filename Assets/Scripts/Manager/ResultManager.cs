@@ -213,7 +213,7 @@ public class ResultManager : MonoBehaviour
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
 
-        soldierSelectObj.GetComponent<Button>().onClick.AddListener(SelectSoldierProces);
+        soldierSelectObj.GetComponent<Button>().onClick.AddListener(RelayProces);
 
         buttonObj.SetActive(false);
 
@@ -243,8 +243,8 @@ public class ResultManager : MonoBehaviour
         sceneChanger.ChangeToGame();
     }
 
-    //兵士選択
-    public void SelectSoldierProces()
+    //Relayシーンへ
+    public void RelayProces()
     {
         //兵士の情報を初期化
         SelectUIManager.SWORD_NUM_1 = 0;
@@ -256,16 +256,19 @@ public class ResultManager : MonoBehaviour
         SelectUIManager.AX_NUM_2 = 0;
         SelectUIManager.SHIELD_NUM_2 = 0;
 
-        SelectUIManager.PlayerID = 1;
-
         //特殊カードの情報を初期化
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 0;
             SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 0;
         }
+        for (int i = 0; i < 4; i++)
+        {
+            RelayManager.isDoneSetting[i] = false;
+        }
 
-        sceneChanger.ChangeToSelect();
+
+        sceneChanger.ChangeToRelay();
     }
 
     void Start()
