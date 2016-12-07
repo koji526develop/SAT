@@ -75,7 +75,6 @@ public class SelectUIManager : MonoBehaviour
                 new Vector2(6 / 32.0f, (20.5f - i * 3.5f) / 25.0f),
                 transform
             );
-            //MyUtility.AddText(WEAPON_NAME[i], obj.transform);
         }
 
         for (int i = 0; i < 4; i++)
@@ -198,12 +197,29 @@ public class SelectUIManager : MonoBehaviour
         sceneChangerObj = new GameObject();
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 
+        //兵士の情報があればセット
+        if (PlayerID == 1 && RelayManager.isDoneSetting[0])
+        {
+            m_soldierNumList[0] = SWORD_NUM_1;
+            m_soldierNumList[1] = SPEAR_NUM_1;
+            m_soldierNumList[2] = AX_NUM_1;
+            m_soldierNumList[3] = SHIELD_NUM_1;
+            SetSoldierNum();
+        }
+        else if (PlayerID == 2 && RelayManager.isDoneSetting[1])
+        {
+            m_soldierNumList[0] = SWORD_NUM_2;
+            m_soldierNumList[1] = SPEAR_NUM_2;
+            m_soldierNumList[2] = AX_NUM_2;
+            m_soldierNumList[3] = SHIELD_NUM_2;
+            SetSoldierNum();
+        }
     }
 
     void Back()
     {
         AudioManager.m_instance.PlaySE("button_SE");
-        sceneChanger.ChangeToOperating();
+        sceneChanger.ChangeToRelay();
     }
 
     public void EnterProces()
@@ -219,29 +235,30 @@ public class SelectUIManager : MonoBehaviour
                 SPEAR_NUM_1 = m_soldierNumList[1];
                 AX_NUM_1 = m_soldierNumList[2];
                 SHIELD_NUM_1 = m_soldierNumList[3];
-                PlayerID = 2;
 
                 //リザルトように別で兵士の数を保存
                 for (int i = 0; i < 4; i++)
                 {
                     ResultManager.ResultSoldierNum[i] = m_soldierNumList[i];
                 }
+                //選択完了
+                RelayManager.isDoneSetting[0] = true;
             }
-            else
+            else if (PlayerID == 2)
             {
                 //最終的な兵士の値を保存
                 SWORD_NUM_2 = m_soldierNumList[0];
                 SPEAR_NUM_2 = m_soldierNumList[1];
                 AX_NUM_2 = m_soldierNumList[2];
                 SHIELD_NUM_2 = m_soldierNumList[3];
-                //3Pはいないが次に進めるために3を振る
-                PlayerID = 3;
 
                 //リザルトように別で兵士の数を保存
                 for (int i = 0; i < 4; i++)
                 {
                     ResultManager.ResultSoldierNum[i + 4] = m_soldierNumList[i];
                 }
+                //選択完了
+                RelayManager.isDoneSetting[1] = true;
             }
 
             //シーン遷移
@@ -334,5 +351,21 @@ public class SelectUIManager : MonoBehaviour
         m_soldierTotalNum = m_soldierNumList.Sum();
 
         m_soldierText[num].text = m_soldierNumList[num].ToString();
+    }
+
+
+    void SetSoldierNum()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            m_soldierText[i].text = m_soldierNumList[i].ToString();
+        }
+
+        m_soldierTotalNum = 18;
+        m_gaugeCount = 9;
+        for (int i = 0; i < m_gaugeCount; i++)
+        {
+            gaugeList[i].GetComponent<Image>().sprite = Resources.Load("UI/Select/select_gauge2", typeof(Sprite)) as Sprite;
+        }
     }
 }
