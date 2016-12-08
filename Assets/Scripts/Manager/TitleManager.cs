@@ -75,7 +75,7 @@ public class TitleManager : MonoBehaviour
         if (touch == TouchInfo.Began)
         {
             SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToRelay();
+            sChange.ChangeToMenu();
         }
     }
 }

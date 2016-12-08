@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class RelayManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
     SceneChanger sceneChanger;
 
@@ -38,69 +38,69 @@ public class RelayManager : MonoBehaviour
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
-        GameObject m_RelayObject = MyUtility.CreateEmpty("RelayObject", canvas.transform);
-        GameObject m_RelayButton = MyUtility.CreateEmpty("RelayButton", canvas.transform);
+        GameObject m_MenuObject = MyUtility.CreateEmpty("MenuObject", canvas.transform);
+        GameObject m_MenuButton = MyUtility.CreateEmpty("MenuButton", canvas.transform);
 
         //背景
         MyUtility.CreateImage(
-            "RelayBackGround",
-            "UI/Relay/relay_back",
+            "MenuBackGround",
+            "UI/Menu/menu_back",
             new Vector2(0 / 32.0f, 0 / 25.0f),
             new Vector2(32 / 32.0f, 25 / 25.0f),
-            m_RelayObject.transform);
+            m_MenuObject.transform);
 
         //操作説明画像
         m_scenesButtonObj[OPERATING] = MyUtility.CreateButton(
              "Operating",
-             "UI/Relay/operating",
+             "UI/Menu/operating",
              new Vector2(12 / 32.0f, 19 / 25.0f),
              new Vector2(20 / 32.0f, 23 / 25.0f),
-             m_RelayButton.transform);
+             m_MenuButton.transform);
         m_scenesButtonObj[OPERATING].GetComponent<Button>().onClick.AddListener(OperatingProces);
 
         //兵士選択1P画像
         m_scenesButtonObj[SOLDIER1P] = MyUtility.CreateButton(
             "Select1P",
-            "UI/Relay/soldier1",
+            "UI/Menu/soldier1",
             new Vector2(3 / 32.0f, 15 / 25.0f),
             new Vector2(11 / 32.0f, 19 / 25.0f),
-            m_RelayButton.transform);
+            m_MenuButton.transform);
         m_scenesButtonObj[SOLDIER1P].GetComponent<Button>().onClick.AddListener(Soldier1Proces);
 
         //兵士選択2P画像
         m_scenesButtonObj[SOLDIER2P] = MyUtility.CreateButton(
             "Select2P",
-            "UI/Relay/soldier2",
+            "UI/Menu/soldier2",
             new Vector2(21 / 32.0f, 15 / 25.0f),
             new Vector2(29 / 32.0f, 19 / 25.0f),
-            m_RelayButton.transform);
+            m_MenuButton.transform);
         m_scenesButtonObj[SOLDIER2P].GetComponent<Button>().onClick.AddListener(Soldier2Proces);
 
         //特殊カード選択1P画像
         m_scenesButtonObj[SPECIAL1P] = MyUtility.CreateButton(
             "Special1P",
-            "UI/Relay/special1",
+            "UI/Menu/special1",
             new Vector2(3 / 32.0f, 7 / 25.0f),
             new Vector2(11 / 32.0f, 11 / 25.0f),
-            m_RelayButton.transform);
+            m_MenuButton.transform);
         m_scenesButtonObj[SPECIAL1P].GetComponent<Button>().onClick.AddListener(Special1Proces);
 
         //特殊カード選択2P画像
         m_scenesButtonObj[SPECIAL2P] = MyUtility.CreateButton(
             "Special2P",
-            "UI/Relay/special2",
+            "UI/Menu/special2",
             new Vector2(21 / 32.0f, 7 / 25.0f),
             new Vector2(29 / 32.0f, 11 / 25.0f),
-            m_RelayButton.transform);
+            m_MenuButton.transform);
         m_scenesButtonObj[SPECIAL2P].GetComponent<Button>().onClick.AddListener(Special2Proces);
 
         //ゲームメイン画像
         m_scenesButtonObj[GAMEMAIN] = MyUtility.CreateButton(
             "GameMain",
-            "UI/Relay/game",
+            "UI/Menu/game",
             new Vector2(12 / 32.0f, 2 / 25.0f),
             new Vector2(20 / 32.0f, 6 / 25.0f),
-            m_RelayButton.transform);
+            m_MenuButton.transform);
         m_scenesButtonObj[GAMEMAIN].GetComponent<Button>().onClick.AddListener(GameMainProces);
         //兵士が選択されていなかったら選べないようにする
         for (int i = 0; i < 4; i++)
@@ -116,10 +116,10 @@ public class RelayManager : MonoBehaviour
         //戻るボタン作成
         GameObject backObj = MyUtility.CreateButton(
             "Back",
-            "UI/Relay/return",
+            "UI/Menu/return",
             new Vector2(2 / 32.0f, 1 / 25.0f),
             new Vector2(9 / 32.0f, 4 / 25.0f),
-            m_RelayButton.transform
+            m_MenuButton.transform
            );
 
         GameObject sceneChangerObj = new GameObject();
@@ -132,7 +132,7 @@ public class RelayManager : MonoBehaviour
             "UI/Operating/decision",
             new Vector2(23 / 32.0f, 1 / 25.0f),
             new Vector2(30 / 32.0f, 4 / 25.0f),
-            m_RelayButton.transform
+            m_MenuButton.transform
         );
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 

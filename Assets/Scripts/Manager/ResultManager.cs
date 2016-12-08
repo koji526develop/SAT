@@ -264,11 +264,11 @@ public class ResultManager : MonoBehaviour
         }
         for (int i = 0; i < 4; i++)
         {
-            RelayManager.isDoneSetting[i] = false;
+            MenuManager.isDoneSetting[i] = false;
         }
 
 
-        sceneChanger.ChangeToRelay();
+        sceneChanger.ChangeToMenu();
     }
 
     void Start()

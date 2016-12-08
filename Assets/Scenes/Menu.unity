@@ -100,7 +100,7 @@ GameObject:
   - 4: {fileID: 109478656}
   - 114: {fileID: 109478657}
   m_Layer: 0
-  m_Name: RelayManager
+  m_Name: MenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

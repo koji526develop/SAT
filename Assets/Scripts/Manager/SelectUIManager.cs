@@ -198,7 +198,7 @@ public class SelectUIManager : MonoBehaviour
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 
         //兵士の情報があればセット
-        if (PlayerID == 1 && RelayManager.isDoneSetting[0])
+        if (PlayerID == 1 && MenuManager.isDoneSetting[0])
         {
             m_soldierNumList[0] = SWORD_NUM_1;
             m_soldierNumList[1] = SPEAR_NUM_1;
@@ -206,7 +206,7 @@ public class SelectUIManager : MonoBehaviour
             m_soldierNumList[3] = SHIELD_NUM_1;
             SetSoldierNum();
         }
-        else if (PlayerID == 2 && RelayManager.isDoneSetting[1])
+        else if (PlayerID == 2 && MenuManager.isDoneSetting[1])
         {
             m_soldierNumList[0] = SWORD_NUM_2;
             m_soldierNumList[1] = SPEAR_NUM_2;
@@ -219,7 +219,7 @@ public class SelectUIManager : MonoBehaviour
     void Back()
     {
         AudioManager.m_instance.PlaySE("button_SE");
-        sceneChanger.ChangeToRelay();
+        sceneChanger.ChangeToMenu();
     }
 
     public void EnterProces()
@@ -242,7 +242,7 @@ public class SelectUIManager : MonoBehaviour
                     ResultManager.ResultSoldierNum[i] = m_soldierNumList[i];
                 }
                 //選択完了
-                RelayManager.isDoneSetting[0] = true;
+                MenuManager.isDoneSetting[0] = true;
             }
             else if (PlayerID == 2)
             {
@@ -258,7 +258,7 @@ public class SelectUIManager : MonoBehaviour
                     ResultManager.ResultSoldierNum[i + 4] = m_soldierNumList[i];
                 }
                 //選択完了
-                RelayManager.isDoneSetting[1] = true;
+                MenuManager.isDoneSetting[1] = true;
             }
 
             //シーン遷移

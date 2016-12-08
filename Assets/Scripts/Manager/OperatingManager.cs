@@ -105,7 +105,7 @@ public class OperatingManager : MonoBehaviour
         AudioManager.m_instance.PlaySE("button_SE");
         GameObject sceneChangerObj = new GameObject();
         SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        sceneChanger.ChangeToRelay();
+        sceneChanger.ChangeToMenu();
     }
 
     void Start()

@@ -33,10 +33,10 @@ public class DebugOpenScene : EditorWindow{
 		OpenScene("Result");
 	}
 
-    [MenuItem("OpenScene/OpenScene_Relay &#%2")]
-    public static void OpenScene_Relay()
+    [MenuItem("OpenScene/OpenScene_Menu &#%2")]
+    public static void OpenScene_Menu()
     {
-        OpenScene("Relay");
+        OpenScene("Menu");
     }
 
     private static void OpenScene(string scene){

@@ -63,7 +63,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                 cardObj.transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
                 cardObj.AddComponent<SpecialCardSprite>().cardNum = num;
 
-                if (SelectUIManager.PlayerID == 1 && RelayManager.isDoneSetting[2])
+                if (SelectUIManager.PlayerID == 1 && MenuManager.isDoneSetting[2])
                 {
                     for (int setNum = 0; setNum < 3; setNum++)
                     {
@@ -76,7 +76,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                         }
                     }
                 }
-                else if (SelectUIManager.PlayerID == 2 && RelayManager.isDoneSetting[3])
+                else if (SelectUIManager.PlayerID == 2 && MenuManager.isDoneSetting[3])
                 {
                     for (int setNum = 0; setNum < 3; setNum++)
                     {
@@ -254,7 +254,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                     ResultManager.ResultSpecialInfo[i] = SPECIALCARD_NUMBER_1[i];
                 }
                 //選択完了
-                RelayManager.isDoneSetting[2] = true;
+                MenuManager.isDoneSetting[2] = true;
             }
             else if (SelectUIManager.PlayerID == 2)
             {
@@ -264,9 +264,9 @@ public class SelectSpecialUIManager : MonoBehaviour
                     ResultManager.ResultSpecialInfo[i + 3] = SPECIALCARD_NUMBER_2[i];
                 }
                 //選択完了
-                RelayManager.isDoneSetting[3] = true;
+                MenuManager.isDoneSetting[3] = true;
             }
-            sceneChanger.ChangeToRelay();
+            sceneChanger.ChangeToMenu();
         }
     }
 
