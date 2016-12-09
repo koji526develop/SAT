@@ -201,7 +201,7 @@ public class ButtonSpawner : MonoBehaviour
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
-
+			AudioManager.m_instance.PlaySE("button_SE");
             if (m_soliderDouble)
             {
                 m_beforeType = m_type;
