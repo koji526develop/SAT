@@ -368,4 +368,37 @@ public class SelectUIManager : MonoBehaviour
             gaugeList[i].GetComponent<Image>().sprite = Resources.Load("UI/Select/select_gauge2", typeof(Sprite)) as Sprite;
         }
     }
+
+    void RandomSet()
+    {
+        int maxSoldierNum = 19;                //兵士の最大数 ランダムの関係で19
+        int nomSoldierNum = 0;              //現在の兵士の数
+        int setSoldierNum = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            setSoldierNum = (int)Random.Range(0, maxSoldierNum - nomSoldierNum);
+            m_soldierNumList[i] = setSoldierNum;
+            nomSoldierNum += setSoldierNum;
+            Debug.Log(m_soldierNumList);
+        }
+        //マックス値にたどりついていなければ
+        if (setSoldierNum < 18)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                //
+            }
+        }
+        SetSoldierNum();
+    }
+
+    //デバッグ用  update
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RandomSet();
+        }
+    }
 }
