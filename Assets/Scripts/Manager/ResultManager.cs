@@ -9,6 +9,7 @@ public class ResultManager : MonoBehaviour
     //タッチを取得し始めるまでの時間
     private float m_TouchCoolTime;
 
+    //画像のパス
     string[] m_IconImagePath = { "UI/Result/sword_icon", "UI/Result/spear_icon", "UI/Result/ax_icon", "UI/Result/shield_icon" };
     string[] m_SpecialImagePath = { "", "", "", "", "", "" };
 
@@ -36,7 +37,7 @@ public class ResultManager : MonoBehaviour
         MyUtility.CreateTapEffect(transform);
         //イベントシステム作成
         MyUtility.CreateEventSystem(transform);
-
+        //キャンバス作成
         Canvas canvas = MyUtility.CreateCanvas();
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
@@ -77,8 +78,8 @@ public class ResultManager : MonoBehaviour
         //スコア
         //スコアの計算
         float[] m_Score = new float[2];
-        m_Score[0] = WarPotential.lastWarPotential;
-        m_Score[1] = MyUtility.MAX_WARPOTENTIAL - m_Score[0];
+        m_Score[0] = WarPotential.lastWarPotential;             //プレイヤー1Pの最終的なスコアを取得
+        m_Score[1] = MyUtility.MAX_WARPOTENTIAL - m_Score[0];   //スコアのマックス値から1P分マイナス
         //スコアのテキスト
         string[] m_ScoreText = { m_Score[0].ToString(), m_Score[1].ToString() };
 

@@ -30,6 +30,7 @@ public class OperatingManager : MonoBehaviour
 
         GameObject m_OperatingSpriteObj;
 
+        //背景
         MyUtility.CreateImage(
             "OperatingBackGround",
             "UI/Operating/operating_back",
@@ -38,6 +39,7 @@ public class OperatingManager : MonoBehaviour
             uiObj.transform);
 
         //何番目を表示しているかの画像
+        //○画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
         {
             m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "UI/Operating/fcircle");
@@ -48,6 +50,7 @@ public class OperatingManager : MonoBehaviour
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
+        //内容
         m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "Image/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
