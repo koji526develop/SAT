@@ -343,7 +343,10 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 			m_hpBarObj.transform.Rotate (90.0f, 90.0f, -90.0f);
 			hp_flame.transform.Rotate (90.0f, 90.0f, -90.0f);
 		}
+
+
 		m_hpBarObj.transform.position = GetHpPosition ();
+
 
 		m_hpBarObj.GetComponent<SpriteRenderer> ().sortingOrder = (int)HpBarZOrder.HpBar;
 
@@ -425,36 +428,20 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 
 	public Vector3 GetHpPosition()
 	{
-		Vector3 hpPos = Vector3.zero;
+		Vector3 hpPos = this.transform.position;
 
 		if (status.PlayerID == 1) 
-			hpPos.x = -5.5f;
-		else
-			hpPos.x=5.5f;
-		if (status.PlayerID == 1)
 		{
-			switch (m_mapColumn) 
-			{
-			case 1:hpPos.z = 4.6f;break;
-			case 2:hpPos.z = 2.6f;break;
-			case 3:hpPos.z = 0.6f;break;
-			case 4:hpPos.z = -1.5f;break;
-			case 5:hpPos.z = -3.4f;break;
-			}
-		} 
+			hpPos.x += 0.5f;
+			hpPos.y += 2.5f;
+			hpPos.z += 0.6f;
+		}
 		else 
 		{
-			switch (m_mapColumn)
-			{
-			case 1:hpPos.z = 3.4f;break;
-			case 2:hpPos.z = 1.4f;break;
-			case 3:hpPos.z = -0.6f;break;
-			case 4:hpPos.z = -2.6f;break;
-			case 5:hpPos.z = -4.6f;break;
-			}
+			hpPos.x -= 0.5f;
+			hpPos.y += 2.5f;
+			hpPos.z -= 0.6f;
 		}
-
-		hpPos.y = 2.4f;
 
 		return hpPos;
 	}
