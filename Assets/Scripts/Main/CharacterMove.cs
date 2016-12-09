@@ -15,10 +15,13 @@ public class CharacterMove :  State<Character>
 		m_isCharacterTouch = false;
 
 		m_touchId = 99;
+	
 	}
 
 	public override void Update ()
 	{
+		//AudioManager.m_instance.PlaySE("walk-gravel1");
+		//Debug.Log ("音");
 		// キャラクターの移動処理
 		Move();
 
@@ -79,6 +82,8 @@ public class CharacterMove :  State<Character>
 		
 		if (m_instance.IsFinishAnimation())
 			m_instance.NowAnimationRePlay ();
+		
+	
 
 	}
 
@@ -351,6 +356,8 @@ public class CharacterMove :  State<Character>
 	{
 		if (m_instance.status.PlayerID == 1)m_instance.transform.position += new Vector3 (m_instance.status.moveSpeed, 0, 0);
 		else m_instance.transform.position -= new Vector3 (m_instance.status.moveSpeed, 0, 0);
+
+
 	}
 
 	// キャラクターを回転させるステートにする
