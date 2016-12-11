@@ -23,8 +23,12 @@ public class ScoreManager : MonoBehaviour
 
     private const float DECREASE_TIME = 0.1f;   //スコアが減っていく時間間隔
     private float m_DecreaseTime = DECREASE_TIME;
+
+  
+    private PointViewScript m_pointView;
     void Awake()
     {
+        m_pointView = GameObject.Find("PointView").GetComponent<PointViewScript>();
         //スコアの初期設定を行う。
         m_Score = m_maxScore / m_totalPlayer;
 
@@ -67,8 +71,9 @@ public class ScoreManager : MonoBehaviour
         _playerID--;
         _Column--;
 
-        if (m_countSpawner[_playerID, _Column] <= 0) m_countSpawner[_playerID, _Column] = 0;
         int checkCount = m_countSpawner[_playerID, _Column];
+        if (m_countSpawner[_playerID, _Column] <= 0) m_countSpawner[_playerID, _Column] = 0;
+
         int allCountStage = m_countAreaStage - 1;
 
         for (int i = 0; i < m_countAreaStage; i++)
@@ -83,7 +88,7 @@ public class ScoreManager : MonoBehaviour
             }
 
         }
-        return m_countAreaStage - 1;
+        return allCountStage - 1;
     }
 
     public void DirectGetPoint(int _playerID, int _point)
@@ -139,12 +144,17 @@ public class ScoreManager : MonoBehaviour
 
         if (_playerID == 1)
         {
-            m_Score = m_Score + (int)(m_scoreArea[GetPointLevel(enemyPlayerID + 1, _Column)] + m_pointBouns[_playerID - 1]);
+            int point = (int)(m_scoreArea[GetPointLevel(enemyPlayerID + 1, _Column)] + m_pointBouns[_playerID - 1]);
+            m_Score = m_Score + point;
+            m_pointView.number(point,_playerID, _Column,1.0f);
         }
         else
         {
             int score = GetPointLevel(enemyPlayerID + 1, _Column);
-            m_Score = m_Score - (int)(m_scoreArea[score] + m_pointBouns[_playerID - 1]);
+            int point = (int)(m_scoreArea[score] + m_pointBouns[_playerID - 1]);
+            m_Score = m_Score - point;
+            m_pointView.number(point, _playerID, _Column, 1.0f);
+
         }
 
         CountReset(enemyPlayerID + 1, _Column, false);
