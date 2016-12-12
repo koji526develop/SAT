@@ -12,6 +12,12 @@ public class SceneChanger : MonoBehaviour
         MySceneManager.m_instance.LoadLevel("Title", fadeOutTime);
     }
 
+    //メニューに行く
+    public void ChangeToMenu()
+    {
+        MySceneManager.m_instance.LoadLevel("Menu", fadeOutTime);
+    }
+
     //操作説明に行く
     public void ChangeToOperating()
     {

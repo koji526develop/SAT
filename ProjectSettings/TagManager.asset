@@ -21,6 +21,7 @@ TagManager:
   - Column6
   - BattleCameraSub
   - SoliderButton
+  - SpecialCamera
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - 
   - TapEffect
   - Character
-  - 
+  - SpecialEffect
   - 
   - 
   - 

@@ -119,9 +119,14 @@ public class MyUtility : MonoBehaviour
         //cameraObj.AddComponent<FlareLayer> ();
         //cameraObj.AddComponent<AudioListener> ();
 
-        //TapEffectを表示させない
-        camera.cullingMask |= (8);
+        ////TapEffectを表示させない
+        //camera.cullingMask |= (8);
+        ////特殊カード5のエフェクトを表示しない
+        //camera.cullingMask |= (10);
+
         int intLayer = LayerMask.NameToLayer("TapEffect");
+        camera.cullingMask &= ~(1 << intLayer);
+        intLayer = LayerMask.NameToLayer("SpecialEffect");
         camera.cullingMask &= ~(1 << intLayer);
 
         if (_parent) cameraObj.transform.SetParent(_parent);
@@ -287,7 +292,17 @@ public class MyUtility : MonoBehaviour
 
         return spriteObj;
     }
+    // スプライト作成
+    public static GameObject CreateSprite(Transform _parent, string _name, Sprite _resources)
+    {
+        GameObject spriteObj = new GameObject(_name);
+        spriteObj.AddComponent<SpriteRenderer>();
+        SpriteRenderer m_SpriteRenderer = spriteObj.GetComponent<SpriteRenderer>();
+        m_SpriteRenderer.sprite = _resources;
+        spriteObj.transform.SetParent(_parent);
 
+        return spriteObj;
+    }
     public static int GetFontSizeFromWidth(GUIStyle style, GUIContent contents, float width)
     {
         int size = 0;

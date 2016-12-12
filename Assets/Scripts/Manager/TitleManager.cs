@@ -35,23 +35,26 @@ public class TitleManager : MonoBehaviour
             new Vector2(0 / 32.0f, 0 / 25.0f),
             new Vector2(32/ 32.0f, 25 / 25.0f),
             m_TitleImageObj.transform);
-
-        //MyUtility.CreateImage(
-        //    "Title",
-        //    "UI/Title/title",
-        //    new Vector2(3 / 32.0f, 15 / 25.0f),
-        //    new Vector2(29 / 32.0f, 23 / 25.0f),
-        //   m_TitleImageObj.transform);
-
+        //タッチの文字
         GameObject obj = MyUtility.CreateImage(
             "Touch",
             "UI/Title/touch",
-            new Vector2(6 / 32.0f, 3 / 25.0f),
-            new Vector2(26 / 32.0f, 7 / 25.0f),
+            new Vector2(8.0f / 32.0f, 3.1f / 25.0f),
+            new Vector2(24.0f / 32.0f, 6.9f / 25.0f),
             m_TitleImageObj.transform);
 
-        FadeTo fadeTo = obj.AddComponent<FadeTo>();
-        fadeTo.SetBlinkFadeForever(0.7f,true);
+        FadeTo fadeTo = obj.AddComponent<FadeTo>();     //タッチの文字を点滅
+        fadeTo.SetBlinkFadeForever(0.7f,true);      
+
+        //兵士の情報を初期化
+        SelectUIManager.SWORD_NUM_1 = 0;
+        SelectUIManager.SPEAR_NUM_1 = 0;
+        SelectUIManager.AX_NUM_1 = 0;
+        SelectUIManager.SHIELD_NUM_1 = 0;
+        SelectUIManager.SWORD_NUM_2 = 0;
+        SelectUIManager.SPEAR_NUM_2 = 0;
+        SelectUIManager.AX_NUM_2 = 0;
+        SelectUIManager.SHIELD_NUM_2 = 0;
     }
 
     void Start()
@@ -65,7 +68,7 @@ public class TitleManager : MonoBehaviour
         if (touch == TouchInfo.Began)
         {
             SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToOperating();
+            sChange.ChangeToMenu();
         }
     }
 }

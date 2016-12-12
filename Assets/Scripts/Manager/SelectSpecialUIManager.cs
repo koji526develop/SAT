@@ -26,6 +26,9 @@ public class SelectSpecialUIManager : MonoBehaviour
     //特殊カード説明文のフォントサイズ
     private readonly int m_fontOperateSize = 25;
 
+    GameObject[] m_setSpecialObj = new GameObject[3];       //既にある情報を一時的に保存する用
+
+
     void Start()
     {
         m_uiCamera = GameObject.FindWithTag("UICamera").GetComponent<Camera>();
@@ -51,6 +54,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 		// 特殊カード８枚作成
 		***********************************************/
         int num = 0;
+
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 2; j++)
@@ -58,6 +62,33 @@ public class SelectSpecialUIManager : MonoBehaviour
                 GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "UI/SpecialSelect/card" + (num + 1).ToString());
                 cardObj.transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
                 cardObj.AddComponent<SpecialCardSprite>().cardNum = num;
+
+                if (SelectUIManager.PlayerID == 1 && MenuManager.isDoneSetting[2])
+                {
+                    for (int setNum = 0; setNum < 3; setNum++)
+                    {
+                        if (SPECIALCARD_NUMBER_1[setNum] == num)
+                        {
+                            cardObj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                            m_selectedObj[setNum].GetComponent<SpriteRenderer>().sprite = cardObj.GetComponent<SpriteRenderer>().sprite;
+                            m_selectedObj[setNum].SetActive(true);
+                            m_selectedCount++;
+                        }
+                    }
+                }
+                else if (SelectUIManager.PlayerID == 2 && MenuManager.isDoneSetting[3])
+                {
+                    for (int setNum = 0; setNum < 3; setNum++)
+                    {
+                        if (SPECIALCARD_NUMBER_2[setNum] == num)
+                        {
+                            cardObj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+                            m_selectedObj[setNum].GetComponent<SpriteRenderer>().sprite = cardObj.GetComponent<SpriteRenderer>().sprite;
+                            m_selectedObj[setNum].SetActive(true);
+                            m_selectedCount++;
+                        }
+                    }
+                }
                 num++;
             }
         }
@@ -65,13 +96,13 @@ public class SelectSpecialUIManager : MonoBehaviour
         /***********************************************
 		// 特殊カード説明枠作成
 		***********************************************/
-        MyUtility.CreateImage (
-			"CardEffect",						 // オブジェクト名
-			"UI/SpecialSelect/card_info",			 // 画像Path
-			new Vector2 (3 / 32.0f, 5 / 25.0f),  // アンカーの最小値
-			new Vector2 (22 / 32.0f, 9 / 25.0f), // アンカーの最大値
-			transform							 // 親のTransform
-		);
+        MyUtility.CreateImage(
+            "CardEffect",                        // オブジェクト名
+            "UI/SpecialSelect/card_info",            // 画像Path
+            new Vector2(3 / 32.0f, 5 / 25.0f),  // アンカーの最小値
+            new Vector2(22 / 32.0f, 9 / 25.0f), // アンカーの最大値
+            transform                            // 親のTransform
+        );
 
         m_howToText[0] = MyUtility.CreateText(SpecialCard1.m_howTo,
             transform,
@@ -93,7 +124,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         m_howToText[2] = MyUtility.CreateText(SpecialCard3.m_howTo,
             transform,
-            m_fontOperateSize+3,
+            m_fontOperateSize + 3,
             Vector3.zero,
             new Vector2(4 / 32.0f, 4.8f / 25.0f),
             new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
@@ -111,7 +142,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         m_howToText[4] = MyUtility.CreateText(SpecialCard5.m_howTo,
             transform,
-            m_fontOperateSize+3,
+            m_fontOperateSize + 3,
             Vector3.zero,
             new Vector2(4 / 32.0f, 4.8f / 25.0f),
             new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
@@ -129,7 +160,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         m_howToText[6] = MyUtility.CreateText(SpecialCard7.m_howTo,
             transform,
-            m_fontOperateSize+3,
+            m_fontOperateSize + 3,
             Vector3.zero,
             new Vector2(4 / 32.0f, 4.8f / 25.0f),
             new Vector2(21.5f / 32.0f, 8.3f / 25.0f)
@@ -138,7 +169,7 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         m_howToText[7] = MyUtility.CreateText(SpecialCard8.m_howTo,
             transform,
-            m_fontOperateSize+3,
+            m_fontOperateSize + 3,
             Vector3.zero,
             new Vector2(4 / 32.0f, 4.3f / 25.0f),
             new Vector2(21.5f / 32.0f, 7.8f / 25.0f)
@@ -154,7 +185,7 @@ public class SelectSpecialUIManager : MonoBehaviour
         /***********************************************
 		// 選択された特殊カードの枠作成
 		***********************************************/
-		GameObject cardFrameObj = MyUtility.CreateSprite(m_cardParent.transform, "CardFrame", "UI/SpecialSelect/select_card_place");
+        GameObject cardFrameObj = MyUtility.CreateSprite(m_cardParent.transform, "CardFrame", "UI/SpecialSelect/select_card_place");
         cardFrameObj.tag = "CardFrame";
         cardFrameObj.transform.position = new Vector2(4.2f, 0.75f);
         cardFrameObj.transform.localScale = new Vector3(1.5f, 1.23f, 1);
@@ -199,21 +230,13 @@ public class SelectSpecialUIManager : MonoBehaviour
         );
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
+
     }
 
     public void BackProces()
     {
         AudioManager.m_instance.PlaySE("button_SE");
 
-        //1Pが特殊選択画面から戻ったとき
-        if (SelectUIManager.PlayerID == 2)
-        {
-            SelectUIManager.PlayerID = 1;
-        }
-        else if(SelectUIManager.PlayerID == 3)
-        {
-            SelectUIManager.PlayerID = 2;
-        }
         sceneChanger.ChangeToSelect();
     }
 
@@ -223,26 +246,27 @@ public class SelectSpecialUIManager : MonoBehaviour
 
         if (m_selectedCount == 3)
         {
-            if (SelectUIManager.PlayerID == 2)
+            if (SelectUIManager.PlayerID == 1)
             {
                 //リザルト用１P特殊カード情報を保存
                 for (int i = 0; i < 3; i++)
                 {
                     ResultManager.ResultSpecialInfo[i] = SPECIALCARD_NUMBER_1[i];
-
                 }
-                sceneChanger.ChangeToSelect();
+                //選択完了
+                MenuManager.isDoneSetting[2] = true;
             }
-            else
+            else if (SelectUIManager.PlayerID == 2)
             {
                 //リザルト用２P特殊カード情報を保存
                 for (int i = 0; i < 3; i++)
                 {
-                    ResultManager.ResultSpecialInfo[i+3] = SPECIALCARD_NUMBER_2[i];
-
+                    ResultManager.ResultSpecialInfo[i + 3] = SPECIALCARD_NUMBER_2[i];
                 }
-                sceneChanger.ChangeToGame();
+                //選択完了
+                MenuManager.isDoneSetting[3] = true;
             }
+            sceneChanger.ChangeToMenu();
         }
     }
 
@@ -334,11 +358,11 @@ public class SelectSpecialUIManager : MonoBehaviour
                 if (collition2d.gameObject.tag == "CardFrame" && m_selectedCount < 3)
                 {
                     AudioManager.m_instance.PlaySE("cardSetting_SE");
-                    if (SelectUIManager.PlayerID == 2)
+                    if (SelectUIManager.PlayerID == 1)
                     {
                         SPECIALCARD_NUMBER_1[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
                     }
-                    else if(SelectUIManager.PlayerID == 3)
+                    else if (SelectUIManager.PlayerID == 2)
                     {
                         SPECIALCARD_NUMBER_2[m_selectedCount] = m_touchCardObject.GetComponent<SpecialCardSprite>().cardNum;
                     }
@@ -384,5 +408,4 @@ public class SelectSpecialUIManager : MonoBehaviour
         }
 
     }
-
 }

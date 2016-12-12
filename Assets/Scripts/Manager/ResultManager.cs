@@ -9,6 +9,7 @@ public class ResultManager : MonoBehaviour
     //タッチを取得し始めるまでの時間
     private float m_TouchCoolTime;
 
+    //画像のパス
     string[] m_IconImagePath = { "UI/Result/sword_icon", "UI/Result/spear_icon", "UI/Result/ax_icon", "UI/Result/shield_icon" };
     string[] m_SpecialImagePath = { "", "", "", "", "", "" };
 
@@ -36,7 +37,7 @@ public class ResultManager : MonoBehaviour
         MyUtility.CreateTapEffect(transform);
         //イベントシステム作成
         MyUtility.CreateEventSystem(transform);
-
+        //キャンバス作成
         Canvas canvas = MyUtility.CreateCanvas();
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
@@ -77,8 +78,8 @@ public class ResultManager : MonoBehaviour
         //スコア
         //スコアの計算
         float[] m_Score = new float[2];
-        m_Score[0] = WarPotential.lastWarPotential;
-        m_Score[1] = MyUtility.MAX_WARPOTENTIAL - m_Score[0];
+        m_Score[0] = WarPotential.lastWarPotential;             //プレイヤー1Pの最終的なスコアを取得
+        m_Score[1] = MyUtility.MAX_WARPOTENTIAL - m_Score[0];   //スコアのマックス値から1P分マイナス
         //スコアのテキスト
         string[] m_ScoreText = { m_Score[0].ToString(), m_Score[1].ToString() };
 
@@ -213,7 +214,7 @@ public class ResultManager : MonoBehaviour
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
 
-        soldierSelectObj.GetComponent<Button>().onClick.AddListener(SelectSoldierProces);
+        soldierSelectObj.GetComponent<Button>().onClick.AddListener(RelayProces);
 
         buttonObj.SetActive(false);
 
@@ -243,8 +244,8 @@ public class ResultManager : MonoBehaviour
         sceneChanger.ChangeToGame();
     }
 
-    //兵士選択
-    public void SelectSoldierProces()
+    //Relayシーンへ
+    public void RelayProces()
     {
         //兵士の情報を初期化
         SelectUIManager.SWORD_NUM_1 = 0;
@@ -256,16 +257,19 @@ public class ResultManager : MonoBehaviour
         SelectUIManager.AX_NUM_2 = 0;
         SelectUIManager.SHIELD_NUM_2 = 0;
 
-        SelectUIManager.PlayerID = 1;
-
         //特殊カードの情報を初期化
         for (int i = 0; i < 3; i++)
         {
             SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 0;
             SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 0;
         }
+        for (int i = 0; i < 4; i++)
+        {
+            MenuManager.isDoneSetting[i] = false;
+        }
 
-        sceneChanger.ChangeToSelect();
+
+        sceneChanger.ChangeToMenu();
     }
 
     void Start()

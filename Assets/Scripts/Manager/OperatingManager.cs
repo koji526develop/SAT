@@ -30,6 +30,7 @@ public class OperatingManager : MonoBehaviour
 
         GameObject m_OperatingSpriteObj;
 
+        //背景
         MyUtility.CreateImage(
             "OperatingBackGround",
             "UI/Operating/operating_back",
@@ -38,6 +39,7 @@ public class OperatingManager : MonoBehaviour
             uiObj.transform);
 
         //何番目を表示しているかの画像
+        //○画像
         for (int i = 0; i < MAX_SPRITE_NUM; i++)
         {
             m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "UI/Operating/fcircle");
@@ -48,6 +50,7 @@ public class OperatingManager : MonoBehaviour
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
+        //内容
         m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "Image/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
@@ -87,9 +90,7 @@ public class OperatingManager : MonoBehaviour
             uiObj.transform
         );
 
-        GameObject sceneChangerObj = new GameObject();
-        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
+        backObj.GetComponent<Button>().onClick.AddListener(BackProces);
 
         // 決定ボタン作成
         GameObject enterObj = MyUtility.CreateButton(
@@ -99,20 +100,15 @@ public class OperatingManager : MonoBehaviour
             new Vector2(29 / 32.0f, 4 / 25.0f),
             uiObj.transform
         );
-        enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        //enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+    }
 
-        //兵士の情報を初期化
-        SelectUIManager.SWORD_NUM_1 = 0;
-        SelectUIManager.SPEAR_NUM_1 = 0;
-        SelectUIManager.AX_NUM_1 = 0;
-        SelectUIManager.SHIELD_NUM_1 = 0;
-        SelectUIManager.SWORD_NUM_2 = 0;
-        SelectUIManager.SPEAR_NUM_2 = 0;
-        SelectUIManager.AX_NUM_2 = 0;
-        SelectUIManager.SHIELD_NUM_2 = 0;
-
-        SelectUIManager.PlayerID = 1;
-
+    void BackProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        GameObject sceneChangerObj = new GameObject();
+        SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+        sceneChanger.ChangeToMenu();
     }
 
     void Start()
