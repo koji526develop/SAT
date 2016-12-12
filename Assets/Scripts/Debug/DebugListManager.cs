@@ -15,7 +15,7 @@ public class DebugListManager : MonoBehaviour
 	{
 		Close,
 		SoldierMax,
-		SceneManager,
+		ResultScene,
 		Title,
 		Barrier,
 		SpecialCard1,
@@ -73,7 +73,7 @@ public class DebugListManager : MonoBehaviour
 		{
 			case Item.Close: return Close;
 		case Item.SoldierMax:return SoldierMax;
-		case Item.SceneManager:return SceneManager;
+		case Item.ResultScene:return ResultScene;
 		case Item.Title:return Title;
 		case Item.Barrier:return Barrier;
 		case Item.SpecialCard1:return SpecialCard1;
@@ -102,7 +102,7 @@ public class DebugListManager : MonoBehaviour
 	{
 		
 	}
-	void SceneManager()
+	void ResultScene()
 	{
 		SceneChanger sChange = new SceneChanger();
 		sChange.ChangeToResult();
