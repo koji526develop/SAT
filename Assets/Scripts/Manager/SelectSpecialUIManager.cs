@@ -20,13 +20,14 @@ public class SelectSpecialUIManager : MonoBehaviour
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
 
+    GameObject[] m_spcialCardObj = new GameObject[8];                  //特殊カード格納
+    int[] m_tmpNum = new int[3] { 0, 0, 0 };                        //選択されたカードの番号を一時的に保存
+
     public static int[] SPECIALCARD_NUMBER_1 = new int[3];
     public static int[] SPECIALCARD_NUMBER_2 = new int[3];
 
     //特殊カード説明文のフォントサイズ
     private readonly int m_fontOperateSize = 25;
-
-    GameObject[] m_setSpecialObj = new GameObject[3];       //既にある情報を一時的に保存する用
 
 
     void Start()
@@ -59,34 +60,18 @@ public class SelectSpecialUIManager : MonoBehaviour
         {
             for (int j = 0; j < 2; j++)
             {
-                GameObject cardObj = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "UI/SpecialSelect/card" + (num + 1).ToString());
-                cardObj.transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
-                cardObj.AddComponent<SpecialCardSprite>().cardNum = num;
-
-                if (SelectUIManager.PlayerID == 1 && MenuManager.isDoneSetting[2])
+                m_spcialCardObj[num] = SpecialCardSprite.CreateSprite(m_cardParent.transform, "Card", "UI/SpecialSelect/card" + (num + 1).ToString());
+                m_spcialCardObj[num].transform.position = new Vector2(-5.4f + 2.08f * i, 3.3f - j * 2.9f);
+                m_spcialCardObj[num].AddComponent<SpecialCardSprite>().cardNum = num;
+                for (int setNum = 0; setNum < 3; setNum++)
                 {
-                    for (int setNum = 0; setNum < 3; setNum++)
+                    if (SelectUIManager.PlayerID == 1)
                     {
-                        if (SPECIALCARD_NUMBER_1[setNum] == num)
-                        {
-                            cardObj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-                            m_selectedObj[setNum].GetComponent<SpriteRenderer>().sprite = cardObj.GetComponent<SpriteRenderer>().sprite;
-                            m_selectedObj[setNum].SetActive(true);
-                            m_selectedCount++;
-                        }
+                        if (SPECIALCARD_NUMBER_1[setNum] == num) m_tmpNum[setNum] = num;
                     }
-                }
-                else if (SelectUIManager.PlayerID == 2 && MenuManager.isDoneSetting[3])
-                {
-                    for (int setNum = 0; setNum < 3; setNum++)
+                    else
                     {
-                        if (SPECIALCARD_NUMBER_2[setNum] == num)
-                        {
-                            cardObj.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
-                            m_selectedObj[setNum].GetComponent<SpriteRenderer>().sprite = cardObj.GetComponent<SpriteRenderer>().sprite;
-                            m_selectedObj[setNum].SetActive(true);
-                            m_selectedCount++;
-                        }
+                        if (SPECIALCARD_NUMBER_2[setNum] == num) m_tmpNum[setNum] = num;
                     }
                 }
                 num++;
@@ -231,6 +216,9 @@ public class SelectSpecialUIManager : MonoBehaviour
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
+        if (MenuManager.m_playerSetting.isSpecial_1P) CardSet();
+        else if (MenuManager.m_playerSetting.isSpecial_2P) CardSet();
+
     }
 
     public void BackProces()
@@ -254,7 +242,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                     ResultManager.ResultSpecialInfo[i] = SPECIALCARD_NUMBER_1[i];
                 }
                 //選択完了
-                MenuManager.isDoneSetting[2] = true;
+                MenuManager.m_playerSetting.isSpecial_1P = true;
             }
             else if (SelectUIManager.PlayerID == 2)
             {
@@ -264,7 +252,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                     ResultManager.ResultSpecialInfo[i + 3] = SPECIALCARD_NUMBER_2[i];
                 }
                 //選択完了
-                MenuManager.isDoneSetting[3] = true;
+                MenuManager.m_playerSetting.isSpecial_2P = true;
             }
             sceneChanger.ChangeToMenu();
         }
@@ -385,6 +373,13 @@ public class SelectSpecialUIManager : MonoBehaviour
             }
             m_touchCardObject = null;
         }
+
+        //デバッグ用
+        if(Input.GetMouseButtonDown(1))
+        {
+            RandomSet();
+        }
+
     }
 
     void Reset()
@@ -407,5 +402,46 @@ public class SelectSpecialUIManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    /// <summary>
+    /// カードの画像をセットする
+    /// </summary>
+    void CardSet()
+    {
+        Reset();
+        for (int i = 0; i < 3; i++)
+        {
+            m_spcialCardObj[m_tmpNum[i]].GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+            m_selectedObj[i].GetComponent<SpriteRenderer>().sprite = m_spcialCardObj[m_tmpNum[i]].GetComponent<SpriteRenderer>().sprite;
+            m_selectedObj[i].SetActive(true);
+            m_selectedCount++;
+        }
+    }
+
+    /// <summary>
+    /// 特殊カードランダムセット
+    /// </summary>
+    void RandomSet()
+    {
+        int tmp = 0;
+        int random = 0;
+        int[] randomBox = new int[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
+
+        //配列の中身をシャッフル
+        for (int i = 0; i < randomBox.Length; i++)
+        {
+            tmp = randomBox[i];
+            random = (int)Random.Range((int)0, (int)randomBox.Length);
+            randomBox[i] = randomBox[random];
+            randomBox[random] = tmp;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            m_tmpNum[i] = randomBox[i];
+        }
+        CardSet();
     }
 }
