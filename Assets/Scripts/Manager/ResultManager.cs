@@ -263,11 +263,8 @@ public class ResultManager : MonoBehaviour
             SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i] = 0;
             SelectSpecialUIManager.SPECIALCARD_NUMBER_2[i] = 0;
         }
-        for (int i = 0; i < 4; i++)
-        {
-            MenuManager.isDoneSetting[i] = false;
-        }
 
+        MenuManager.m_playerSetting.Reset();
 
         sceneChanger.ChangeToMenu();
     }
