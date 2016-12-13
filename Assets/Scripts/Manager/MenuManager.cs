@@ -162,6 +162,23 @@ public class MenuManager : MonoBehaviour
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
         m_touchScene = NOT_SET_SCENE;
+
+
+        //デバッグ
+        MyUtility.CreateButton(
+            "aaa",
+            "UI/Select/1p",
+            new Vector2(1 / 32.0f, 22 / 25.0f),
+            new Vector2(4 / 32.0f, 24 / 25.0f),
+            m_MenuButton.transform
+            );
+        MyUtility.CreateButton(
+            "aaa",
+            "UI/Select/2p",
+            new Vector2(4 / 32.0f, 22 / 25.0f),
+            new Vector2(7 / 32.0f, 24 / 25.0f),
+            m_MenuButton.transform
+    );
     }
 
 
@@ -253,54 +270,54 @@ public class MenuManager : MonoBehaviour
         if (m_touchScene != GAMEMAIN) ChangeChoice(GAMEMAIN, m_touchScene);
         //選択解除
         else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-}
-
-//選択状態の更新
-void ChangeChoice(int _setScene, int _nowChoiceScene)
-{
-    m_touchScene = _setScene;
-
-    if (m_touchScene != NOT_SET_SCENE) m_scenesButtonObj[_setScene].GetComponent<Image>().color = m_choiceColor;
-
-    //前回タッチされていたボタンを解除
-    if (_nowChoiceScene != NOT_SET_SCENE) m_scenesButtonObj[_nowChoiceScene].GetComponent<Image>().color = m_nonChoiceColor;
-}
-
-//決定ボタンが押された時
-void EnterProces()
-{
-    AudioManager.m_instance.PlaySE("button_SE");
-
-    switch (m_touchScene)
-    {
-        case OPERATING:
-            sceneChanger.ChangeToOperating();
-            break;
-        case SOLDIER1P:
-            sceneChanger.ChangeToSelect();
-            break;
-        case SOLDIER2P:
-            sceneChanger.ChangeToSelect();
-            break;
-        case SPECIAL1P:
-            sceneChanger.ChangeToSelectSpecial();
-            break;
-        case SPECIAL2P:
-            sceneChanger.ChangeToSelectSpecial();
-            break;
-        case GAMEMAIN:
-            sceneChanger.ChangeToGame();
-            break;
     }
-}
 
-void Start()
-{
+    //選択状態の更新
+    void ChangeChoice(int _setScene, int _nowChoiceScene)
+    {
+        m_touchScene = _setScene;
 
-}
+        if (m_touchScene != NOT_SET_SCENE) m_scenesButtonObj[_setScene].GetComponent<Image>().color = m_choiceColor;
 
-void Update()
-{
+        //前回タッチされていたボタンを解除
+        if (_nowChoiceScene != NOT_SET_SCENE) m_scenesButtonObj[_nowChoiceScene].GetComponent<Image>().color = m_nonChoiceColor;
+    }
 
-}
+    //決定ボタンが押された時
+    void EnterProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+
+        switch (m_touchScene)
+        {
+            case OPERATING:
+                sceneChanger.ChangeToOperating();
+                break;
+            case SOLDIER1P:
+                sceneChanger.ChangeToSelect();
+                break;
+            case SOLDIER2P:
+                sceneChanger.ChangeToSelect();
+                break;
+            case SPECIAL1P:
+                sceneChanger.ChangeToSelectSpecial();
+                break;
+            case SPECIAL2P:
+                sceneChanger.ChangeToSelectSpecial();
+                break;
+            case GAMEMAIN:
+                sceneChanger.ChangeToGame();
+                break;
+        }
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
 }

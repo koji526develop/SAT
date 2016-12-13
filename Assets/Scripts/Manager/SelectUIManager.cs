@@ -58,7 +58,7 @@ public class SelectUIManager : MonoBehaviour
         MyUtility.CreateImage(
             "Player",
             PlayerIconPath[PlayerID],
-            new Vector2(2.0f / 32.0f, 21 / 25.0f),
+            new Vector2(2.0f / 32.0f, 22 / 25.0f),
             new Vector2(5.0f / 32.0f, 24 / 25.0f),
             transform);
 
