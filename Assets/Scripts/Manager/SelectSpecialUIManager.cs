@@ -69,7 +69,7 @@ public class SelectSpecialUIManager : MonoBehaviour
                     {
                         if (SPECIALCARD_NUMBER_1[setNum] == num) m_tmpNum[setNum] = num;
                     }
-                    else
+                    else if (SelectUIManager.PlayerID == 2)
                     {
                         if (SPECIALCARD_NUMBER_2[setNum] == num) m_tmpNum[setNum] = num;
                     }
@@ -373,13 +373,6 @@ public class SelectSpecialUIManager : MonoBehaviour
             }
             m_touchCardObject = null;
         }
-
-        //デバッグ用
-        if(Input.GetMouseButtonDown(1))
-        {
-            RandomSet();
-        }
-
     }
 
     void Reset()
@@ -413,35 +406,16 @@ public class SelectSpecialUIManager : MonoBehaviour
         Reset();
         for (int i = 0; i < 3; i++)
         {
+            if (SelectUIManager.PlayerID == 1)
+                m_tmpNum[i] = SPECIALCARD_NUMBER_1[i];
+            else if (SelectUIManager.PlayerID == 2)
+                m_tmpNum[i] = SPECIALCARD_NUMBER_2[i];
+
             m_spcialCardObj[m_tmpNum[i]].GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
             m_selectedObj[i].GetComponent<SpriteRenderer>().sprite = m_spcialCardObj[m_tmpNum[i]].GetComponent<SpriteRenderer>().sprite;
             m_selectedObj[i].SetActive(true);
+            m_selectedObj[i].GetComponent<SpriteRenderer>().sortingOrder = 1;
             m_selectedCount++;
         }
-    }
-
-    /// <summary>
-    /// 特殊カードランダムセット
-    /// </summary>
-    void RandomSet()
-    {
-        int tmp = 0;
-        int random = 0;
-        int[] randomBox = new int[8] { 0, 1, 2, 3, 4, 5, 6, 7 };
-
-        //配列の中身をシャッフル
-        for (int i = 0; i < randomBox.Length; i++)
-        {
-            tmp = randomBox[i];
-            random = (int)Random.Range((int)0, (int)randomBox.Length);
-            randomBox[i] = randomBox[random];
-            randomBox[random] = tmp;
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            m_tmpNum[i] = randomBox[i];
-        }
-        CardSet();
     }
 }
