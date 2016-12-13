@@ -55,6 +55,8 @@ public class TitleManager : MonoBehaviour
         SelectUIManager.SPEAR_NUM_2 = 0;
         SelectUIManager.AX_NUM_2 = 0;
         SelectUIManager.SHIELD_NUM_2 = 0;
+
+        SelectUIManager.PlayerID = 1;
     }
 
     void Start()

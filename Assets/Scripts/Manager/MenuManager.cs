@@ -76,34 +76,45 @@ public class MenuManager : MonoBehaviour
             new Vector2(32 / 32.0f, 25 / 25.0f),
             m_MenuObject.transform);
 
-        //操作説明画像
-        m_scenesButtonObj[OPERATING] = MyUtility.CreateButton(
-             "Operating",
-             "UI/Menu/operating",
-             new Vector2(12 / 32.0f, 19 / 25.0f),
-             new Vector2(20 / 32.0f, 23 / 25.0f),
-             m_MenuButton.transform);
-        m_scenesButtonObj[OPERATING].GetComponent<Button>().onClick.AddListener(OperatingProces);
+        //プレイヤーアイコン1P
+        GameObject Icon1PButtonObj = MyUtility.CreateButton(
+            "Player1PIcon",
+            "UI/Select/1p",
+            new Vector2(1 / 32.0f, 21 / 25.0f),
+            new Vector2(5 / 32.0f, 24 / 25.0f),
+            m_MenuButton.transform
+            );
+        Icon1PButtonObj.GetComponent<Button>().onClick.AddListener(Player1Proces);
 
-        //兵士選択1P画像
+        //プレイヤーアイコン2P
+        GameObject Icon2PButtonObj = MyUtility.CreateButton(
+            "Player2PIcon",
+            "UI/Select/2p",
+            new Vector2(5 / 32.0f, 21 / 25.0f),
+            new Vector2(9 / 32.0f, 24 / 25.0f),
+            m_MenuButton.transform
+            );
+        Icon2PButtonObj.GetComponent<Button>().onClick.AddListener(Player2Proces);
+
+        ////操作説明画像
+        //m_scenesButtonObj[OPERATING] = MyUtility.CreateButton(
+        //     "Operating",
+        //     "UI/Menu/operating",
+        //     new Vector2(12 / 32.0f, 19 / 25.0f),
+        //     new Vector2(20 / 32.0f, 23 / 25.0f),
+        //     m_MenuButton.transform);
+        //m_scenesButtonObj[OPERATING].GetComponent<Button>().onClick.AddListener(OperatingProces);
+
+        //兵士選択画像
         m_scenesButtonObj[SOLDIER1P] = MyUtility.CreateButton(
             "Select1P",
             "UI/Menu/soldier1",
-            new Vector2(3 / 32.0f, 15 / 25.0f),
-            new Vector2(11 / 32.0f, 19 / 25.0f),
+            new Vector2(8 / 32.0f, 12 / 25.0f),
+            new Vector2(16 / 32.0f, 19 / 25.0f),
             m_MenuButton.transform);
         m_scenesButtonObj[SOLDIER1P].GetComponent<Button>().onClick.AddListener(Soldier1Proces);
 
-        //兵士選択2P画像
-        m_scenesButtonObj[SOLDIER2P] = MyUtility.CreateButton(
-            "Select2P",
-            "UI/Menu/soldier2",
-            new Vector2(21 / 32.0f, 15 / 25.0f),
-            new Vector2(29 / 32.0f, 19 / 25.0f),
-            m_MenuButton.transform);
-        m_scenesButtonObj[SOLDIER2P].GetComponent<Button>().onClick.AddListener(Soldier2Proces);
-
-        //特殊カード選択1P画像
+        //特殊カード選択画像
         m_scenesButtonObj[SPECIAL1P] = MyUtility.CreateButton(
             "Special1P",
             "UI/Menu/special1",
@@ -112,23 +123,6 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform);
         m_scenesButtonObj[SPECIAL1P].GetComponent<Button>().onClick.AddListener(Special1Proces);
 
-        //特殊カード選択2P画像
-        m_scenesButtonObj[SPECIAL2P] = MyUtility.CreateButton(
-            "Special2P",
-            "UI/Menu/special2",
-            new Vector2(21 / 32.0f, 7 / 25.0f),
-            new Vector2(29 / 32.0f, 11 / 25.0f),
-            m_MenuButton.transform);
-        m_scenesButtonObj[SPECIAL2P].GetComponent<Button>().onClick.AddListener(Special2Proces);
-
-        //ゲームメイン画像
-        m_scenesButtonObj[GAMEMAIN] = MyUtility.CreateButton(
-            "GameMain",
-            "UI/Menu/game",
-            new Vector2(12 / 32.0f, 2 / 25.0f),
-            new Vector2(20 / 32.0f, 6 / 25.0f),
-            m_MenuButton.transform);
-        m_scenesButtonObj[GAMEMAIN].GetComponent<Button>().onClick.AddListener(GameMainProces);
         //兵士が選択されていなかったら選べないようにする
         isGame = m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_2P && m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_1P;
 
@@ -163,28 +157,25 @@ public class MenuManager : MonoBehaviour
 
         m_touchScene = NOT_SET_SCENE;
 
-
-        //デバッグ
-        MyUtility.CreateButton(
-            "aaa",
-            "UI/Select/1p",
-            new Vector2(1 / 32.0f, 21 / 25.0f),
-            new Vector2(5 / 32.0f, 24 / 25.0f),
-            m_MenuButton.transform
-            );
-        MyUtility.CreateButton(
-            "aaa",
-            "UI/Select/2p",
-            new Vector2(5 / 32.0f, 21 / 25.0f),
-            new Vector2(9 / 32.0f, 24 / 25.0f),
-            m_MenuButton.transform
-    );
     }
 
 
     //=============================================================
     //=============================================================
 
+    //プレイヤー1PIconが押された時
+    void Player1Proces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        SelectUIManager.PlayerID = 1;
+    }
+
+    //プレイヤー2PIconが押された時
+    void Player2Proces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        SelectUIManager.PlayerID = 2;
+    }
 
     //操作説明が押された時
     void OperatingProces()
