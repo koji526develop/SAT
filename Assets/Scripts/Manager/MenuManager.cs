@@ -168,15 +168,15 @@ public class MenuManager : MonoBehaviour
         MyUtility.CreateButton(
             "aaa",
             "UI/Select/1p",
-            new Vector2(1 / 32.0f, 22 / 25.0f),
-            new Vector2(4 / 32.0f, 24 / 25.0f),
+            new Vector2(1 / 32.0f, 21 / 25.0f),
+            new Vector2(5 / 32.0f, 24 / 25.0f),
             m_MenuButton.transform
             );
         MyUtility.CreateButton(
             "aaa",
             "UI/Select/2p",
-            new Vector2(4 / 32.0f, 22 / 25.0f),
-            new Vector2(7 / 32.0f, 24 / 25.0f),
+            new Vector2(5 / 32.0f, 21 / 25.0f),
+            new Vector2(9 / 32.0f, 24 / 25.0f),
             m_MenuButton.transform
     );
     }
