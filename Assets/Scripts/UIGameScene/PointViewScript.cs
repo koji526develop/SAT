@@ -90,7 +90,7 @@ public class PointViewScript : MonoBehaviour {
             i++;
         }
         parentobj.transform.parent = this.transform;
-        parentobj.transform.position = new Vector3(2, 0, 0);
+        parentobj.transform.position = _vector;
         if (_playerID == 1)
         {
             parentobj.transform.eulerAngles = new Vector3(0, 90, 0);

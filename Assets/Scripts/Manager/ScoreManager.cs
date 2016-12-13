@@ -91,6 +91,21 @@ public class ScoreManager : MonoBehaviour
         return allCountStage - 1;
     }
 
+    public void DirectGetPoint(int _playerID, int _point,Vector3 _viewPos)
+    {
+        if (_playerID == 1)
+        {
+            m_pointView.number(5, _playerID, _viewPos,1.0f);
+            m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID - 1]);
+        }
+        else
+        {
+            m_pointView.number(5, _playerID, _viewPos, 1.0f);
+            m_Score = m_Score - (int)((float)_point + m_pointBouns[_playerID - 1]);
+        }
+
+    }
+
     public void DirectGetPoint(int _playerID, int _point)
     {
         if (_playerID == 1)

@@ -198,7 +198,7 @@ public class SelectUIManager : MonoBehaviour
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
 
         //兵士の情報があればセット
-        if (PlayerID == 1 && MenuManager.isDoneSetting[0])
+        if (PlayerID == 1 && MenuManager.m_playerSetting.isSoldier_1P)
         {
             m_soldierNumList[0] = SWORD_NUM_1;
             m_soldierNumList[1] = SPEAR_NUM_1;
@@ -206,7 +206,7 @@ public class SelectUIManager : MonoBehaviour
             m_soldierNumList[3] = SHIELD_NUM_1;
             SetSoldierNum();
         }
-        else if (PlayerID == 2 && MenuManager.isDoneSetting[1])
+        else if (PlayerID == 2 && MenuManager.m_playerSetting.isSoldier_2P)
         {
             m_soldierNumList[0] = SWORD_NUM_2;
             m_soldierNumList[1] = SPEAR_NUM_2;
@@ -242,7 +242,7 @@ public class SelectUIManager : MonoBehaviour
                     ResultManager.ResultSoldierNum[i] = m_soldierNumList[i];
                 }
                 //選択完了
-                MenuManager.isDoneSetting[0] = true;
+                MenuManager.m_playerSetting.isSoldier_1P = true;
             }
             else if (PlayerID == 2)
             {
@@ -258,7 +258,7 @@ public class SelectUIManager : MonoBehaviour
                     ResultManager.ResultSoldierNum[i + 4] = m_soldierNumList[i];
                 }
                 //選択完了
-                MenuManager.isDoneSetting[1] = true;
+                MenuManager.m_playerSetting.isSoldier_2P = true;
             }
 
             //シーン遷移
@@ -375,13 +375,13 @@ public class SelectUIManager : MonoBehaviour
     
     void RandomSet()
     {
-        int maxSoldierNum = 19;                //兵士の最大数 ランダムの関係で19
+        int maxSoldierNum = 18;                //兵士の最大数 ランダムの関係で19
         int nomSoldierNum = 0;                 //現在の兵士の数
         int[] setSoldierNum = new int[4];      //セットする兵士の数を一時的に保管しておくもの
 
         for (int i = 0; i < 4; i++)
         {
-            setSoldierNum[i] = (int)Random.Range(0, maxSoldierNum - nomSoldierNum);
+            setSoldierNum[i] = (int)Random.Range((int)0, (int)maxSoldierNum - nomSoldierNum);
             nomSoldierNum += setSoldierNum[i];
         }
 
