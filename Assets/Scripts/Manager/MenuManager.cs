@@ -130,9 +130,9 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform);
         m_scenesButtonObj[GAMEMAIN].GetComponent<Button>().onClick.AddListener(GameMainProces);
         //兵士が選択されていなかったら選べないようにする
-        isGame = !m_playerSetting.isSoldier_1P && !m_playerSetting.isSoldier_2P && !m_playerSetting.isSoldier_1P && !m_playerSetting.isSoldier_1P;
+        isGame = m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_2P && m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_1P;
 
-        if (isGame)
+        if (!isGame)
         {
             m_scenesButtonObj[GAMEMAIN].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
         }
