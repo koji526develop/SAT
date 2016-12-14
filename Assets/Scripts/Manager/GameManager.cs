@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
 				isStageCheck = false;
 			}
 		}
-
+		//兵士残数フラグと盤面チェックフラグとカウントダウンフラグ
 		if(isSoldierNone && isStageCheck && m_startFlag)
 		{
 			SceneChanger sChange = new SceneChanger();
