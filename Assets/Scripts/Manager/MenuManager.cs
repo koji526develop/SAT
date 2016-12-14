@@ -6,21 +6,6 @@ public class MenuManager : MonoBehaviour
 {
     SceneChanger sceneChanger;
 
-    private int m_touchScene;       //どのボタンをタッチしているか
-
-    const int NOT_SET_SCENE = -1;
-    const int SOLDIER1P = 0;
-    const int SOLDIER2P = 1;
-    const int SPECIAL1P = 2;
-    const int SPECIAL2P = 3;
-    const int OPERATING = 4;
-    const int GAMEMAIN = 5;
-
-    readonly Color m_choiceColor = new Vector4(1, 1, 1, 0.5f);        //ボタンが押されている状態の色
-    readonly Color m_nonChoiceColor = new Vector4(1, 1, 1, 1);        //ボタンが押されていないときの色
-
-    GameObject[] m_scenesButtonObj = new GameObject[6];     //それぞれのシーンのボタン
-
     /// <summary>
     /// //兵士の情報がセットされているかどうか
     /// </summary>
@@ -48,7 +33,9 @@ public class MenuManager : MonoBehaviour
 
     public static PlayerSetting m_playerSetting = new PlayerSetting(false);
 
-    bool isGame;
+    bool isGame;            //ゲーム開始できるか
+
+    GameObject[] m_PlayerButton = new GameObject[2];    //プレイヤー選択ボタン格納
 
     void Awake()
     {
@@ -65,6 +52,10 @@ public class MenuManager : MonoBehaviour
 
         StartCoroutine(MyUtility.SetCameraForCanvas(canvas, camera));
 
+        //シーンチェンジャー
+        GameObject sceneChangerObj = new GameObject();
+        sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+
         GameObject m_MenuObject = MyUtility.CreateEmpty("MenuObject", canvas.transform);
         GameObject m_MenuButton = MyUtility.CreateEmpty("MenuButton", canvas.transform);
 
@@ -77,24 +68,27 @@ public class MenuManager : MonoBehaviour
             m_MenuObject.transform);
 
         //プレイヤーアイコン1P
-        GameObject Icon1PButtonObj = MyUtility.CreateButton(
+        m_PlayerButton[0] = MyUtility.CreateButton(
             "Player1PIcon",
             "UI/Select/1p",
             new Vector2(1 / 32.0f, 21 / 25.0f),
             new Vector2(5 / 32.0f, 24 / 25.0f),
             m_MenuButton.transform
             );
-        Icon1PButtonObj.GetComponent<Button>().onClick.AddListener(Player1Proces);
+        m_PlayerButton[0].GetComponent<Button>().onClick.AddListener(Player1Proces);
 
         //プレイヤーアイコン2P
-        GameObject Icon2PButtonObj = MyUtility.CreateButton(
+        m_PlayerButton[1] = MyUtility.CreateButton(
             "Player2PIcon",
             "UI/Select/2p",
             new Vector2(5 / 32.0f, 21 / 25.0f),
             new Vector2(9 / 32.0f, 24 / 25.0f),
             m_MenuButton.transform
             );
-        Icon2PButtonObj.GetComponent<Button>().onClick.AddListener(Player2Proces);
+        m_PlayerButton[1].GetComponent<Button>().onClick.AddListener(Player2Proces);
+        //現在のプレイヤーではない方のボタンを半透明に
+        if(SelectUIManager.PlayerID == 1) m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+        else if (SelectUIManager.PlayerID == 2) m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
 
         ////操作説明画像
         //m_scenesButtonObj[OPERATING] = MyUtility.CreateButton(
@@ -105,58 +99,52 @@ public class MenuManager : MonoBehaviour
         //     m_MenuButton.transform);
         //m_scenesButtonObj[OPERATING].GetComponent<Button>().onClick.AddListener(OperatingProces);
 
-        //兵士選択画像
-        m_scenesButtonObj[SOLDIER1P] = MyUtility.CreateButton(
+        //兵士編成ボタン
+        GameObject soldierFormationObj = MyUtility.CreateButton(
             "Select1P",
             "UI/Menu/soldier1",
             new Vector2(8 / 32.0f, 12 / 25.0f),
             new Vector2(16 / 32.0f, 19 / 25.0f),
             m_MenuButton.transform);
-        m_scenesButtonObj[SOLDIER1P].GetComponent<Button>().onClick.AddListener(Soldier1Proces);
+        soldierFormationObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
 
-        //特殊カード選択画像
-        m_scenesButtonObj[SPECIAL1P] = MyUtility.CreateButton(
+        //特殊カード選択ボタン
+        GameObject specialCardObj = MyUtility.CreateButton(
             "Special1P",
             "UI/Menu/special1",
-            new Vector2(3 / 32.0f, 7 / 25.0f),
-            new Vector2(11 / 32.0f, 11 / 25.0f),
+            new Vector2(16 / 32.0f, 8 / 25.0f),
+            new Vector2(24 / 32.0f, 15 / 25.0f),
             m_MenuButton.transform);
-        m_scenesButtonObj[SPECIAL1P].GetComponent<Button>().onClick.AddListener(Special1Proces);
+        specialCardObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
 
-        //兵士が選択されていなかったら選べないようにする
+        //チュートリアルボタン作成
+        GameObject tutoObj = MyUtility.CreateButton(
+            "Tutorial",
+            "UI/Menu/return",
+            new Vector2(6 / 32.0f, 2 / 25.0f),
+            new Vector2(15 / 32.0f, 6 / 25.0f),
+            m_MenuButton.transform
+           );
+
+        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
+
+        // 開戦ボタン作成
+        GameObject gameObj = MyUtility.CreateButton(
+            "Enter",
+            "UI/Operating/decision",
+            new Vector2(17 / 32.0f, 2 / 25.0f),
+            new Vector2(26 / 32.0f, 6 / 25.0f),
+            m_MenuButton.transform
+        );
+        gameObj.GetComponent<Button>().onClick.AddListener(GameMainProces);
+
+        //全ての兵士、カードの情報がセットされていなかったら選べないようにする
         isGame = m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_2P && m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_1P;
 
         if (!isGame)
         {
-            m_scenesButtonObj[GAMEMAIN].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+            gameObj.GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
         }
-
-
-        //戻るボタン作成
-        GameObject backObj = MyUtility.CreateButton(
-            "Back",
-            "UI/Menu/return",
-            new Vector2(2 / 32.0f, 1 / 25.0f),
-            new Vector2(9 / 32.0f, 4 / 25.0f),
-            m_MenuButton.transform
-           );
-
-        GameObject sceneChangerObj = new GameObject();
-        sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
-        backObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
-
-        // 決定ボタン作成
-        GameObject enterObj = MyUtility.CreateButton(
-            "Enter",
-            "UI/Operating/decision",
-            new Vector2(23 / 32.0f, 1 / 25.0f),
-            new Vector2(30 / 32.0f, 4 / 25.0f),
-            m_MenuButton.transform
-        );
-        enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
-
-        m_touchScene = NOT_SET_SCENE;
-
     }
 
 
@@ -168,6 +156,8 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.m_instance.PlaySE("button_SE");
         SelectUIManager.PlayerID = 1;
+        m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 1.0f);
+        m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
     }
 
     //プレイヤー2PIconが押された時
@@ -175,77 +165,8 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.m_instance.PlaySE("button_SE");
         SelectUIManager.PlayerID = 2;
-    }
-
-    //操作説明が押された時
-    void OperatingProces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        //選択状態にする
-        if (m_touchScene != OPERATING) ChangeChoice(OPERATING, m_touchScene);
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-    }
-
-    //兵士選択1が押された時
-    void Soldier1Proces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        //選択状態にする
-        if (m_touchScene != SOLDIER1P)
-        {
-            SelectUIManager.PlayerID = 1;
-            ChangeChoice(SOLDIER1P, m_touchScene);
-        }
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-    }
-
-    //兵士選択2が押された時
-    void Soldier2Proces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        //選択状態にする
-        if (m_touchScene != SOLDIER2P)
-        {
-            SelectUIManager.PlayerID = 2;
-            ChangeChoice(SOLDIER2P, m_touchScene);
-        }
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-    }
-
-    //特殊1が押された時
-    void Special1Proces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        //選択状態にする
-        if (m_touchScene != SPECIAL1P)
-        {
-            SelectUIManager.PlayerID = 1;
-            ChangeChoice(SPECIAL1P, m_touchScene);
-        }
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-    }
-
-    //特殊2が押された時
-    void Special2Proces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        //選択状態にする
-        if (m_touchScene != SPECIAL2P)
-        {
-            SelectUIManager.PlayerID = 2;
-            ChangeChoice(SPECIAL2P, m_touchScene);
-        }
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
+        m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+        m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 1.0f);
     }
 
     //ゲームボタンが押された時
@@ -257,49 +178,7 @@ public class MenuManager : MonoBehaviour
         if (!isGame)
             return;
 
-        //選択状態にする
-        if (m_touchScene != GAMEMAIN) ChangeChoice(GAMEMAIN, m_touchScene);
-        //選択解除
-        else ChangeChoice(NOT_SET_SCENE, m_touchScene);
-    }
-
-    //選択状態の更新
-    void ChangeChoice(int _setScene, int _nowChoiceScene)
-    {
-        m_touchScene = _setScene;
-
-        if (m_touchScene != NOT_SET_SCENE) m_scenesButtonObj[_setScene].GetComponent<Image>().color = m_choiceColor;
-
-        //前回タッチされていたボタンを解除
-        if (_nowChoiceScene != NOT_SET_SCENE) m_scenesButtonObj[_nowChoiceScene].GetComponent<Image>().color = m_nonChoiceColor;
-    }
-
-    //決定ボタンが押された時
-    void EnterProces()
-    {
-        AudioManager.m_instance.PlaySE("button_SE");
-
-        switch (m_touchScene)
-        {
-            case OPERATING:
-                sceneChanger.ChangeToOperating();
-                break;
-            case SOLDIER1P:
-                sceneChanger.ChangeToSelect();
-                break;
-            case SOLDIER2P:
-                sceneChanger.ChangeToSelect();
-                break;
-            case SPECIAL1P:
-                sceneChanger.ChangeToSelectSpecial();
-                break;
-            case SPECIAL2P:
-                sceneChanger.ChangeToSelectSpecial();
-                break;
-            case GAMEMAIN:
-                sceneChanger.ChangeToGame();
-                break;
-        }
+        sceneChanger.ChangeToGame();
     }
 
     void Start()
