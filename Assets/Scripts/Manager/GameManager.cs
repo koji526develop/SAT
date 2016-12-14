@@ -90,9 +90,6 @@ public class GameManager : MonoBehaviour
         this.gameObject.AddComponent<ScoreManager>();
         this.gameObject.AddComponent<GameUIManager>();
 
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
-
         //AudioManager.m_instance.PlaySE ("Countdown_SE");
 
         //カウントダウン処理用

@@ -10,8 +10,6 @@ public class TitleManager : MonoBehaviour
         MyUtility.CreateDirectionalLight();
         // MAINカメラ作成
         Camera camera = MyUtility.CreateCamera("MainCamera");
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
 
         Canvas canvas = MyUtility.CreateCanvas();
         //イベントシステム作成

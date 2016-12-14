@@ -16,8 +16,6 @@ public class SelectSpecialManager : MonoBehaviour
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);
 
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
 
         //背景
         GameObject obj = MyUtility.CreateSprite(

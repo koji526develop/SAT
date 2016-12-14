@@ -21,9 +21,6 @@ public class SelectManager : MonoBehaviour
 
 		// イベントシステム作成
 		MyUtility.CreateEventSystem(transform);
-
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
     }
 
 	public IEnumerator SetCameraForCanvas(Canvas _canvas, Camera _camera)
