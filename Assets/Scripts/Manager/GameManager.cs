@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public bool m_startFlag = false;
     bool m_countStart = false;
 
-	public int playerID = GameObject.Find("GameManager").GetComponent<Character> ().status.PlayerID;
+
 
 	Transform battleManager;
 
