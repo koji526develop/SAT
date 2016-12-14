@@ -55,6 +55,7 @@ public class SelectUIManager : MonoBehaviour
             new Vector2(32 / 32.0f, 25 / 25.0f),
             transform);
 
+        //プレイヤーアイコン画像
         MyUtility.CreateImage(
             "Player",
             PlayerIconPath[PlayerID],
@@ -77,6 +78,7 @@ public class SelectUIManager : MonoBehaviour
             );
         }
 
+        //ステータス背景
         for (int i = 0; i < 4; i++)
         {
             MyUtility.CreateImage(
@@ -87,6 +89,7 @@ public class SelectUIManager : MonoBehaviour
                 transform);
         }
 
+        //ステータス詳細背景
         MyUtility.CreateImage(
             "valueName",
             "UI/Select/status_header",
@@ -214,6 +217,15 @@ public class SelectUIManager : MonoBehaviour
             m_soldierNumList[3] = SHIELD_NUM_2;
             SetSoldierNum();
         }
+
+        //右上兵士優劣ボタン
+        MyUtility.CreateButton(
+            "soldierMeritButton",
+            "UI/Select/triangle_icon",
+            new Vector2(26 / 32.0f, 21 / 25.0f),
+            new Vector2(29 / 32.0f, 24 / 25.0f),
+            transform);
+
     }
 
     void Back()
