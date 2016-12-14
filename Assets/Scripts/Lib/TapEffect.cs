@@ -12,7 +12,7 @@ public class TapEffect : MonoBehaviour
 
     void Start()
     {
-		
+        m_tapEffect.GetComponent<Renderer>().sortingLayerName = "tap";
     }
 
     void Update()
