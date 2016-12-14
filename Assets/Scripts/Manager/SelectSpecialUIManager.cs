@@ -217,7 +217,7 @@ public class SelectSpecialUIManager : MonoBehaviour
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
         if (MenuManager.m_playerSetting.isSpecial_1P) CardSet();
-        else if (MenuManager.m_playerSetting.isSpecial_2P) CardSet();
+        if (MenuManager.m_playerSetting.isSpecial_2P) CardSet();
 
     }
 
