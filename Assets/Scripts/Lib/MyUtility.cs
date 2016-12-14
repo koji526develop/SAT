@@ -315,16 +315,6 @@ public class MyUtility : MonoBehaviour
         return size;
     }
 
-    public static void CreateTapEffect(Transform _parent)
-    {
-        GameObject tapEffectObj = Instantiate(Resources.Load("Prefabs/TapEffect") as GameObject);
-        tapEffectObj.name = "TapEffect";
-        Vector3 tmp = tapEffectObj.transform.position;
-        tmp.z = -100;
-        tapEffectObj.transform.position = tmp;
-        tapEffectObj.transform.SetParent(_parent);
-    }
-
     static Vector2 GetCenterPositionOfUI(RectTransform _rect, Vector2 _scale)
     {
         Vector2 vec2;

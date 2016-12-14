@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public bool m_startFlag = false;
     bool m_countStart = false;
 
-	public int playerID = GameObject.Find("GameManager").GetComponent<Character> ().status.PlayerID;
+
 
 	Transform battleManager;
 
@@ -89,9 +89,6 @@ public class GameManager : MonoBehaviour
         //ゲーム内で使用するマネージャーを作成
         this.gameObject.AddComponent<ScoreManager>();
         this.gameObject.AddComponent<GameUIManager>();
-
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
 
         //AudioManager.m_instance.PlaySE ("Countdown_SE");
 
@@ -194,7 +191,7 @@ public class GameManager : MonoBehaviour
 				isStageCheck = false;
 			}
 		}
-
+		//兵士残数フラグと盤面チェックフラグとカウントダウンフラグ
 		if(isSoldierNone && isStageCheck && m_startFlag)
 		{
 			SceneChanger sChange = new SceneChanger();
