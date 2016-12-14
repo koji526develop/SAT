@@ -7,9 +7,6 @@ public class LoadingManager : MonoBehaviour
 
 	void Start ()
     {
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
-
         string[] str = { "N", "o", "w", " ", "L", "o", "a", "d", "i", "n", "g" };
 		for(int i = 0; i < str.GetLength(0);i++)
 		{

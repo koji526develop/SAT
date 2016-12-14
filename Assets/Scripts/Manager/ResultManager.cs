@@ -33,8 +33,6 @@ public class ResultManager : MonoBehaviour
         MyUtility.CreateDirectionalLight();
         // MAINカメラ作成
         Camera camera = MyUtility.CreateCamera("MainCamera");
-        //タップエフェクト
-        MyUtility.CreateTapEffect(transform);
         //イベントシステム作成
         MyUtility.CreateEventSystem(transform);
         //キャンバス作成
