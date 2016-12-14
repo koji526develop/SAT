@@ -216,8 +216,8 @@ public class SelectSpecialUIManager : MonoBehaviour
         // PlayerIDが1なら2Pの兵士を選びにセレクトに戻る
         enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
 
-        if (MenuManager.m_playerSetting.isSpecial_1P) CardSet();
-        if (MenuManager.m_playerSetting.isSpecial_2P) CardSet();
+        if (MenuManager.m_playerSetting.isSpecial_1P && SelectUIManager.PlayerID == 1) CardSet();
+        if (MenuManager.m_playerSetting.isSpecial_2P && SelectUIManager.PlayerID == 2) CardSet();
 
     }
 
