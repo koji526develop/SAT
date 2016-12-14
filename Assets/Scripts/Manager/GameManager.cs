@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public bool m_startFlag = false;
     bool m_countStart = false;
 
+	public int playerID = GameObject.Find("GameManager").GetComponent<Character> ().status.PlayerID;
+
+	Transform battleManager;
+
     // ゲーム開始時
     void Awake()
     {
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
         //MyUtility.CreateEventSystem (UIManager);
 
         // BattleManager作成
-        Transform battleManager = new GameObject("BattleManager").transform;
+        battleManager = new GameObject("BattleManager").transform;
         battleManager.tag = "BattleManager";
 
         // バトル用のカメラ作成
@@ -173,5 +177,30 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+		//兵士残数チェック
+		bool isSoldierNone = SelectUIManager.SWORD_NUM_1 <= 0 && SelectUIManager.SWORD_NUM_2  <=0 &&
+			SelectUIManager.SPEAR_NUM_1 <= 0 && SelectUIManager.SPEAR_NUM_2 <= 0 &&
+			SelectUIManager.AX_NUM_1 <=0 && SelectUIManager.AX_NUM_2<= 0 &&
+			SelectUIManager.SHIELD_NUM_1<= 0 && SelectUIManager.SHIELD_NUM_2 <= 0;
+
+		//盤面に兵士が残っているかチェック
+		bool isStageCheck = true;
+		foreach (Transform childObj in battleManager)
+		{
+			//キャラクタータグであるならもしくは、同じ列であるなら
+			if (childObj.tag == "Character")
+			{
+				isStageCheck = false;
+			}
+		}
+
+		if(isSoldierNone && isStageCheck && m_startFlag)
+		{
+			SceneChanger sChange = new SceneChanger();
+			sChange.ChangeToResult();
+		}
+
+
     }
 }
