@@ -8,6 +8,7 @@ public class ScoreManager : MonoBehaviour
 {
 
     private int m_maxScore = MyUtility.MAX_WARPOTENTIAL; //最大ゲージ数値
+	private int m_minScore=MyUtility.MIN_WARPOTENTIAL;//最小ゲージ数値
     public int m_Score;    //現在のスコア数値
 
     private int m_totalPlayer = 2;  //総プレイヤー数
@@ -95,13 +96,20 @@ public class ScoreManager : MonoBehaviour
     {
         if (_playerID == 1)
         {
-            m_pointView.number(5, _playerID, _viewPos,1.0f);
+            
+			if(m_Score<m_maxScore)
+			{
+			m_pointView.number(5, _playerID, _viewPos,1.0f);
             m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID - 1]);
+			}
         }
         else
         {
+			if(m_Score>m_minScore)
+			{
             m_pointView.number(5, _playerID, _viewPos, 1.0f);
             m_Score = m_Score - (int)((float)_point + m_pointBouns[_playerID - 1]);
+			}
         }
 
     }
@@ -110,11 +118,18 @@ public class ScoreManager : MonoBehaviour
     {
         if (_playerID == 1)
         {
-            m_Score = m_Score + (int)((float)_point + m_pointBouns[_playerID - 1]);
+			if (m_Score < m_maxScore) 
+			{
+				m_Score = m_Score + (int)((float)_point + m_pointBouns [_playerID - 1]);
+
+			}
         }
         else
         {
-            m_Score = m_Score - (int)((float)_point + m_pointBouns[_playerID - 1]);
+			if (m_Score > m_minScore) 
+			{
+				m_Score = m_Score - (int)((float)_point + m_pointBouns [_playerID - 1]);
+			}
         }
 
     }
@@ -158,17 +173,21 @@ public class ScoreManager : MonoBehaviour
         }
 
         if (_playerID == 1)
-        {
-            int point = (int)(m_scoreArea[GetPointLevel(enemyPlayerID + 1, _Column)] + m_pointBouns[_playerID - 1]);
-            m_Score = m_Score + point;
-            m_pointView.number(point,_playerID, _Column,1.0f);
+		{if (m_Score < m_maxScore) 
+			{
+				int point = (int)(m_scoreArea [GetPointLevel (enemyPlayerID + 1, _Column)] + m_pointBouns [_playerID - 1]);
+				m_Score = m_Score + point;
+				m_pointView.number (point, _playerID, _Column, 1.0f);
+			}
         }
         else
-        {
-            int score = GetPointLevel(enemyPlayerID + 1, _Column);
-            int point = (int)(m_scoreArea[score] + m_pointBouns[_playerID - 1]);
-            m_Score = m_Score - point;
-            m_pointView.number(point, _playerID, _Column, 1.0f);
+		{	if (m_Score > m_minScore) 
+			{
+				int score = GetPointLevel (enemyPlayerID + 1, _Column);
+				int point = (int)(m_scoreArea [score] + m_pointBouns [_playerID - 1]);
+				m_Score = m_Score - point;
+				m_pointView.number (point, _playerID, _Column, 1.0f);
+			}
 
         }
 

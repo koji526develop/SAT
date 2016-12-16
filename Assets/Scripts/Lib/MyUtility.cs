@@ -47,6 +47,7 @@ public class MyUtility : MonoBehaviour
 
     // ディレクショナルライト作成
     public static readonly int MAX_WARPOTENTIAL = 500;
+	public static readonly int MIN_WARPOTENTIAL = 0;
 
     public static float GAME_TIME = 120.0f;
 
