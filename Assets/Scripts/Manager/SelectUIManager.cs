@@ -31,6 +31,10 @@ public class SelectUIManager : MonoBehaviour
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
 
+
+    GameObject m_meritDisplayObj;
+    RectTransform m_meritRectRange;
+
     private int[] m_characterSpeed = new int[2];
 
     enum PlusOrMinus
@@ -219,21 +223,55 @@ public class SelectUIManager : MonoBehaviour
         }
 
         //右上兵士優劣ボタン
-        MyUtility.CreateButton(
-            "soldierMeritButton",
-            "UI/Select/triangle_icon",
-            new Vector2(26 / 32.0f, 21 / 25.0f),
-            new Vector2(29 / 32.0f, 24 / 25.0f),
-            transform);
+        GameObject MeritButtonObj = MyUtility.CreateButton(
+             "soldierMeritButton",
+             "UI/Select/triangle_icon",
+             new Vector2(26 / 32.0f, 21 / 25.0f),
+             new Vector2(30 / 32.0f, 24 / 25.0f),
+             transform);
+        MeritButtonObj.GetComponent<Button>().onClick.AddListener(MeritButtonProces);
+
+        m_meritDisplayObj = MyUtility.CreateEmpty("MaritObject", transform);
+
+        //黒レイヤー
+        GameObject layerObj = MyUtility.CreateImage(
+            "BlackLayer",
+            "Image/TimeWaku",
+            new Vector2(0 / 32.0f, 0 / 25.0f),
+            new Vector2(32 / 32.0f, 25 / 25.0f),
+            m_meritDisplayObj.transform);
+        layerObj.GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
+
+        //優劣画像
+        GameObject meritImageObj = MyUtility.CreateImage(
+              "Merit",
+              "Image/TimeWaku",
+              new Vector2(3 / 32.0f, 3 / 25.0f),
+              new Vector2(28 / 32.0f, 22 / 25.0f),
+              m_meritDisplayObj.transform);
+
+        m_meritRectRange = meritImageObj.GetComponent<RectTransform>();
+
+        //最初は非表示
+        m_meritDisplayObj.SetActive(false);
 
     }
 
+    //優劣ボタンが押された時
+    void MeritButtonProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        m_meritDisplayObj.SetActive(true);
+    }
+
+    //戻るボタンが押された時
     void Back()
     {
         AudioManager.m_instance.PlaySE("button_SE");
         sceneChanger.ChangeToMenu();
     }
 
+    //決定ボタンが押された時
     public void EnterProces()
     {
         AudioManager.m_instance.PlaySE("button_SE");
@@ -315,6 +353,9 @@ public class SelectUIManager : MonoBehaviour
 
     void Plus(int num)
     {
+        if (m_meritDisplayObj.activeSelf)
+            return;
+
         AudioManager.m_instance.PlaySE("button_SE");
 
         // 兵士の合計数が兵士最大数より多かったら抜ける
@@ -341,6 +382,9 @@ public class SelectUIManager : MonoBehaviour
 
     void Minus(int num)
     {
+        if (m_meritDisplayObj.activeSelf)
+            return;
+
         AudioManager.m_instance.PlaySE("button_SE");
 
         // 兵士の合計数が０以下または各兵士の数が０以下だったら抜ける
@@ -380,4 +424,23 @@ public class SelectUIManager : MonoBehaviour
             gaugeList[i].GetComponent<Image>().sprite = Resources.Load("UI/Select/select_gauge2", typeof(Sprite)) as Sprite;
         }
     }
+
+    void Update()
+    {
+        //優劣画像が表示されているとき
+        if (m_meritDisplayObj.activeSelf)
+        {
+            TouchInfo touch = TouchManager.GetTouchInfo(0);
+            if (touch == TouchInfo.Began)
+            {
+                //タッチ場所が画像の上でなければ
+                if (!MyUtility.IsContainPoint(m_meritRectRange))
+                {
+                    m_meritDisplayObj.SetActive(false);
+                }
+            }
+        }
+
+    }
+
 }
