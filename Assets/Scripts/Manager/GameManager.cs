@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     Canvas m_canvas;
     Touch touchh;
-    bool flag = false;
 
     //カウントダウン用
     GameObject[] m_countDownObj = new GameObject[8];

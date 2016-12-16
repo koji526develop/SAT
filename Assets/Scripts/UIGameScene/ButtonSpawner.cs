@@ -10,7 +10,7 @@ public class ButtonSpawner : MonoBehaviour
     GameManager m_gameManager;
     ScoreManager m_scoreManager;
 
-	Canvas m_canvas;
+    Canvas m_canvas;
 
     public int m_PlayerID;
     public int m_ButtonID;
@@ -18,9 +18,9 @@ public class ButtonSpawner : MonoBehaviour
 
     private int m_nowTouchNumber;
     private bool m_startFlag = false;
-    private bool m_spawnerFlag=false;
+    private bool m_spawnerFlag = false;
 
-    public float m_intervalTime =0.0f;
+    public float m_intervalTime = 0.0f;
 
     //特殊カードのフラグ
     public bool m_soliderStop = false;
@@ -37,7 +37,7 @@ public class ButtonSpawner : MonoBehaviour
 
         this.transform.tag = "SoliderButton";
 
-        Transform gameManagerTrans=GameObject.Find("GameManager").transform;
+        Transform gameManagerTrans = GameObject.Find("GameManager").transform;
 
         this.GetComponent<Button>().onClick.AddListener(ResetFlag);
 
@@ -79,9 +79,6 @@ public class ButtonSpawner : MonoBehaviour
         m_startFlag = false;
         m_spawnerFlag = false;
 
-       
-        Image image = this.GetComponent<Image>();
-
         m_changeSprite.sprite = m_sprite[0];
 
     }
@@ -96,9 +93,6 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     m_nowTouchNumber = i;
                     Debug.Log("タッチしましたー＞" + i);
-                    
-
-                    Image image = this.GetComponent<Image>();
 
                     m_changeSprite.sprite = m_sprite[1];
 
@@ -114,7 +108,6 @@ public class ButtonSpawner : MonoBehaviour
         m_spawnerFlag = false;
 
         if (!m_startFlag) { return; }
-        Image image = this.GetComponent<Image>();
 
         m_changeSprite.sprite = m_sprite[1];
     }
@@ -136,9 +129,9 @@ public class ButtonSpawner : MonoBehaviour
     //兵士出現処理
     public void Spawner()
     {
-		
+
         //兵士が残っていれば生成
-		if(SoldierNumCheck(m_PlayerID,m_type) && m_spawnerFlag)
+        if (SoldierNumCheck(m_PlayerID, m_type) && m_spawnerFlag)
         {
 
             m_changeSprite.transform.gameObject.AddComponent<Anten>();
@@ -201,7 +194,7 @@ public class ButtonSpawner : MonoBehaviour
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
-			AudioManager.m_instance.PlaySE("button_SE");
+            AudioManager.m_instance.PlaySE("button_SE");
             if (m_soliderDouble)
             {
                 m_beforeType = m_type;
@@ -209,21 +202,21 @@ public class ButtonSpawner : MonoBehaviour
                 m_soliderDoubleStart = true;
             }
 
-           //インターバル時間を追加
+            //インターバル時間を追加
             m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
-           
+
         }
         ResetFlag();
     }
 
     //兵士が残っているかチェック
     //残っていれば true が返る
-    bool SoldierNumCheck(int _playerID,Character.CharacterType _type)
+    bool SoldierNumCheck(int _playerID, Character.CharacterType _type)
     {
         switch (_type)
         {
             case Character.CharacterType.Sword:
-                if (_playerID == 1)if (SelectUIManager.SWORD_NUM_1 <= 0)return false;
+                if (_playerID == 1) if (SelectUIManager.SWORD_NUM_1 <= 0) return false;
                 if (_playerID == 2) if (SelectUIManager.SWORD_NUM_2 <= 0) return false;
                 break;
             case Character.CharacterType.Spear:
@@ -246,18 +239,15 @@ public class ButtonSpawner : MonoBehaviour
         return true;
     }
 
-	//兵士を出してもよいか前方をチェック
-	bool CheckFrontArea(int _playerID,Character.CharacterType _type)
-	{
-		return false;
-	}
+    //兵士を出してもよいか前方をチェック
+    bool CheckFrontArea(int _playerID, Character.CharacterType _type)
+    {
+        return false;
+    }
 
     //兵士の選択を変える処理に入る
     public void SolderImageChange()
     {
-        Image image = this.GetComponent<Image>();
-
-
         if (m_PlayerID == 1)
         {
             if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
@@ -293,22 +283,23 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[4];
-                    if(m_PlayerID==1)
-                    m_type = Character.CharacterType.Sword;
+                    if (m_PlayerID == 1)
+                        m_type = Character.CharacterType.Sword;
                     else
                         m_type = Character.CharacterType.Shield;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
-                    if(m_PlayerID==1)
-                    m_type = Character.CharacterType.Shield;
+                    if (m_PlayerID == 1)
+                        m_type = Character.CharacterType.Shield;
                     else
                         m_type = Character.CharacterType.Sword;
                 }
             }
         }
-        else {
+        else
+        {
             if (Mathf.Abs(TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber)) > Mathf.Abs(TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber)))
             {
 
@@ -344,7 +335,7 @@ public class ButtonSpawner : MonoBehaviour
     void Start()
     {
         //初期設定を行う。
-		m_battleManager = GameObject.FindWithTag("BattleManager").transform;
+        m_battleManager = GameObject.FindWithTag("BattleManager").transform;
 
         m_type = Character.CharacterType.Sword;
 
@@ -425,7 +416,7 @@ public class ButtonSpawner : MonoBehaviour
 
         }
 
-        if ( m_spawnerFlag)
+        if (m_spawnerFlag)
         {
             SolderImageChange();
         }

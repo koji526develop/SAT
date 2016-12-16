@@ -108,7 +108,6 @@ public class CharacterMove :  State<Character>
 		if (playerID == otherCharacterId) {
 			Character allyCharacter = _otherCharacter;
 			GameObject allyGameObject = _otherCharacter.gameObject;
-			int allyCharacterId = otherCharacterId;
 
 			if (playerID == 1) {
 				// 味方のキャラが自分より左にいたら
@@ -194,7 +193,6 @@ public class CharacterMove :  State<Character>
 		if (playerID != otherCharacterId) {
 			Character enemyCharacter = _otherCharacter;
 			GameObject enemyGameObject = _otherCharacter.gameObject;
-			int enemyCharacterId = otherCharacterId;
 
 			if (playerID == 1) 
 			{
@@ -453,7 +451,6 @@ public class CharacterMove :  State<Character>
 	bool IsArrivalGoal()
 	{
 		int id = m_instance.status.PlayerID;
-		int column = m_instance.mapColumn;
 		float charaPosX = m_instance.transform.position.x;
 
 		// プレイヤー１のキャラがプレイヤー２のキャラクター生成ラインより右に行ったら

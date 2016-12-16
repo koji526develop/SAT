@@ -73,7 +73,7 @@ public class SelectUIManager : MonoBehaviour
         // 武器の名前がついた丸４つ作成
         for (int i = 0; i < 4; i++)
         {
-            GameObject obj = MyUtility.CreateImage(
+            MyUtility.CreateImage(
                 WEAPON_NAME[i],
                 IconPath[i],
                 new Vector2(3 / 32.0f, (17.5f - i * 3.5f) / 25.0f),

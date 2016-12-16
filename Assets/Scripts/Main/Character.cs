@@ -454,6 +454,6 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
 	public void NowAnimationRePlay()
 	{
 		AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo (0);
-		animator.Play (info.nameHash, 0, 0.0f);
+		animator.Play (info.fullPathHash, 0, 0.0f);
 	}
 }

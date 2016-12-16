@@ -289,7 +289,7 @@ public class ResultManager : MonoBehaviour
         if (touch == TouchInfo.Began)
         {
             //タッチしてよい && ボタンが表示されていない
-            if (m_TouchFlag && !buttonObj.active)
+            if (m_TouchFlag && !buttonObj.activeSelf)
             {
                 buttonObj.SetActive(true);
             }

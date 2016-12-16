@@ -25,8 +25,8 @@ public class SelectManager : MonoBehaviour
 
 	public IEnumerator SetCameraForCanvas(Canvas _canvas, Camera _camera)
 	{
-		return null;
-		_canvas.worldCamera = _camera;
+        _canvas.worldCamera = _camera;
+        return null;
 	}
 
 	void Update () 
