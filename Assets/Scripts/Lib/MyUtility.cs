@@ -11,22 +11,22 @@ public class MyUtility : MonoBehaviour
     public static readonly int MAX_COLUMN = 5;
 
     // 剣士のパラメータ
-    public static int SWORD_LIFE = 3;
+    public static int SWORD_LIFE = 2;
     public static int SWORD_ATTACK = 1;
     public static int SWORD_ATTACKDISTANCE = 1;
-    public static float SWORD_MOVESPEED = 0.05f/2;
+    public static float SWORD_MOVESPEED = 0.035f/2;
 
     // 槍のパラメータ
-    public static int SPEAR_LIFE = 1;
+    public static int SPEAR_LIFE = 2;
     public static int SPEAR_ATTACK = 1;
-    public static int SPEAR_ATTACKDISTANCE = 2;
-	public static float SPEAR_MOVESPEED = 0.025f/2;
+    public static int SPEAR_ATTACKDISTANCE = 1;
+	public static float SPEAR_MOVESPEED = 0.035f/2;
 
     // 斧のパラメータ
     public static int AX_LIFE = 2;
-    public static int AX_ATTACK = 4;
+    public static int AX_ATTACK = 1;
     public static int AX_ATTACKDISTANCE = 1;
-	public static float AX_MOVESPEED = 0.025f/2;
+	public static float AX_MOVESPEED = 0.035f/2;
 
     // 盾のパラメータ
     public static int SHIELD_LIFE = 8;

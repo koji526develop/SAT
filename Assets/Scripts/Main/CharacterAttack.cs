@@ -1,105 +1,116 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterAttack : State<Character> 
+public class CharacterAttack : State<Character>
 {
-	public CharacterAttack(Character _instance) : base(_instance) {}
+    public CharacterAttack(Character _instance) : base(_instance) { }
 
-	// 敵のキャラクターオブジェクト
-	GameObject m_enemyObj;
+    // 敵のキャラクターオブジェクト
+    GameObject m_enemyObj;
 
-	// 敵のキャラクター
-	Character m_enemyCharacter;
+    // 敵のキャラクター
+    Character m_enemyCharacter;
 
-	// 攻撃のインターバル
-	float m_attackTime;
+    // 攻撃のインターバル
+    float m_attackTime;
 
-	//　敵の情報格納用
-	Character.Status m_changeStatus; 
+    //　敵の情報格納用
+    Character.Status m_changeStatus;
 
-	public GameObject enemyObj
-	{
-		set
-		{ 
-			m_enemyObj = value;
-		}
-	}
+    //攻撃倍率
+    float magnification = 1.0f;
 
-	public override void Enter() 
-	{
-		m_enemyCharacter = m_enemyObj.GetComponent<Character> ();
-		m_attackTime = 0.0f;
-		m_changeStatus = m_enemyCharacter.status;
+    public GameObject enemyObj
+    {
+        set
+        {
+            m_enemyObj = value;
+        }
+    }
 
-		m_instance.animator.Play ("Attack");
-	}
+    public override void Enter()
+    {
+        m_enemyCharacter = m_enemyObj.GetComponent<Character>();
+        m_attackTime = 0.0f;
+        m_changeStatus = m_enemyCharacter.status;
 
-	public override void Update()
-	{
-		if (m_instance.status.PlayerID == 1)
-		{
-			Debug.Log ("1p"+m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime.ToString());
-			;
-		}
-		else
-		{
-			Debug.Log ("2p"+m_instance.animator.GetCurrentAnimatorStateInfo (0).normalizedTime.ToString());
-		}
+        m_instance.animator.Play("Attack");
+    }
 
-		m_attackTime += Time.deltaTime;
+    public override void Update()
+    {
+        if (m_instance.status.PlayerID == 1)
+        {
+            Debug.Log("1p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
+            ;
+        }
+        else
+        {
+            Debug.Log("2p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
+        }
 
-		if(m_instance.IsFinishAnimation())
-		{
-			m_instance.NowAnimationRePlay ();
+        m_attackTime += Time.deltaTime;
 
-			Attak ();
-			if(m_instance.status.PlayerID == 1)
-				Debug.Log ("1p攻撃なう");
-			else
-				Debug.Log ("2p攻撃なう");
-			m_attackTime = 0;
+        if (m_instance.IsFinishAnimation())
+        {
+            m_instance.NowAnimationRePlay();
 
-		}
+            Attak();
+            if (m_instance.status.PlayerID == 1)
+                Debug.Log("1p攻撃なう");
+            else
+                Debug.Log("2p攻撃なう");
+            m_attackTime = 0;
 
-		if(m_enemyCharacter == null)
-			m_instance.ChangeState (Character.CharacterState.Move);
-	}
-	void Attak()
-	{
-		if (m_enemyCharacter.Barrier) {
-			foreach (Transform child in m_enemyCharacter.transform) {
-				if (child.name == "Barrier")
-					Character.Destroy (child.gameObject);
-			}
-			m_enemyCharacter.Barrier = false;
-			return;
-		} else {
+        }
 
-			switch (m_instance.status.characterType) 
-			{
-			case Character.CharacterType.Sword:
-				AudioManager.m_instance.PlaySE ("sowrd_SE");
-				break;
-			case Character.CharacterType.Spear:
-				AudioManager.m_instance.PlaySE ("spear_SE");
-				break;
-			case Character.CharacterType.Shield:
-				AudioManager.m_instance.PlaySE ("shield_SE");
-				break;
-			case Character.CharacterType.Ax:
-				AudioManager.m_instance.PlaySE ("sowrd_SE");
-				break;
-			}
+        if (m_enemyCharacter == null)
+            m_instance.ChangeState(Character.CharacterState.Move);
+    }
+    void Attak()
+    {
+        if (m_enemyCharacter.Barrier)
+        {
+            foreach (Transform child in m_enemyCharacter.transform)
+            {
+                if (child.name == "Barrier")
+                    Character.Destroy(child.gameObject);
+            }
+            m_enemyCharacter.Barrier = false;
+            return;
+        }
+        else
+        {
+            magnification = 1.0f;
+            switch (m_instance.status.characterType)
+            {
+                case Character.CharacterType.Sword:
+                    AudioManager.m_instance.PlaySE("sowrd_SE");
+                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Spear) magnification = 2.0f;
+                    break;
+                case Character.CharacterType.Spear:
+                    AudioManager.m_instance.PlaySE("spear_SE");
+                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Ax) magnification = 2.0f;
+                    break;
+                case Character.CharacterType.Shield:
+                    AudioManager.m_instance.PlaySE("shield_SE");
+                    //if (m_enemyCharacter.status.characterType == Character.CharacterType.Spear) magnification = 2.0f;
+                    break;
+                case Character.CharacterType.Ax:
+                    AudioManager.m_instance.PlaySE("sowrd_SE");
+                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Sword) magnification = 2.0f;
+                    break;
+            }
 
-			m_changeStatus.life -= m_instance.status.attack;
+            m_changeStatus.life -= m_instance.status.attack * (int)magnification;
 
-			m_enemyCharacter.status = m_changeStatus;
-		}
-	}
+            m_enemyCharacter.status = m_changeStatus;
+        }
+    }
 
-	public override void Exit() 
-	{
-		m_enemyObj = null;
-		m_enemyCharacter = null;
-	}
+    public override void Exit()
+    {
+        m_enemyObj = null;
+        m_enemyCharacter = null;
+    }
 }
