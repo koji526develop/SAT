@@ -344,9 +344,9 @@ public class MyUtility : MonoBehaviour
         Vector2 touchPos = TouchManager.GetTouchPosition(0);
 
         if (touchPos.x < centerPos.x - scale.x / 2) return false;
-        if (touchPos.x < centerPos.x - scale.x / 2) return false;
+        if (touchPos.x > centerPos.x + scale.x / 2) return false;
         if (touchPos.y < centerPos.y - scale.y / 2) return false;
-        if (touchPos.y < centerPos.y - scale.y / 2) return false;
+        if (touchPos.y > centerPos.y + scale.y / 2) return false;
 
         return true;
     }
