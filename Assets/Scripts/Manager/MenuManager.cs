@@ -37,15 +37,13 @@ public class MenuManager : MonoBehaviour
     bool isGame;            //ゲーム開始できるか
 
     GameObject[] m_PlayerButton = new GameObject[2];    //プレイヤー選択ボタン格納
-    GameObject circleObj;
-    GameObject soldierFormationObj;
-    Camera camera;
+    
     void Awake()
     {
         // ライト作成
         MyUtility.CreateDirectionalLight();
         // MAINカメラ作成
-        camera = MyUtility.CreateCamera("MainCamera");
+        Camera camera = MyUtility.CreateCamera("MainCamera");
 
         Canvas canvas = MyUtility.CreateCanvas();
         //イベントシステム作成
@@ -69,7 +67,7 @@ public class MenuManager : MonoBehaviour
             m_MenuObject.transform);
 
         //兵士編成ボタン
-        soldierFormationObj = MyUtility.CreateButton(
+        GameObject soldierFormationObj = MyUtility.CreateButton(
             "formation",
             "UI/Menu/formation",
             new Vector2(6 / 32.0f, 6 / 25.0f),
@@ -81,9 +79,7 @@ public class MenuManager : MonoBehaviour
         ButtonRectSet(soldierFormationObj.transform, new Vector2(0, 0), new Vector2(0.425f, 1), new Vector3(0, 0, 0));
         ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0.623f), new Vector2(0.81f, 1), new Vector3(0, 0, 0));
         ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0), new Vector2(0.81f, 0.4f), new Vector3(0, 0, 135));
-        circleObj = MyUtility.CreateButton("circleButton", "UI/clean", new Vector2(0.42f, 0.52f), new Vector2(0.63f, 0.77f), m_MenuButton.transform);
-        circleObj.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
-        circleObj.GetComponent<Button>().onClick.AddListener(CircleProces);
+        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.6f, 0.55f), new Vector2(0.94f, 0.89f), new Vector3(0, 0, 0));
 
         //特殊カード選択ボタン
         GameObject specialCardObj = MyUtility.CreateButton(
@@ -203,19 +199,19 @@ public class MenuManager : MonoBehaviour
         rectTransform.anchorMax = _anchorMax;
         rectTransform.Rotate(_rotate);
     }
-    /// <summary>
-    /// 円形判定のボタン
-    /// </summary>
-    void CircleProces()
-    {
-        Vector3 touchPos = TouchManager.GetTouchPosition(0);
-        Vector3 circlePos = camera.WorldToScreenPoint(circleObj.transform.position);
-        if (Vector2.Distance(touchPos, circlePos) < 43.0f)
-        {
-            Debug.Log("円内");
-            sceneChanger.ChangeToSelect();
-        }
-    }
+    ///// <summary>
+    ///// 円形判定のボタン
+    ///// </summary>
+    //void CircleProces()
+    //{
+    //    Vector3 touchPos = TouchManager.GetTouchPosition(0);
+    //    Vector3 circlePos = camera.WorldToScreenPoint(circleObj.transform.position);
+    //    if (Vector2.Distance(touchPos, circlePos) < 43.0f)
+    //    {
+    //        Debug.Log("円内");
+    //        sceneChanger.ChangeToSelect();
+    //    }
+    //}
 
     void Start()
     {
