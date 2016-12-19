@@ -29,7 +29,7 @@ public class TitleManager : MonoBehaviour
         //タイトル文字
         MyUtility.CreateImage(
             "Title",
-            "UI/Title/title_new",
+            "UI/Title/title",
             new Vector2(0 / 32.0f, 0 / 25.0f),
             new Vector2(32/ 32.0f, 25 / 25.0f),
             m_TitleImageObj.transform);
