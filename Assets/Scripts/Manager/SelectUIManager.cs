@@ -245,7 +245,7 @@ public class SelectUIManager : MonoBehaviour
         //優劣画像
         GameObject meritImageObj = MyUtility.CreateImage(
               "Merit",
-              "Image/TimeWaku",
+			"Image/triangle_window",
               new Vector2(3 / 32.0f, 3 / 25.0f),
               new Vector2(28 / 32.0f, 22 / 25.0f),
               m_meritDisplayObj.transform);
