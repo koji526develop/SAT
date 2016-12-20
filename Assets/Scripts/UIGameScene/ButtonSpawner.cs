@@ -32,6 +32,8 @@ public class ButtonSpawner : MonoBehaviour
     public Image m_changeSprite;
     Sprite[] m_sprite = new Sprite[6];
 
+    private int m_specialSoldier = 0;
+
     void Awake()
     {
 
@@ -129,9 +131,16 @@ public class ButtonSpawner : MonoBehaviour
     //兵士出現処理
     public void Spawner()
     {
-
+        //特殊カード3兵士増強
+        if (m_soliderDouble)
+        {
+            m_beforeType = m_type;
+            m_soliderDouble = false;
+            m_soliderDoubleStart = true;
+            m_specialSoldier = 2;
+        }
         //兵士が残っていれば生成
-        if (SoldierNumCheck(m_PlayerID, m_type) && m_spawnerFlag)
+        else if (SoldierNumCheck(m_PlayerID, m_type) && m_spawnerFlag)
         {
 
             m_changeSprite.transform.gameObject.AddComponent<Anten>();
@@ -143,22 +152,22 @@ public class ButtonSpawner : MonoBehaviour
 
                     if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                     {
-						m_type = Character.CharacterType.Sword;
+                        m_type = Character.CharacterType.Sword;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Shield;
+                        m_type = Character.CharacterType.Shield;
                     }
                 }
                 else
                 {
                     if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                     {
-						m_type = Character.CharacterType.Spear;
+                        m_type = Character.CharacterType.Spear;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Ax;
+                        m_type = Character.CharacterType.Ax;
                     }
                 }
             }
@@ -169,22 +178,22 @@ public class ButtonSpawner : MonoBehaviour
 
                     if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                     {
-						m_type = Character.CharacterType.Shield;
+                        m_type = Character.CharacterType.Shield;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Sword;
+                        m_type = Character.CharacterType.Sword;
                     }
                 }
                 else
                 {
                     if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                     {
-						m_type = Character.CharacterType.Ax;
+                        m_type = Character.CharacterType.Ax;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Spear;
+                        m_type = Character.CharacterType.Spear;
                     }
                 }
             }
@@ -195,12 +204,6 @@ public class ButtonSpawner : MonoBehaviour
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             Debug.Log("兵士出す");
             AudioManager.m_instance.PlaySE("button_SE");
-            if (m_soliderDouble)
-            {
-                m_beforeType = m_type;
-                m_soliderDouble = false;
-                m_soliderDoubleStart = true;
-            }
 
             //インターバル時間を追加
             m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
@@ -258,11 +261,11 @@ public class ButtonSpawner : MonoBehaviour
                     m_changeSprite.sprite = m_sprite[2];
                     if (m_PlayerID == 1)
                     {
-						m_type = Character.CharacterType.Sword;
+                        m_type = Character.CharacterType.Sword;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Shield;
+                        m_type = Character.CharacterType.Shield;
                     }
                 }
                 else
@@ -270,11 +273,11 @@ public class ButtonSpawner : MonoBehaviour
                     m_changeSprite.sprite = m_sprite[3];
                     if (m_PlayerID == 1)
                     {
-						m_type = Character.CharacterType.Shield;
+                        m_type = Character.CharacterType.Shield;
                     }
                     else
                     {
-						m_type = Character.CharacterType.Sword;
+                        m_type = Character.CharacterType.Sword;
                     }
                 }
             }
@@ -284,17 +287,17 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     m_changeSprite.sprite = m_sprite[4];
                     if (m_PlayerID == 1)
-						m_type = Character.CharacterType.Spear;
+                        m_type = Character.CharacterType.Spear;
                     else
-						m_type = Character.CharacterType.Ax;
+                        m_type = Character.CharacterType.Ax;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
                     if (m_PlayerID == 1)
-						m_type = Character.CharacterType.Ax;
+                        m_type = Character.CharacterType.Ax;
                     else
-						m_type = Character.CharacterType.Spear;
+                        m_type = Character.CharacterType.Spear;
                 }
             }
         }
@@ -306,12 +309,12 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[2];
-					m_type = Character.CharacterType.Shield;
+                    m_type = Character.CharacterType.Shield;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[3];
-					m_type = Character.CharacterType.Sword;
+                    m_type = Character.CharacterType.Sword;
                 }
             }
             else
@@ -319,12 +322,12 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                 {
                     m_changeSprite.sprite = m_sprite[4];
-					m_type = Character.CharacterType.Spear;
+                    m_type = Character.CharacterType.Spear;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
-					m_type = Character.CharacterType.Ax;
+                    m_type = Character.CharacterType.Ax;
                 }
             }
         }
@@ -352,20 +355,20 @@ public class ButtonSpawner : MonoBehaviour
         if (m_PlayerID == 1)
         {
             m_sprite[0] = Resources.Load("UI/Game/flick", typeof(Sprite)) as Sprite;
-			m_sprite[1] = Resources.Load("UI/Game/flick_center", typeof(Sprite)) as Sprite;
-			m_sprite[2] = Resources.Load("UI/Game/flick_sword", typeof(Sprite)) as Sprite;
-			m_sprite[3] = Resources.Load("UI/Game/flick_shield", typeof(Sprite)) as Sprite;
-			m_sprite[4] = Resources.Load("UI/Game/flick_spear", typeof(Sprite)) as Sprite;
-			m_sprite[5] = Resources.Load("UI/Game/flick_ax", typeof(Sprite)) as Sprite;
+            m_sprite[1] = Resources.Load("UI/Game/flick_center", typeof(Sprite)) as Sprite;
+            m_sprite[2] = Resources.Load("UI/Game/flick_sword", typeof(Sprite)) as Sprite;
+            m_sprite[3] = Resources.Load("UI/Game/flick_shield", typeof(Sprite)) as Sprite;
+            m_sprite[4] = Resources.Load("UI/Game/flick_spear", typeof(Sprite)) as Sprite;
+            m_sprite[5] = Resources.Load("UI/Game/flick_ax", typeof(Sprite)) as Sprite;
         }
         else
         {
             m_sprite[0] = Resources.Load("UI/Game/flick2", typeof(Sprite)) as Sprite;
-			m_sprite[1] = Resources.Load("UI/Game/flick_center2", typeof(Sprite)) as Sprite;
-			m_sprite[2] = Resources.Load("UI/Game/flick_shield2", typeof(Sprite)) as Sprite;
-			m_sprite[3] = Resources.Load("UI/Game/flick_sword2", typeof(Sprite)) as Sprite;
-			m_sprite[4] = Resources.Load("UI/Game/flick_ax2", typeof(Sprite)) as Sprite;
-			m_sprite[5] = Resources.Load("UI/Game/flick_spear2", typeof(Sprite)) as Sprite;
+            m_sprite[1] = Resources.Load("UI/Game/flick_center2", typeof(Sprite)) as Sprite;
+            m_sprite[2] = Resources.Load("UI/Game/flick_shield2", typeof(Sprite)) as Sprite;
+            m_sprite[3] = Resources.Load("UI/Game/flick_sword2", typeof(Sprite)) as Sprite;
+            m_sprite[4] = Resources.Load("UI/Game/flick_ax2", typeof(Sprite)) as Sprite;
+            m_sprite[5] = Resources.Load("UI/Game/flick_spear2", typeof(Sprite)) as Sprite;
         }
 
         ResetFlag();
@@ -410,7 +413,11 @@ public class ButtonSpawner : MonoBehaviour
                         break;
                 }
 
-                m_soliderDoubleStart = false;
+                m_specialSoldier -= 1;
+                //インターバル時間を追加
+                m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
+
+                if (m_specialSoldier <= 0) m_soliderDoubleStart = false;
             }
 
 
