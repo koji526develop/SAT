@@ -245,9 +245,9 @@ public class SelectUIManager : MonoBehaviour
         //優劣画像
         GameObject meritImageObj = MyUtility.CreateImage(
               "Merit",
-			"Image/triangle_window",
-              new Vector2(3 / 32.0f, 3 / 25.0f),
-              new Vector2(28 / 32.0f, 22 / 25.0f),
+            "UI/Select/triangle_window",
+              new Vector2(0 / 32.0f, 0 / 25.0f),
+              new Vector2(32 / 32.0f, 25 / 25.0f),
               m_meritDisplayObj.transform);
 
         m_meritRectRange = meritImageObj.GetComponent<RectTransform>();
@@ -433,11 +433,7 @@ public class SelectUIManager : MonoBehaviour
             TouchInfo touch = TouchManager.GetTouchInfo(0);
             if (touch == TouchInfo.Began)
             {
-                //タッチ場所が画像の上でなければ
-                if (!MyUtility.IsContainPoint(m_meritRectRange))
-                {
-                    m_meritDisplayObj.SetActive(false);
-                }
+                m_meritDisplayObj.SetActive(false);
             }
         }
 
