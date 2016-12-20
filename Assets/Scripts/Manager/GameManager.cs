@@ -126,10 +126,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        GameObject debugList = Instantiate(Resources.Load("Prefabs/DebugList") as GameObject);
-        debugList.name = "DebugList";
-        debugList.transform.SetParent(m_canvas.transform);
-        m_canvas.gameObject.AddComponent<DebugUI>();
+        //GameObject debugList = Instantiate(Resources.Load("Prefabs/DebugList") as GameObject);
+        //debugList.name = "DebugList";
+        //debugList.transform.SetParent(m_canvas.transform);
+        //m_canvas.gameObject.AddComponent<DebugUI>();
 
         Invoke("DelayMethod", 0.5f);
 
