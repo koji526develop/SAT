@@ -312,7 +312,7 @@ public class SelectUIManager : MonoBehaviour
             }
 
             //シーン遷移
-            sceneChanger.ChangeToSelectSpecial();
+            sceneChanger.ChangeToMenu();
         }
     }
 

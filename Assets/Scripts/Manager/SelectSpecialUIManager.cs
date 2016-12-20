@@ -225,7 +225,7 @@ public class SelectSpecialUIManager : MonoBehaviour
     {
         AudioManager.m_instance.PlaySE("button_SE");
 
-        sceneChanger.ChangeToSelect();
+        sceneChanger.ChangeToMenu();
     }
 
     public void EnterProces()
