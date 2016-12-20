@@ -24,7 +24,7 @@ public class ResultManager : MonoBehaviour
     GameObject buttonObj;
 
     GameObject rematchObj;
-    GameObject soldierSelectObj;
+    GameObject menuObj;
 
     void Awake()
     {
@@ -204,15 +204,15 @@ public class ResultManager : MonoBehaviour
         sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         rematchObj.GetComponent<Button>().onClick.AddListener(RematchProces);
 
-        //兵士選択へボタン
-        soldierSelectObj = MyUtility.CreateButton(
+        //メニューボタン
+        menuObj = MyUtility.CreateButton(
             "SoldierSelect",
             "UI/Result/reselect",
             new Vector2(10 / 32.0f, 2 / 25.0f),
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
 
-        soldierSelectObj.GetComponent<Button>().onClick.AddListener(RelayProces);
+        menuObj.GetComponent<Button>().onClick.AddListener(MenuProces);
 
         buttonObj.SetActive(false);
 
@@ -242,8 +242,8 @@ public class ResultManager : MonoBehaviour
         sceneChanger.ChangeToGame();
     }
 
-    //Relayシーンへ
-    public void RelayProces()
+    //メニューシーンへ
+    public void MenuProces()
     {
         //兵士の情報を初期化
         SelectUIManager.SWORD_NUM_1 = 0;
@@ -263,6 +263,8 @@ public class ResultManager : MonoBehaviour
         }
 
         MenuManager.m_playerSetting.Reset();
+
+        SelectUIManager.PlayerID = 1;
 
         sceneChanger.ChangeToMenu();
     }
@@ -294,7 +296,7 @@ public class ResultManager : MonoBehaviour
                 buttonObj.SetActive(true);
             }
             //タッチ場所がボタンの上でなければ
-            else if (!MyUtility.IsContainPoint(rematchObj.GetComponent<RectTransform>()) && !MyUtility.IsContainPoint(soldierSelectObj.GetComponent<RectTransform>()))
+            else if (!MyUtility.IsContainPoint(rematchObj.GetComponent<RectTransform>()) && !MyUtility.IsContainPoint(menuObj.GetComponent<RectTransform>()))
             {
                 buttonObj.SetActive(false);
             }
