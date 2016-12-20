@@ -91,7 +91,7 @@ public class SpecialCard2 : SpecialCard
                             int enemyPlayerID = 0;
                             if (m_UsedPlayerID == 1) { enemyPlayerID = 2; }
                             else { enemyPlayerID = 1; }
-                            gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID, 100);
+                            gameManager.GetComponent<ScoreManager>().DirectGetPoint(enemyPlayerID, 50);
                             m_gameUIManager.RectRender(m_UsedPlayerID, false);
 
                             Destroy(this);
