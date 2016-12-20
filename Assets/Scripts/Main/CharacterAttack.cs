@@ -86,11 +86,11 @@ public class CharacterAttack : State<Character>
             {
                 case Character.CharacterType.Sword:
                     AudioManager.m_instance.PlaySE("sowrd_SE");
-                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Spear) magnification = 2.0f;
+                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Spear) magnification = 1.5f;
                     break;
                 case Character.CharacterType.Spear:
                     AudioManager.m_instance.PlaySE("spear_SE");
-                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Ax) magnification = 2.0f;
+				if (m_enemyCharacter.status.characterType == Character.CharacterType.Ax) magnification =1.5f;
                     break;
                 case Character.CharacterType.Shield:
                     AudioManager.m_instance.PlaySE("shield_SE");
@@ -98,7 +98,7 @@ public class CharacterAttack : State<Character>
                     break;
                 case Character.CharacterType.Ax:
                     AudioManager.m_instance.PlaySE("sowrd_SE");
-                    if (m_enemyCharacter.status.characterType == Character.CharacterType.Sword) magnification = 2.0f;
+				if (m_enemyCharacter.status.characterType == Character.CharacterType.Sword) magnification = 1.5f;
                     break;
             }
 
