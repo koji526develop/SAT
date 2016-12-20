@@ -37,7 +37,7 @@ public class MenuManager : MonoBehaviour
     bool isGame;            //ゲーム開始できるか
 
     GameObject[] m_PlayerButton = new GameObject[2];    //プレイヤー選択ボタン格納
-    
+
     void Awake()
     {
         // ライト作成
@@ -90,6 +90,11 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform);
         specialCardObj.GetComponent<Image>().raycastTarget = false;
         specialCardObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+        //特殊カード選択ボタンタッチ取得範囲
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.58f, 0), new Vector2(1, 1), new Vector3(0, 0, 0));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.18f, 0), new Vector2(0.6f, 0.3f), new Vector3(0, 0, 0));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.36f, 0.16f), new Vector2(0.72f, 0.35f), new Vector3(0, 0, 45));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.04f, 0.08f), new Vector2(0.42f, 0.43f), new Vector3(0, 0, 0));
 
         //プレイヤーアイコン1P
         m_PlayerButton[0] = MyUtility.CreateButton(
