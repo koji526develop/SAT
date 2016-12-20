@@ -165,7 +165,7 @@ public class MenuManager : MonoBehaviour
         gameObj.GetComponent<Button>().onClick.AddListener(GameMainProces);
 
         //全ての兵士、カードの情報がセットされていなかったら選べないようにする
-        isGame = m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_2P && m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_1P;
+        isGame = m_playerSetting.isSoldier_1P && m_playerSetting.isSoldier_2P && m_playerSetting.isSpecial_1P && m_playerSetting.isSpecial_2P;
 
         if (!isGame)
         {
