@@ -40,6 +40,7 @@ public class TitleManager : MonoBehaviour
             new Vector2(8.0f / 32.0f, 3.1f / 25.0f),
             new Vector2(24.0f / 32.0f, 6.9f / 25.0f),
             m_TitleImageObj.transform);
+        obj.GetComponent<Image>().color = new Color(207.0f/255.0f,236.0f/255.0f,200.0f/255.0f,1);
 
         FadeTo fadeTo = obj.AddComponent<FadeTo>();     //タッチの文字を点滅
         fadeTo.SetBlinkFadeForever(0.7f,true);      

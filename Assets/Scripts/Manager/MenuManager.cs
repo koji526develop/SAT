@@ -38,6 +38,8 @@ public class MenuManager : MonoBehaviour
 
     GameObject[] m_PlayerButton = new GameObject[2];    //プレイヤー選択ボタン格納
 
+    Color m_buttonClearColor = new Color(1, 1, 1, 120.0f / 255.0f);
+
     void Awake()
     {
         // ライト作成
@@ -66,36 +68,6 @@ public class MenuManager : MonoBehaviour
             new Vector2(32 / 32.0f, 25 / 25.0f),
             m_MenuObject.transform);
 
-        //兵士編成ボタン
-        GameObject soldierFormationObj = MyUtility.CreateButton(
-            "formation",
-            "UI/Menu/formation",
-            new Vector2(6 / 32.0f, 6 / 25.0f),
-            new Vector2(20 / 32.0f, 20 / 25.0f),
-            m_MenuButton.transform);
-        soldierFormationObj.GetComponent<Image>().raycastTarget = false;
-        soldierFormationObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
-        //兵士編成ボタンタッチ取得範囲
-        ButtonRectSet(soldierFormationObj.transform, new Vector2(0, 0), new Vector2(0.425f, 1), new Vector3(0, 0, 0));
-        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0.623f), new Vector2(0.81f, 1), new Vector3(0, 0, 0));
-        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0), new Vector2(0.81f, 0.4f), new Vector3(0, 0, 135));
-        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.6f, 0.55f), new Vector2(0.94f, 0.89f), new Vector3(0, 0, 0));
-
-        //特殊カード選択ボタン
-        GameObject specialCardObj = MyUtility.CreateButton(
-            "Special",
-            "UI/Menu/card",
-            new Vector2(12 / 32.0f, 6 / 25.0f),
-            new Vector2(26 / 32.0f, 20 / 25.0f),
-            m_MenuButton.transform);
-        specialCardObj.GetComponent<Image>().raycastTarget = false;
-        specialCardObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
-        //特殊カード選択ボタンタッチ取得範囲
-        ButtonRectSet(specialCardObj.transform, new Vector2(0.58f, 0), new Vector2(1, 1), new Vector3(0, 0, 0));
-        ButtonRectSet(specialCardObj.transform, new Vector2(0.18f, 0), new Vector2(0.6f, 0.3f), new Vector3(0, 0, 0));
-        ButtonRectSet(specialCardObj.transform, new Vector2(0.36f, 0.16f), new Vector2(0.72f, 0.35f), new Vector3(0, 0, 45));
-        ButtonRectSet(specialCardObj.transform, new Vector2(0.04f, 0.08f), new Vector2(0.42f, 0.43f), new Vector3(0, 0, 0));
-
         //プレイヤーアイコン1P
         m_PlayerButton[0] = MyUtility.CreateButton(
             "Player1PIcon",
@@ -115,9 +87,61 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform
             );
         m_PlayerButton[1].GetComponent<Button>().onClick.AddListener(Player2Proces);
-        //現在のプレイヤーではない方のボタンを半透明に
-        if (SelectUIManager.PlayerID == 1) m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
-        else if (SelectUIManager.PlayerID == 2) m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+        //現在のプレイヤーではない方のボタンを半透明かつ小さく
+        if (SelectUIManager.PlayerID == 1)
+        {
+            m_PlayerButton[1].GetComponent<Image>().color = m_buttonClearColor;
+            m_PlayerButton[1].transform.localScale = new Vector3(0.8f,0.8f,1.0f);
+        }
+        else if (SelectUIManager.PlayerID == 2)
+        {
+            m_PlayerButton[0].GetComponent<Image>().color = m_buttonClearColor;
+            m_PlayerButton[0].transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
+        }
+
+        //プレイヤーアイコンPivot変更
+        for (int i = 0; i < 2; i++)
+        {
+            m_PlayerButton[i].GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+        }
+
+        //テキスト
+        MyUtility.CreateText("プレイヤー選択",
+            m_MenuObject.transform,
+            30,
+            Vector3.zero,
+            new Vector2(1 / 32.0f, 20 / 25.0f),
+            new Vector2(9 / 32.0f, 21 / 25.0f));
+
+        //兵士編成ボタン
+        GameObject soldierFormationObj = MyUtility.CreateButton(
+            "formation",
+            "UI/Menu/formation",
+            new Vector2(6 / 32.0f, 5.5f / 25.0f),
+            new Vector2(20 / 32.0f, 19.5f / 25.0f),
+            m_MenuButton.transform);
+        soldierFormationObj.GetComponent<Image>().raycastTarget = false;
+        soldierFormationObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        //兵士編成ボタンタッチ取得範囲
+        ButtonRectSet(soldierFormationObj.transform, new Vector2(0, 0), new Vector2(0.425f, 1), new Vector3(0, 0, 0));
+        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0.623f), new Vector2(0.81f, 1), new Vector3(0, 0, 0));
+        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0), new Vector2(0.81f, 0.4f), new Vector3(0, 0, 135));
+        ButtonRectSet(soldierFormationObj.transform, new Vector2(0.6f, 0.55f), new Vector2(0.94f, 0.89f), new Vector3(0, 0, 0));
+
+        //特殊カード選択ボタン
+        GameObject specialCardObj = MyUtility.CreateButton(
+            "Special",
+            "UI/Menu/card",
+            new Vector2(12 / 32.0f, 5.5f / 25.0f),
+            new Vector2(26 / 32.0f, 19.5f / 25.0f),
+            m_MenuButton.transform);
+        specialCardObj.GetComponent<Image>().raycastTarget = false;
+        specialCardObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+        //特殊カード選択ボタンタッチ取得範囲
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.58f, 0), new Vector2(1, 1), new Vector3(0, 0, 0));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.18f, 0), new Vector2(0.6f, 0.3f), new Vector3(0, 0, 0));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.36f, 0.16f), new Vector2(0.72f, 0.35f), new Vector3(0, 0, 45));
+        ButtonRectSet(specialCardObj.transform, new Vector2(0.04f, 0.08f), new Vector2(0.42f, 0.43f), new Vector3(0, 0, 0));
 
         //チュートリアルボタン作成
         GameObject tutoObj = MyUtility.CreateButton(
@@ -145,7 +169,7 @@ public class MenuManager : MonoBehaviour
 
         if (!isGame)
         {
-            gameObj.GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+            gameObj.GetComponent<Image>().color = m_buttonClearColor;
         }
     }
 
@@ -159,8 +183,13 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.m_instance.PlaySE("button_SE");
         SelectUIManager.PlayerID = 1;
-        m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 1.0f);
-        m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+        //選択側
+        m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 1.0f); //α値をもとに戻す
+        m_PlayerButton[0].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);     //大きく
+        //非選択側
+        m_PlayerButton[1].GetComponent<Image>().color = m_buttonClearColor;         //選択されていない方を薄く
+        m_PlayerButton[1].transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);     //小さく
+        
     }
     /// <summary>
     /// プレイヤー2PIconが押された時
@@ -169,8 +198,12 @@ public class MenuManager : MonoBehaviour
     {
         AudioManager.m_instance.PlaySE("button_SE");
         SelectUIManager.PlayerID = 2;
-        m_PlayerButton[0].GetComponent<Image>().color = new Vector4(1, 1, 1, 0.2f);
+        //選択側
         m_PlayerButton[1].GetComponent<Image>().color = new Vector4(1, 1, 1, 1.0f);
+        m_PlayerButton[1].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);     //大きく
+        //非選択側
+        m_PlayerButton[0].GetComponent<Image>().color = m_buttonClearColor;
+        m_PlayerButton[0].transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
     }
     /// <summary>
     /// ゲームボタンが押された時
