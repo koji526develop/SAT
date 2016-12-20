@@ -143,22 +143,22 @@ public class ButtonSpawner : MonoBehaviour
 
                     if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                     {
-                        m_type = Character.CharacterType.Ax;
+						m_type = Character.CharacterType.Sword;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Spear;
+						m_type = Character.CharacterType.Shield;
                     }
                 }
                 else
                 {
                     if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                     {
-                        m_type = Character.CharacterType.Sword;
+						m_type = Character.CharacterType.Spear;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Shield;
+						m_type = Character.CharacterType.Ax;
                     }
                 }
             }
@@ -169,22 +169,22 @@ public class ButtonSpawner : MonoBehaviour
 
                     if (TouchManager.GetTouchMoveDistanceX(m_nowTouchNumber) > 0)
                     {
-                        m_type = Character.CharacterType.Spear;
+						m_type = Character.CharacterType.Shield;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Ax;
+						m_type = Character.CharacterType.Sword;
                     }
                 }
                 else
                 {
                     if (TouchManager.GetTouchMoveDistanceY(m_nowTouchNumber) > 0)
                     {
-                        m_type = Character.CharacterType.Shield;
+						m_type = Character.CharacterType.Ax;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Sword;
+						m_type = Character.CharacterType.Spear;
                     }
                 }
             }
@@ -352,20 +352,20 @@ public class ButtonSpawner : MonoBehaviour
         if (m_PlayerID == 1)
         {
             m_sprite[0] = Resources.Load("UI/Game/flick", typeof(Sprite)) as Sprite;
-            m_sprite[1] = Resources.Load("UI/Game/center_active", typeof(Sprite)) as Sprite;
-            m_sprite[2] = Resources.Load("UI/Game/ax_active", typeof(Sprite)) as Sprite;
-            m_sprite[3] = Resources.Load("UI/Game/spear_active", typeof(Sprite)) as Sprite;
-            m_sprite[4] = Resources.Load("UI/Game/sword_active", typeof(Sprite)) as Sprite;
-            m_sprite[5] = Resources.Load("UI/Game/shield_active", typeof(Sprite)) as Sprite;
+			m_sprite[1] = Resources.Load("UI/Game/flick_center", typeof(Sprite)) as Sprite;
+			m_sprite[2] = Resources.Load("UI/Game/flick_sword", typeof(Sprite)) as Sprite;
+			m_sprite[3] = Resources.Load("UI/Game/flick_shield", typeof(Sprite)) as Sprite;
+			m_sprite[4] = Resources.Load("UI/Game/flick_spear", typeof(Sprite)) as Sprite;
+			m_sprite[5] = Resources.Load("UI/Game/flick_ax", typeof(Sprite)) as Sprite;
         }
         else
         {
             m_sprite[0] = Resources.Load("UI/Game/flick2", typeof(Sprite)) as Sprite;
-            m_sprite[1] = Resources.Load("UI/Game/center_active2", typeof(Sprite)) as Sprite;
-            m_sprite[2] = Resources.Load("UI/Game/spear_active2", typeof(Sprite)) as Sprite;
-            m_sprite[3] = Resources.Load("UI/Game/ax_active2", typeof(Sprite)) as Sprite;
-            m_sprite[4] = Resources.Load("UI/Game/shield_active2", typeof(Sprite)) as Sprite;
-            m_sprite[5] = Resources.Load("UI/Game/sword_active2", typeof(Sprite)) as Sprite;
+			m_sprite[1] = Resources.Load("UI/Game/flick_center2", typeof(Sprite)) as Sprite;
+			m_sprite[2] = Resources.Load("UI/Game/flick_shield2", typeof(Sprite)) as Sprite;
+			m_sprite[3] = Resources.Load("UI/Game/flick_sword2", typeof(Sprite)) as Sprite;
+			m_sprite[4] = Resources.Load("UI/Game/flick_ax2", typeof(Sprite)) as Sprite;
+			m_sprite[5] = Resources.Load("UI/Game/flick_spear2", typeof(Sprite)) as Sprite;
         }
 
         ResetFlag();
