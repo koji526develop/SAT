@@ -258,11 +258,11 @@ public class ButtonSpawner : MonoBehaviour
                     m_changeSprite.sprite = m_sprite[2];
                     if (m_PlayerID == 1)
                     {
-                        m_type = Character.CharacterType.Ax;
+						m_type = Character.CharacterType.Sword;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Spear;
+						m_type = Character.CharacterType.Shield;
                     }
                 }
                 else
@@ -270,11 +270,11 @@ public class ButtonSpawner : MonoBehaviour
                     m_changeSprite.sprite = m_sprite[3];
                     if (m_PlayerID == 1)
                     {
-                        m_type = Character.CharacterType.Spear;
+						m_type = Character.CharacterType.Shield;
                     }
                     else
                     {
-                        m_type = Character.CharacterType.Ax;
+						m_type = Character.CharacterType.Sword;
                     }
                 }
             }
@@ -284,17 +284,17 @@ public class ButtonSpawner : MonoBehaviour
                 {
                     m_changeSprite.sprite = m_sprite[4];
                     if (m_PlayerID == 1)
-                        m_type = Character.CharacterType.Sword;
+						m_type = Character.CharacterType.Spear;
                     else
-                        m_type = Character.CharacterType.Shield;
+						m_type = Character.CharacterType.Ax;
                 }
                 else
                 {
                     m_changeSprite.sprite = m_sprite[5];
                     if (m_PlayerID == 1)
-                        m_type = Character.CharacterType.Shield;
+						m_type = Character.CharacterType.Ax;
                     else
-                        m_type = Character.CharacterType.Sword;
+						m_type = Character.CharacterType.Spear;
                 }
             }
         }
