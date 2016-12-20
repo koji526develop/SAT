@@ -32,7 +32,7 @@ public class MyUtility : MonoBehaviour
     public static int SHIELD_LIFE = 150;
     public static int SHIELD_ATTACK = 20;
     public static int SHIELD_ATTACKDISTANCE = 1;
-	public static float SHIELD_MOVESPEED = 0.025f/2;
+	public static float SHIELD_MOVESPEED = 0.035f/2;
 
     //兵士のインターバル時間を設定
     public static float SPAWNER_INTERVAL_TIME = 2.0f;
