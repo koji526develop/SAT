@@ -35,8 +35,6 @@ public class SelectUIManager : MonoBehaviour
     GameObject m_meritDisplayObj;
     RectTransform m_meritRectRange;
 
-    private int[] m_characterSpeed = new int[2];
-
     enum PlusOrMinus
     {
         Plus,
@@ -112,15 +110,13 @@ public class SelectUIManager : MonoBehaviour
                 new Vector2((10 + (i * 3)) / 32.0f, 24.0f / 25.0f));
             text.color = new Color(0, 0, 0);
         }
-
-        m_characterSpeed[0] = 2;
-        m_characterSpeed[1] = 1;
+        int m_characterSpeed = 1;
 
         float[,] value = {
-            { MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, m_characterSpeed[0], MyUtility.SWORD_ATTACKDISTANCE,0 },
-            { MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, m_characterSpeed[1], MyUtility.SPEAR_ATTACKDISTANCE,0 },
-            { MyUtility.AX_LIFE, MyUtility.AX_ATTACK, m_characterSpeed[1],  MyUtility.AX_ATTACKDISTANCE,0 },
-            { MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, m_characterSpeed[1], MyUtility.SHIELD_ATTACKDISTANCE,0 }
+            { MyUtility.SWORD_LIFE, MyUtility.SWORD_ATTACK, m_characterSpeed, MyUtility.SWORD_ATTACKDISTANCE,0 },
+            { MyUtility.SPEAR_LIFE, MyUtility.SPEAR_ATTACK, m_characterSpeed, MyUtility.SPEAR_ATTACKDISTANCE,0 },
+            { MyUtility.AX_LIFE, MyUtility.AX_ATTACK, m_characterSpeed,  MyUtility.AX_ATTACKDISTANCE,0 },
+            { MyUtility.SHIELD_LIFE, MyUtility.SHIELD_ATTACK, m_characterSpeed, MyUtility.SHIELD_ATTACKDISTANCE,0 }
         };
         for (int i = 0; i < 5; i++)
         {
