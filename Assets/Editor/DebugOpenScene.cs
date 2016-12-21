@@ -8,7 +8,19 @@ public class DebugOpenScene : EditorWindow{
 		OpenScene("Title");
 	}
 
-	[MenuItem("OpenScene/OpenScene_Select &#%2")]
+    [MenuItem("OpenScene/OpenScene_Menu &#%2")]
+    public static void OpenScene_Menu()
+    {
+        OpenScene("Menu");
+    }
+
+    [MenuItem("OpenScene/OpenScene_Tutorial &#%2")]
+    public static void OpenScene_Tutorial()
+    {
+        OpenScene("Tutorial");
+    }
+
+    [MenuItem("OpenScene/OpenScene_Select &#%2")]
 	public static void OpenScene_Select(){
 		OpenScene("Select");
 	}
@@ -16,11 +28,6 @@ public class DebugOpenScene : EditorWindow{
 	[MenuItem("OpenScene/OpenScene_SelectSpecial &#%2")]
 	public static void OpenScene_SelectSpecial(){
 		OpenScene("SelectSpecial");
-	}
-
-	[MenuItem("OpenScene/OpenScene_Operating &#%2")]
-	public static void OpenScene_Operating(){
-		OpenScene("Operating");
 	}
 
 	[MenuItem("OpenScene/OpenScene_Game &#%2")]
@@ -33,10 +40,10 @@ public class DebugOpenScene : EditorWindow{
 		OpenScene("Result");
 	}
 
-    [MenuItem("OpenScene/OpenScene_Menu &#%2")]
-    public static void OpenScene_Menu()
+    [MenuItem("OpenScene/OpenScene_Operating &#%2")]
+    public static void OpenScene_Operating()
     {
-        OpenScene("Menu");
+        OpenScene("Operating");
     }
 
     private static void OpenScene(string scene){
