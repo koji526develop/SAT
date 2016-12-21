@@ -397,8 +397,11 @@ public class CharacterMove :  State<Character>
 				} 
 				else
 				{
-					m_instance.characterAttackState.enemyObj = charaObj [i];
-					m_instance.ChangeState (Character.CharacterState.Attack); 
+					if (charaObj [i].GetComponent<Character> ().IsEqualState (Character.CharacterState.Move)||charaObj [i].GetComponent<Character> ().IsEqualState (Character.CharacterState.Attack)) 
+					{
+						m_instance.characterAttackState.enemyObj = charaObj [i];
+						m_instance.ChangeState (Character.CharacterState.Attack); 
+					}
 				}
 			}
 		}
