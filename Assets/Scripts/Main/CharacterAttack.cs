@@ -39,15 +39,15 @@ public class CharacterAttack : State<Character>
 
     public override void Update()
     {
-        if (m_instance.status.PlayerID == 1)
-        {
-            Debug.Log("1p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
-            ;
-        }
-        else
-        {
-            Debug.Log("2p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
-        }
+//        if (m_instance.status.PlayerID == 1)
+//        {
+//            Debug.Log("1p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
+//            ;
+//        }
+//        else
+//        {
+//            Debug.Log("2p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
+//        }
 
         m_attackTime += Time.deltaTime;
 
@@ -102,7 +102,7 @@ public class CharacterAttack : State<Character>
                     break;
             }
 
-            m_changeStatus.life -= m_instance.status.attack * (int)magnification;
+            m_changeStatus.life -= m_instance.status.attack * magnification;
 
             m_enemyCharacter.status = m_changeStatus;
         }
