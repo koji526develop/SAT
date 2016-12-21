@@ -40,14 +40,15 @@ public class SpecialCard7 : SpecialCard {
 		foreach (Character allyCharacter in allyCharactersList) 
 		{
 			GameObject barrierObj = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecailShield/shield_blue")) as GameObject;
-			barrierObj.name = "Barrier";
+			barrierObj.name = "SpeedUp";
 
 			barrierObj.transform.SetParent (allyCharacter.transform);
 
 			Vector3 tmp = allyCharacter.transform.position;
 			tmp.y = 1.05f;
 			barrierObj.transform.position = tmp;
-		}
+            Destroy(barrierObj,5.0f);
+        }
 
 		Destroy(this);
 		return;

@@ -33,16 +33,19 @@ public class SpecialCard8 : SpecialCard {
 		foreach (Character allyCharacter in allyCharactersList) 
 		{
 			GameObject barrierObj = GameObject.Instantiate(Resources.Load("SpecialWeapon/SpecailShield/shield_pink")) as GameObject;
-			barrierObj.name = "Barrier";
+			barrierObj.name = "ScoreUp";
 
 			barrierObj.transform.SetParent (allyCharacter.transform);
 
 			Vector3 tmp = allyCharacter.transform.position;
 			tmp.y = 1.05f;
 			barrierObj.transform.position = tmp;
-		}
+            Destroy(barrierObj,10.0f);
+        }
 			
         scoreManager.pointBouns(m_UsedPlayerID,10.0f ,10.0f);
+
+        
         Destroy(this);
     }
 		
