@@ -89,7 +89,7 @@ public class ScoreManager : MonoBehaviour
             }
 
         }
-        return allCountStage - 1;
+        return allCountStage;
     }
 
     public void DirectGetPoint(int _playerID, int _point,Vector3 _viewPos)
