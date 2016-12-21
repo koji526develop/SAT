@@ -49,6 +49,8 @@ public class CharacterAttack : State<Character>
 //            Debug.Log("2p" + m_instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime.ToString());
 //        }
 
+
+
         m_attackTime += Time.deltaTime;
 
         if (m_instance.IsFinishAnimation())
@@ -66,6 +68,7 @@ public class CharacterAttack : State<Character>
 
         if (m_enemyCharacter == null)
             m_instance.ChangeState(Character.CharacterState.Move);
+	
     }
     void Attak()
     {

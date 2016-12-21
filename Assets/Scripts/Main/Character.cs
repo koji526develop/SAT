@@ -10,7 +10,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     public struct Status
     {
 		public float life;
-        public int attack;
+		public float attack;
         public int attackDistance;
         public float moveSpeed;
         public CharacterType characterType;
@@ -292,7 +292,7 @@ public class Character : StatefulObjectBase<Character, Character.CharacterState>
     }
 
     // パラメーターセット
-	public void SetParametor(float _life, int _attack, int _attackDistance, float _moveSpeed, int _playerID)
+	public void SetParametor(float _life, float _attack, int _attackDistance, float _moveSpeed, int _playerID)
     {
         m_status.life = _life;
         m_status.attack = _attack;

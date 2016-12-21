@@ -20,7 +20,7 @@ public class CharacterMove :  State<Character>
 
 	public override void Update ()
 	{
-		Debug.Log (m_instance.status.life);
+		//Debug.Log (m_instance.status.life);
 		//AudioManager.m_instance.PlaySE("walk-gravel1");
 		//Debug.Log ("音");
 		// キャラクターの移動処理
