@@ -152,7 +152,7 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform
            );
 
-        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTitle);
+        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTutorial);
 
         // 開戦ボタン作成
         GameObject gameObj = MyUtility.CreateButton(

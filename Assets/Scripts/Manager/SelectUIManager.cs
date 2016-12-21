@@ -33,7 +33,6 @@ public class SelectUIManager : MonoBehaviour
 
 
     GameObject m_meritDisplayObj;
-    RectTransform m_meritRectRange;
 
     enum PlusOrMinus
     {
@@ -239,18 +238,15 @@ public class SelectUIManager : MonoBehaviour
         layerObj.GetComponent<Image>().color = new Color(0, 0, 0, 0.5f);
 
         //優劣画像
-        GameObject meritImageObj = MyUtility.CreateImage(
+        MyUtility.CreateImage(
               "Merit",
             "UI/Select/triangle_window",
               new Vector2(0 / 32.0f, 0 / 25.0f),
               new Vector2(32 / 32.0f, 25 / 25.0f),
               m_meritDisplayObj.transform);
 
-        m_meritRectRange = meritImageObj.GetComponent<RectTransform>();
-
         //最初は非表示
         m_meritDisplayObj.SetActive(false);
-
     }
 
     //優劣ボタンが押された時

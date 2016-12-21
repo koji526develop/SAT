@@ -36,6 +36,12 @@ public class SceneChanger : MonoBehaviour
         MySceneManager.m_instance.LoadLevel("SelectSpecial", fadeOutTime);
     }
 
+    //チュートリアルに行く
+    public void ChangeToTutorial()
+    {
+        MySceneManager.m_instance.LoadLevel("Tutorial", fadeOutTime);
+    }
+
     //ゲームに行く
     public void ChangeToGame()
     {
