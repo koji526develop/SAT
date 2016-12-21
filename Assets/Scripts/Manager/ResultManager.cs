@@ -207,7 +207,7 @@ public class ResultManager : MonoBehaviour
         //メニューボタン
         menuObj = MyUtility.CreateButton(
             "SoldierSelect",
-            "UI/Result/reselect",
+            "UI/Result/menu",
             new Vector2(10 / 32.0f, 2 / 25.0f),
             new Vector2(22 / 32.0f, 11 / 25.0f),
             buttonObj.transform);
