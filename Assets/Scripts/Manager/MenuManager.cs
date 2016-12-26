@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
+    public static bool isTutorial;  //チュートリアルかどうか
+
+
     SceneChanger sceneChanger;
 
     /// <summary>
@@ -171,6 +174,8 @@ public class MenuManager : MonoBehaviour
         {
             gameObj.GetComponent<Image>().color = m_buttonClearColor;
         }
+
+        isTutorial = false;
     }
 
 
@@ -218,6 +223,18 @@ public class MenuManager : MonoBehaviour
 
         sceneChanger.ChangeToGame();
     }
+    
+    /// <summary>
+    /// チューリアルボタンが押された時
+    /// </summary>
+    void TutorialProces()
+    {
+        isTutorial = true;
+        SelectUIManager.PlayerID = 1;
+        sceneChanger.ChangeToSelect();
+    }
+
+
     /// <summary>
     /// ボタンタッチ範囲指定
     /// </summary>
@@ -237,19 +254,6 @@ public class MenuManager : MonoBehaviour
         rectTransform.anchorMax = _anchorMax;
         rectTransform.Rotate(_rotate);
     }
-    ///// <summary>
-    ///// 円形判定のボタン
-    ///// </summary>
-    //void CircleProces()
-    //{
-    //    Vector3 touchPos = TouchManager.GetTouchPosition(0);
-    //    Vector3 circlePos = camera.WorldToScreenPoint(circleObj.transform.position);
-    //    if (Vector2.Distance(touchPos, circlePos) < 43.0f)
-    //    {
-    //        Debug.Log("円内");
-    //        sceneChanger.ChangeToSelect();
-    //    }
-    //}
 
     void Start()
     {
