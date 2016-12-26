@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
         Camera cameraSub = MyUtility.CreateCamera("BattleCameraSub", battleManager);
         //cameraSub.transform.eulerAngles = new Vector3(90, 0, 0);
-        cameraSub.transform.rotation = Quaternion.Euler(50, -90, -90);
+        cameraSub.transform.rotation = Quaternion.Euler(60, -90, -90);
         cameraSub.transform.position = new Vector3(9.0f, 7.15f, 0);
         cameraSub.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraSub.clearFlags = CameraClearFlags.Depth;
@@ -126,10 +126,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //GameObject debugList = Instantiate(Resources.Load("Prefabs/DebugList") as GameObject);
-        //debugList.name = "DebugList";
-        //debugList.transform.SetParent(m_canvas.transform);
-        //m_canvas.gameObject.AddComponent<DebugUI>();
+        GameObject debugList = Instantiate(Resources.Load("Prefabs/DebugList") as GameObject);
+        debugList.name = "DebugList";
+        debugList.transform.SetParent(m_canvas.transform);
+        m_canvas.gameObject.AddComponent<DebugUI>();
 
         Invoke("DelayMethod", 0.5f);
 

@@ -94,7 +94,7 @@ public class ButtonSpawner : MonoBehaviour
                 if (TouchManager.GetTouchInfo(i) == TouchInfo.Began)
                 {
                     m_nowTouchNumber = i;
-                    Debug.Log("タッチしましたー＞" + i);
+                    //Debug.Log("タッチしましたー＞" + i);
 
                     m_changeSprite.sprite = m_sprite[1];
 
@@ -202,7 +202,7 @@ public class ButtonSpawner : MonoBehaviour
             Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
             character.mapColumn = m_ButtonID;
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
-            Debug.Log("兵士出す");
+            //Debug.Log("兵士出す");
             AudioManager.m_instance.PlaySE("button_SE");
 
             //インターバル時間を追加
@@ -387,7 +387,7 @@ public class ButtonSpawner : MonoBehaviour
 
             if (m_soliderDoubleStart)
             {
-                Debug.Log("兵士増強");
+                //Debug.Log("兵士増強");
                 Character character = Character.CreateObject(m_battleManager, m_type, Character.GetSpawnPosition(m_PlayerID, m_ButtonID), m_PlayerID).GetComponent<Character>();
                 character.mapColumn = m_ButtonID;
 

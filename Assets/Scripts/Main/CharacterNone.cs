@@ -17,7 +17,7 @@ public class CharacterNone : State<Character>
 
 	public override void Enter() 
 	{
-		Debug.Log ("入った");
+		//Debug.Log ("入った");
 		m_suppoteObjCharacter = m_suppoteObj.GetComponent<Character> ();
 	}
 	public override void Update()
@@ -30,7 +30,7 @@ public class CharacterNone : State<Character>
 	public override void Exit() 
 	{
 		m_suppoteObj = null;
-		Debug.Log ("出た");
+		//Debug.Log ("出た");
 	}
 
 }

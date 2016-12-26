@@ -46,7 +46,7 @@ public class GameUIManager : SceneUiManagerBase
             _targetPoint.y < m_coulumnRect[_playerID, _idx].height
         )
         {
-            Debug.Log("PlayerID" + _playerID + "Cloumn" + _idx + "押されましあ");
+           // Debug.Log("PlayerID" + _playerID + "Cloumn" + _idx + "押されましあ");
             m_rectset[_playerID, _idx].m_isSelected = true;
             return true;
         }
