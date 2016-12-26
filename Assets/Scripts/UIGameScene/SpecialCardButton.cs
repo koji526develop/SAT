@@ -105,8 +105,7 @@ public class SpecialCardButton : MonoBehaviour {
 
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("プレイヤーID");
-            Debug.Log(m_playerID);
+            
             if (m_playerID == 1)
             {
                 m_keepSpCard[i] = SelectSpecialUIManager.SPECIALCARD_NUMBER_1[i];

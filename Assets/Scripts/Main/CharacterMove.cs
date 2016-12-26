@@ -47,6 +47,7 @@ public class CharacterMove :  State<Character>
 				m_isCharacterTouch = IsCharacterTouch (i);
 				if (m_isCharacterTouch) 
 				{
+					
 					m_touchId = i;
 					break;
 				}
@@ -59,6 +60,7 @@ public class CharacterMove :  State<Character>
 
 				// キャラクターが境界線を超えていたら何もしない
 			if (IsBeyondCenterLine ())
+				
 				return;
 
 			if(IsNearCharacter(Character.Direction.Up))
@@ -289,47 +291,47 @@ public class CharacterMove :  State<Character>
 
 			if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightDown) 
 			{
-				Debug.Log ("味方が右下にいる");
+				//Debug.Log ("味方が右下にいる");
 				if (myChara.status.PlayerID == 1)
 					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightUp)
 			{
-				Debug.Log ("味方が右上にいる");
+				//Debug.Log ("味方が右上にいる");
 				if (myChara.status.PlayerID == 1)
 					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
 			
 			}
 			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftDown) 
 			{
-				Debug.Log ("味方が左下にいる");
+				//Debug.Log ("味方が左下にいる");
 				if (myChara.status.PlayerID == 2)
 					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetAllyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftUp) 
 			{
-				Debug.Log ("味方が左上にいる");
+				//Debug.Log ("味方が左上にいる");
 				if (myChara.status.PlayerID == 2)
 					if (GetDirection (myCharaPos, otherCharaPos) < 10.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightDown)
 			{
-				Debug.Log ("敵が右下にいる");
+				//Debug.Log ("敵が右下にいる");
 				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.RightUp)
 			{
-				Debug.Log ("敵が右上にいる");
+				//Debug.Log ("敵が右上にいる");
 				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftDown)
 			{
-				Debug.Log ("敵が左下にいる");
+				//Debug.Log ("敵が左下にいる");
 				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
 			}
 			else if (GetEnemyDirectionFromMyChara (otherCharacter, _dir) == Character.Direction.LeftUp) 
 			{
-				Debug.Log ("敵が左上にいる");
+				//Debug.Log ("敵が左上にいる");
 				if (GetDirection(myCharaPos, otherCharaPos) < 90.0f * myChara.status.moveSpeed) return true;
 			}
 		}
@@ -443,10 +445,10 @@ public class CharacterMove :  State<Character>
 		float charaPosX = m_instance.transform.position.x;
 
 		// プレイヤー１のキャラがセンターラインより右にいたら
-		if (id == 1 && charaPosX >= MyUtility.CENTER_LINE_X) return true;
+		//if (id == 1 && charaPosX >= MyUtility.CENTER_LINE_X) return true;
 
 		// プレイヤー２のキャラがセンターラインより左にいたら
-		else if (id == 2 && charaPosX <= MyUtility.CENTER_LINE_X) return true;
+		//else if (id == 2 && charaPosX <= MyUtility.CENTER_LINE_X) return true;
 
 		return false;
 	}
