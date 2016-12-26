@@ -58,10 +58,7 @@ public class CharacterAttack : State<Character>
             m_instance.NowAnimationRePlay();
 
             Attak();
-            if (m_instance.status.PlayerID == 1)
-                Debug.Log("1p攻撃なう");
-            else
-                Debug.Log("2p攻撃なう");
+           
             m_attackTime = 0;
 
         }

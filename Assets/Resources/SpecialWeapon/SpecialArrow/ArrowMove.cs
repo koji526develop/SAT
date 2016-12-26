@@ -29,13 +29,14 @@ public class ArrowMove : MonoBehaviour
 
     void Update()
     {
+		//兵士削除
         if (m_PlayerID == 1)
         {
             transform.position += new Vector3(speed, 0, 0);
             if (transform.position.x >= MyUtility.SOLDIER_CREATE_LINE_X_2P)
             {
                 Destroy(this.gameObject);
-                Debug.Log("削除");
+                
             }
         }
         else if (m_PlayerID == 2)
@@ -44,7 +45,7 @@ public class ArrowMove : MonoBehaviour
             if (transform.position.x <= MyUtility.SOLDIER_CREATE_LINE_X_1P)
             {
                 Destroy(this.gameObject);
-                Debug.Log("削除");
+                
             }
         }
     }
