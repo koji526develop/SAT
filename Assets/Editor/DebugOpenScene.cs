@@ -14,12 +14,6 @@ public class DebugOpenScene : EditorWindow{
         OpenScene("Menu");
     }
 
-    [MenuItem("OpenScene/OpenScene_Tutorial &#%2")]
-    public static void OpenScene_Tutorial()
-    {
-        OpenScene("Tutorial");
-    }
-
     [MenuItem("OpenScene/OpenScene_Select &#%2")]
 	public static void OpenScene_Select(){
 		OpenScene("Select");
