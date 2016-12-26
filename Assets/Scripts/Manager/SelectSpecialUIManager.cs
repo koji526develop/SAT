@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class SelectSpecialUIManager : MonoBehaviour
+public class SelectSpecialUIManager : SceneUiManagerBase
 {
     Camera m_uiCamera;
 

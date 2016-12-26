@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System;
 
-public class GameUIManager : MonoBehaviour
+public class GameUIManager : SceneUiManagerBase
 {
     Rect[,] m_coulumnRect = new Rect[2, MyUtility.MAX_COLUMN];
     RectSet[,] m_rectset = new RectSet[2, MyUtility.MAX_COLUMN];
