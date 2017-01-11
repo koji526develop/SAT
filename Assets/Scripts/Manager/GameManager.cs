@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     int m_nowCount = 0;
     public bool m_startFlag = false;
     bool m_countStart = false;
-
-
+	bool m_player=false;
+	GameObject sprite1p;
+	GameObject sprite2p;
 
 	Transform battleManager;
 
@@ -60,6 +61,8 @@ public class GameManager : MonoBehaviour
         cameraSub.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
         cameraSub.clearFlags = CameraClearFlags.Depth;
         cameraSub.orthographic = true;
+
+	
 
 
         Camera uiCamera = MyUtility.CreateCamera("UICamera");
@@ -115,7 +118,7 @@ public class GameManager : MonoBehaviour
                 countDown[j + (i * 4)].FadeFlag = false;
                 m_countDownObj[j + (i * 4)].SetActive(false);
             }
-            m_countDownObj[m_nowCount + (i * 4)].SetActive(true);
+            //m_countDownObj[m_nowCount + (i * 4)].SetActive(true);
             //countDown[m_nowCount + (i * 4)].FadeFlag = true;
         }
         //2Pように反転
@@ -131,7 +134,18 @@ public class GameManager : MonoBehaviour
         debugList.transform.SetParent(m_canvas.transform);
         m_canvas.gameObject.AddComponent<DebugUI>();
 
+	
         Invoke("DelayMethod", 0.5f);
+
+		sprite1p= MyUtility.CreateSprite (transform, "1P", "UI/Select/1p");
+		sprite1p.transform.position = new Vector3 (-2.5f, 1.0f, 0.0f);
+		sprite1p.transform.Rotate (90.0f, 90.0f, 0.0f);
+		sprite1p.transform.localScale =new Vector3(5.0f, 5.0f, 1.0f);
+
+		sprite2p= MyUtility.CreateSprite (transform, "2P", "UI/Select/2p");
+		sprite2p.transform.position = new Vector3 (4.5f, 1.0f, 0.0f);
+		sprite2p.transform.Rotate (90.0f, -90.0f, 0.0f);
+		sprite2p.transform.localScale =new Vector3(5.0f, 4.5f, 1.0f);
 
         AudioManager.m_instance.PlayBGM("battle_BGM");
 
@@ -148,32 +162,38 @@ public class GameManager : MonoBehaviour
     {
         TouchManager.Update();
 
-        //ゲームスタートのカウントダウン
-        if (!m_startFlag && m_countStart)
-        {
-            if (!countDown[m_nowCount].FadeFlag)
-            {
-                //fightが消えたらゲーム開始
-                if (m_nowCount == 3 && !countDown[m_nowCount].FadeFlag)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        Destroy(m_countDownObj[i]);
-                    }
-                    m_startFlag = true;
-                }
-                else
-                {
-                    m_nowCount++;
-                    for (int i = 0; i < 2; i++)
-                    {
-                        m_countDownObj[m_nowCount + (i * 4)].SetActive(true);
-                        countDown[m_nowCount + (i * 4)].FadeFlag = true;
-                    }
-                }
-            }
-        }
+		for (int i = 0; i < TouchManager.touchCount; i++) {
+			TouchInfo touchInfo = TouchManager.GetTouchInfo (i);
+			// タッチ開始時
+			if (touchInfo == TouchInfo.Began) {
 
+				Destroy (sprite1p);
+				Destroy (sprite2p);
+				m_player = true;
+				m_countDownObj[0].SetActive(true);
+				m_countDownObj[4].SetActive(true);
+			}
+		}
+        //ゲームスタートのカウントダウン
+		if (m_player == true) {
+			if (!m_startFlag && m_countStart) {
+				if (!countDown [m_nowCount].FadeFlag) {
+					//fightが消えたらゲーム開始
+					if (m_nowCount == 3 && !countDown [m_nowCount].FadeFlag) {
+						for (int i = 0; i < 8; i++) {
+							Destroy (m_countDownObj [i]);
+						}
+						m_startFlag = true;
+					} else {
+						m_nowCount++;
+						for (int i = 0; i < 2; i++) {
+							m_countDownObj [m_nowCount + (i * 4)].SetActive (true);
+							countDown [m_nowCount + (i * 4)].FadeFlag = true;
+						}
+					}
+				}
+			}
+		}
 		//兵士残数チェック
 		bool isSoldierNone = SelectUIManager.SWORD_NUM_1 <= 0 && SelectUIManager.SWORD_NUM_2  <=0 &&
 			SelectUIManager.SPEAR_NUM_1 <= 0 && SelectUIManager.SPEAR_NUM_2 <= 0 &&
