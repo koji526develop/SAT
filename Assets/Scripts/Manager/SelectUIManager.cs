@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Linq;
 
-public class SelectUIManager : MonoBehaviour
+public class SelectUIManager : SceneUiManagerBase
 {
     //現在何Pが兵士を選択中か
     public static int PlayerID;
@@ -30,8 +30,6 @@ public class SelectUIManager : MonoBehaviour
 
     GameObject sceneChangerObj;
     SceneChanger sceneChanger;
-
-
     GameObject m_meritDisplayObj;
 
     enum PlusOrMinus
@@ -47,7 +45,6 @@ public class SelectUIManager : MonoBehaviour
 
     void Awake()
     {
-
         //背景
         MyUtility.CreateImage(
             "SelectBackGround",
@@ -248,7 +245,7 @@ public class SelectUIManager : MonoBehaviour
         //最初は非表示
         m_meritDisplayObj.SetActive(false);
     }
-
+		
     //優劣ボタンが押された時
     void MeritButtonProces()
     {
