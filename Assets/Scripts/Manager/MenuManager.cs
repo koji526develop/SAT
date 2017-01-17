@@ -146,16 +146,16 @@ public class MenuManager : MonoBehaviour
         ButtonRectSet(specialCardObj.transform, new Vector2(0.36f, 0.16f), new Vector2(0.72f, 0.35f), new Vector3(0, 0, 45));
         ButtonRectSet(specialCardObj.transform, new Vector2(0.04f, 0.08f), new Vector2(0.42f, 0.43f), new Vector3(0, 0, 0));
 
-        //チュートリアルボタン作成
+        //メニューボタン作成
         GameObject tutoObj = MyUtility.CreateButton(
-            "Tutorial",
+            "Menu",
             "UI/Menu/tutorial",
             new Vector2(6 / 32.0f, 1 / 25.0f),
             new Vector2(15 / 32.0f, 5 / 25.0f),
             m_MenuButton.transform
            );
 
-        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToTutorial);
+        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
 
         // 開戦ボタン作成
         GameObject gameObj = MyUtility.CreateButton(

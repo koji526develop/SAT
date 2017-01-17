@@ -89,16 +89,6 @@ public class OperatingManager : MonoBehaviour
         );
 
         backObj.GetComponent<Button>().onClick.AddListener(BackProces);
-
-        // 決定ボタン作成
-        MyUtility.CreateButton(
-            "Enter",
-            "UI/Operating/decision",
-            new Vector2(23 / 32.0f, 1 / 25.0f),
-            new Vector2(29 / 32.0f, 4 / 25.0f),
-            uiObj.transform
-        );
-        //enterObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
     }
 
     void BackProces()
