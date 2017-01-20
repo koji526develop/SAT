@@ -23,7 +23,7 @@ public class OperatingFlick : MonoBehaviour
         m_DisplaySpriteNum = 0;
         for (int i = 1; i < MAX_SPRITE_NUM+1; i++) 
         {
-            m_OperatingSprite[i-1] = Resources.Load<Sprite>("Image/operating"+i.ToString());
+            m_OperatingSprite[i-1] = Resources.Load<Sprite>("UI/Operating/operating"+i.ToString());
         }
     }
 
