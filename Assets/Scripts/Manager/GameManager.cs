@@ -172,6 +172,8 @@ public class GameManager : MonoBehaviour
 					m_player = true;
 					m_countDownObj [0].SetActive (true);
 					m_countDownObj [4].SetActive (true);
+					AudioManager.m_instance.PlaySE("Countdown2SE");
+
 				}
 			}
 		}
