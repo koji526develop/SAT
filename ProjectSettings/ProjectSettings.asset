@@ -12,7 +12,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: human
   productName: SAT
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 0669ac3be5e30d7439362badee01f8d8, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenStyle: 0
   m_ShowUnitySplashScreen: 1
@@ -180,7 +180,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: 0669ac3be5e30d7439362badee01f8d8, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
