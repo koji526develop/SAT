@@ -4,6 +4,9 @@ using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
+
+    private bool m_isSplashScreen;    //スプラッシュスクリーンが表示中かどうか
+
     void Awake()
     {
         // ライト作成
@@ -56,6 +59,7 @@ public class TitleManager : MonoBehaviour
         SelectUIManager.SHIELD_NUM_2 = 0;
 
         SelectUIManager.PlayerID = 1;
+        m_isSplashScreen = true;
     }
 
     void Start()
@@ -66,10 +70,20 @@ public class TitleManager : MonoBehaviour
     void Update()
     {
         TouchInfo touch = TouchManager.GetTouchInfo(0);
+
         if (touch == TouchInfo.Began)
         {
-            SceneChanger sChange = new SceneChanger();
-            sChange.ChangeToMenu();
+            if (!m_isSplashScreen)
+            {
+                SceneChanger sChange = new SceneChanger();
+                sChange.ChangeToMenu();
+            }
+        }
+
+        //　スプラッシュ画面が閉じたら
+        if (!Application.isShowingSplashScreen)
+        {
+            m_isSplashScreen = false;
         }
     }
 }
