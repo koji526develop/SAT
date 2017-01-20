@@ -166,12 +166,13 @@ public class GameManager : MonoBehaviour
 			TouchInfo touchInfo = TouchManager.GetTouchInfo (i);
 			// タッチ開始時
 			if (touchInfo == TouchInfo.Began) {
-
-				Destroy (sprite1p);
-				Destroy (sprite2p);
-				m_player = true;
-				m_countDownObj[0].SetActive(true);
-				m_countDownObj[4].SetActive(true);
+				if (m_player == false) {
+					Destroy (sprite1p);
+					Destroy (sprite2p);
+					m_player = true;
+					m_countDownObj [0].SetActive (true);
+					m_countDownObj [4].SetActive (true);
+				}
 			}
 		}
         //ゲームスタートのカウントダウン
