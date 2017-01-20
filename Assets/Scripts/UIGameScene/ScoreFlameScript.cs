@@ -64,23 +64,23 @@ public class ScoreFlameScript : MonoBehaviour {
             {
 
                 case 0:
-				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop1", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop1 2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 1:
-				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop2", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop2 2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 2:
-				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop3", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop3 2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 3:
-				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop4", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop4 2", typeof(Sprite)) as Sprite;
                     break;
 
                 case 4:
-				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop5", typeof(Sprite)) as Sprite;
+				this.GetComponent<Image>().sprite = Resources.Load("UI/Game/score_troop5 2", typeof(Sprite)) as Sprite;
                     break;
 
             }
