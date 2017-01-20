@@ -49,11 +49,11 @@ public class OperatingManager : MonoBehaviour
         }
         //操作説明の画像
         //内容
-        m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "Image/operating1");
+        m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "UI/Operating/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
-        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 1.0f, -790.0f);
-        m_OperatingSpriteObj.transform.localScale = new Vector3(1.4f, 1.4f, 0.0f);
+        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 1.0f, -780.0f);
+        //m_OperatingSpriteObj.transform.localScale = new Vector3(1.0f, 1.0f, 0.0f);
 
         //左矢印ボタン
         GameObject leftButton = MyUtility.CreateButton(
