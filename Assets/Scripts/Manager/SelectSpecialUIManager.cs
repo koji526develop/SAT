@@ -377,6 +377,8 @@ public class SelectSpecialUIManager : SceneUiManagerBase
 
     void Reset()
     {
+        AudioManager.m_instance.PlaySE("button_SE");
+
         m_selectedCount = 0;
 
         for (int i = 0; i < 8; i++)

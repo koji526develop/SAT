@@ -135,7 +135,7 @@ public class MyUtility : MonoBehaviour
 
         if (_parent) cameraObj.transform.SetParent(_parent);
 
-        cameraObj.AddComponent<CameraSize>();
+        //cameraObj.AddComponent<CameraSize>();
 
         return camera;
     }

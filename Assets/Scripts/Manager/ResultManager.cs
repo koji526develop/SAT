@@ -221,6 +221,8 @@ public class ResultManager : MonoBehaviour
     //再戦
     public void RematchProces()
     {
+        AudioManager.m_instance.PlaySE("button_SE");
+
         //兵士の情報を設定
         SelectUIManager.SWORD_NUM_1 = ResultManager.ResultSoldierNum[0];
         SelectUIManager.SPEAR_NUM_1 = ResultManager.ResultSoldierNum[1];
@@ -245,6 +247,8 @@ public class ResultManager : MonoBehaviour
     //メニューシーンへ
     public void MenuProces()
     {
+        AudioManager.m_instance.PlaySE("button_SE");
+
         //兵士の情報を初期化
         SelectUIManager.SWORD_NUM_1 = 0;
         SelectUIManager.SPEAR_NUM_1 = 0;

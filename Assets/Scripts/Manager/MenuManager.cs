@@ -124,7 +124,7 @@ public class MenuManager : MonoBehaviour
             new Vector2(20 / 32.0f, 19.5f / 25.0f),
             m_MenuButton.transform);
         soldierFormationObj.GetComponent<Image>().raycastTarget = false;
-        soldierFormationObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelect);
+        soldierFormationObj.GetComponent<Button>().onClick.AddListener(SelectProces);
         //兵士編成ボタンタッチ取得範囲
         ButtonRectSet(soldierFormationObj.transform, new Vector2(0, 0), new Vector2(0.425f, 1), new Vector3(0, 0, 0));
         ButtonRectSet(soldierFormationObj.transform, new Vector2(0.425f, 0.623f), new Vector2(0.81f, 1), new Vector3(0, 0, 0));
@@ -139,7 +139,7 @@ public class MenuManager : MonoBehaviour
             new Vector2(26 / 32.0f, 19.5f / 25.0f),
             m_MenuButton.transform);
         specialCardObj.GetComponent<Image>().raycastTarget = false;
-        specialCardObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToSelectSpecial);
+        specialCardObj.GetComponent<Button>().onClick.AddListener(CardProces);
         //特殊カード選択ボタンタッチ取得範囲
         ButtonRectSet(specialCardObj.transform, new Vector2(0.58f, 0), new Vector2(1, 1), new Vector3(0, 0, 0));
         ButtonRectSet(specialCardObj.transform, new Vector2(0.18f, 0), new Vector2(0.6f, 0.3f), new Vector3(0, 0, 0));
@@ -155,7 +155,7 @@ public class MenuManager : MonoBehaviour
             m_MenuButton.transform
            );
 
-        tutoObj.GetComponent<Button>().onClick.AddListener(sceneChanger.ChangeToOperating);
+        tutoObj.GetComponent<Button>().onClick.AddListener(MenuProces);
 
         // 開戦ボタン作成
         GameObject gameObj = MyUtility.CreateButton(
@@ -210,6 +210,25 @@ public class MenuManager : MonoBehaviour
         m_PlayerButton[0].GetComponent<Image>().color = m_buttonClearColor;
         m_PlayerButton[0].transform.localScale = new Vector3(0.8f, 0.8f, 1.0f);
     }
+
+    /// <summary>
+    /// 兵士編成が押された時
+    /// </summary>
+    void SelectProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        sceneChanger.ChangeToSelect();
+    }
+
+    /// <summary>
+    /// 特殊カード選択が押された時
+    /// </summary>
+    void CardProces()
+    {
+        AudioManager.m_instance.PlaySE("button_SE");
+        sceneChanger.ChangeToSelectSpecial();
+    }
+
     /// <summary>
     /// ゲームボタンが押された時
     /// </summary>
@@ -227,11 +246,10 @@ public class MenuManager : MonoBehaviour
     /// <summary>
     /// チューリアルボタンが押された時
     /// </summary>
-    void TutorialProces()
+    void MenuProces()
     {
-        isTutorial = true;
-        SelectUIManager.PlayerID = 1;
-        sceneChanger.ChangeToSelect();
+        AudioManager.m_instance.PlaySE("button_SE");
+        sceneChanger.ChangeToOperating();
     }
 
 
