@@ -259,6 +259,8 @@ public class ResultManager : MonoBehaviour
         SelectUIManager.AX_NUM_2 = 0;
         SelectUIManager.SHIELD_NUM_2 = 0;
 
+		AudioManager.m_instance.PlayBGM("title_BGM");
+
         //特殊カードの情報を初期化
         for (int i = 0; i < 3; i++)
         {
