@@ -13,7 +13,7 @@ public abstract class SceneUiManagerBase : MonoBehaviour {
 		{
 			allGameObjectList.Add (child.gameObject);
 		}
-		AllUiDarken ();
+		//AllUiDarken ();
 	}
 
 	// 全てのUIを明るくする
