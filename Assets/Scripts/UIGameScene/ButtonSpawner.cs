@@ -103,13 +103,15 @@ public class ButtonSpawner : MonoBehaviour
                 }
             }
         }
+
+        ResetFlag();
     }
 
     public void EnterFlag()
     {
         m_spawnerFlag = false;
 
-        if (!m_startFlag) { return; }
+        if (!m_startFlag) { ResetFlag();  return; }
 
         m_changeSprite.sprite = m_sprite[1];
     }
