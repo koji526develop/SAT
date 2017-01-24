@@ -71,7 +71,7 @@ public class SpecialCard4 : SpecialCard {
                         }
                         else
                         {
-                            createObj= (GameObject)Instantiate(stone, new Vector3(3.5f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
+                            createObj= (GameObject)Instantiate(stone, new Vector3(5.25f, 0.0f, MyUtility.ForCount(4.0f, -2.0f, btnCmp.m_ButtonID - 1)), Quaternion.identity);
                         }
                         createObj.AddComponent<TimeDestory>();
                         childObj.gameObject.AddComponent<NotSpawner>();

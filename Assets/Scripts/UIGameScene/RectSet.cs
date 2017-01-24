@@ -34,7 +34,7 @@ public class RectSet : MonoBehaviour {
         }
         else
         {
-            alpha = alpha + Time.deltaTime * 2;
+            alpha = alpha + Time.deltaTime * 4;
             this.GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, Mathf.Abs(Mathf.Cos(alpha)) +0.3f);
         }
 
