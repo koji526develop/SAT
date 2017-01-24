@@ -149,7 +149,7 @@ public class MenuManager : MonoBehaviour
         //メニューボタン作成
         GameObject tutoObj = MyUtility.CreateButton(
             "Menu",
-            "UI/Menu/tutorial",
+            "UI/Operating/return",
             new Vector2(6 / 32.0f, 1 / 25.0f),
             new Vector2(15 / 32.0f, 5 / 25.0f),
             m_MenuButton.transform

@@ -63,11 +63,11 @@ public class CharacterMove :  State<Character>
 				
 				return;
 
-			if(IsNearCharacter(Character.Direction.Up))
-				m_instance.SetOnSideMoveDownImg (Character.Direction.Up);
+			//if(IsNearCharacter(Character.Direction.Up))
+			//	m_instance.SetOnSideMoveDownImg (Character.Direction.Up);
 
-			else if(IsNearCharacter(Character.Direction.Down))
-				m_instance.SetOnSideMoveDownImg (Character.Direction.Down);
+			//else if(IsNearCharacter(Character.Direction.Down))
+			//	m_instance.SetOnSideMoveDownImg (Character.Direction.Down);
 
 				// キャラクターが上にフリックされていたら回転させる
 			if (IsUpFlick (m_touchId) && !IsNearCharacter (Character.Direction.Up))
@@ -79,7 +79,7 @@ public class CharacterMove :  State<Character>
 			}
 
 		if (m_touchId != 99 && TouchManager.GetTouchInfo (m_touchId) == TouchInfo.Ended) {
-			m_instance.SetOffSideMoveDownImg ();
+			//m_instance.SetOffSideMoveDownImg ();
 			m_touchId = 99;
 		}
 		

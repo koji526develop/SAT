@@ -6,7 +6,7 @@ public class OperatingFlick : MonoBehaviour
     Sprite[] m_OperatingSprite = new Sprite[MAX_SPRITE_NUM];
     SpriteRenderer m_DisplaySpriteRenderer;
     int m_DisplaySpriteNum;
-    const int MAX_SPRITE_NUM = 6;
+    const int MAX_SPRITE_NUM = 8;
 
     public int DisplayNum
     {

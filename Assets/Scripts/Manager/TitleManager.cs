@@ -76,7 +76,7 @@ public class TitleManager : MonoBehaviour
             if (!m_isSplashScreen)
             {
                 SceneChanger sChange = new SceneChanger();
-                sChange.ChangeToMenu();
+                sChange.ChangeToOperating();
             }
         }
 

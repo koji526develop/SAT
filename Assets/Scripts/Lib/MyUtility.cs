@@ -14,25 +14,25 @@ public class MyUtility : MonoBehaviour
 	public static float SWORD_LIFE = 100;
 	public static float SWORD_ATTACK = 40;
     public static int SWORD_ATTACKDISTANCE = 1;
-    public static float SWORD_MOVESPEED = 0.035f/2/2;
+    public static float SWORD_MOVESPEED = 0.035f/2;
 
     // 槍のパラメータ
 	public static float SPEAR_LIFE = 100;
 	public static float SPEAR_ATTACK = 40;
     public static int SPEAR_ATTACKDISTANCE = 1;
-	public static float SPEAR_MOVESPEED = 0.035f/2/2;
+	public static float SPEAR_MOVESPEED = 0.035f/2;
 
     // 斧のパラメータ
 	public static float AX_LIFE = 100;
 	public static float AX_ATTACK = 40;
     public static int AX_ATTACKDISTANCE = 1;
-	public static float AX_MOVESPEED = 0.035f/2/2;
+	public static float AX_MOVESPEED = 0.035f/2;
 
     // 盾のパラメータ
 	public static float SHIELD_LIFE = 150;
 	public static float SHIELD_ATTACK = 20;
     public static int SHIELD_ATTACKDISTANCE = 1;
-	public static float SHIELD_MOVESPEED = 0.035f/2/2;
+	public static float SHIELD_MOVESPEED = 0.035f/2;
 
     //兵士のインターバル時間を設定
     public static float SPAWNER_INTERVAL_TIME = 2.0f;

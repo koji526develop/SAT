@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class OperatingManager : MonoBehaviour
 {
-    const int MAX_SPRITE_NUM = 6;
-    readonly float m_MinSprPosition = -3.7f;
+    const int MAX_SPRITE_NUM = 8;
+    readonly float m_MinSprPosition = -5.3f;
 
     GameObject[] m_OperatingSprNumObj = new GameObject[MAX_SPRITE_NUM];
 
@@ -43,25 +43,24 @@ public class OperatingManager : MonoBehaviour
             m_OperatingSprNumObj[i] = MyUtility.CreateSprite(opObj.transform, "OperatingChoiceSprite" + i, "UI/Operating/fcircle");
 
             m_OperatingSprNumObj[i].AddComponent<OperatingChoice>();
-            m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -3.3f, -790.0f);
+            m_OperatingSprNumObj[i].transform.position = new Vector3((m_MinSprPosition + (i * 1.5f)), -3.1f, -790.0f);
             m_OperatingSprNumObj[i].transform.localScale = new Vector3(0.3f,0.3f,0.0f);
             m_OperatingSprNumObj[i].GetComponent<OperatingChoice>().SpriteNum = i;
         }
         //操作説明の画像
         //内容
-        m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "UI/Operating/ope");
-        //m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "UI/Operating/operating1");
+        m_OperatingSpriteObj = MyUtility.CreateSprite(opObj.transform, "OperatingSprite", "UI/Operating/operating1");
 
         m_OperatingSpriteObj.AddComponent<OperatingFlick>();
-        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 1.0f, -790.0f);
+        m_OperatingSpriteObj.transform.position = new Vector3(0.0f, 2.0f, -785.0f);
         m_OperatingSpriteObj.transform.localScale = new Vector3(1.0f, 1.0f, 0.0f);
 
         //左矢印ボタン
         GameObject leftButton = MyUtility.CreateButton(
             "LeftButton",
             "UI/Operating/triangle",
-             new Vector2(2.0f / 32.0f, 14.0f / 25.0f),
-             new Vector2(4.0f / 32.0f, 16.0f / 25.0f),
+             new Vector2(0.0f / 32.0f, 15.0f / 25.0f),
+             new Vector2(2.0f / 32.0f, 17.0f / 25.0f),
              uiObj.transform);
         leftButton.transform.localScale = new Vector3(1.5f,1.5f,0.0f);
 
@@ -73,32 +72,51 @@ public class OperatingManager : MonoBehaviour
         GameObject rightButton = MyUtility.CreateButton(
             "RightButton",
             "UI/Operating/triangle",
-             new Vector2(30.0f / 32.0f, 11.0f / 25.0f),
-             new Vector2(32.0f / 32.0f, 13.0f / 25.0f),
+             new Vector2(32.0f / 32.0f, 12.0f / 25.0f),
+             new Vector2(34.0f / 32.0f, 14.0f / 25.0f),
              uiObj.transform);
         rightButton.transform.Rotate(new Vector3(0, 0, 1), 180.0f);
         rightButton.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
         rightButton.GetComponent<Button>().onClick.AddListener(operatingFlick.ButtonRight);
 
-        // 戻るボタン作成
-        GameObject backObj = MyUtility.CreateButton(
-            "Back",
-            "UI/Operating/return",
-            new Vector2(3 / 32.0f, 1 / 25.0f),
-            new Vector2(9 / 32.0f, 4 / 25.0f),
+        // 決定ボタン作成
+        GameObject enterObj = MyUtility.CreateButton(
+            "Enter",
+            "UI/Operating/decision",
+            new Vector2(23 / 32.0f, 1 / 25.0f),
+            new Vector2(29 / 32.0f, 4 / 25.0f),
             uiObj.transform
         );
 
-        backObj.GetComponent<Button>().onClick.AddListener(BackProces);
+        enterObj.GetComponent<Button>().onClick.AddListener(EnterProces);
+
+        //// 戻るボタン作成
+        //GameObject backObj = MyUtility.CreateButton(
+        //    "Back",
+        //    "UI/Operating/return",
+        //    new Vector2(3 / 32.0f, 1 / 25.0f),
+        //    new Vector2(9 / 32.0f, 4 / 25.0f),
+        //    uiObj.transform
+        //);
+
+        //backObj.GetComponent<Button>().onClick.AddListener(BackProces);
     }
 
-    void BackProces()
+    void EnterProces()
     {
         AudioManager.m_instance.PlaySE("button_SE");
         GameObject sceneChangerObj = new GameObject();
         SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
         sceneChanger.ChangeToMenu();
     }
+
+    //void BackProces()
+    //{
+    //    AudioManager.m_instance.PlaySE("button_SE");
+    //    GameObject sceneChangerObj = new GameObject();
+    //    SceneChanger sceneChanger = sceneChangerObj.AddComponent<SceneChanger>();
+    //    sceneChanger.ChangeToMenu();
+    //}
 
     void Start()
     {

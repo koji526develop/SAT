@@ -204,7 +204,7 @@ public class ButtonSpawner : MonoBehaviour
             m_scoreManager.SpawnerCount(m_PlayerID, m_ButtonID);
             //Debug.Log("兵士出す");
 			//兵士出現音
-            AudioManager.m_instance.PlaySE("button_SE");
+            //AudioManager.m_instance.PlaySE("button_SE");
 
             //インターバル時間を追加
             m_intervalTime = MyUtility.SPAWNER_INTERVAL_TIME;
