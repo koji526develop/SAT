@@ -18,11 +18,11 @@ public class DebugUI : MonoBehaviour
 
 	void Update () 
 	{
-		if (IsDebugAction()) 
+		/*if (IsDebugAction()) 
 		{
 			// ここでデバッグリストを表示させる
 			transform.FindChild ("DebugList").gameObject.SetActive (true);
-		}
+		}*/
 	}
 
 	bool IsDebugAction()
