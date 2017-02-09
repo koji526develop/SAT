@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         camera.transform.rotation = Quaternion.Euler(50, 90, 90);
         camera.transform.position = new Vector3(-9.0f, 7.15f, 0);
         camera.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
-        camera.clearFlags = CameraClearFlags.Depth;
+		camera.clearFlags = CameraClearFlags.Depth;
         camera.orthographic = true;
 
         Camera cameraSub = MyUtility.CreateCamera("BattleCameraSub", battleManager);
